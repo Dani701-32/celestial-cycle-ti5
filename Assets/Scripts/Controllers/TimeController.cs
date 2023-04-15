@@ -45,13 +45,14 @@ public class TimeController : MonoBehaviour
 
     private void UpdateTimeOfDay()
     {
+        DateTime preciousTime = currentTime;
         currentTime = currentTime.AddSeconds(Time.deltaTime * timeMultiplier);
         if (textHours) textHours.text = currentTime.ToString("HH:mm");
-        TimeSpan midnight = new TimeSpan(0);
-        if (currentTime.TimeOfDay == midnight)
+
+        if (currentTime.Date != preciousTime.Date)
         {
             day++;
-            if (textDays) textDays.text = $"Dia: {day}";
+            if (textDays) textDays.text = "Day " + day.ToString();
         }
     }
 
@@ -69,7 +70,6 @@ public class TimeController : MonoBehaviour
         if (diff.TotalSeconds < 0)
         {
             diff += TimeSpan.FromHours(24);
-
         }
         return diff;
     }
