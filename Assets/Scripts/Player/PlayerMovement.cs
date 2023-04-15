@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed, rotation;
+    private CharacterController characterController;
     // Start is called before the first frame update
     void Start()
     {
-
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -17,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+        float magnitude = Mathf.Clamp01(movement.magnitude) * speed;
         movement.Normalize();
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        characterController.SimpleMove(movement * magnitude);
 
         //Rotate player
         if (movement != Vector3.zero)
