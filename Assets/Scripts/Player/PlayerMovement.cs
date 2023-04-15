@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed, rotation;
     private CharacterController characterController;
+    [SerializeField] private Transform cameraTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,9 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+
         float magnitude = Mathf.Clamp01(movement.magnitude) * speed;
+        movement = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movement;
         movement.Normalize();
 
         characterController.SimpleMove(movement * magnitude);
@@ -29,5 +32,10 @@ public class PlayerMovement : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotation * Time.deltaTime);
         }
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }
