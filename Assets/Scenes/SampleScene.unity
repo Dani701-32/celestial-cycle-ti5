@@ -577,8 +577,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textHours: {fileID: 116108090}
   textDays: {fileID: 1287509163}
-  timeMultiplier: 2000
-  startHour: 23
+  textMoonPhase: {fileID: 813249861}
+  timeMultiplier: 5000
+  startHour: 12
   day: 0
   sunLight: {fileID: 705507994}
   sunriseHour: 6
@@ -586,6 +587,7 @@ MonoBehaviour:
   maxSunLightIntensity: 1
   moonLight: {fileID: 1243974105}
   maxMoonLightIntensity: 0.5
+  currentPhase: 0
   lightCurve:
     serializedVersion: 2
     m_Curve:
@@ -2210,7 +2212,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825528971}
-  m_LocalRotation: {x: 0.22029746, y: 0.000000018764709, z: -0.000000004237932, w: 0.97543275}
+  m_LocalRotation: {x: 0.22029743, y: -0.00000001876471, z: 0.000000004237931, w: 0.97543275}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3363,7 +3365,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.1847195, y: -0.000000016910285, z: 0.0000000031783547, w: 0.9827913}
+  m_LocalRotation: {x: 0.1847195, y: 0.00000001691028, z: -0.0000000031783538, w: 0.9827913}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
