@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &67342288
 Light:
   m_ObjectHideFlags: 0
@@ -209,13 +209,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67342287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 4.42, z: 17.63}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.67, y: 4.42, z: 25.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &88983531
 GameObject:
@@ -577,8 +577,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textHours: {fileID: 116108090}
   textDays: {fileID: 1287509163}
-  timeMultiplier: 2000
-  startHour: 23
+  textMoonPhase: {fileID: 813249861}
+  timeMultiplier: 5000
+  startHour: 12
   day: 0
   sunLight: {fileID: 705507994}
   sunriseHour: 6
@@ -586,7 +587,11 @@ MonoBehaviour:
   maxSunLightIntensity: 1
   moonLight: {fileID: 1243974105}
   maxMoonLightIntensity: 0.5
+
+  currentPhase: 0
+
   isNight: 0
+
   lightCurve:
     serializedVersion: 2
     m_Curve:
@@ -622,6 +627,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   ambientDayLight: {r: 0.43320578, g: 0.5566038, b: 0.5395834, a: 0}
   ambientNightLight: {r: 0.05873977, g: 0.10664707, b: 0.2264151, a: 0}
+  cityLights:
+  - {fileID: 606153846}
+  - {fileID: 67342288}
 --- !u!4 &198773378
 Transform:
   m_ObjectHideFlags: 0
@@ -1436,7 +1444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &606153846
 Light:
   m_ObjectHideFlags: 0
@@ -1507,12 +1515,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606153845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.21, y: 4.42, z: 0}
+  m_LocalPosition: {x: -1.43, y: 4.42, z: 8.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &618914937
 GameObject:
@@ -2756,7 +2764,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
