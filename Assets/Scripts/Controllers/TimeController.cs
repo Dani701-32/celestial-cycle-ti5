@@ -53,7 +53,7 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
@@ -122,6 +122,8 @@ public class TimeController : MonoBehaviour
 
             double porcent = timeSinceSunrise.TotalMinutes / sunriseToSunset.TotalMinutes;
             angle = Mathf.Lerp(0, 180, (float)porcent);
+            // Rotate the moonLight to the opposite side of the sunLight
+            moonLight.transform.rotation = Quaternion.AngleAxis(angle + 180f, Vector3.right);
         }
         else
         {
@@ -131,6 +133,8 @@ public class TimeController : MonoBehaviour
 
             double porcent = timeSinceSunset.TotalMinutes / timeSinceSunset.TotalMinutes;
             angle = Mathf.Lerp(180, 360, (float)porcent);
+            // Rotate the moonLight to the opposite side of the sunLight
+            moonLight.transform.rotation = Quaternion.AngleAxis(angle - 180f, Vector3.right);
         }
 
         sunLight.transform.rotation = Quaternion.AngleAxis(angle, Vector3.right);
