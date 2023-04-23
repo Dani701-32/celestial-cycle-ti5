@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Debug.Log("Enemy started");
     }
 
     // Update is called once per frame
@@ -17,25 +17,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void SetType(int type)
-    {
-        switch (type)
-        {
-            default:
-            case 0:
-                this.type = EnemyType.Grunt;
-                break;
-            case 1:
-                this.type = EnemyType.Agility;
-                break;
-            case 2:
-                this.type = EnemyType.Medium;
-                break;
-            case 3:
-                this.type = EnemyType.Tank;
-                break;
-        }
-    }
 }
 
 public enum EnemyType

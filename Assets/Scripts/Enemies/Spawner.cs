@@ -9,7 +9,10 @@ public class Spawner : MonoBehaviour
     public GameObject enemiesPrefabs;
     public Vector3 size;
     [SerializeField] private List<GameObject> enemies;
+
     [SerializeField] private bool spawned;
+    [SerializeField] private int numEnemies;
+
     void Start()
     {
         timeController = TimeController.InstanceTime;
@@ -32,10 +35,12 @@ public class Spawner : MonoBehaviour
     {
         if (!spawned)
         {
-            Vector3 pos = new Vector3(UnityEngine.Random.Range(-size.x / 2, size.x / 2), UnityEngine.Random.Range(-size.y / 2, size.y / 2), UnityEngine.Random.Range(-size.z / 2, size.z / 2));
-            GameObject obj = Instantiate(enemiesPrefabs, pos + transform.position, Quaternion.identity);
-            obj.GetComponent<Enemy>().SetType(UnityEngine.Random.Range(0, 4));
-            enemies.Add(obj);
+            for (int i = 0; i < numEnemies; i++)
+            {
+                Vector3 pos = new Vector3(UnityEngine.Random.Range(-size.x / 2, size.x / 2), UnityEngine.Random.Range(-size.y / 2, size.y / 2), UnityEngine.Random.Range(-size.z / 2, size.z / 2));
+                GameObject obj = Instantiate(enemiesPrefabs, pos + transform.position, Quaternion.identity);
+                enemies.Add(obj);
+            }
             Debug.Log("Spawn");
             spawned = true;
         }
@@ -44,12 +49,16 @@ public class Spawner : MonoBehaviour
 
     private void EndSpawn()
     {
-        foreach (GameObject enemy in enemies)
+        if (enemies.Count != 0)
         {
+
+            foreach (GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
             Debug.Log("EndSpawn");
-            Destroy(enemy);
+            enemies.Clear();
         }
-        enemies.Clear();
     }
     void OnDrawGizmosSelected()
     {
