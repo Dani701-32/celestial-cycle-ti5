@@ -47,16 +47,12 @@ public class TimeController : MonoBehaviour
 
 
     // Start is called before the first frame update
-
-    void Awake()
+    void Start()
     {
         foreach (Light light in cityLights)
         {
             light.intensity = 0;
         }
-    }
-    void Start()
-    {
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
