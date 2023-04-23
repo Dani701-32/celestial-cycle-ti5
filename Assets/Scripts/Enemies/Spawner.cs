@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Spawner : MonoBehaviour
 {
     private TimeController timeController;
     public GameObject enemiesPrefabs;
     public Vector3 size;
+    [SerializeField] private List<GameObject> enemies;
     [SerializeField] private bool spawned;
     void Start()
     {
@@ -23,6 +25,7 @@ public class Spawner : MonoBehaviour
         else
         {
             spawned = false;
+            EndSpawn();
         }
     }
     public void Spawn()
@@ -30,11 +33,23 @@ public class Spawner : MonoBehaviour
         if (!spawned)
         {
             Vector3 pos = new Vector3(UnityEngine.Random.Range(-size.x / 2, size.x / 2), UnityEngine.Random.Range(-size.y / 2, size.y / 2), UnityEngine.Random.Range(-size.z / 2, size.z / 2));
-            Instantiate(enemiesPrefabs, pos + transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(enemiesPrefabs, pos + transform.position, Quaternion.identity);
+            obj.GetComponent<Enemy>().SetType(UnityEngine.Random.Range(0, 4));
+            enemies.Add(obj);
             Debug.Log("Spawn");
             spawned = true;
         }
 
+    }
+
+    private void EndSpawn()
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            Debug.Log("EndSpawn");
+            Destroy(enemy);
+        }
+        enemies.Clear();
     }
     void OnDrawGizmosSelected()
     {
