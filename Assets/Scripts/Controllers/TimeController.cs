@@ -6,6 +6,8 @@ using TMPro;
 
 public class TimeController : MonoBehaviour
 {
+    public static TimeController InstanceTime;
+
     [Header("Generic Hours")]
     [SerializeField] private TextMeshProUGUI textHours;
     [SerializeField] private TextMeshProUGUI textDays;
@@ -25,11 +27,24 @@ public class TimeController : MonoBehaviour
     [SerializeField] private MoonPhases currentPhase;
     private int phaseController = 0;
 
+    public bool isNight = false;
+
+
     [Header("Ambient Controlls")]
     [SerializeField] private AnimationCurve lightCurve;
     [SerializeField] private Color ambientDayLight, ambientNightLight;
 
+
     [SerializeField] private List<Light> cityLights;
+
+    private void Awake()
+    {
+        if (InstanceTime == null)
+        {
+            InstanceTime = this;
+        }
+    }
+
 
     // Start is called before the first frame update
 
@@ -104,6 +119,7 @@ public class TimeController : MonoBehaviour
         float angle;
         if (currentTime.TimeOfDay > sunriseTime && currentTime.TimeOfDay < sunsetTime)
         {
+            isNight = false;
             TimeSpan sunriseToSunset = CalculateTimeDifference(sunriseTime, sunsetTime);
             TimeSpan timeSinceSunrise = CalculateTimeDifference(sunriseTime, currentTime.TimeOfDay);
 
@@ -112,6 +128,7 @@ public class TimeController : MonoBehaviour
         }
         else
         {
+            isNight = true;
             TimeSpan sunsetToSunrise = CalculateTimeDifference(sunsetTime, sunriseTime);
             TimeSpan timeSinceSunset = CalculateTimeDifference(sunsetTime, currentTime.TimeOfDay);
 
@@ -145,6 +162,7 @@ public class TimeController : MonoBehaviour
         }
         textMoonPhase.text = currentPhase.ToString();
     }
+
 }
 
 
