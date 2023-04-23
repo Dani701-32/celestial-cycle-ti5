@@ -586,12 +586,9 @@ MonoBehaviour:
   sunsetHour: 18
   maxSunLightIntensity: 1
   moonLight: {fileID: 1243974105}
-  maxMoonLightIntensity: 0.5
-
+  maxMoonLightIntensity: 0.2
   currentPhase: 0
-
   isNight: 0
-
   lightCurve:
     serializedVersion: 2
     m_Curve:
@@ -605,14 +602,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.1120664
-      value: 0.8529708
-      inSlope: 0.8292197
-      outSlope: 0.8292197
+      time: 0.0683699
+      value: 0.83715314
+      inSlope: 0.86108655
+      outSlope: 0.86108655
       tangentMode: 0
       weightedMode: 3
-      inWeight: 1
-      outWeight: 0.24039525
+      inWeight: 0.8256259
+      outWeight: 0.24415638
     - serializedVersion: 3
       time: 1
       value: 1
@@ -625,11 +622,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ambientDayLight: {r: 0.43320578, g: 0.5566038, b: 0.5395834, a: 0}
-  ambientNightLight: {r: 0.05873977, g: 0.10664707, b: 0.2264151, a: 0}
+  ambientDayLight: {r: 0.96889263, g: 0.9716981, b: 0.5179334, a: 0}
+  ambientNightLight: {r: 0.023473876, g: 0.0011569981, b: 0.24528301, a: 0}
   cityLights:
-  - {fileID: 606153846}
   - {fileID: 67342288}
+  - {fileID: 606153846}
 --- !u!4 &198773378
 Transform:
   m_ObjectHideFlags: 0
@@ -2219,7 +2216,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825528971}
-  m_LocalRotation: {x: 0.22029746, y: 0.000000018764707, z: -0.0000000042379313, w: 0.97543275}
+  m_LocalRotation: {x: 0.22029743, y: -0.00000001876471, z: 0.000000004237931, w: 0.97543275}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
