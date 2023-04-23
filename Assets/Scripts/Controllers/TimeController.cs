@@ -29,7 +29,17 @@ public class TimeController : MonoBehaviour
     [SerializeField] private AnimationCurve lightCurve;
     [SerializeField] private Color ambientDayLight, ambientNightLight;
 
+    [SerializeField] private List<Light> cityLights;
+
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        foreach (Light light in cityLights)
+        {
+            light.intensity = 0;
+        }
+    }
     void Start()
     {
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
@@ -73,6 +83,11 @@ public class TimeController : MonoBehaviour
         sunLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightCurve.Evaluate(dotProduct));
         moonLight.intensity = Mathf.Lerp(maxMoonLightIntensity, 0, lightCurve.Evaluate(dotProduct));
         RenderSettings.ambientLight = Color.Lerp(ambientNightLight, ambientDayLight, lightCurve.Evaluate(dotProduct));
+
+        foreach (Light light in cityLights)
+        {
+            light.intensity = Mathf.Lerp(2, 0, lightCurve.Evaluate(dotProduct));
+        }
     }
 
     private TimeSpan CalculateTimeDifference(TimeSpan fromTime, TimeSpan toTime)
@@ -118,7 +133,6 @@ public class TimeController : MonoBehaviour
             case 0:
                 currentPhase = MoonPhases.NewMoon;
                 break;
-
             case 1:
                 currentPhase = MoonPhases.FirstQuarter;
                 break;
