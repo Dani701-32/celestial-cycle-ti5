@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraTransform;
     bool isRunning = false;
+    private float currentSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +32,9 @@ public class PlayerMovement : MonoBehaviour
         
 
         //Movment
-        speed = (isRunning) ? maxSpeed : speed;
+        currentSpeed = (isRunning) ? maxSpeed : speed;
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
-        float magnitude = Mathf.Clamp01(movement.magnitude) * speed;
+        float magnitude = Mathf.Clamp01(movement.magnitude) * currentSpeed;
         movement = Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movement;
         movement.Normalize();
 
