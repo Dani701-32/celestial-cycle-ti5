@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (!spawned)
+        if (!spawned && !enemy)
         {
             Vector3 pos = new Vector3(
                 UnityEngine.Random.Range(-size.x / 2, size.x / 2),
@@ -54,8 +54,10 @@ public class Spawner : MonoBehaviour
 
     private void EndSpawn()
     {
-        if (enemy == null) return;
-        Destroy(enemy);
+        if (this.enemy == null) return;
+        Enemy enemy = this.enemy.GetComponent<Enemy>();
+        if (enemy.GetEnemyType() == EnemyType.Karakasa || enemy.GetEnemyType() == EnemyType.Humanoid) return;
+        Destroy(this.enemy);
         Debug.Log("EndSpawn");
     }
 

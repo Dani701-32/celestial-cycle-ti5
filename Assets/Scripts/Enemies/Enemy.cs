@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] EnemyType type;
+    [SerializeField] EnemyType enemyType;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     {
 
     }
+    public EnemyType GetEnemyType() { return enemyType; }
 
 }
 
