@@ -21,8 +21,9 @@ public class Enemy : MonoBehaviour
 
 public enum EnemyType
 {
-    Grunt,
-    Medium,
-    Agility,
-    Tank,
+    Karakasa,
+    Humanoid,
+    Kitsune,
+    Tengu,
+    Kappa,
 }

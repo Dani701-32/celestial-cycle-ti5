@@ -8,10 +8,10 @@ public class Spawner : MonoBehaviour
     private TimeController timeController;
     public GameObject enemiesPrefabs;
     public Vector3 size;
-    [SerializeField] private List<GameObject> enemies;
+
+    [SerializeField] private GameObject enemy;
 
     [SerializeField] private bool spawned;
-    [SerializeField] private int numEnemies;
 
     void Start()
     {
@@ -31,35 +31,34 @@ public class Spawner : MonoBehaviour
             EndSpawn();
         }
     }
+
     public void Spawn()
     {
         if (!spawned)
         {
-            for (int i = 0; i < numEnemies; i++)
-            {
-                Vector3 pos = new Vector3(UnityEngine.Random.Range(-size.x / 2, size.x / 2), UnityEngine.Random.Range(-size.y / 2, size.y / 2), UnityEngine.Random.Range(-size.z / 2, size.z / 2));
-                GameObject obj = Instantiate(enemiesPrefabs, pos + transform.position, Quaternion.identity);
-                enemies.Add(obj);
-            }
+            Vector3 pos = new Vector3(
+                UnityEngine.Random.Range(-size.x / 2, size.x / 2),
+                UnityEngine.Random.Range(-size.y / 2, size.y / 2),
+                UnityEngine.Random.Range(-size.z / 2, size.z / 2)
+            );
+            GameObject obj = Instantiate(
+                enemiesPrefabs,
+                pos + transform.position,
+                Quaternion.identity
+            );
+            enemy = obj;
             Debug.Log("Spawn");
             spawned = true;
         }
-
     }
 
     private void EndSpawn()
     {
-        if (enemies.Count != 0)
-        {
-
-            foreach (GameObject enemy in enemies)
-            {
-                Destroy(enemy);
-            }
-            Debug.Log("EndSpawn");
-            enemies.Clear();
-        }
+        if (enemy == null) return;
+        Destroy(enemy);
+        Debug.Log("EndSpawn");
     }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.3f);
