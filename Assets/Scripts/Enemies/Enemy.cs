@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyType enemyType;
+    public bool isAgressive = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,18 @@ public class Enemy : MonoBehaviour
     {
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isAgressive = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        isAgressive = false;
+    }
+
     public EnemyType GetEnemyType() { return enemyType; }
 
 }

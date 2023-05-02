@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849610797304165786}
   - component: {fileID: 2651308895446352103}
+  - component: {fileID: 385094898590011313}
   m_Layer: 0
   m_Name: Enemy_Humanoid
   m_TagString: Untagged
@@ -143,6 +144,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
+  isAgressive: 0
+--- !u!65 &385094898590011313
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739450172750789417}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.54, y: 2, z: 6.42}
+  m_Center: {x: 0, y: 1, z: 3.21}
 --- !u!1 &9124071785257129694
 GameObject:
   m_ObjectHideFlags: 0
