@@ -6,16 +6,22 @@ using System;
 public class Spawner : MonoBehaviour
 {
     private TimeController timeController;
-    public GameObject enemiesPrefabs;
+    public GameObject enemiePrefabs;
     public Vector3 size;
 
-    [SerializeField] private GameObject enemy;
+    [SerializeField]
+    private GameObject go_Enemy;
 
-    [SerializeField] private bool spawned;
+    [SerializeField]
+    private Enemy enemy;
+
+    [SerializeField]
+    private bool spawned;
 
     void Start()
     {
         timeController = TimeController.InstanceTime;
+        enemy = enemiePrefabs.GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -34,19 +40,21 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (!spawned && !enemy)
+        if (!spawned && !go_Enemy)
         {
+            if (!enemy.CanSpawn(timeController.GetCurrentPhase()))
+                return;
             Vector3 pos = new Vector3(
                 UnityEngine.Random.Range(-size.x / 2, size.x / 2),
                 UnityEngine.Random.Range(-size.y / 2, size.y / 2),
                 UnityEngine.Random.Range(-size.z / 2, size.z / 2)
             );
             GameObject obj = Instantiate(
-                enemiesPrefabs,
+                enemiePrefabs,
                 pos + transform.position,
                 Quaternion.identity
             );
-            enemy = obj;
+            go_Enemy = obj;
             Debug.Log("Spawn");
             spawned = true;
         }
@@ -54,10 +62,15 @@ public class Spawner : MonoBehaviour
 
     private void EndSpawn()
     {
-        if (this.enemy == null) return;
-        Enemy enemy = this.enemy.GetComponent<Enemy>();
-        if (enemy.GetEnemyType() == EnemyType.Karakasa || enemy.GetEnemyType() == EnemyType.Humanoid) return;
-        Destroy(this.enemy);
+        if (this.go_Enemy == null)
+            return;
+        Enemy go_Enemy = this.go_Enemy.GetComponent<Enemy>();
+        if (
+            go_Enemy.GetEnemyType() == EnemyType.Karakasa
+            || go_Enemy.GetEnemyType() == EnemyType.Humanoid
+        )
+            return;
+        Destroy(this.go_Enemy);
         Debug.Log("EndSpawn");
     }
 

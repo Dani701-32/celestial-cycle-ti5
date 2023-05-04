@@ -164,6 +164,8 @@ public class TimeController : MonoBehaviour
         textMoonPhase.text = currentPhase.ToString();
     }
 
+    public MoonPhases GetCurrentPhase() { return this.currentPhase;}
+
 }
 
 
