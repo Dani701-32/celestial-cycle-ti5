@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -18,6 +19,9 @@ public class TimeController : MonoBehaviour
     public ReflectionProbe probe;
     public AnimationCurve lightAngleCurve;
     private Light sunLight;
+    [SerializeField] private TextMeshProUGUI textHours;
+    [SerializeField] private TextMeshProUGUI textDays;
+    [SerializeField] private TextMeshProUGUI textMoonPhase;
 
     [Header("Generic Hours:")]
     public bool animate;
@@ -34,9 +38,6 @@ public class TimeController : MonoBehaviour
     [Range(0, 60)]
     public float dayMinutesDuration = 10;
 
-    [SerializeField]
-    private TextMeshProUGUI textMoonPhase;
-
     [Header("Moon Controlls:")]
     public bool isNight;
     public float intensity;
@@ -44,6 +45,7 @@ public class TimeController : MonoBehaviour
     [SerializeField]
     private MoonPhases currentPhase;
     private int phaseController = 0;
+    private int day = 1;
 
 #if UNITY_EDITOR
     [Header("Color Controlls:")]
@@ -67,6 +69,11 @@ public class TimeController : MonoBehaviour
     private Transform mainCamera;
     private float t = 0;
     private float dt = 0;
+    private DateTime currentTime;
+
+    private bool isSaveNight = false;
+    private bool switchDay = false;
+
 
     [SerializeField]
     private List<Light> cityLights;
@@ -91,6 +98,8 @@ public class TimeController : MonoBehaviour
         }
 
         SetMoonPhase();
+
+        textDays.text = "Day " + day.ToString();  
     }
 
     private void OnEnable()
@@ -104,6 +113,7 @@ public class TimeController : MonoBehaviour
         RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Custom;
         RenderSettings.customReflection = new Cubemap(probe.resolution, TextureFormat.RGBA32, true);
         probeRenderID = probe.RenderProbe();
+        currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
 #if UNITY_EDITOR
         lastNightDuration = -1;
 #endif
@@ -111,6 +121,8 @@ public class TimeController : MonoBehaviour
 
     public void Update()
     {
+        UpdateTimeOfDay();
+
 #if UNITY_EDITOR
         if (
             Application.isPlaying == false
@@ -144,6 +156,8 @@ public class TimeController : MonoBehaviour
             }
         }
 
+        
+
         lastHour = hour;
         lastLongitude = longitude;
         dt = Time.deltaTime;
@@ -154,7 +168,12 @@ public class TimeController : MonoBehaviour
         }
 
         if (hour > 24)
+        {
             hour -= 24;
+            switchDay = true;
+        }
+        else switchDay = false;
+
 
         isNight = hour < nightDuration / 2 || hour > 24 - (nightDuration / 2);
 
@@ -261,6 +280,28 @@ public class TimeController : MonoBehaviour
         }
     }
 #endif
+
+    private void UpdateTimeOfDay()
+    {
+        DateTime preciousTime = currentTime;
+        currentTime = currentTime.AddSeconds(Time.deltaTime * 24 * (60 / dayMinutesDuration));
+        if (textHours) textHours.text = currentTime.ToString("HH:mm");
+
+        if (isNight && !isSaveNight && switchDay)
+        {
+            isSaveNight = true;
+            day++;
+            if (day == 8)
+            {
+                day = 1;
+                phaseController++;
+                SetMoonPhase();
+            }
+            if (textDays) textDays.text = "Day " + day.ToString();
+        }
+
+        if (!isNight && isSaveNight) isSaveNight = false;
+    }
 
     private void SetMoonPhase()
     {
