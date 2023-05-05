@@ -11,7 +11,7 @@ using TMPro;
 [RequireComponent(typeof(Light))]
 public class TimeController : MonoBehaviour
 {
-    public static TimeController InstanceTime; 
+    public static TimeController InstanceTime;
 
     [Header("Components:")]
     public Material skyMaterial;
@@ -21,26 +21,43 @@ public class TimeController : MonoBehaviour
 
     [Header("Generic Hours:")]
     public bool animate;
-    [Range(0, 24)] public float hour;
-    [Range(-90, 90)] public float longitude;
-    [Range(2, 22)] public float nightDuration = 12;
-    [Range(0, 60)] public float dayMinutesDuration = 10;
-    [SerializeField] private TextMeshProUGUI textMoonPhase;
+
+    [Range(0, 24)]
+    public float hour;
+
+    [Range(-90, 90)]
+    public float longitude;
+
+    [Range(2, 22)]
+    public float nightDuration = 12;
+
+    [Range(0, 60)]
+    public float dayMinutesDuration = 10;
+
+    [SerializeField]
+    private TextMeshProUGUI textMoonPhase;
 
     [Header("Moon Controlls:")]
     public bool isNight;
     public float intensity;
-    [SerializeField] private MoonPhases currentPhase;
+
+    [SerializeField]
+    private MoonPhases currentPhase;
     private int phaseController = 0;
 
 #if UNITY_EDITOR
     [Header("Color Controlls:")]
-    [SerializeField] private Color nightColor;
-    [SerializeField] private Color dayColor;
-    [SerializeField] private Color dawnColor;
+    [SerializeField]
+    private Color nightColor;
+
+    [SerializeField]
+    private Color dayColor;
+
+    [SerializeField]
+    private Color dawnColor;
 #endif
     public Gradient gradientColor;
-    
+
     private Color lightColor;
     private float lastHour = -1;
     private float lastLongitude = 1000;
@@ -51,7 +68,8 @@ public class TimeController : MonoBehaviour
     private float t = 0;
     private float dt = 0;
 
-    [SerializeField] private List<Light> cityLights;
+    [SerializeField]
+    private List<Light> cityLights;
 
 #if UNITY_EDITOR
     private float lastNightDuration = -1;
@@ -67,7 +85,6 @@ public class TimeController : MonoBehaviour
 
     void Start()
     {
-        
         foreach (Light light in cityLights)
         {
             light.intensity = 0;
@@ -95,7 +112,12 @@ public class TimeController : MonoBehaviour
     public void Update()
     {
 #if UNITY_EDITOR
-        if (Application.isPlaying == false && lastNightDuration == nightDuration && lastHour == hour && lastLongitude == longitude)
+        if (
+            Application.isPlaying == false
+            && lastNightDuration == nightDuration
+            && lastHour == hour
+            && lastLongitude == longitude
+        )
         {
             return;
         }
@@ -107,7 +129,7 @@ public class TimeController : MonoBehaviour
         }
 #endif
 
-        if(isNight)
+        if (isNight)
         {
             foreach (Light light in cityLights)
             {
@@ -131,7 +153,8 @@ public class TimeController : MonoBehaviour
             hour += dt * 24.0f / (60 * dayMinutesDuration);
         }
 
-        if (hour > 24) hour -= 24;
+        if (hour > 24)
+            hour -= 24;
 
         isNight = hour < nightDuration / 2 || hour > 24 - (nightDuration / 2);
 
@@ -143,8 +166,16 @@ public class TimeController : MonoBehaviour
 
         if (hour > 12)
         {
-            sunLight.transform.localEulerAngles = new Vector3(sunLight.transform.localEulerAngles.x, sunLight.transform.localEulerAngles.y + 180, 0);
-            sunLight.transform.localEulerAngles = new Vector3(sunLight.transform.localEulerAngles.x, -sunLight.transform.localEulerAngles.y, 0);
+            sunLight.transform.localEulerAngles = new Vector3(
+                sunLight.transform.localEulerAngles.x,
+                sunLight.transform.localEulerAngles.y + 180,
+                0
+            );
+            sunLight.transform.localEulerAngles = new Vector3(
+                sunLight.transform.localEulerAngles.x,
+                -sunLight.transform.localEulerAngles.y,
+                0
+            );
         }
 
         lightColor = gradientColor.Evaluate(hour / 24.0f);
@@ -206,11 +237,7 @@ public class TimeController : MonoBehaviour
         alphaKeys[1].alpha = 1;
         alphaKeys[1].time = 1;
 
-        gradientColor = new Gradient
-        {
-            colorKeys = gradientColorKeys,
-            alphaKeys = alphaKeys
-        };
+        gradientColor = new Gradient { colorKeys = gradientColorKeys, alphaKeys = alphaKeys };
 
         //light angle --------
         Keyframe[] keys = lightAngleCurve.keys;
@@ -221,8 +248,16 @@ public class TimeController : MonoBehaviour
         for (int i = 0; i < lightAngleCurve.keys.Length; i++)
         {
             AnimationUtility.SetKeyBroken(lightAngleCurve, i, true);
-            AnimationUtility.SetKeyLeftTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
-            AnimationUtility.SetKeyRightTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
+            AnimationUtility.SetKeyLeftTangentMode(
+                lightAngleCurve,
+                i,
+                AnimationUtility.TangentMode.Linear
+            );
+            AnimationUtility.SetKeyRightTangentMode(
+                lightAngleCurve,
+                i,
+                AnimationUtility.TangentMode.Linear
+            );
         }
     }
 #endif
@@ -252,13 +287,16 @@ public class TimeController : MonoBehaviour
         textMoonPhase.text = currentPhase.ToString();
     }
 
-    public enum MoonPhases
+    public MoonPhases GetCurrentPhase()
     {
-        NewMoon,
-        FirstQuarter,
-        FullMoon,
-        ThirdQuarter,
+        return this.currentPhase;
     }
-    public MoonPhases GetCurrentPhase() { return this.currentPhase;}
+}
 
+public enum MoonPhases
+{
+    NewMoon,
+    FirstQuarter,
+    FullMoon,
+    ThirdQuarter,
 }

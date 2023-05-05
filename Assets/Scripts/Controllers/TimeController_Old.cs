@@ -190,12 +190,3 @@ public class TimeController_Old : MonoBehaviour
     }
 
 }
-
-
-public enum MoonPhases
-{
-    NewMoon,
-    FirstQuarter,
-    FullMoon,
-    ThirdQuarter,
-}
