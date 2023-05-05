@@ -1386,9 +1386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPrefabs: {fileID: 8024312284284726538, guid: 9bd821b65ff081f48b1a77e5cf3c6c35, type: 3}
+  enemiePrefabs: {fileID: 5032197283983388883, guid: 65a2a0cf85dc930448064601002c4bb6, type: 3}
   size: {x: 2, y: 0.2, z: 2}
-  enemy: {fileID: 5164411360438265906, guid: 965b11e678b3611469fb685893faf29f, type: 3}
+  go_Enemy: {fileID: 0}
+  enemy: {fileID: 0}
   spawned: 0
 --- !u!4 &455961312
 Transform:
@@ -1465,8 +1466,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPrefabs: {fileID: 4251102152432850105, guid: 33562b69637b976498ca84bf07811dda, type: 3}
+  enemiePrefabs: {fileID: 3513350443964964110, guid: 218b86fa96d1807459ddca4a9caf87e8, type: 3}
   size: {x: 2, y: 0.2, z: 2}
+  go_Enemy: {fileID: 0}
   enemy: {fileID: 0}
   spawned: 0
 --- !u!4 &551352691
@@ -1725,8 +1727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPrefabs: {fileID: 4739450172750789417, guid: d6d16fc751bc16843a50926670d4cf98, type: 3}
+  enemiePrefabs: {fileID: 4251102152432850105, guid: 33562b69637b976498ca84bf07811dda, type: 3}
   size: {x: 2, y: 0.2, z: 2}
+  go_Enemy: {fileID: 0}
   enemy: {fileID: 0}
   spawned: 0
 --- !u!4 &608875363
@@ -3414,8 +3417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPrefabs: {fileID: 5032197283983388883, guid: 65a2a0cf85dc930448064601002c4bb6, type: 3}
+  enemiePrefabs: {fileID: 4739450172750789417, guid: d6d16fc751bc16843a50926670d4cf98, type: 3}
   size: {x: 2, y: 0.2, z: 2}
+  go_Enemy: {fileID: 0}
   enemy: {fileID: 0}
   spawned: 0
 --- !u!1 &1188934943
@@ -4444,7 +4448,7 @@ GameObject:
   - component: {fileID: 1656015334}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5226,9 +5230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPrefabs: {fileID: 8024312284284726538, guid: 9bd821b65ff081f48b1a77e5cf3c6c35, type: 3}
+  enemiePrefabs: {fileID: 5164411360438265906, guid: 965b11e678b3611469fb685893faf29f, type: 3}
   size: {x: 2, y: 0.2, z: 2}
-  enemy: {fileID: 3513350443964964110, guid: 218b86fa96d1807459ddca4a9caf87e8, type: 3}
+  go_Enemy: {fileID: 0}
+  enemy: {fileID: 0}
   spawned: 0
 --- !u!4 &2012259327
 Transform:

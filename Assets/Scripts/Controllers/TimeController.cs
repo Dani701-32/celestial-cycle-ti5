@@ -259,4 +259,6 @@ public class TimeController : MonoBehaviour
         FullMoon,
         ThirdQuarter,
     }
+    public MoonPhases GetCurrentPhase() { return this.currentPhase;}
+
 }
