@@ -13,8 +13,9 @@ public class Enemy : MonoBehaviour
     public float stunDuration = 3.0f;
     public float attackRange = 2.0f;
     public float attackDelay = 2.0f;
-    public float idleTime = 2.0f;
+    public float idleTime = 10.0f;
     public float sightRange = 10.0f;
+    public bool dieInStun = false; 
 
     [SerializeField]
     EnemyType enemyType;
@@ -43,6 +44,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch (currentState)
         {
             default:
@@ -71,7 +73,7 @@ public class Enemy : MonoBehaviour
         idleTimer += Time.deltaTime;
         if (idleTimer >= idleTime)
         {
-            idleTimer = 0.0F;
+            idleTimer = 0.0f;
             currentState = AIState.Patrol;
         }
     }
@@ -95,6 +97,7 @@ public class Enemy : MonoBehaviour
         {
             // Move to the next waypoint
             currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+            currentState = AIState.Idle;
         }
     }
 

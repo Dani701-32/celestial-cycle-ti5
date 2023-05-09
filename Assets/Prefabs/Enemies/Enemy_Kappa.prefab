@@ -243,15 +243,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAgressive: 0
   waypoints: []
-  patrolSpeed: 2
-  chaseSpeed: 5
-  stunDuration: 3
-  attackRange: 2
-  attackDelay: 2
-  idleTime: 2
+  patrolSpeed: 1
+  chaseSpeed: 3
+  stunDuration: 6
+  attackRange: 5
+  attackDelay: 8
+  idleTime: 10
   sightRange: 10
+  dieInStun: 0
   enemyType: 4
   currentState: 0
+  currentWaypoint: 0
+  target: {fileID: 0}
 --- !u!195 &-6253047504604387076
 NavMeshAgent:
   m_ObjectHideFlags: 0

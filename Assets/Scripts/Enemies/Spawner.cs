@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     public Vector3 size;
 
     private GameObject go_Enemy;
-    private Enemy enemy;
+    [SerializeField]private Enemy enemy;
     private bool spawned;
     [SerializeField] private Transform[] waypoints;
 
@@ -52,6 +52,7 @@ public class Spawner : MonoBehaviour
                 Quaternion.identity
             );
             go_Enemy = obj;
+            enemy = go_Enemy.GetComponent<Enemy>();
             enemy.waypoints = waypoints;
             Debug.Log("Spawn");
             spawned = true;
