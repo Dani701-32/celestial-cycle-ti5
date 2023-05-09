@@ -4,137 +4,245 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public bool dieInStun = false;
     public bool isAgressive = false;
-
-    //GPT
-    public Transform[] waypoints;
-    public float patrolSpeed = 2.0f;
-    public float chaseSpeed = 5.0f;
-    public float stunDuration = 3.0f;
-    public float attackRange = 2.0f;
-    public float attackDelay = 2.0f;
-    public float idleTime = 10.0f;
-    public float sightRange = 10.0f;
-    public bool dieInStun = false; 
 
     [SerializeField]
     EnemyType enemyType;
 
-    [SerializeField]
-    AIState currentState = AIState.Idle;
+    public UnityEngine.AI.NavMeshAgent navMeshAgent; //  Nav mesh agent component
+    public float startWaitTime = 4; //  Wait time of every action
+    public float timeToRotate = 2; //  Wait time when the enemy detect near the player without seeing
+    public float speedWalk = 6; //  Walking speed, speed in the nav mesh agent
+    public float speedRun = 9; //  Running speed
 
-    [SerializeField]
-    private int currentWaypoint = 0;
-    private UnityEngine.AI.NavMeshAgent agent;
-    private float stunTimer = 0.0f;
-    private float attackTimer = 0.0f;
-    private float idleTimer = 0.0f;
+    public float viewRadius = 15; //  Radius of the enemy view
+    public float viewAngle = 90; //  Angle of the enemy view
+    public LayerMask playerMask; //  To detect the player with the raycast
+    public LayerMask obstacleMask; //  To detect the obstacules with the raycast
+    public float meshResolution = 1.0f; //  How many rays will cast per degree
+    public int edgeIterations = 4; //  Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule
+    public float edgeDistance = 0.5f; //  Max distance to calcule the a minumun and a maximum raycast when hits something
 
-    [SerializeField]
-    private GameObject target;
+    public Transform[] waypoints; 
+    int m_CurrentWaypointIndex; 
 
-    // Start is called before the first frame update
+    Vector3 playerLastPosition = Vector3.zero; 
+    Vector3 m_PlayerPosition; 
+
+    float m_WaitTime; 
+    float m_TimeToRotate; 
+    bool m_playerInRange; 
+    bool m_PlayerNear; 
+    bool m_IsPatrol;
+    bool m_CaughtPlayer; 
+
     void Start()
     {
-        Debug.Log("Enemy started");
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        m_PlayerPosition = Vector3.zero;
+        m_IsPatrol = true;
+        m_CaughtPlayer = false;
+        m_playerInRange = false;
+        m_PlayerNear = false;
+        m_WaitTime = startWaitTime; 
+        m_TimeToRotate = timeToRotate;
+
+        m_CurrentWaypointIndex = 0; 
+        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = speedWalk; 
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        switch (currentState)
-        {
-            default:
-            case AIState.Idle:
-                Idle();
-                break;
-            case AIState.Patrol:
-                Patrol();
-                break;
-            case AIState.Attack:
-                Attack();
-                break;
-            case AIState.Stunned:
-                Stunned();
-                break;
-        }
-    }
+        EnviromentView(); 
 
-    private void Idle()
-    {
-        if (CanSeeTarget())
+        if (!m_IsPatrol)
         {
-            currentState = AIState.Attack;
-            return;
+            Chasing();
         }
-        idleTimer += Time.deltaTime;
-        if (idleTimer >= idleTime)
+        else
         {
-            idleTimer = 0.0f;
-            currentState = AIState.Patrol;
+            Patroling();
         }
     }
 
-    private void Patrol()
+    private void Chasing()
     {
-        if (CanSeeTarget())
+        m_PlayerNear = false; 
+        playerLastPosition = Vector3.zero; 
+
+        if (!m_CaughtPlayer)
         {
-            currentState = AIState.Attack;
-            return;
+            Move(speedRun);
+            navMeshAgent.SetDestination(m_PlayerPosition);
         }
-        if (waypoints == null){
-
-            return;
-        }
-        agent.speed = patrolSpeed;
-        agent.SetDestination(waypoints[currentWaypoint].position);
-
-        // Check if we've reached the current waypoint
-        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 1.0f)
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            // Move to the next waypoint
-            currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
-            currentState = AIState.Idle;
-        }
-    }
-
-    private void Attack() { }
-
-    private void Stunned() { }
-
-    private bool CanSeeTarget()
-    {
-        // Check if the player is within sight range
-        if (Vector3.Distance(transform.position, target.transform.position) <= sightRange)
-        {
-            // Check if there's line of sight to the player
-            RaycastHit hit;
             if (
-                Physics.Raycast(
+                m_WaitTime <= 0
+                && !m_CaughtPlayer
+                && Vector3.Distance(
                     transform.position,
-                    (target.transform.position - transform.position).normalized,
-                    out hit
-                )
+                    GameObject.FindGameObjectWithTag("Player").transform.position
+                ) >= 6f
             )
             {
-                if (hit.collider.gameObject.CompareTag("Player"))
+                
+                m_IsPatrol = true;
+                m_PlayerNear = false;
+                Move(speedWalk);
+                m_TimeToRotate = timeToRotate;
+                m_WaitTime = startWaitTime;
+                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+            }
+            else
+            {
+                if (
+                    Vector3.Distance(
+                        transform.position,
+                        GameObject.FindGameObjectWithTag("Player").transform.position
+                    ) >= 2.5f
+                )
+                    
+                    Stop();
+                m_WaitTime -= Time.deltaTime;
+            }
+        }
+    }
+
+    private void Patroling()
+    {
+        if (m_PlayerNear)
+        {
+            
+            if (m_TimeToRotate <= 0)
+            {
+                Move(speedWalk);
+                LookingPlayer(playerLastPosition);
+            }
+            else
+            {
+               
+                Stop();
+                m_TimeToRotate -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            m_PlayerNear = false; 
+            playerLastPosition = Vector3.zero;
+            navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position); 
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                if (m_WaitTime <= 0)
                 {
-                    return true;
+                    NextPoint();
+                    Move(speedWalk);
+                    m_WaitTime = startWaitTime;
+                }
+                else
+                {
+                    Stop();
+                    m_WaitTime -= Time.deltaTime;
                 }
             }
         }
-
-        return false;
     }
 
-    void OnDrawGizmosSelected()
+    private void OnAnimatorMove() { }
+
+    public void NextPoint()
     {
-        Gizmos.color = new Color(1, 0, 0, 0.3f);
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
+
+    void Stop()
+    {
+        navMeshAgent.isStopped = true;
+        navMeshAgent.speed = 0;
+    }
+
+    void Move(float speed)
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = speed;
+    }
+
+    void CaughtPlayer()
+    {
+        m_CaughtPlayer = true;
+    }
+
+    void LookingPlayer(Vector3 player)
+    {
+        navMeshAgent.SetDestination(player);
+        if (Vector3.Distance(transform.position, player) <= 0.3)
+        {
+            if (m_WaitTime <= 0)
+            {
+                m_PlayerNear = false;
+                Move(speedWalk);
+                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                m_WaitTime = startWaitTime;
+                m_TimeToRotate = timeToRotate;
+            }
+            else
+            {
+                Stop();
+                m_WaitTime -= Time.deltaTime;
+            }
+        }
+    }
+
+    void EnviromentView()
+    {
+        Collider[] playerInRange = Physics.OverlapSphere(
+            transform.position,
+            viewRadius,
+            playerMask
+        ); 
+
+        for (int i = 0; i < playerInRange.Length; i++)
+        {
+            Transform player = playerInRange[i].transform;
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2)
+            {
+                float dstToPlayer = Vector3.Distance(transform.position, player.position); 
+                if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
+                {
+                    m_playerInRange = true; 
+                    m_IsPatrol = false;
+                }
+                else
+                {
+
+                    m_playerInRange = false;
+                }
+            }
+            if (Vector3.Distance(transform.position, player.position) > viewRadius)
+            {
+
+                m_playerInRange = false;
+            }
+            if (m_playerInRange)
+            {
+                m_PlayerPosition = player.transform.position;
+            }
+        }
+    }
+    void OnDrawGizmos()
+{
+    if (m_playerInRange)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, m_PlayerPosition);
+    }
+}
 
     public bool CanSpawn(MoonPhases moonphase)
     {

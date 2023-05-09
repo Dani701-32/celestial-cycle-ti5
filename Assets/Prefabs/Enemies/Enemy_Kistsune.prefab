@@ -46,20 +46,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf6bf1302ffb04449de1dc1d230ef1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAgressive: 0
-  waypoints: []
-  patrolSpeed: 3
-  chaseSpeed: 10
-  stunDuration: 3
-  attackRange: 10
-  attackDelay: 2
-  idleTime: 15
-  sightRange: 18
   dieInStun: 0
+  isAgressive: 0
   enemyType: 2
-  currentState: 0
-  currentWaypoint: 0
-  target: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  startWaitTime: 4
+  timeToRotate: 2
+  speedWalk: 6
+  speedRun: 9
+  viewRadius: 15
+  viewAngle: 90
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  meshResolution: 1
+  edgeIterations: 4
+  edgeDistance: 0.5
+  waypoints: []
 --- !u!195 &-507939301413127821
 NavMeshAgent:
   m_ObjectHideFlags: 0
