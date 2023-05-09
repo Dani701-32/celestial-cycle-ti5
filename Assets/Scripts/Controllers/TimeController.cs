@@ -44,6 +44,7 @@ public class TimeController : MonoBehaviour
 
     [SerializeField]
     private MoonPhases currentPhase;
+    [SerializeField]
     private int phaseController = 0;
     private int day = 1;
 
