@@ -9,19 +9,16 @@ public class Spawner : MonoBehaviour
     public GameObject enemiePrefabs;
     public Vector3 size;
 
-    [SerializeField]
     private GameObject go_Enemy;
-
-    [SerializeField]
     private Enemy enemy;
-
-    [SerializeField]
     private bool spawned;
+    [SerializeField] private Transform[] waypoints;
 
     void Start()
     {
         timeController = TimeController.InstanceTime;
         enemy = enemiePrefabs.GetComponent<Enemy>();
+        waypoints = GetComponentsInChildren<Transform>();
     }
 
     // Update is called once per frame
@@ -55,6 +52,7 @@ public class Spawner : MonoBehaviour
                 Quaternion.identity
             );
             go_Enemy = obj;
+            enemy.waypoints = waypoints;
             Debug.Log("Spawn");
             spawned = true;
         }

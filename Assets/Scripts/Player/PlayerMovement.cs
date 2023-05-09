@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform cameraTransform;
     bool isRunning = false;
+    public bool isGrounded = false;
     private float currentSpeed;
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         movement.Normalize();
 
         //Jump
-                    
+        isGrounded = characterController.isGrounded;                
         ySpeed += Physics.gravity.y * Time.deltaTime;
         if (characterController.isGrounded)
         {
@@ -47,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
             characterController.stepOffset = stepOffset;
             if (Input.GetButtonDown("Jump"))
             {
-                
                 ySpeed = jumpSpeed;
             }
             // animator.SetBool("IsJumping", false);

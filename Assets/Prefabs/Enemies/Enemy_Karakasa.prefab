@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352768077566006563}
   - component: {fileID: 6689803586061439691}
+  - component: {fileID: -1674774784649787236}
   m_Layer: 0
   m_Name: Enemy_Karakasa
   m_TagString: Untagged
@@ -143,7 +144,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf6bf1302ffb04449de1dc1d230ef1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  isAgressive: 0
+  waypoints: []
+  patrolSpeed: 2
+  chaseSpeed: 5
+  stunDuration: 3
+  attackRange: 2
+  attackDelay: 2
+  idleTime: 2
+  sightRange: 10
+  enemyType: 0
+  currentState: 0
+--- !u!195 &-1674774784649787236
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032197283983388883}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7012237560554082220
 GameObject:
   m_ObjectHideFlags: 0
