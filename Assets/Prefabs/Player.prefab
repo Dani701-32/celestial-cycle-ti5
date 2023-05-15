@@ -254,6 +254,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   cameraTransform: {fileID: 0}
   isGrounded: 0
+  combatMode: 0
+  currentWeapon: {fileID: 0}
+  timeToDraw: 0
+  currentTime: 0
 --- !u!143 &5019829766420754208
 CharacterController:
   m_ObjectHideFlags: 0

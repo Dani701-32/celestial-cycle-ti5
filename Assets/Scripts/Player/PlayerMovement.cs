@@ -22,12 +22,15 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = false;
     public bool combatMode = false;
     private float currentSpeed;
+    private bool isWalking = false;
 
     [Header("Combat Controlers")]
     public GameObject currentWeapon;
     private bool counter = false;
     public float timeToDraw;
-    [SerializeField] private float currentTime;
+
+    [SerializeField]
+    private float currentTime;
 
     void Start()
     {
@@ -44,17 +47,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         isRunning = (Input.GetKey(KeyCode.LeftShift));
-
+        isWalking = (verticalInput != 0 || horizontalInput != 0);
         //Animation
-        animator.SetBool("isWalking", (verticalInput != 0 || horizontalInput != 0));
+        animator.SetBool("isWalking", isWalking);
         animator.SetBool("isRunning", isRunning);
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            combatMode = (combatMode) ? false : true;
-            animator.SetBool("isCombat", combatMode);
-            counter = true;
-        }
 
         //Movment
         currentSpeed = (isRunning) ? maxSpeed : speed;
@@ -97,9 +93,26 @@ public class PlayerMovement : MonoBehaviour
                 rotation * Time.deltaTime
             );
         }
+        //Combat
+        
+        if (!isWalking)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                combatMode = (combatMode) ? false : true;
+                animator.SetBool("isCombat", combatMode);
+                counter = true;
+            }
+        }
 
-        //Draw weapon
         DrawWeapon();
+        if (combatMode) { 
+            if(Input.GetMouseButton(0)){
+                animator.SetBool("isAttack", true);
+                return;
+            } 
+            animator.SetBool("isAttack", false);
+        }
     }
 
     void DrawWeapon()
@@ -112,9 +125,8 @@ public class PlayerMovement : MonoBehaviour
                 currentTime = timeToDraw;
                 counter = false;
                 return;
-            } 
+            }
             currentTime -= Time.deltaTime;
-            
         }
     }
 
