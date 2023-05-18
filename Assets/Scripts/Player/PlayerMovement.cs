@@ -129,6 +129,14 @@ public class PlayerMovement : MonoBehaviour
             currentTime -= Time.deltaTime;
         }
     }
+    public void StartDealDamage(){
+        currentWeapon.GetComponent<DamageDealer>().StartDealDamage();
+
+    }
+    public void EndDealDamage(){
+        currentWeapon.GetComponent<DamageDealer>().EndDamage();
+        
+    }
 
     void OnApplicationFocus(bool hasFocus)
     {
