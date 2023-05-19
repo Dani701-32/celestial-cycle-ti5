@@ -49,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieInStun: 0
   isAgressive: 0
+  health: 100
+  attackCoulDown: 2
+  attackRange: 1
+  viewRange: 4
   enemyType: 1
   waypoints: []
 --- !u!195 &3507599956711235473
@@ -65,7 +69,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -150,6 +154,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6ca949566c53b9248b5c4b4ea93ccca3, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 427169ae55a83f44a98153e4f9045b4a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6148737315974723067, guid: 427169ae55a83f44a98153e4f9045b4a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
