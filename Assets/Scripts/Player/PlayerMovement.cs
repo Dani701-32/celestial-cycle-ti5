@@ -43,6 +43,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float currentTime;
 
+    //  Attack
+    
+    public bool isCombat = false;
+    private bool attack = false;
+    public float currentAttackTime = 0f;
+    public float delayAttack = 0;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -74,8 +81,14 @@ public class PlayerMovement : MonoBehaviour
             isRunning = (isRunning) ? false : true;
         if (drawWeaponAction.triggered)
         {
-            drawWeapon = (drawWeapon)? false : true;
+            drawWeapon = (drawWeapon) ? false : true;
             counter = true;
+        }
+        if (attackAction.triggered &&  !counter && isCombat)
+        {
+            delayAttack = 1.2f;
+            currentAttackTime = 0f;
+            attack = true;
         }
 
         Walking(inputVector);
@@ -85,6 +98,11 @@ public class PlayerMovement : MonoBehaviour
 
         Jump();
         DrawWeapon();
+
+        if (drawWeapon)
+        {
+            Attack();
+        }
 
         if (animator.GetFloat("speed") < .001f)
         {
@@ -145,6 +163,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        if (attack)
+        {
+            if (currentAttackTime == 0)
+            {
+                animator.SetTrigger("attack");
+            }
+            currentAttackTime += Time.deltaTime;
+            if (currentAttackTime >= delayAttack)
+            {
+                animator.SetTrigger("move");
+                attack = false;
+                currentAttackTime = 0;
+            }
+        }
+    }
+
     void DrawWeapon()
     {
         if (counter)
@@ -162,21 +198,24 @@ public class PlayerMovement : MonoBehaviour
             if (drawWeapon)
             {
                 animator.SetTrigger("drawWeapon");
-            } else {
-                
+                isCombat =true;
+            }
+            else
+            {
                 animator.SetTrigger("sheathWeapon");
+                isCombat = false;
             }
         }
     }
 
     public void StartDealDamage()
     {
-        currentWeapon.GetComponent<DamageDealer>().StartDealDamage();
+        currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
 
-    public void EndDealDamage()
+    public void EndDamage()
     {
-        currentWeapon.GetComponent<DamageDealer>().EndDamage();
+        currentWeapon.GetComponentInChildren<DamageDealer>().EndDamage();
     }
 
     void OnApplicationFocus(bool hasFocus)
