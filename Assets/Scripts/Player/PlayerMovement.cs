@@ -1,42 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed,
-        maxSpeed,
-        rotation,
-        jumpSpeed;
-    private float ySpeed,
-        stepOffset;
-    private CharacterController characterController;
+    public float walkSpeed;
+    public float runSpeed;
+    public float rotationSpeed;
+    public float jumpSpeed;
 
-    [SerializeField]
+    [Header("Movement Transition")]
+    [Range(0, 1)]
+    public float speedDampTime;
+
+    private bool isRunning = false;
+    private float ySpeed;
+    private float stepOffset;
+    private float currentSpeed;
+
+    private InputAction runningAction;
+    private InputAction jumpAction;
+    private InputAction drawWeaponAction;
+    private InputAction attackAction;
+    private PlayerInput playerInput;
+    private PlayerInputActions playerInputActions;
+    private CharacterController characterController;
     private Animator animator;
 
     [SerializeField]
     private Transform cameraTransform;
-    bool isRunning = false;
     public bool isGrounded = false;
     public bool combatMode = false;
-    private float currentSpeed;
-    private bool isWalking = false;
 
     [Header("Combat Controlers")]
     public GameObject currentWeapon;
-    private bool counter = false;
     public float timeToDraw;
+    private bool counter = false;
+    private bool drawWeapon = false;
 
     [SerializeField]
     private float currentTime;
 
-    void Start()
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        stepOffset = characterController.stepOffset;
         animator = GetComponentInChildren<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Enable();
+
+        runningAction = playerInput.actions["Run"];
+        jumpAction = playerInput.actions["Jump"];
+        drawWeaponAction = playerInput.actions["DrawWeapon"];
+        attackAction = playerInput.actions["Attack"];
+    }
+
+    void Start()
+    {
+        currentSpeed = walkSpeed;
+        stepOffset = characterController.stepOffset;
         currentWeapon.SetActive(combatMode);
         currentTime = timeToDraw;
     }
@@ -44,74 +69,79 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        isRunning = (Input.GetKey(KeyCode.LeftShift));
-        isWalking = (verticalInput != 0 || horizontalInput != 0);
-        //Animation
-        animator.SetBool("isWalking", isWalking);
-        animator.SetBool("isRunning", isRunning);
+        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        if (runningAction.triggered)
+            isRunning = (isRunning) ? false : true;
+        if (drawWeaponAction.triggered)
+        {
+            drawWeapon = (drawWeapon)? false : true;
+            counter = true;
+        }
 
-        //Movment
-        currentSpeed = (isRunning) ? maxSpeed : speed;
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+        Walking(inputVector);
+
+        isGrounded = characterController.isGrounded;
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        Jump();
+        DrawWeapon();
+
+        if (animator.GetFloat("speed") < .001f)
+        {
+            animator.SetFloat("speed", 0);
+        }
+    }
+
+    private void Jump()
+    {
+        if (characterController.isGrounded)
+        {
+            ySpeed = -.5f;
+            characterController.stepOffset = stepOffset;
+
+            if (jumpAction.triggered)
+            {
+                Debug.Log("Jumping");
+                ySpeed = jumpSpeed;
+            }
+
+            return;
+        }
+        characterController.stepOffset = 0;
+    }
+
+    private void Walking(Vector2 inputVector)
+    {
+        float speedAnim = inputVector.magnitude;
+        if (isRunning)
+            speedAnim += .5f;
+
+        currentSpeed = (isRunning) ? runSpeed : walkSpeed;
+        animator.SetFloat("speed", speedAnim, speedDampTime, Time.deltaTime);
+        Vector3 movement = new Vector3(inputVector.x, 0, inputVector.y);
+
         float magnitude = Mathf.Clamp01(movement.magnitude) * currentSpeed;
+
         movement =
             Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movement;
         movement.Normalize();
 
-        //Jump
-        isGrounded = characterController.isGrounded;
-        ySpeed += Physics.gravity.y * Time.deltaTime;
-        if (characterController.isGrounded)
-        {
-            ySpeed = -0.5f;
-            characterController.stepOffset = stepOffset;
-            if (Input.GetButtonDown("Jump"))
-            {
-                ySpeed = jumpSpeed;
-            }
-            // animator.SetBool("IsJumping", false);
-        }
-        else
-        {
-            // animator.SetBool("IsJumping", true);
-            characterController.stepOffset = 0;
-        }
-
+        // if (characterController.isGrounded)
+        // {
+        //     ySpeed = -0.5f;
+        // }
         Vector3 velocity = movement * magnitude;
         velocity.y = ySpeed;
         characterController.Move(velocity * Time.deltaTime);
 
-        //Rotate player
         if (movement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 toRotation,
-                rotation * Time.deltaTime
+                rotationSpeed * Time.deltaTime
             );
-        }
-        //Combat
-        
-        if (!isWalking)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                combatMode = (combatMode) ? false : true;
-                animator.SetBool("isCombat", combatMode);
-                counter = true;
-            }
-        }
-
-        DrawWeapon();
-        if (combatMode) { 
-            if(Input.GetMouseButton(0)){
-                animator.SetBool("isAttack", true);
-                return;
-            } 
-            animator.SetBool("isAttack", false);
         }
     }
 
@@ -121,21 +151,32 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentTime <= 0)
             {
-                currentWeapon.SetActive(combatMode);
+                currentWeapon.SetActive(drawWeapon);
                 currentTime = timeToDraw;
                 counter = false;
+                animator.ResetTrigger("drawWeapon");
+                animator.ResetTrigger("sheathWeapon");
                 return;
             }
             currentTime -= Time.deltaTime;
+            if (drawWeapon)
+            {
+                animator.SetTrigger("drawWeapon");
+            } else {
+                
+                animator.SetTrigger("sheathWeapon");
+            }
         }
     }
-    public void StartDealDamage(){
-        currentWeapon.GetComponent<DamageDealer>().StartDealDamage();
 
+    public void StartDealDamage()
+    {
+        currentWeapon.GetComponent<DamageDealer>().StartDealDamage();
     }
-    public void EndDealDamage(){
+
+    public void EndDealDamage()
+    {
         currentWeapon.GetComponent<DamageDealer>().EndDamage();
-        
     }
 
     void OnApplicationFocus(bool hasFocus)
