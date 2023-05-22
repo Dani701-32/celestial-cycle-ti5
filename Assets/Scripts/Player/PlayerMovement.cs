@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private CharacterController characterController;
-    [SerializeField] private Animator animator;
+
+    [SerializeField]
+    private Animator animator;
 
     [SerializeField]
     private Transform cameraTransform;
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private float currentTime;
 
     //  Attack
-    
+
     public bool isCombat = false;
     private bool attack = false;
     public float currentAttackTime = 0f;
@@ -84,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             drawWeapon = (drawWeapon) ? false : true;
             counter = true;
         }
-        if (attackAction.triggered &&  !counter && isCombat)
+        if (attackAction.triggered && !counter && isCombat)
         {
             delayAttack = 1.2f;
             currentAttackTime = 0f;
@@ -198,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
             if (drawWeapon)
             {
                 animator.SetTrigger("drawWeapon");
-                isCombat =true;
+                isCombat = true;
             }
             else
             {

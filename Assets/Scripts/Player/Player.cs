@@ -6,15 +6,21 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     float health = 100;
-    [SerializeField] Animator animator;
-    [SerializeField] PlayerMovement playerMovement; 
-    private bool isDead; 
+
+    [SerializeField]
+    Animator animator;
+
+    [SerializeField]
+    PlayerMovement playerMovement;
+    private bool isDead;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.enabled = true;
+        animator = GetComponent<Animator>();
         isDead = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void TakeDamage(float damage)
@@ -30,11 +36,16 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-       playerMovement.enabled = false;
-       animator.SetTrigger("death");
-       isDead = true;
+        playerMovement.enabled = false;
+        animator.SetTrigger("death");
+        isDead = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.gameController.DeathScreen();
         // Destroy(this.gameObject);
     }
 
-    public bool IsDead(){  return isDead; }
+    public bool IsDead()
+    {
+        return isDead;
+    }
 }

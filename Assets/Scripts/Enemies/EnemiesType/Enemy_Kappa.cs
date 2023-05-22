@@ -7,6 +7,7 @@ public class Enemy_Kappa : Enemy
 {
     // Start is called before the first frame update
     public bool stuned = false;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -33,6 +34,8 @@ public class Enemy_Kappa : Enemy
 
     public override void Attack()
     {
+        if (player.GetComponent<Player>().IsDead())
+            return;
         if (timePassad >= attackCoulDown)
         {
             if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)

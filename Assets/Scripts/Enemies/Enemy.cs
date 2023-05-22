@@ -22,6 +22,8 @@ public abstract class Enemy : MonoBehaviour
     protected float viewRange = 4f;
 
     protected GameObject player;
+
+    [SerializeField]
     protected Animator animator;
     protected NavMeshAgent agent;
 
@@ -33,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
 
     //Patrulha waypoints
     public Transform[] waypoints;
-    int currentWaypointIndex;
+     [SerializeField] protected int currentWaypointIndex;
 
     Vector3 playerLastPosition = Vector3.zero;
     Vector3 m_PlayerPosition;

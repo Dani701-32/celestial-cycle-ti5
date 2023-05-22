@@ -1291,8 +1291,10 @@ MonoBehaviour:
   attackCoulDown: 3
   attackRange: 1
   viewRange: 4
-  enemyType: 0
+  animator: {fileID: 0}
+  enemyType: 1
   waypoints: []
+  currentWaypointIndex: 0
 --- !u!195 &3507599956711235473
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1313,7 +1315,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 3
   m_ObstacleAvoidanceType: 4
 --- !u!136 &5463774519435579366
 CapsuleCollider:
