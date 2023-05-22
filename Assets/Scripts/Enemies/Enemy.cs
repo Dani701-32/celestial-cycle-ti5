@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public bool dieInStun = false;
     public bool isAgressive = false;
 
     [Header("Status")]
     [SerializeField]
-    private float health = 100;
+    protected float health = 100;
 
     [SerializeField]
-    private float attackCoulDown = 3f;
+    protected float attackCoulDown = 3f;
 
     [SerializeField]
-    private float attackRange = 1f;
+    protected float attackRange = 1f;
 
     [SerializeField]
-    private float viewRange = 4f;
+    protected float viewRange = 4f;
 
-    private GameObject player;
-    private Animator animator;
-    private NavMeshAgent agent;
+    protected GameObject player;
+    protected Animator animator;
+    protected NavMeshAgent agent;
 
     [SerializeField]
-    private EnemyType enemyType;
+    protected EnemyType enemyType;
 
-    private float timePassad;
-    private float newDestnationCD = 0.5f;
+    protected float timePassad;
+    protected float newDestnationCD = 0.5f;
 
     //Patrulha waypoints
     public Transform[] waypoints;
@@ -38,57 +38,11 @@ public class Enemy : MonoBehaviour
     Vector3 playerLastPosition = Vector3.zero;
     Vector3 m_PlayerPosition;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-        animator = GetComponentInChildren<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-    }
+    public abstract void Attack();
 
-    // Update is called once per frame
-    void Update()
-    {
-        animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
-        Attack();
-        if (
-            newDestnationCD <= 0
-            && Vector3.Distance(player.transform.position, transform.position) <= viewRange
-        )
-        {
-            newDestnationCD = 0.5f;
-            agent.SetDestination(player.transform.position);
-            transform.LookAt(player.transform);
-        }
-        newDestnationCD -= Time.deltaTime;
-    }
+    public abstract void TakeDamage(float damage);
 
-
-    private void Attack()
-    {
-        if (timePassad >= attackCoulDown)
-        {
-            if (Vector3.Distance(player.transform.position, transform.position) <= attackRange)
-            {
-                animator.SetTrigger("attack");
-                timePassad = 0;
-            }
-        }
-        timePassad += Time.deltaTime;
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        animator.SetTrigger("damage");
-
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
+    protected void Die()
     {
         Destroy(this.gameObject);
     }
@@ -124,6 +78,16 @@ public class Enemy : MonoBehaviour
     public EnemyType GetEnemyType()
     {
         return enemyType;
+    }
+
+    public void StarDealDamage()
+    {
+        GetComponentInChildren<EnemyDamageDealer>().StarDealDamage();
+    }
+
+    public void EndDealDamage()
+    {
+        GetComponentInChildren<EnemyDamageDealer>().EndDealDamage();
     }
 }
 

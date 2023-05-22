@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private CharacterController characterController;
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     [SerializeField]
     private Transform cameraTransform;
