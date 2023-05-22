@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController gameController;
+    public InventorySystem inventorySystem;
 
     [Header("UI")]
     [SerializeField]
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         gameController = (gameController == null) ? this : gameController;
+        inventorySystem = GetComponent<InventorySystem>();
     }
 
     void Start()

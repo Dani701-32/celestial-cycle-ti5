@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction jumpAction;
     private InputAction drawWeaponAction;
     private InputAction attackAction;
+    public InputAction interactAction;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
     private CharacterController characterController;
@@ -65,13 +66,17 @@ public class PlayerMovement : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         drawWeaponAction = playerInput.actions["DrawWeapon"];
         attackAction = playerInput.actions["Attack"];
+        interactAction = playerInput.actions["Interact"];
     }
 
     void Start()
     {
         currentSpeed = walkSpeed;
         stepOffset = characterController.stepOffset;
-        currentWeapon.SetActive(combatMode);
+        if (currentWeapon != null)
+        {
+            currentWeapon.SetActive(combatMode);
+        }
         currentTime = timeToDraw;
     }
 
@@ -81,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         if (runningAction.triggered)
             isRunning = (isRunning) ? false : true;
-        if (drawWeaponAction.triggered)
+        if (drawWeaponAction.triggered && currentWeapon != null)
         {
             drawWeapon = (drawWeapon) ? false : true;
             counter = true;
