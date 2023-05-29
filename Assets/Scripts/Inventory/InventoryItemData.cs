@@ -12,4 +12,12 @@ public class InventoryItemData : ScriptableObject
     public GameObject prefab;
     public int maxStack;
     public bool canStack;
+    public ItemType type;
+}
+
+
+public enum ItemType {
+    Collectable,
+    Weapon,
+    Artifact,
 }

@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
     public InventorySystem inventorySystem;
+    public Player player; 
     private bool isInventory = false;
 
     [Header("UI")]

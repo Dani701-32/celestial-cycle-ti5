@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryItem
+public abstract class InventoryItem
 {
     public InventoryItemData data { get; private set; }
     public int stackSize { get; private set; }
@@ -22,4 +22,7 @@ public class InventoryItem
     {
         stackSize--;
     }
+
+    public abstract void Use();
+    public abstract void Remove();
 }

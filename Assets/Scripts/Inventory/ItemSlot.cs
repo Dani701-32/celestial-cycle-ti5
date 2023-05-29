@@ -8,7 +8,8 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField]
     private Image icon;
-
+    [SerializeField]
+    private Image backgroundImage;
     [SerializeField]
     private InventoryItem currentItem;
 
@@ -22,6 +23,11 @@ public class ItemSlot : MonoBehaviour
         this.currentItem = referenceItem;
         icon.sprite = currentItem.data.icon;
         stack.text = (referenceItem.stackSize > 1) ? $"{referenceItem.stackSize}" : "";
+        if(currentItem.equiped){
+            backgroundImage.color = UnityEngine.Color.yellow;
+        }else {
+            backgroundImage.color = UnityEngine.Color.white;
+        }
     }
 
     public void ShowDescriotion()

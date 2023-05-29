@@ -33,6 +33,11 @@ public class InventorySystem : MonoBehaviour
         buttonText;
 
     [SerializeField]
+    GameObject removeButton,
+        equipeButton,
+        unequipeButton;
+
+    [SerializeField]
     private Image spriteDescription;
     private InventoryItem currentItem;
 
@@ -76,7 +81,17 @@ public class InventorySystem : MonoBehaviour
         else
         {
             currentItem.equiped = (currentItem.equiped) ? false : true;
-            Debug.Log($"ItemEquiado: {currentItem.equiped}");
+            if (currentItem.equiped)
+            {
+                currentItem.Use();
+            }
+            else
+            {
+                currentItem.Remove();
+            }
+            OpenDescription(currentItem);
+            ClearInventory();
+            UpdateScreen();
         }
     }
 
@@ -88,7 +103,20 @@ public class InventorySystem : MonoBehaviour
         }
         else
         {
-            InventoryItem newItem = new InventoryItem(referenceData);
+            InventoryItem newItem;
+            switch (referenceData.type)
+            {
+                case ItemType.Artifact:
+                    newItem = new ArtifactItem(referenceData);
+                    break;
+                case ItemType.Weapon:
+                    newItem = new WeaponItem(referenceData);
+                    break;
+                default:
+                case ItemType.Collectable:
+                    newItem = new CollectableItem(referenceData);
+                    break;
+            }
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
@@ -122,7 +150,6 @@ public class InventorySystem : MonoBehaviour
             }
         }
     }
-
     private void UpdateScreen()
     {
         foreach (InventoryItem item in inventory)
@@ -131,6 +158,7 @@ public class InventorySystem : MonoBehaviour
             instance.GetComponent<ItemSlot>().UpdateItem(item);
             instance.GetComponent<ItemSlot>().itemDescriptor = descriptionScreen;
             slots.Add(instance);
+
         }
     }
 
@@ -140,7 +168,17 @@ public class InventorySystem : MonoBehaviour
         itemName.text = currentItem.data.displayName;
         itemDescription.text = currentItem.data.description;
         spriteDescription.sprite = currentItem.data.icon;
+        if (currentItem.equiped)
+        {
+            equipeButton.SetActive(false);
+            unequipeButton.SetActive(true);
+            removeButton.GetComponent<Button>().enabled = false;
+            return;
+        }
+        equipeButton.SetActive(true);
+        unequipeButton.SetActive(false);
         buttonText.text = (currentItem.data.canStack) ? "Consumir" : "Equipar";
+        removeButton.GetComponent<Button>().enabled = true;
     }
 
     private void ClearInventory()
@@ -157,6 +195,7 @@ public class InventorySystem : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         UpdateScreen();
         inventoryScreen.SetActive(true);
+        GameController.gameController.player.playerMovement.enabled = false;
     }
 
     public void CloseScreen()
@@ -168,5 +207,6 @@ public class InventorySystem : MonoBehaviour
         }
         descriptionScreen.SetActive(false);
         inventoryScreen.SetActive(false);
+        GameController.gameController.player.playerMovement.enabled = true;
     }
 }

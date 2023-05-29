@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Combat Controlers")]
     public GameObject currentWeapon;
+    public GameObject currentArtifact;
     public float timeToDraw;
     private bool counter = false;
     private bool drawWeapon = false;
@@ -194,7 +195,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentTime <= 0)
             {
-                currentWeapon.SetActive(drawWeapon);
+                if (currentWeapon != null)
+                {
+                    currentWeapon.SetActive(drawWeapon);
+                }
                 currentTime = timeToDraw;
                 counter = false;
                 animator.ResetTrigger("drawWeapon");
@@ -215,6 +219,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void UniqueppedWeapon()
+    {
+        counter = true;
+        currentTime = timeToDraw;
+        drawWeapon = false;
+        Destroy(currentWeapon);
+        DrawWeapon();
+        currentWeapon = null;
+    }
     public void StartDealDamage()
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
