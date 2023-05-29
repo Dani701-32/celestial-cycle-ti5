@@ -7,10 +7,9 @@ public class InventoryItemData : ScriptableObject
 {
     public string id;
     public string displayName;
+    public string description;
     public Sprite icon;
     public GameObject prefab;
-
-    public bool canStack;
-
     public int maxStack;
+    public bool canStack;
 }

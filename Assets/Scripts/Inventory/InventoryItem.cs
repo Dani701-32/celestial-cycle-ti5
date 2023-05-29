@@ -6,7 +6,7 @@ public class InventoryItem
 {
     public InventoryItemData data { get; private set; }
     public int stackSize { get; private set; }
-
+    public bool equiped;
     public InventoryItem(InventoryItemData data)
     {
         this.data = data;
