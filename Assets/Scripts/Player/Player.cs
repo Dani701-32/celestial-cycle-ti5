@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private GameController controller;
     [SerializeField]
     float health = 100;
 
@@ -13,14 +15,23 @@ public class Player : MonoBehaviour
     [SerializeField]
     PlayerMovement playerMovement;
     private bool isDead;
+    InputAction inventoryAction;
 
     void Start()
     {
+        controller = GameController.gameController;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
+        inventoryAction = playerMovement.playerInput.actions["Inventory"];
         animator = GetComponent<Animator>();
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Update() {
+        if(inventoryAction.triggered){
+            
+            controller.InventoryScene();
+        }
     }
 
     public void TakeDamage(float damage)

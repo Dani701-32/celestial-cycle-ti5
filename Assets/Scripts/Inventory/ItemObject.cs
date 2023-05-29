@@ -7,15 +7,24 @@ public class ItemObject : MonoBehaviour
     public InventoryItemData referenceItem;
     private PlayerMovement playerMovement;
 
+    private InventorySystem inventory;
+
+    private void Start()
+    {
+        inventory = GameController.gameController.inventorySystem;
+    }
+
     public void OnHandlePickupItem()
     {
-        GameController.gameController.inventorySystem.Add(referenceItem);
+        if (!inventory.canAdd(referenceItem))
+            return;
+        inventory.Add(referenceItem);
         Destroy(this.gameObject);
     }
 
     void Update()
     {
-        if (playerMovement.interactAction.triggered)
+        if ( playerMovement != null && playerMovement.interactAction.triggered)
         {
             OnHandlePickupItem();
         }

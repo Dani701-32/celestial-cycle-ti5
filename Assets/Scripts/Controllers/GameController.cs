@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
     public InventorySystem inventorySystem;
+    private bool isInventory = false;
 
     [Header("UI")]
     [SerializeField]
@@ -37,5 +38,19 @@ public class GameController : MonoBehaviour
     {
         int currectScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currectScene);
+    }
+
+    public void InventoryScene()
+    {
+        if (isInventory)
+        {
+            inventorySystem.CloseScreen();
+            isInventory = false;
+        }
+        else
+        {
+            isInventory = true;
+            inventorySystem.OpenScreen();
+        }
     }
 }

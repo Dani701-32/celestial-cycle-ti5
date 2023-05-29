@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction drawWeaponAction;
     private InputAction attackAction;
     public InputAction interactAction;
-    private PlayerInput playerInput;
+    public PlayerInput playerInput { get; private set; }
     private PlayerInputActions playerInputActions;
     private CharacterController characterController;
 
