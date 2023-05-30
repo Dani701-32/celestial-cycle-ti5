@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
     public InventorySystem inventorySystem;
+    public NPCDialogue _NPCDialogue;
     public Player player; 
     private bool isInventory = false;
 
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
     {
         gameController = (gameController == null) ? this : gameController;
         inventorySystem = GetComponent<InventorySystem>();
+        _NPCDialogue = GetComponent<NPCDialogue>();
     }
 
     void Start()

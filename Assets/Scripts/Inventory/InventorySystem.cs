@@ -189,6 +189,15 @@ public class InventorySystem : MonoBehaviour
         slots.Clear();
     }
 
+    public InventoryItem GetInventoryItem(InventoryItemData referenceData){
+
+        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        {
+            return value;
+        }
+        return null;
+    }
+
     public void OpenScreen()
     {
         Cursor.lockState = CursorLockMode.None;

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c91a428ed15942bbd83f1564ce094, type: 3}
+  m_Name: FirstQuest
+  m_EditorClassIdentifier: 
+  questData:
+    title: "Primeira Miss\xE3o "
+    description: "\"Estou precisando de alguns fragmentos da lua. Motivos? Nem eu
+      sei, teria que ver com aquela sacerdotisa. Ela me pediu para achar mas sabe
+      como \xE9, melhor deixar algu\xE9m fazer o trabalho que voc\xEA n\xE3o quer
+      hehe\" - Lontri, A lontra"
+  goals:
+  - {fileID: 11400000, guid: 7fabbe6fc41451a46bf2706e6e2ecb50, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 4c1850cb3a0f9434cac472c6894a12a5, type: 2}
+  isQuestCompleted: 0
+  NPCsmessages:
+  - "Ol\xE1 companheira  pode me Ajudar com uma coisinha? "
+  - "Otimo preciso que voc\xEA colete uns fragmentos da lua para mim. Eu lhe darei
+    algo de util depois hehe"
+  - Valeu pela ajuda companheira !
+  - "Sem problema. Talvez eu encontre algu\xE9m para me ajudar com isso."
+  - "Opa parece que voc\xEA conseguiu companheira. Aqui sua recompensa."
+  - "Quando voc\xEA tiver tudo o que eu lhe darei uma boa recompensa. Pode esperar
+    hehe"
