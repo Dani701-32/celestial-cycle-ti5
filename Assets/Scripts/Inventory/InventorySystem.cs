@@ -80,14 +80,13 @@ public class InventorySystem : MonoBehaviour
         }
         else
         {
-            currentItem.equiped = (currentItem.equiped) ? false : true;
             if (currentItem.equiped)
             {
-                currentItem.Use();
+                currentItem.Remove();
             }
             else
             {
-                currentItem.Remove();
+                currentItem.Use();
             }
             OpenDescription(currentItem);
             ClearInventory();

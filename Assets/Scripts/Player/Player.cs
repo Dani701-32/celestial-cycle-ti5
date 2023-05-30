@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     public Image weaponSprite;
     public Image artifactSprite;
 
+    public bool hasArtifact { get; private set; }
+    public bool hasWeapon { get; private set; }
+
     void Start()
     {
         controller = GameController.gameController;
@@ -56,12 +59,14 @@ public class Player : MonoBehaviour
 
     public void EquipeArtifact(GameObject prefab)
     {
+        hasArtifact = true;
         GameObject artifact = Instantiate(prefab, artifactSpot);
         playerMovement.currentArtifact = artifact;
     }
 
     public void EquipWeapon(GameObject prefab)
     {
+        hasWeapon = true;
         GameObject weapon = Instantiate(prefab, weaponSpot);
         playerMovement.currentWeapon = weapon;
         weapon.SetActive(playerMovement.combatMode);
@@ -69,12 +74,14 @@ public class Player : MonoBehaviour
 
     public void RemoveWeapon()
     {
+        hasWeapon = false;
         Debug.Log("Remvoer arma");
         playerMovement.UniqueppedWeapon();
     }
 
     public void RemoveArtifact()
     {
+        hasArtifact = false;
         Debug.Log("Remvoer artefato");
         Destroy(playerMovement.currentArtifact);
         playerMovement.currentArtifact = null;
