@@ -18,7 +18,6 @@ public class QuestStructure : ScriptableObject
         protected string rewardDescription;
 
         public abstract string GetDescription();
-
     }
 
     public abstract class QuestGoal : ScriptableObject
@@ -76,7 +75,7 @@ public class QuestStructure : ScriptableObject
 
     public string GetQuestGoals()
     {
-        string textGoals = "Objetivos:\n";
+        string textGoals = "";
         foreach (QuestGoal goal in goals)
         {
             textGoals += $"{goal.currentAmount}/{goal.minimumAmount} - {goal.GetDescription()}\n";
@@ -84,13 +83,18 @@ public class QuestStructure : ScriptableObject
         return textGoals;
     }
 
-    public string GetQuestRewards() {
-        string textReward = "Recompensas:\n";
-        foreach (QuestReward reward in rewards){
-            textReward+= $"{reward.GetDescription()}\n";
+    public string GetQuestRewards()
+    {
+        string textReward = "";
+        foreach (QuestReward reward in rewards)
+        {
+            textReward += $"{reward.GetDescription()}\n";
         }
         return textReward;
-     }
+    }
 
+    [Header("Dialogues for Quest")]
+    public int aceptedMessage,
+        declineMessage;
     public string[] NPCsmessages;
 }

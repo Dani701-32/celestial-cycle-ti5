@@ -117,7 +117,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("speed", 0);
         }
     }
-
+    void OnDisable()
+    {
+        animator.SetFloat("speed", 0);
+    }
     private void Jump()
     {
         if (characterController.isGrounded)

@@ -18,17 +18,20 @@ MonoBehaviour:
       sei, teria que ver com aquela sacerdotisa. Ela me pediu para achar mas sabe
       como \xE9, melhor deixar algu\xE9m fazer o trabalho que voc\xEA n\xE3o quer
       hehe\" - Lontri, A lontra"
+    currentStep: 0
   goals:
   - {fileID: 11400000, guid: 7fabbe6fc41451a46bf2706e6e2ecb50, type: 2}
   rewards:
   - {fileID: 11400000, guid: 4c1850cb3a0f9434cac472c6894a12a5, type: 2}
   isQuestCompleted: 0
+  aceptedMessage: 3
+  declineMessage: 2
   NPCsmessages:
   - "Ol\xE1 companheira  pode me Ajudar com uma coisinha? "
   - "Otimo preciso que voc\xEA colete uns fragmentos da lua para mim. Eu lhe darei
     algo de util depois hehe"
-  - Valeu pela ajuda companheira !
   - "Sem problema. Talvez eu encontre algu\xE9m para me ajudar com isso."
-  - "Opa parece que voc\xEA conseguiu companheira. Aqui sua recompensa."
+  - Valeu pela ajuda companheria
   - "Quando voc\xEA tiver tudo o que eu lhe darei uma boa recompensa. Pode esperar
     hehe"
+  - "Opa parece que voc\xEA conseguiu companheria. Aqui sua parte do acordo"

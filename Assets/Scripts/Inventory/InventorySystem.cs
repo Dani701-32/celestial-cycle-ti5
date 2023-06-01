@@ -46,11 +46,12 @@ public class InventorySystem : MonoBehaviour
         inventory = new List<InventoryItem>();
         slots = new List<GameObject>();
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-        inventoryScreen.SetActive(false);
+        
     }
 
     private void Start()
     {
+        inventoryScreen.SetActive(false);
         descriptionScreen.SetActive(false);
     }
 
@@ -202,7 +203,6 @@ public class InventorySystem : MonoBehaviour
     {
         UpdateScreen();
         inventoryScreen.SetActive(true);
-        GameController.gameController.player.playerMovement.enabled = false;
     }
 
     public void CloseScreen()
@@ -213,6 +213,5 @@ public class InventorySystem : MonoBehaviour
         }
         descriptionScreen.SetActive(false);
         inventoryScreen.SetActive(false);
-        GameController.gameController.player.playerMovement.enabled = true;
     }
 }

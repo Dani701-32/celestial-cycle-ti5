@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
     public InventorySystem inventorySystem;
+    public QuestSystem questSystem;
     public NPCDialogue _NPCDialogue;
     public Player player;
     public CinemachineFreeLook freelookCamera;
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
     {
         gameController = (gameController == null) ? this : gameController;
         inventorySystem = GetComponent<InventorySystem>();
+        questSystem = GetComponent<QuestSystem>();
         _NPCDialogue = GetComponent<NPCDialogue>();
         currentCameraX = "Mouse X";
         currentCameraY = "Mouse Y";
@@ -57,22 +59,34 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(currectScene);
     }
 
+    public void ReleaseCamera()
+    {
+        currentCameraX = "Mouse X";
+        currentCameraY = "Mouse Y";
+    }
+
+    public void StopCamera()
+    {
+        currentCameraX = "";
+        currentCameraY = "";
+    }
+
     public void MenuScreen()
     {
         if (isMenu)
         {
+            GameController.gameController.player.playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             menuScreen.SetActive(false);
-            currentCameraX = "Mouse X";
-            currentCameraY = "Mouse Y";
+            ReleaseCamera();
             isMenu = false;
         }
         else
         {
+            GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
-            currentCameraX = "";
-            currentCameraY = "";
+            StopCamera();
             isMenu = true;
         }
     }
