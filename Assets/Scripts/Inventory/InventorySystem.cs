@@ -200,7 +200,6 @@ public class InventorySystem : MonoBehaviour
 
     public void OpenScreen()
     {
-        Cursor.lockState = CursorLockMode.None;
         UpdateScreen();
         inventoryScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
@@ -208,7 +207,6 @@ public class InventorySystem : MonoBehaviour
 
     public void CloseScreen()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         if (slots.Count > 0)
         {
             ClearInventory();

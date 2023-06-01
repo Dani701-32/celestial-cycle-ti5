@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     {
         if (inventoryAction.triggered)
         {
-            controller.InventoryScene();
+            controller.MenuScreen();
         }
     }
 
