@@ -28,7 +28,8 @@ public class QuestSystem : MonoBehaviour
     private TextMeshProUGUI questTitle,
         questDescriotion,
         questGoals,
-        questRewards;
+        questRewards,
+        questCompleted;
     private Quest currentQuest;
 
     // Start is called before the first frame update
@@ -82,9 +83,30 @@ public class QuestSystem : MonoBehaviour
         slotsList.Clear();
     }
 
+    private void CheckQuests()
+    {
+        if (activeQuestList.Count == 0)
+            return;
+
+        foreach (Quest item in activeQuestList)
+        {
+            Debug.Log("Teste quest");
+            item.data.CompleteQuest();
+            if (item.data.isQuestCompleted)
+            {
+                questCompleted.text = "Quest Completed";
+            }
+            else
+            {
+                questCompleted.text = "";
+            }
+        }
+    }
+
     public void OpenScreen()
     {
         UpdateScreen();
+        CheckQuests();
         questScreen.SetActive(true);
     }
 

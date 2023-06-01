@@ -31,7 +31,7 @@ public class QuestStructure : ScriptableObject
         public void Invoke()
         {
             currentAmount = 0;
-            isGoalCompleted = true;
+            isGoalCompleted = false;
         }
 
         public virtual string GetDescription()
@@ -57,6 +57,7 @@ public class QuestStructure : ScriptableObject
     public void Invoke()
     {
         isQuestCompleted = false;
+        Debug.Log("Quest restarted");
         foreach (QuestGoal questGoal in goals)
         {
             questGoal.Invoke();
@@ -67,6 +68,7 @@ public class QuestStructure : ScriptableObject
     {
         foreach (QuestGoal questGoal in goals)
         {
+            questGoal.isCompleted();
             if (questGoal.isGoalCompleted)
                 return;
         }

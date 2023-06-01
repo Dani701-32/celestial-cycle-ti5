@@ -11,11 +11,16 @@ public class QuestSlot : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textQuest;
     public GameObject questDescription;
-
+    public GameObject spriteCompleted;
     public void UpdateQuest(Quest quest)
     {
         this.currentQuest = quest;
         textQuest.text = quest.data.questData.title;
+        if(this.currentQuest.data.isQuestCompleted){
+            spriteCompleted.SetActive(true);
+        } else {
+            spriteCompleted.SetActive(false);
+        }
     }
 
     public void ShowDescription()

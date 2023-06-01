@@ -9,8 +9,6 @@ using UnityEngine;
 )]
 public class CollectGoal : QuestStructure.QuestGoal
 {
-    private GameController gameController;
-
     [SerializeField]
     protected InventoryItemData referenceItemData;
 
@@ -21,11 +19,17 @@ public class CollectGoal : QuestStructure.QuestGoal
 
     private bool CheckQuantity()
     {
-        InventoryItem data = gameController.inventorySystem.GetInventoryItem(referenceItemData);
-        if (data != null)
+        InventoryItem dataItem = GameController.gameController.inventorySystem.GetInventoryItem(referenceItemData);
+        if (dataItem != null)
         {
-            return (data.stackSize >= minimumAmount);
+            AddToCurrentQuantity(dataItem.stackSize);
+            return (dataItem.stackSize >= minimumAmount);
         }
         return false;
+    }
+
+    private void AddToCurrentQuantity(int quantity)
+    {
+        currentAmount = quantity;
     }
 }

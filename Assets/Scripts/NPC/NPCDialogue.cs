@@ -98,6 +98,7 @@ public class NPCDialogue : MonoBehaviour
     {
         GameController.gameController.questSystem.AddQuest(currentNPC.activeQuest.data, currentNPC.activeQuest.currentIndex);
         questAcept = true;
+        currentNPC.activeQuest.data.Invoke();
         StartCoroutine(ResponseDialog());
     }
 
