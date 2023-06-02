@@ -77,6 +77,8 @@ public class GameController : MonoBehaviour
         {
             GameController.gameController.player.playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
+            inventorySystem.CloseScreen();
+            questSystem.CloseScreen();
             menuScreen.SetActive(false);
             ReleaseCamera();
             isMenu = false;

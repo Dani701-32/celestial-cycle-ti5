@@ -31,6 +31,7 @@ public class QuestNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        activeQuest = null;
         gameController = GameController.gameController;
         dialogueSystem = gameController._NPCDialogue;
         interected = false;
@@ -64,7 +65,12 @@ public class QuestNPC : MonoBehaviour
     {
         dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
         dialogueSystem.textNPCName.text = NPC.Name;
+        if (activeQuest != null)
+        {
+            currentStep = activeQuest.currentIndex;
+        }
         activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
+        activeQuest.SetNPC(NPC);
         dialogueSystem.OpenScreen(this);
     }
 

@@ -44,9 +44,11 @@ public class QuestSystem : MonoBehaviour
     // Update is called once per frame
     void Update() { }
 
-    public void AddQuest(QuestStructure quest, int currentStep)
+    public void AddQuest(QuestStructure quest, int currentStep, NPCData npc)
     {
-        activeQuestList.Add(new Quest(quest, currentStep));
+        Quest _quest = new Quest(quest, currentStep);
+        _quest.SetNPC(npc);
+        activeQuestList.Add(_quest);
     }
 
     public void UpdateScreen()
@@ -90,17 +92,34 @@ public class QuestSystem : MonoBehaviour
 
         foreach (Quest item in activeQuestList)
         {
-            Debug.Log("Teste quest");
-            item.data.CompleteQuest();
+            item.CompleteQuest();
             if (item.data.isQuestCompleted)
             {
-                questCompleted.text = "Quest Completed";
+                questCompleted.text =
+                    $"Missão Completa \nEncontre com {item.currentNPC.dataNPC.Name} para pegar a recompensa";
             }
             else
             {
                 questCompleted.text = "";
             }
         }
+    }
+
+    public Quest CheckQuests(QuestStructure quest)
+    {
+        if (activeQuestList.Count == 0)
+            return null;
+
+        foreach (Quest item in activeQuestList)
+        {
+            item.CompleteQuest();
+            if (item.data.isQuestCompleted)
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 
     public void OpenScreen()

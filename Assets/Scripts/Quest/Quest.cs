@@ -5,6 +5,7 @@ using UnityEngine;
 public class Quest
 {
     public QuestStructure data { get; private set; }
+    public NPCItem currentNPC { get; private set; }
     public int currentIndex { get; private set; }
     public bool questCompleted { get; private set; }
 
@@ -24,6 +25,11 @@ public class Quest
     public void ProgressQuest()
     {
         currentIndex++;
+    }
+
+    public void SetNPC(NPCData npc)
+    {
+        currentNPC = new NPCItem(npc);
     }
 
     public void CompleteQuest()

@@ -51,9 +51,7 @@ public class QuestStructure : ScriptableObject
 
     [Header("Quest Reward")]
     public List<QuestReward> rewards;
-
     public bool isQuestCompleted = false;
-
     public void Invoke()
     {
         isQuestCompleted = false;
@@ -69,7 +67,7 @@ public class QuestStructure : ScriptableObject
         foreach (QuestGoal questGoal in goals)
         {
             questGoal.isCompleted();
-            if (questGoal.isGoalCompleted)
+            if (!questGoal.isGoalCompleted)
                 return;
         }
         isQuestCompleted = true;
