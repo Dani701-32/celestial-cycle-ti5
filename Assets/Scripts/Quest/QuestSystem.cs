@@ -92,7 +92,7 @@ public class QuestSystem : MonoBehaviour
 
         foreach (Quest item in activeQuestList)
         {
-            item.CompleteQuest();
+            item.CompleteQuest(0);
             if (item.data.isQuestCompleted)
             {
                 questCompleted.text =
@@ -112,7 +112,7 @@ public class QuestSystem : MonoBehaviour
 
         foreach (Quest item in activeQuestList)
         {
-            item.CompleteQuest();
+            item.CompleteQuest(0);
             if (item.data.isQuestCompleted)
             {
                 return item;

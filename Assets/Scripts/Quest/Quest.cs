@@ -32,9 +32,9 @@ public class Quest
         currentNPC = new NPCItem(npc);
     }
 
-    public void CompleteQuest()
+    public void CompleteQuest(int valueDialogue)
     {
-        currentIndex = 5;
+        currentIndex = valueDialogue;
         data.CompleteQuest();
         questCompleted = data.isQuestCompleted;
     }

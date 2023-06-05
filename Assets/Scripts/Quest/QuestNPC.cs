@@ -53,7 +53,24 @@ public class QuestNPC : MonoBehaviour
         if (interected)
         {
             player.playerMovement.enabled = false;
-            UpdadeScreen();
+
+            if (activeQuest == null) UpdadeScreen();
+            else
+            {
+                if (activeQuest.data.isQuestCompleted)
+                {
+                    
+                    activeQuest.CompleteQuest(5);
+                    UpdadeScreen();
+                    Debug.Log("Completou a Quest");
+                }
+                else
+                {
+                    UpdadeScreen();
+                    Debug.Log("Não Completou a Quest");
+                }
+            }
+            
         }
         else
         {
@@ -72,6 +89,8 @@ public class QuestNPC : MonoBehaviour
         activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
         activeQuest.SetNPC(NPC);
         dialogueSystem.OpenScreen(this);
+
+        
     }
 
     void OnTriggerEnter(Collider other)
