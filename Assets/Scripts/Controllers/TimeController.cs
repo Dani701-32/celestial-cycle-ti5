@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMPro;
-
-#if UNITY_EDITOR
-[ExecuteInEditMode]
-#endif
 
 [RequireComponent(typeof(Light))]
 public class TimeController : MonoBehaviour
@@ -16,16 +11,14 @@ public class TimeController : MonoBehaviour
 
     [Header("Components:")]
     public Material skyMaterial;
-    public ReflectionProbe probe;
     public AnimationCurve lightAngleCurve;
     private Light sunLight;
-    [SerializeField] private TextMeshProUGUI textHours;
-    [SerializeField] private TextMeshProUGUI textDays;
-    [SerializeField] private TextMeshProUGUI textMoonPhase;
+
+    [Header("UI:")]
+    public TextMeshProUGUI textHours;
+    public TextMeshProUGUI textDays, textMoonPhase;
 
     [Header("Generic Hours:")]
-    public bool animate;
-
     [Range(0, 24)]
     public float hour;
 
@@ -38,17 +31,18 @@ public class TimeController : MonoBehaviour
     [Range(0, 60)]
     public float dayMinutesDuration = 10;
 
-    [Header("Moon Controlls:")]
-    public bool isNight;
-    public float intensity;
+    [Range(0.02f, 0.2f)]
+    public float sunSize = 0.06f;
 
+    [Header("Moon Controlls:")]
     [SerializeField]
     private MoonPhases currentPhase;
-    [SerializeField]
-    private int phaseController = 0;
+    [HideInInspector]
+    public bool isNight;
+    public int phaseController = 0;
     private int day = 1;
+    public float intensity;
 
-#if UNITY_EDITOR
     [Header("Color Controlls:")]
     [SerializeField]
     private Color nightColor;
@@ -58,30 +52,18 @@ public class TimeController : MonoBehaviour
 
     [SerializeField]
     private Color dawnColor;
-#endif
     public Gradient gradientColor;
 
     private Color lightColor;
-    private float lastHour = -1;
-    private float lastLongitude = 1000;
-    private int probeRenderID = -1;
-    private float gray;
-    private float hourEval;
     private Transform mainCamera;
-    private float t = 0;
-    private float dt = 0;
+    private float dt = 0, hourEval, gray, lastLongitude = 1000, lastHour = -1;
     private DateTime currentTime;
-
-    private bool isSaveNight = false;
-    private bool switchDay = false;
-
+    private bool isSaveNight = false, switchDay = false;
 
     [SerializeField]
     private List<Light> cityLights;
 
-#if UNITY_EDITOR
     private float lastNightDuration = -1;
-#endif
 
     private void Awake()
     {
@@ -89,6 +71,9 @@ public class TimeController : MonoBehaviour
         {
             InstanceTime = this;
         }
+
+        sunLight = this.GetComponent<Light>();
+        mainCamera = Camera.main.transform;
     }
 
     void Start()
@@ -100,72 +85,45 @@ public class TimeController : MonoBehaviour
 
         SetMoonPhase();
 
-        textDays.text = "Day " + day.ToString();  
-    }
+        textDays.text = "Day " + day.ToString();
 
-    private void OnEnable()
-    {
-        sunLight = this.GetComponent<Light>();
-        mainCamera = Camera.main.transform;
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
         RenderSettings.sun = sunLight;
         RenderSettings.skybox = skyMaterial;
-        RenderSettings.defaultReflectionResolution = probe.resolution;
-        RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Custom;
-        RenderSettings.customReflection = new Cubemap(probe.resolution, TextureFormat.RGBA32, true);
-        probeRenderID = probe.RenderProbe();
+        RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
-#if UNITY_EDITOR
         lastNightDuration = -1;
-#endif
+    }
+
+    private void ControlLightsCity(float min, float max)
+    {
+        foreach (Light light in cityLights) light.intensity = Mathf.Lerp(min, max, lightAngleCurve.Evaluate(hour));
     }
 
     public void Update()
     {
-        UpdateTimeOfDay();
+        lastHour = hour;
+        lastLongitude = longitude;
+        dt = Time.deltaTime;
+        hour += dt * 24.0f / (60 * dayMinutesDuration);
 
-#if UNITY_EDITOR
-        if (
-            Application.isPlaying == false
-            && lastNightDuration == nightDuration
-            && lastHour == hour
-            && lastLongitude == longitude
-        )
-        {
-            return;
-        }
+        UpdateTimeOfDay();
 
         if (lastNightDuration != nightDuration)
         {
             lastNightDuration = nightDuration;
             UpdateGradients();
         }
-#endif
 
         if (isNight)
         {
-            foreach (Light light in cityLights)
-            {
-                light.intensity = Mathf.Lerp(0, 2, lightAngleCurve.Evaluate(hour));
-            }
+            ControlLightsCity(0, 2);
+            skyMaterial.SetFloat("_SunSize", 0.0f);
         }
         else
         {
-            foreach (Light light in cityLights)
-            {
-                light.intensity = Mathf.Lerp(2, 0, lightAngleCurve.Evaluate(hour));
-            }
-        }
-
-        
-
-        lastHour = hour;
-        lastLongitude = longitude;
-        dt = Time.deltaTime;
-
-        if (animate && Application.isPlaying)
-        {
-            hour += dt * 24.0f / (60 * dayMinutesDuration);
+            ControlLightsCity(2, 0);
+            skyMaterial.SetFloat("_SunSize", sunSize);
         }
 
         if (hour > 24)
@@ -174,7 +132,6 @@ public class TimeController : MonoBehaviour
             switchDay = true;
         }
         else switchDay = false;
-
 
         isNight = hour < nightDuration / 2 || hour > 24 - (nightDuration / 2);
 
@@ -186,16 +143,9 @@ public class TimeController : MonoBehaviour
 
         if (hour > 12)
         {
-            sunLight.transform.localEulerAngles = new Vector3(
-                sunLight.transform.localEulerAngles.x,
-                sunLight.transform.localEulerAngles.y + 180,
-                0
-            );
-            sunLight.transform.localEulerAngles = new Vector3(
-                sunLight.transform.localEulerAngles.x,
-                -sunLight.transform.localEulerAngles.y,
-                0
-            );
+            sunLight.transform.localEulerAngles = new Vector3(sunLight.transform.localEulerAngles.x, sunLight.transform.localEulerAngles.y + 180, 0);
+
+            sunLight.transform.localEulerAngles = new Vector3(sunLight.transform.localEulerAngles.x, -sunLight.transform.localEulerAngles.y, 0);
         }
 
         lightColor = gradientColor.Evaluate(hour / 24.0f);
@@ -216,19 +166,8 @@ public class TimeController : MonoBehaviour
         RenderSettings.ambientGroundColor = lightColor * 0.015f;
 
         intensity = isNight ? 0 : gray;
-
-        //always update probe when dawn
-        t = intensity > 0 && intensity < 1 ? 1 : t + dt;
-
-        if (probe.IsFinishedRendering(probeRenderID) && t >= 1)
-        {
-            t = 0;
-            Graphics.CopyTexture(probe.texture, RenderSettings.customReflection as Cubemap);
-            probeRenderID = probe.RenderProbe();
-        }
     }
 
-#if UNITY_EDITOR
     public void UpdateGradients()
     {
         //light color --------
@@ -268,19 +207,10 @@ public class TimeController : MonoBehaviour
         for (int i = 0; i < lightAngleCurve.keys.Length; i++)
         {
             AnimationUtility.SetKeyBroken(lightAngleCurve, i, true);
-            AnimationUtility.SetKeyLeftTangentMode(
-                lightAngleCurve,
-                i,
-                AnimationUtility.TangentMode.Linear
-            );
-            AnimationUtility.SetKeyRightTangentMode(
-                lightAngleCurve,
-                i,
-                AnimationUtility.TangentMode.Linear
-            );
+            AnimationUtility.SetKeyLeftTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
+            AnimationUtility.SetKeyRightTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
         }
     }
-#endif
 
     private void UpdateTimeOfDay()
     {
@@ -342,3 +272,6 @@ public enum MoonPhases
     FullMoon,
     ThirdQuarter,
 }
+
+
+
