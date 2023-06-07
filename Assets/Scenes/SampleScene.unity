@@ -5268,7 +5268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyMaterial: {fileID: 2100000, guid: 4b2ef050ce5b74e2cbf788976bc73e73, type: 2}
-  probe: {fileID: 1184569326}
   lightAngleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5323,15 +5322,15 @@ MonoBehaviour:
   textHours: {fileID: 116108090}
   textDays: {fileID: 1287509163}
   textMoonPhase: {fileID: 813249861}
-  animate: 1
   hour: 8.9
   longitude: -22
   nightDuration: 12
   dayMinutesDuration: 1
-  isNight: 0
-  intensity: 0.8916139
+  sunSize: 0.06
   currentPhase: 1
+  isNight: 0
   phaseController: 1
+  intensity: 0.8916139
   nightColor: {r: 0.012014951, g: 0.054050334, b: 0.38431373, a: 1}
   dayColor: {r: 0.9150943, g: 0.896051, b: 0.80718225, a: 1}
   dawnColor: {r: 0.9245283, g: 0.7238085, b: 0.3532396, a: 1}
@@ -6076,7 +6075,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772619322}
-  m_LocalRotation: {x: 0.11289373, y: -0.000000019114333, z: 0.0000000021717723, w: 0.9936071}
+  m_LocalRotation: {x: 0.09605122, y: -1e-45, z: -0, w: 0.9953764}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6442,7 +6441,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825528971}
-  m_LocalRotation: {x: 0.13094825, y: 0.000000017058222, z: -0.0000000022531457, w: 0.9913892}
+  m_LocalRotation: {x: 0.11414073, y: -0, z: -0, w: 0.9934646}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7832,7 +7831,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.11289374, y: -0.000000038228663, z: 0.000000004343545, w: 0.99360704}
+  m_LocalRotation: {x: 0.09605123, y: 0, z: 0, w: 0.9953764}
   m_LocalPosition: {x: 0, y: 2.98, z: -5.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9660,7 +9659,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.09484967, y: 0.000000017128805, z: -0.0000000016320194, w: 0.9954916}
+  m_LocalRotation: {x: 0.077977836, y: -0.00000001715399, z: 0.0000000013417166, w: 0.9969551}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10712,7 +10711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 2.0805664, y: 16.646423}
+  m_AnchoredPosition: {x: 2.0805664, y: 16.646484}
   m_SizeDelta: {x: -41.6155, y: 248.0966}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1372076376
@@ -15941,10 +15940,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1656015336, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: weaponSprite
       value: 
@@ -16005,12 +16000,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5019829768102149638, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 427169ae55a83f44a98153e4f9045b4a, type: 3}
-    m_RemovedComponents:
-    - {fileID: 5019829768102149638, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
 --- !u!114 &8020468338046253456 stripped
 MonoBehaviour:
