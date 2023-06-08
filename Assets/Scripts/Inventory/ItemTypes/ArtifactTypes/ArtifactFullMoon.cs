@@ -20,6 +20,7 @@ public class ArtifactFullMoon : Artifact
     {
         if (useArtifact)
         {
+            Instantiate(particle, gameController.player.transform);
             int layerMask = 1 << 8;
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,

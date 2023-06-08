@@ -9,6 +9,7 @@ public abstract class Artifact : MonoBehaviour
     public float charge, maxCharge, cost;
     protected bool useArtifact = false;
     protected GameController gameController;
+    public GameObject particle;
     public List<GameObject> hasAffacted;
     public abstract void Use();
     public abstract void Recharge();
