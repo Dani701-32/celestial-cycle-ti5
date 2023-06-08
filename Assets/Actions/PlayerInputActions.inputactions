@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SaveGame",
+                    "type": "Button",
+                    "id": "3f1f2e8c-68be-44d0-a38c-69fa7556a9be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "6717c99c-9d5a-4892-890b-5a1900d1f8ab",
@@ -188,6 +197,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7235c9c4-2c70-4b6f-8da6-cb1c8af490cb",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SaveGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

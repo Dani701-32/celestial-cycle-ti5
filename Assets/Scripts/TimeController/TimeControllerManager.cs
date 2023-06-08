@@ -5,65 +5,37 @@ using UnityEditor;
 using TMPro;
 
 [RequireComponent(typeof(Light))]
-public class TimeController : MonoBehaviour
+public class TimeControllerManager : MonoBehaviour
 {
-    public static TimeController InstanceTime;
+    public static TimeControllerManager InstanceTime;
+    public TimeControllerData timeControllerData;
 
-    [Header("Components:")]
-    public Material skyMaterial;
-    public AnimationCurve lightAngleCurve;
+    private Material skyMaterial;
+    private AnimationCurve lightAngleCurve;
     private Light sunLight;
+
+    private int phaseController, day;
+    private float hour, longitude, nightDuration;
+    private float intensity, sunSize, dayMinutesDuration, lastNightDuration = -1;
+    private float dt = 0, hourEval, gray, lastLongitude = 1000, lastHour = -1;
+
+    private MoonPhases currentPhase;
+    [HideInInspector]
+    public bool isNight;
+    private bool isSaveNight = false, switchDay = false;
+    
+    private Color dayColor, dawnColor, nightColor, lightColor;
+    private Gradient gradientColor;
+
+    private Transform mainCamera;
+    private DateTime currentTime;
 
     [Header("UI:")]
     public TextMeshProUGUI textHours;
     public TextMeshProUGUI textDays, textMoonPhase;
 
-    [Header("Generic Hours:")]
-    [Range(0, 24)]
-    public float hour;
-
-    [Range(-90, 90)]
-    public float longitude;
-
-    [Range(2, 22)]
-    public float nightDuration = 12;
-
-    [Range(0, 60)]
-    public float dayMinutesDuration = 10;
-
-    [Range(0.02f, 0.2f)]
-    public float sunSize = 0.06f;
-
-    [Header("Moon Controlls:")]
-    [SerializeField]
-    private MoonPhases currentPhase;
-    [HideInInspector]
-    public bool isNight;
-    public int phaseController = 0;
-    private int day = 1;
-    public float intensity;
-
-    [Header("Color Controlls:")]
-    [SerializeField]
-    private Color nightColor;
-
-    [SerializeField]
-    private Color dayColor;
-
-    [SerializeField]
-    private Color dawnColor;
-    public Gradient gradientColor;
-
-    private Color lightColor;
-    private Transform mainCamera;
-    private float dt = 0, hourEval, gray, lastLongitude = 1000, lastHour = -1;
-    private DateTime currentTime;
-    private bool isSaveNight = false, switchDay = false;
-
     [SerializeField]
     private List<Light> cityLights;
-
-    private float lastNightDuration = -1;
 
     private void Awake()
     {
@@ -82,6 +54,8 @@ public class TimeController : MonoBehaviour
         {
             light.intensity = 0;
         }
+
+        InitializeVariables();
 
         SetMoonPhase();
 
@@ -106,6 +80,11 @@ public class TimeController : MonoBehaviour
         lastLongitude = longitude;
         dt = Time.deltaTime;
         hour += dt * 24.0f / (60 * dayMinutesDuration);
+
+        //if(Input.GetKeyDown(KeyCode.P))
+        //{
+        //    InitializeVariables();
+        //}
 
         UpdateTimeOfDay();
 
@@ -212,7 +191,7 @@ public class TimeController : MonoBehaviour
         }
     }
 
-    private void UpdateTimeOfDay()
+    public void UpdateTimeOfDay()
     {
         DateTime preciousTime = currentTime;
         currentTime = currentTime.AddSeconds(Time.deltaTime * 24 * (60 / dayMinutesDuration));
@@ -263,6 +242,38 @@ public class TimeController : MonoBehaviour
     {
         return this.currentPhase;
     }
+
+    public void InitializeVariables()
+    {
+        skyMaterial = timeControllerData.skyMaterial;
+        lightAngleCurve = timeControllerData.lightAngleCurve;
+        hour = timeControllerData.hour;
+        longitude = timeControllerData.longitude;
+        nightDuration = timeControllerData.nightDuration;
+        dayMinutesDuration = timeControllerData.dayMinutesDuration;
+        sunSize = timeControllerData.sunSize;
+        phaseController = timeControllerData.phaseController;
+        currentPhase = timeControllerData.currentPhase;
+        day = timeControllerData.day;
+        intensity = timeControllerData.intensity;
+        nightColor = timeControllerData.nightColor;
+        dayColor = timeControllerData.dayColor;
+        dawnColor = timeControllerData.dawnColor;
+        gradientColor = timeControllerData.gradientColor;
+    }
+
+    public void SaveVariables()
+    {
+        timeControllerData.hour = hour;
+        //timeControllerData.longitude = longitude;
+        //timeControllerData.nightDuration = nightDuration;
+        //timeControllerData.dayMinutesDuration = dayMinutesDuration;
+        //timeControllerData.sunSize = sunSize;
+        timeControllerData.currentPhase = currentPhase;
+        timeControllerData.phaseController = phaseController;
+        timeControllerData.day = day;
+        //timeControllerData.intensity = intensity;
+    }
 }
 
 public enum MoonPhases
@@ -272,6 +283,8 @@ public enum MoonPhases
     FullMoon,
     ThirdQuarter,
 }
+
+
 
 
 

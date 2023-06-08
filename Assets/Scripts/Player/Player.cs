@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private GameController controller;
 
     [SerializeField]
-    float health = 100;
+    public float health = 100;
 
     [SerializeField]
     Animator animator;
@@ -27,6 +27,18 @@ public class Player : MonoBehaviour
     public bool hasArtifact { get; private set; }
     public bool hasWeapon { get; private set; }
 
+    //public string SavePlayerData()
+    //{
+    //    return health.ToString();
+    //}
+
+    //public string ReceivePlayerData(string data)
+    //{
+    //    health = float.Parse(data);
+
+    //    return health.ToString();
+    //}
+
     void Start()
     {
         controller = GameController.gameController;
@@ -36,6 +48,9 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        //Carrega as propriedades do Player
+        //controller.LoadPlayer(health, this.transform.position, this.transform);
     }
 
     private void Update()
