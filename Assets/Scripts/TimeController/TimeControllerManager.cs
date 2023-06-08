@@ -5,10 +5,12 @@ using UnityEditor;
 using TMPro;
 
 [RequireComponent(typeof(Light))]
-public class TimeControllerManager : MonoBehaviour
+public class TimeControllerManager : MonoBehaviour, ISaveable
 {
     public static TimeControllerManager InstanceTime;
     public TimeControllerData timeControllerData;
+
+    public SavingLoading savingLoading;
 
     private Material skyMaterial;
     private AnimationCurve lightAngleCurve;
@@ -55,6 +57,11 @@ public class TimeControllerManager : MonoBehaviour
             light.intensity = 0;
         }
 
+        //if(!savingLoading.StatusFile())
+        //{
+        //    InitializeVariables();
+        //}
+
         InitializeVariables();
 
         SetMoonPhase();
@@ -80,11 +87,6 @@ public class TimeControllerManager : MonoBehaviour
         lastLongitude = longitude;
         dt = Time.deltaTime;
         hour += dt * 24.0f / (60 * dayMinutesDuration);
-
-        //if(Input.GetKeyDown(KeyCode.P))
-        //{
-        //    InitializeVariables();
-        //}
 
         UpdateTimeOfDay();
 
@@ -262,17 +264,34 @@ public class TimeControllerManager : MonoBehaviour
         gradientColor = timeControllerData.gradientColor;
     }
 
-    public void SaveVariables()
+    public object CaptureState()
     {
-        timeControllerData.hour = hour;
-        //timeControllerData.longitude = longitude;
-        //timeControllerData.nightDuration = nightDuration;
-        //timeControllerData.dayMinutesDuration = dayMinutesDuration;
-        //timeControllerData.sunSize = sunSize;
-        timeControllerData.currentPhase = currentPhase;
-        timeControllerData.phaseController = phaseController;
-        timeControllerData.day = day;
-        //timeControllerData.intensity = intensity;
+        return new SaveData
+        {
+            s_hour = hour,
+            s_currentPhase = currentPhase,
+            s_phaseController = phaseController,
+            s_day = day
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (SaveData)state;
+
+        hour = saveData.s_hour;
+        currentPhase = saveData.s_currentPhase;
+        phaseController = saveData.s_phaseController;
+        day = saveData.s_day;
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public float s_hour;
+        public MoonPhases s_currentPhase;
+        public int s_phaseController;
+        public int s_day;
     }
 }
 

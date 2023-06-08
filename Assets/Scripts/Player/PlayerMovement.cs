@@ -97,6 +97,11 @@ public class PlayerMovement : MonoBehaviour
             delayAttack = 1.2f;
             currentAttackTime = 0f;
             attack = true;
+            if(currentWeapon.GetComponent<SlashAttack>() != null)
+            {
+                currentWeapon.GetComponent<SlashAttack>().Slash();
+            }
+            
         }
 
         Walking(inputVector);
