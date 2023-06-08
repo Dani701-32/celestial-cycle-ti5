@@ -12,6 +12,8 @@ public class ArtifactFullMoon : Artifact
 
     [SerializeField]
     private float cooldown = 5f;
+
+    [SerializeField]
     private float remaningCooldown = 0;
 
     private void Update()
@@ -48,13 +50,15 @@ public class ArtifactFullMoon : Artifact
 
     public override void Use()
     {
-        if (charge <= 0 && remaningCooldown != 0)
+        if( remaningCooldown != 0) return;
+        if (charge <= 0 )
             return;
         Debug.Log("Usando artefato");
         hasAffacted.Clear();
         remaningCooldown = cooldown;
-        useArtifact = true;
+        charge -= cost;
         StartCoroutine(CountdownCoroutine());
+        useArtifact = true;
     }
 
     public override void Recharge()

@@ -213,8 +213,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   artifactMoon: 2
-  charge: 0
+  charge: 100
+  maxCharge: 100
+  cost: 20
   hasAffacted: []
   enemyCooldown: 5
   range: 5
   cooldown: 5
+  remaningCooldown: 0

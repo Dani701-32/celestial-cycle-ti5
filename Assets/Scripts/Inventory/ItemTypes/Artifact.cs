@@ -6,7 +6,7 @@ public abstract class Artifact : MonoBehaviour
 {
     [Header("Main Controllers")]
     public MoonPhases artifactMoon;
-    public float charge;
+    public float charge, maxCharge, cost;
     protected bool useArtifact = false;
     protected GameController gameController;
     public List<GameObject> hasAffacted;
@@ -17,5 +17,6 @@ public abstract class Artifact : MonoBehaviour
     {
         gameController = GameController.gameController;
         useArtifact = false;
+        // charge = maxCharge;
     }
 }

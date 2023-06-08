@@ -25,7 +25,10 @@ public class Player : MonoBehaviour
     [Header("HUD")]
     public Image weaponSprite;
     public Image artifactSprite;
+    public GameObject artifactSlider;
 
+    [SerializeField]
+    private Slider slider;
     public bool hasArtifact { get; private set; }
     public bool hasWeapon { get; private set; }
 
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
+        artifactSlider.SetActive(false);
     }
 
     private void Update()
@@ -47,9 +51,13 @@ public class Player : MonoBehaviour
         {
             controller.MenuScreen();
         }
-        if (artifactsAction.triggered && currentArtifact != null)
+        if (currentArtifact != null)
         {
-            currentArtifact.Use();
+            if (artifactsAction.triggered)
+            {
+                currentArtifact.Use();
+            }
+            UpdateArtifact();
         }
     }
 
@@ -64,14 +72,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void EquipeArtifact(GameObject prefab)
+    public void EquipeArtifact(GameObject prefab, float charge)
     {
         hasArtifact = true;
         GameObject artifact = Instantiate(prefab, artifactSpot);
         playerMovement.currentArtifact = artifact;
         if (artifact.TryGetComponent(out Artifact component))
         {
+            component.charge = charge;
             currentArtifact = component;
+            artifactSlider.SetActive(true);
+            slider = artifactSlider.GetComponent<Slider>();
+            slider.maxValue = currentArtifact.maxCharge;
         }
     }
 
@@ -97,6 +109,12 @@ public class Player : MonoBehaviour
         Destroy(playerMovement.currentArtifact);
         playerMovement.currentArtifact = null;
         currentArtifact = null;
+        artifactSlider.SetActive(false);
+    }
+
+    private void UpdateArtifact()
+    {
+        slider.value = currentArtifact.charge;
     }
 
     void Die()
@@ -106,7 +124,6 @@ public class Player : MonoBehaviour
         isDead = true;
         Cursor.lockState = CursorLockMode.None;
         GameController.gameController.DeathScreen();
-        // Destroy(this.gameObject);
     }
 
     public bool IsDead()
