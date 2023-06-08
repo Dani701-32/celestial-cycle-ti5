@@ -102,7 +102,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public void EndEffect(){
+    public IEnumerator  EndEffect(float timer){
+        Debug.Log("Iniciando corrotina");
+        yield return new WaitForSeconds(timer);
         canReceiveDamage = false;
     }
 }

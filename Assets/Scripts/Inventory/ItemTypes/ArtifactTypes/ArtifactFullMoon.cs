@@ -5,6 +5,9 @@ using UnityEngine;
 public class ArtifactFullMoon : Artifact
 {
     [SerializeField]
+    private float enemyCooldown;
+
+    [SerializeField]
     private float range = 5f;
 
     [SerializeField]
@@ -32,6 +35,7 @@ public class ArtifactFullMoon : Artifact
                     )
                     {
                         enemy.ArtifactEffect(artifactMoon);
+                        StartCoroutine(enemy.EndEffect(enemyCooldown));
                         hasAffacted.Add(hit.transform.gameObject);
                     }
                 }

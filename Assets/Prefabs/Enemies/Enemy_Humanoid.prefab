@@ -1287,18 +1287,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieInStun: 0
   isAgressive: 0
-  health: 100
+  health: 20
   attackCoulDown: 3
   attackRange: 1.3
   viewRange: 5
   canReceiveDamage: 0
   animator: {fileID: 0}
   enemyType: 1
+  moonPhase: 2
   timePassad: 0
   newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
-  moonPhase: 2
+  isFoward: 1
 --- !u!195 &3507599956711235473
 NavMeshAgent:
   m_ObjectHideFlags: 0
