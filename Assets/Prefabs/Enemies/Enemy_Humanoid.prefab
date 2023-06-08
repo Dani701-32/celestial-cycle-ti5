@@ -1289,12 +1289,16 @@ MonoBehaviour:
   isAgressive: 0
   health: 100
   attackCoulDown: 3
-  attackRange: 1
-  viewRange: 4
+  attackRange: 1.3
+  viewRange: 5
+  canReceiveDamage: 0
   animator: {fileID: 0}
   enemyType: 1
+  timePassad: 0
+  newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
+  moonPhase: 2
 --- !u!195 &3507599956711235473
 NavMeshAgent:
   m_ObjectHideFlags: 0

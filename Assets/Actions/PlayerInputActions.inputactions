@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "6717c99c-9d5a-4892-890b-5a1900d1f8ab",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "0c0dd3eb-40f2-4b87-9e5c-f8c67e8bddcd",
@@ -63,6 +54,24 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "09aa08d1-d116-4c35-a81e-523857517802",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "6717c99c-9d5a-4892-890b-5a1900d1f8ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Artifact",
+                    "type": "Button",
+                    "id": "80eca5f7-a957-4334-a71b-6a1f2b37ca10",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -160,17 +169,6 @@
                 },
                 {
                     "name": "",
-                    "id": "dd8674ea-6f11-4e81-806c-206847549e96",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0df46e89-77ae-4c1f-b385-53cd138dd989",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -188,6 +186,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "233a9ba1-585e-4f6b-8510-4ea8edb5964d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Artifact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd8674ea-6f11-4e81-806c-206847549e96",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

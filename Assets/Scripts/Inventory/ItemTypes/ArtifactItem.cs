@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArtifactItem : InventoryItem
 {
-    private GameController controller;
+    private GameController controller; 
     public ArtifactItem(InventoryItemData data)
         : base(data) {
 

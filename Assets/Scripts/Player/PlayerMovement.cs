@@ -37,15 +37,17 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded = false;
     public bool combatMode = false;
 
-    [Header("Combat Controlers")]
+    [Header("Combat Controllers")]
     public GameObject currentWeapon;
-    public GameObject currentArtifact;
     public float timeToDraw;
     private bool counter = false;
     private bool drawWeapon = false;
 
     [SerializeField]
     private float currentTime;
+
+    [Header("Artifact Controllers")]
+    public GameObject currentArtifact;
 
     //  Attack
 
@@ -92,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             drawWeapon = (drawWeapon) ? false : true;
             counter = true;
         }
-        if (attackAction.triggered && !counter && isCombat)
+        if (attackAction.triggered && !counter && isCombat && !isRunning)
         {
             delayAttack = 1.2f;
             currentAttackTime = 0f;
@@ -117,10 +119,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("speed", 0);
         }
     }
+
     void OnDisable()
     {
         animator.SetFloat("speed", 0);
     }
+
     private void Jump()
     {
         if (characterController.isGrounded)
@@ -231,6 +235,7 @@ public class PlayerMovement : MonoBehaviour
         DrawWeapon();
         currentWeapon = null;
     }
+
     public void StartDealDamage()
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();

@@ -17,8 +17,10 @@ public class Player : MonoBehaviour
     public Transform artifactSpot;
     public Transform weaponSpot;
     public PlayerMovement playerMovement { get; private set; }
+    public Artifact currentArtifact;
     private bool isDead;
     InputAction inventoryAction;
+    InputAction artifactsAction;
 
     [Header("HUD")]
     public Image weaponSprite;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
         inventoryAction = playerMovement.playerInput.actions["Inventory"];
+        artifactsAction = playerMovement.playerInput.actions["Artifact"];
         animator = GetComponent<Animator>();
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -43,6 +46,10 @@ public class Player : MonoBehaviour
         if (inventoryAction.triggered)
         {
             controller.MenuScreen();
+        }
+        if (artifactsAction.triggered && currentArtifact != null)
+        {
+            currentArtifact.Use();
         }
     }
 
@@ -62,6 +69,10 @@ public class Player : MonoBehaviour
         hasArtifact = true;
         GameObject artifact = Instantiate(prefab, artifactSpot);
         playerMovement.currentArtifact = artifact;
+        if (artifact.TryGetComponent(out Artifact component))
+        {
+            currentArtifact = component;
+        }
     }
 
     public void EquipWeapon(GameObject prefab)
@@ -85,6 +96,7 @@ public class Player : MonoBehaviour
         Debug.Log("Remvoer artefato");
         Destroy(playerMovement.currentArtifact);
         playerMovement.currentArtifact = null;
+        currentArtifact = null;
     }
 
     void Die()

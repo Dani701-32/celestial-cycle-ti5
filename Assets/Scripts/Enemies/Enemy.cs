@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy : MonoBehaviour
 {
+    protected GameController gameController;
     public bool dieInStun = false;
     public bool isAgressive = false;
 
@@ -20,6 +21,7 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField]
     protected float viewRange = 4f;
+    [SerializeField] protected bool canReceiveDamage = false;
 
     protected GameObject player;
 
@@ -29,13 +31,15 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField]
     protected EnemyType enemyType;
+    
+    public MoonPhases moonPhase;
 
-    protected float timePassad;
-    protected float newDestnationCD = 0.5f;
+    [SerializeField] protected float timePassad;
+    [SerializeField] protected float newDestnationCD = 0.5f;
 
     //Patrulha waypoints
     public Transform[] waypoints;
-     [SerializeField] protected int currentWaypointIndex;
+    [SerializeField] protected int currentWaypointIndex;
 
     Vector3 playerLastPosition = Vector3.zero;
     Vector3 m_PlayerPosition;
@@ -90,6 +94,16 @@ public abstract class Enemy : MonoBehaviour
     public void EndDealDamage()
     {
         GetComponentInChildren<EnemyDamageDealer>().EndDealDamage();
+    }
+
+    public void ArtifactEffect(MoonPhases artifactMoon){
+        if(moonPhase == artifactMoon){
+            canReceiveDamage = true;
+        }
+    }
+
+    public void EndEffect(){
+        canReceiveDamage = false;
     }
 }
 

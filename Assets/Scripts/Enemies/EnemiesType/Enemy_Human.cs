@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class Enemy_Human : Enemy
 {
+    [SerializeField]
     private bool isFoward = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -20,20 +22,24 @@ public class Enemy_Human : Enemy
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
         Attack();
+        animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
         if (newDestnationCD <= 0)
         {
             if (Vector3.Distance(player.transform.position, transform.position) <= viewRange)
             {
+                agent.stoppingDistance = 1.2f;
+                
                 newDestnationCD = 0.5f;
                 agent.SetDestination(player.transform.position);
                 transform.LookAt(player.transform);
             }
             else
             {
+                timePassad = 0f;
                 newDestnationCD = 4f;
-                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                agent.stoppingDistance = .3f;
+                if (agent.remainingDistance < 0.5f)
                 {
                     if (isFoward)
                     {
@@ -78,6 +84,7 @@ public class Enemy_Human : Enemy
 
     public override void TakeDamage(float damage)
     {
+        if(!canReceiveDamage) return;
         health -= damage;
         animator.SetTrigger("damage");
 
