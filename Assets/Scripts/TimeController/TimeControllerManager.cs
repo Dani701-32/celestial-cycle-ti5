@@ -10,8 +10,6 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
     public static TimeControllerManager InstanceTime;
     public TimeControllerData timeControllerData;
 
-    public SavingLoading savingLoading;
-
     private Material skyMaterial;
     private AnimationCurve lightAngleCurve;
     private Light sunLight;
@@ -56,11 +54,6 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         {
             light.intensity = 0;
         }
-
-        //if(!savingLoading.StatusFile())
-        //{
-        //    InitializeVariables();
-        //}
 
         InitializeVariables();
 
@@ -185,12 +178,12 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         keys[3].time = 24 - nightDuration / 2;
         lightAngleCurve.keys = keys;
 
-        for (int i = 0; i < lightAngleCurve.keys.Length; i++)
-        {
-            AnimationUtility.SetKeyBroken(lightAngleCurve, i, true);
-            AnimationUtility.SetKeyLeftTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
-            AnimationUtility.SetKeyRightTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
-        }
+        //for (int i = 0; i < lightAngleCurve.keys.Length; i++)
+        //{
+        //    AnimationUtility.SetKeyBroken(lightAngleCurve, i, true);
+        //    AnimationUtility.SetKeyLeftTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
+        //    AnimationUtility.SetKeyRightTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
+        //}
     }
 
     public void UpdateTimeOfDay()
