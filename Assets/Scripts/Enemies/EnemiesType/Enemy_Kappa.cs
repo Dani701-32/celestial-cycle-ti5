@@ -49,6 +49,8 @@ public class Enemy_Kappa : Enemy
 
     public override void TakeDamage(float damage)
     {
+        if (!canReceiveDamage)
+            return;
         health -= damage;
         animator.SetTrigger("damage");
 
@@ -57,6 +59,7 @@ public class Enemy_Kappa : Enemy
             Die();
         }
     }
+
     public override void ArtifactEffect(MoonPhases artifactMoon)
     {
         if (moonPhase == artifactMoon)
@@ -65,15 +68,17 @@ public class Enemy_Kappa : Enemy
             canReceiveDamage = true;
         }
     }
-      public override IEnumerator EndEffect(float timer)
+
+    public override IEnumerator EndEffect(float timer)
     {
         Debug.Log("Iniciando corrotina");
         yield return new WaitForSeconds(timer);
         canReceiveDamage = false;
     }
+
     protected override void Die()
     {
-        gameController.player.currentFullMoon += 10;
+        gameController.player.currentNewMoon += 10;
         gameController.player.UpdateHud();
         Destroy(this.gameObject);
     }

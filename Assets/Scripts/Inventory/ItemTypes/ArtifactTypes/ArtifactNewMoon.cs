@@ -8,7 +8,7 @@ public class ArtifactNewMoon : Artifact
     private float enemyCooldown;
 
     [SerializeField]
-    private float range = 5f;
+    private float range = 8f;
 
     private void Update()
     {
@@ -48,13 +48,13 @@ public class ArtifactNewMoon : Artifact
     {
         if (remaningCooldown != 0)
             return;
-        if (gameController.player.currentFullMoon <= 0)
+        if (gameController.player.currentNewMoon <= 0)
             return;
         Instantiate(particle, gameController.player.transform);
 
         hasAffacted.Clear();
         remaningCooldown = cooldown;
-        gameController.player.currentFullMoon -= cost;
+        gameController.player.currentNewMoon -= cost;
         useArtifact = true;
         StartCoroutine(CountdownCoroutine());
     }

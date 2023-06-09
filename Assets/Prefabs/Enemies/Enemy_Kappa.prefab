@@ -910,13 +910,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieInStun: 0
   isAgressive: 0
-  health: 600
+  health: 10
   attackCoulDown: 5
   attackRange: 4
   viewRange: 7.39
+  canReceiveDamage: 0
   animator: {fileID: 0}
   enemyType: 4
+  moonPhase: 0
+  timePassad: 0
+  newDestnationCD: 0.5
   waypoints: []
+  currentWaypointIndex: 0
   stuned: 0
 --- !u!195 &-6253047504604387076
 NavMeshAgent:
