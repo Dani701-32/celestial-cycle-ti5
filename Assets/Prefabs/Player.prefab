@@ -2961,6 +2961,7 @@ GameObject:
   - component: {fileID: 5019829766420754210}
   - component: {fileID: 3090711682512035670}
   - component: {fileID: 5019829766420754211}
+  - component: {fileID: 9011282033864383711}
   - component: {fileID: 5019829766420754208}
   - component: {fileID: 1656015336}
   - component: {fileID: 1656015337}
@@ -3043,6 +3044,22 @@ MonoBehaviour:
   isCombat: 0
   currentAttackTime: 0
   delayAttack: 1.2
+--- !u!114 &9011282033864383711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019829766420754213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feed6ada76e699244a277df6be6304ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGround: 0.123
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 959
 --- !u!143 &5019829766420754208
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3060,7 +3077,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!95 &1656015336
 Animator:
   serializedVersion: 5
