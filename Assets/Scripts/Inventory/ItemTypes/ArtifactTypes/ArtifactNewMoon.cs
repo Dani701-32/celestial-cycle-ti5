@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArtifactFullMoon : Artifact
+public class ArtifactNewMoon : Artifact
 {
     [SerializeField]
     private float enemyCooldown;

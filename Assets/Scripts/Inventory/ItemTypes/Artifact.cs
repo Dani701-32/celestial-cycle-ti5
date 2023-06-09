@@ -6,13 +6,16 @@ public abstract class Artifact : MonoBehaviour
 {
     [Header("Main Controllers")]
     public MoonPhases artifactMoon;
-    public float charge, maxCharge, cost;
+    public float cost;
+    
+    public float cooldown = 5f;
+    public float remaningCooldown = 0;
+
     protected bool useArtifact = false;
     protected GameController gameController;
     public GameObject particle;
     public List<GameObject> hasAffacted;
     public abstract void Use();
-    public abstract void Recharge();
 
     private void Start()
     {

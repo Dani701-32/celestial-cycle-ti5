@@ -48,11 +48,6 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void TakeDamage(float damage);
 
-    protected void Die()
-    {
-        Destroy(this.gameObject);
-    }
-
     public bool CanSpawn(MoonPhases moonphase)
     {
         switch (enemyType)
@@ -96,17 +91,10 @@ public abstract class Enemy : MonoBehaviour
         GetComponentInChildren<EnemyDamageDealer>().EndDealDamage();
     }
 
-    public void ArtifactEffect(MoonPhases artifactMoon){
-        if(moonPhase == artifactMoon){
-            canReceiveDamage = true;
-        }
-    }
+    public abstract void ArtifactEffect(MoonPhases artifactMoon);
+    public abstract IEnumerator  EndEffect(float timer);
+    protected abstract void Die();
 
-    public IEnumerator  EndEffect(float timer){
-        Debug.Log("Iniciando corrotina");
-        yield return new WaitForSeconds(timer);
-        canReceiveDamage = false;
-    }
 }
 
 public enum AIState

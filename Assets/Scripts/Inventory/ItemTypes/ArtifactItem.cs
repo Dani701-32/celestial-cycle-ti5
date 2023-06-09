@@ -5,13 +5,11 @@ using UnityEngine;
 public class ArtifactItem : InventoryItem
 {
     private GameController controller;
-    private float charge;
 
     public ArtifactItem(InventoryItemData data)
         : base(data)
     {
         controller = GameController.gameController;
-        charge = this.data.prefab.GetComponent<Artifact>().charge;
     }
 
     public override void Use()
@@ -22,8 +20,7 @@ public class ArtifactItem : InventoryItem
             return;
         }
         equiped = true;
-        Debug.Log("Curren charge " + charge);
-        controller.player.EquipeArtifact(this.data.prefab, charge);
+        controller.player.EquipeArtifact(this.data.prefab);
         controller.player.artifactSprite.sprite = data.icon;
         controller.player.artifactSprite.enabled = true;
     }
@@ -31,7 +28,6 @@ public class ArtifactItem : InventoryItem
     public override void Remove()
     {
         Debug.Log("Desequipar");
-        charge = controller.player.currentArtifact.charge;
         equiped = false;
         controller.player.RemoveArtifact();
         controller.player.artifactSprite.sprite = null;

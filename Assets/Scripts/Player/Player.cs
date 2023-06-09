@@ -14,6 +14,14 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     Animator animator;
+    public float maxFullMoon,
+        maxWaxingMoon,
+        maxWaningMoon,
+        maxNewMoon;
+    public float currentFullMoon,
+        currentWaxingMoon,
+        currentWaningMoon,
+        currentNewMoon;
     public Transform artifactSpot;
     public Transform weaponSpot;
     public PlayerMovement playerMovement { get; private set; }
@@ -26,6 +34,10 @@ public class Player : MonoBehaviour
     public Image weaponSprite;
     public Image artifactSprite;
     public GameObject artifactSlider;
+    public Slider fullMoonSlider;
+    public Slider waxingMoonSlider;
+    public Slider waningMoonSlider;
+    public Slider newMoonSlider;
 
     [SerializeField]
     private Slider slider;
@@ -43,6 +55,11 @@ public class Player : MonoBehaviour
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
         artifactSlider.SetActive(false);
+
+        fullMoonSlider.maxValue = maxFullMoon;
+        fullMoonSlider.value = currentFullMoon;
+        newMoonSlider.maxValue = maxNewMoon;
+        newMoonSlider.value = currentNewMoon;
     }
 
     private void Update()
@@ -72,18 +89,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void EquipeArtifact(GameObject prefab, float charge)
+    public void EquipeArtifact(GameObject prefab)
     {
         hasArtifact = true;
         GameObject artifact = Instantiate(prefab, artifactSpot);
         playerMovement.currentArtifact = artifact;
         if (artifact.TryGetComponent(out Artifact component))
         {
-            component.charge = charge;
             currentArtifact = component;
             artifactSlider.SetActive(true);
             slider = artifactSlider.GetComponent<Slider>();
-            slider.maxValue = currentArtifact.maxCharge;
+            slider.maxValue = currentArtifact.cooldown;
         }
     }
 
@@ -111,10 +127,16 @@ public class Player : MonoBehaviour
         currentArtifact = null;
         artifactSlider.SetActive(false);
     }
+    public void UpdateHud(){
+        fullMoonSlider.value = currentFullMoon;
+        newMoonSlider.value = currentNewMoon;
+    }
 
     private void UpdateArtifact()
     {
-        slider.value = currentArtifact.charge;
+        slider.value = currentArtifact.remaningCooldown;
+        fullMoonSlider.value = currentFullMoon;
+        newMoonSlider.value = currentNewMoon;
     }
 
     void Die()

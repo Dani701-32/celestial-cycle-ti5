@@ -1300,6 +1300,9 @@ MonoBehaviour:
   waypoints: []
   currentWaypointIndex: 0
   isFoward: 1
+  defaultMaterial: {fileID: 2100000, guid: 7fb42f11e55393b4fabfbc1d96648314, type: 2}
+  stunedMaterial: {fileID: 2100000, guid: 771534143a033994e9c312910555e9a9, type: 2}
+  joints: {fileID: 4097747264066877375}
 --- !u!195 &3507599956711235473
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1632,7 +1635,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d231d22cd0037474f81aaa1702d43dcf, type: 2}
+  - {fileID: 2100000, guid: 771534143a033994e9c312910555e9a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

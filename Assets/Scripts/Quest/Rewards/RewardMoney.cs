@@ -7,7 +7,7 @@ using UnityEngine;
 public class RewardMoney : QuestStructure.QuestReward
 {
     [SerializeField]
-    private int rewardValue;
+    private float rewardValue;
 
     public override string GetDescription()
     {

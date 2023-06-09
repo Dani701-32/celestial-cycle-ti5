@@ -8,15 +8,22 @@ public class Enemy_Human : Enemy
     [SerializeField]
     private bool isFoward = true;
 
+    public Material defaultMaterial,
+        stunedMaterial;
+    public SkinnedMeshRenderer joints; //Temporario
+
     // Start is called before the first frame update
     void Start()
     {
         gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
+        joints = GetComponentInChildren<SkinnedMeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         isFoward = true;
         currentWaypointIndex = 0;
+
+        joints.material = defaultMaterial;
     }
 
     // Update is called once per frame
@@ -24,12 +31,15 @@ public class Enemy_Human : Enemy
     {
         Attack();
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
-        if (newDestnationCD <= 0)
+        if (
+            newDestnationCD <= 0
+            || Vector3.Distance(player.transform.position, transform.position) <= viewRange
+        )
         {
             if (Vector3.Distance(player.transform.position, transform.position) <= viewRange)
             {
                 agent.stoppingDistance = 1.2f;
-                
+
                 newDestnationCD = 0.5f;
                 agent.SetDestination(player.transform.position);
                 transform.LookAt(player.transform);
@@ -82,9 +92,20 @@ public class Enemy_Human : Enemy
         }
     }
 
+    public override void ArtifactEffect(MoonPhases artifactMoon)
+    {
+        if (moonPhase == artifactMoon)
+        {
+            animator.SetTrigger("damage");
+            canReceiveDamage = true;
+            joints.material = stunedMaterial;
+        }
+    }
+
     public override void TakeDamage(float damage)
     {
-        if(!canReceiveDamage) return;
+        if (!canReceiveDamage)
+            return;
         health -= damage;
         animator.SetTrigger("damage");
 
@@ -92,5 +113,23 @@ public class Enemy_Human : Enemy
         {
             Die();
         }
+    }
+
+    public override IEnumerator EndEffect(float timer)
+    {
+        Debug.Log("Iniciando corrotina");
+        yield return new WaitForSeconds(timer);
+        canReceiveDamage = false;
+        if (joints != null)
+        {
+            joints.material = defaultMaterial;
+        }
+    }
+
+    protected override void Die()
+    {
+        gameController.player.currentFullMoon += 10;
+        gameController.player.UpdateHud();
+        Destroy(this.gameObject);
     }
 }

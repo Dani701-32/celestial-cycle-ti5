@@ -57,4 +57,24 @@ public class Enemy_Kappa : Enemy
             Die();
         }
     }
+    public override void ArtifactEffect(MoonPhases artifactMoon)
+    {
+        if (moonPhase == artifactMoon)
+        {
+            animator.SetTrigger("damage");
+            canReceiveDamage = true;
+        }
+    }
+      public override IEnumerator EndEffect(float timer)
+    {
+        Debug.Log("Iniciando corrotina");
+        yield return new WaitForSeconds(timer);
+        canReceiveDamage = false;
+    }
+    protected override void Die()
+    {
+        gameController.player.currentFullMoon += 10;
+        gameController.player.UpdateHud();
+        Destroy(this.gameObject);
+    }
 }
