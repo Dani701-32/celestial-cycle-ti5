@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &856445108123607123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6040248537579309897}
+  m_Layer: 0
+  m_Name: Spawn_Slash
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6040248537579309897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856445108123607123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.075, y: -0.90999997, z: 0.025}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839114009707259157}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405263276966896878
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +162,7 @@ Transform:
   - {fileID: 5012459627580556379}
   - {fileID: 3892323057887412518}
   m_Father: {fileID: 1839114009707259157}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3008213254082519297
 GameObject:
@@ -163,7 +194,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1839114009707259157}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7757681003292341878
 MonoBehaviour:
@@ -355,6 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839114009707259157}
+  - component: {fileID: 8505249702094351687}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -374,11 +406,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6040248537579309897}
   - {fileID: 2271684963528880481}
   - {fileID: 5290614593343745121}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8505249702094351687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5915344903233701514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a832488a64ff38b4ca40b4af7a36d44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashes:
+  - slashVFX: {fileID: 6723355478964286897, guid: 856f9b5bdd6a3be4ea5b58200c4367b7, type: 3}
+    spawn: {fileID: 6040248537579309897}
+    delay: 0.6
 --- !u!1 &7938528790295951289
 GameObject:
   m_ObjectHideFlags: 0

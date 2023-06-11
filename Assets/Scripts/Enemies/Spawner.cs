@@ -5,7 +5,7 @@ using System;
 
 public class Spawner : MonoBehaviour
 {
-    private TimeController timeController;
+    private TimeControllerManager timeController;
     public GameObject enemiePrefabs;
     public Vector3 size;
 
@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        timeController = TimeController.InstanceTime;
+        timeController = TimeControllerManager.InstanceTime;
         enemy = enemiePrefabs.GetComponent<Enemy>();
         waypoints = GetComponentsInChildren<Transform>();
     }
