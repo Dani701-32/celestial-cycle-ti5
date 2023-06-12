@@ -202,6 +202,9 @@ public class InventorySystem : MonoBehaviour
 
     public void OpenScreen()
     {
+        if(slots.Count != 0){
+            ClearInventory();
+        }
         UpdateScreen();
         inventoryScreen.SetActive(true);
     }

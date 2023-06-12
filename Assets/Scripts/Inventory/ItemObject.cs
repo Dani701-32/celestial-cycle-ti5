@@ -6,25 +6,28 @@ public class ItemObject : MonoBehaviour
 {
     public InventoryItemData referenceItem;
     private PlayerMovement playerMovement;
-
+    private QuestSystem questSystem;
     private InventorySystem inventory;
 
     private void Start()
     {
         inventory = GameController.gameController.inventorySystem;
+        questSystem = GameController.gameController.questSystem;
     }
 
     public void OnHandlePickupItem()
     {
         if (!inventory.canAdd(referenceItem))
             return;
+            
         inventory.Add(referenceItem);
+        questSystem.CheckQuests();
         Destroy(this.gameObject);
     }
 
     void Update()
     {
-        if ( playerMovement != null && playerMovement.interactAction.triggered)
+        if (playerMovement != null && playerMovement.interactAction.triggered)
         {
             OnHandlePickupItem();
         }

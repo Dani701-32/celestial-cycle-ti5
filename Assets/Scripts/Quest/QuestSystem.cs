@@ -30,6 +30,8 @@ public class QuestSystem : MonoBehaviour
         questGoals,
         questRewards,
         questCompleted;
+
+    [SerializeField]
     private Quest currentQuest;
 
     // Start is called before the first frame update
@@ -68,7 +70,7 @@ public class QuestSystem : MonoBehaviour
         questTitle.text = quest.data.questData.title;
         questDescriotion.text = quest.data.questData.description;
         questGoals.text = quest.data.GetQuestGoals();
-        questRewards.text = quest.data.GetQuestRewards();
+        questRewards.text = quest.data.GetQuestRewardsDescription();
     }
 
     public void CloseDescription()
@@ -85,7 +87,7 @@ public class QuestSystem : MonoBehaviour
         slotsList.Clear();
     }
 
-    private void CheckQuests()
+    public void CheckQuests()
     {
         if (activeQuestList.Count == 0)
             return;
@@ -122,10 +124,19 @@ public class QuestSystem : MonoBehaviour
         return null;
     }
 
+    public void CompleteQuest(Quest quest)
+    {
+        activeQuestList.Remove(quest);
+    }
+
     public void OpenScreen()
     {
-        UpdateScreen();
+        if (slotsList.Count > 0)
+        {
+            ClearList();
+        }
         CheckQuests();
+        UpdateScreen();
         questScreen.SetActive(true);
     }
 

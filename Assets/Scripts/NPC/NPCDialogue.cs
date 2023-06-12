@@ -22,7 +22,12 @@ public class NPCDialogue : MonoBehaviour
         textQuestRewards;
 
     private QuestNPC currentNPC;
+    public GameObject acceptButton,
+        refuseButton;
     private bool questAcept = false;
+
+    [Header("UI Reward")]
+    public GameObject rewardButton;
 
     // Start is called before the first frame update
     void Start()
@@ -46,15 +51,23 @@ public class NPCDialogue : MonoBehaviour
         buttonContinue.SetActive(currentNPC.activeQuest.currentIndex == 0);
         UpdateDialog();
     }
+    public void OpenScreen(){
+        Cursor.lockState = CursorLockMode.None;
+        dialogScreen.SetActive(true);
+        GameController.gameController.player.playerMovement.enabled = false;
+        GameController.gameController.StopCamera();
+        buttonContinue.SetActive(false);
+        UpdateDialog();
+    }
 
     public void CloseScreen()
     {
-        currentNPC.currentStep = currentNPC.activeQuest.currentIndex;
+        currentNPC.currentStep =
+            (currentNPC.activeQuest != null) ? currentNPC.activeQuest.currentIndex : 0;
         Cursor.lockState = CursorLockMode.Locked;
         dialogScreen.SetActive(false);
         GameController.gameController.ReleaseCamera();
         GameController.gameController.player.playerMovement.enabled = true;
-
     }
 
     private void UpdateDialog()
@@ -62,6 +75,10 @@ public class NPCDialogue : MonoBehaviour
         if (currentNPC.activeQuest != null)
         {
             textNPCDialogue.text = currentNPC.activeQuest.CurrentDialogue();
+        }
+        else
+        {
+            textNPCDialogue.text = "Espero poder contar com você novamente no futuro minha jovem";
         }
     }
 
@@ -74,10 +91,29 @@ public class NPCDialogue : MonoBehaviour
             UpdateDialog();
             OpenQuestDialog();
         }
+        else if (currentNPC.activeQuest.currentIndex == 5)
+        {
+            UpdateDialog();
+            OpenQuestCompleteDialog();
+        }
         else
         {
             UpdateDialog();
         }
+    }
+
+    private void OpenQuestCompleteDialog()
+    {
+        questScreen.SetActive(true);
+        textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
+        textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
+        textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";
+        textQuestRewards.text =
+            $"Recompensas:\n{currentNPC.activeQuest.data.GetQuestRewardsDescription()}";
+
+        acceptButton.SetActive(false);
+        refuseButton.SetActive(false);
+        rewardButton.SetActive(true);
     }
 
     public void OpenQuestDialog()
@@ -86,8 +122,14 @@ public class NPCDialogue : MonoBehaviour
         textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
         textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
         textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";
-        textQuestRewards.text = $"Recompensas:\n{currentNPC.activeQuest.data.GetQuestRewards()}";
+        textQuestRewards.text =
+            $"Recompensas:\n{currentNPC.activeQuest.data.GetQuestRewardsDescription()}";
+        acceptButton.SetActive(true);
+        refuseButton.SetActive(true);
+        rewardButton.SetActive(false);
     }
+
+    public void EmptyQuest() { }
 
     public void CloseQuestDialog()
     {
@@ -96,7 +138,11 @@ public class NPCDialogue : MonoBehaviour
 
     public void AceptQuest()
     {
-        GameController.gameController.questSystem.AddQuest(currentNPC.activeQuest.data, currentNPC.activeQuest.currentIndex, currentNPC.NPC);
+        GameController.gameController.questSystem.AddQuest(
+            currentNPC.activeQuest.data,
+            currentNPC.activeQuest.currentIndex,
+            currentNPC.NPC
+        );
         questAcept = true;
         currentNPC.activeQuest.data.Invoke();
         StartCoroutine(ResponseDialog());
@@ -106,6 +152,11 @@ public class NPCDialogue : MonoBehaviour
     {
         questAcept = false;
         StartCoroutine(ResponseDialog());
+    }
+
+    public void CompleteQuest()
+    {
+        Debug.Log("Complete dialogo");
     }
 
     private IEnumerator ResponseDialog()

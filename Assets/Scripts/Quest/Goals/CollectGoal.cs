@@ -19,7 +19,9 @@ public class CollectGoal : QuestStructure.QuestGoal
 
     private bool CheckQuantity()
     {
-        InventoryItem dataItem = GameController.gameController.inventorySystem.GetInventoryItem(referenceItemData);
+        InventoryItem dataItem = GameController.gameController.inventorySystem.GetInventoryItem(
+            referenceItemData
+        );
         if (dataItem != null)
         {
             AddToCurrentQuantity(dataItem.stackSize);
@@ -31,5 +33,13 @@ public class CollectGoal : QuestStructure.QuestGoal
     private void AddToCurrentQuantity(int quantity)
     {
         currentAmount = quantity;
+    }
+
+    public override void Complete()
+    {
+        for (int i = 0; i < this.minimumAmount; i++)
+        {
+            GameController.gameController.inventorySystem.Remove(referenceItemData);
+        }
     }
 }

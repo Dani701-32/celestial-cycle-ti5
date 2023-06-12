@@ -54,23 +54,26 @@ public class QuestNPC : MonoBehaviour
         {
             player.playerMovement.enabled = false;
 
-            if (activeQuest == null) UpdadeScreen();
+            if (activeQuest == null)
+                UpdadeScreen();
             else
             {
                 if (activeQuest.data.isQuestCompleted)
                 {
-                    
                     activeQuest.CompleteQuest(5);
                     UpdadeScreen();
                     Debug.Log("Completou a Quest");
+                    activeQuest.data.GetRewards();
+                    gameController.questSystem.CompleteQuest(activeQuest);
+                    quests.Remove(activeQuest.data);
+                    activeQuest = null;
                 }
                 else
                 {
                     UpdadeScreen();
-                    Debug.Log("Não Completou a Quest");
+                    Debug.Log("Nï¿½o Completou a Quest");
                 }
             }
-            
         }
         else
         {
@@ -80,17 +83,22 @@ public class QuestNPC : MonoBehaviour
 
     private void UpdadeScreen()
     {
-        dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
-        dialogueSystem.textNPCName.text = NPC.Name;
-        if (activeQuest != null)
+        if (quests.Count > 0)
         {
-            currentStep = activeQuest.currentIndex;
+            dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
+            dialogueSystem.textNPCName.text = NPC.Name;
+            if (activeQuest != null)
+            {
+                currentStep = activeQuest.currentIndex;
+            }
+            activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
+            activeQuest.SetNPC(NPC);
+            dialogueSystem.OpenScreen(this);
         }
-        activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
-        activeQuest.SetNPC(NPC);
-        dialogueSystem.OpenScreen(this);
-
-        
+        else
+        {
+            dialogueSystem.OpenScreen();
+        }
     }
 
     void OnTriggerEnter(Collider other)

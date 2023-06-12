@@ -18,6 +18,7 @@ public class QuestStructure : ScriptableObject
         protected string rewardDescription;
 
         public abstract string GetDescription();
+        public abstract void GetReward();
     }
 
     public abstract class QuestGoal : ScriptableObject
@@ -40,6 +41,7 @@ public class QuestStructure : ScriptableObject
         }
 
         public abstract void isCompleted();
+        public abstract void Complete();
     }
 
     //Armazenamento dos dados da quest
@@ -52,6 +54,7 @@ public class QuestStructure : ScriptableObject
     [Header("Quest Reward")]
     public List<QuestReward> rewards;
     public bool isQuestCompleted = false;
+
     public void Invoke()
     {
         isQuestCompleted = false;
@@ -83,7 +86,7 @@ public class QuestStructure : ScriptableObject
         return textGoals;
     }
 
-    public string GetQuestRewards()
+    public string GetQuestRewardsDescription()
     {
         string textReward = "";
         foreach (QuestReward reward in rewards)
@@ -91,6 +94,19 @@ public class QuestStructure : ScriptableObject
             textReward += $"{reward.GetDescription()}\n";
         }
         return textReward;
+    }
+
+    public void GetRewards()
+    {
+        foreach (QuestGoal goal in goals)
+        {
+            goal.Complete();
+        }
+        Debug.Log("GetRewards");
+        foreach (QuestReward reward in rewards)
+        {
+            reward.GetReward();
+        }
     }
 
     [Header("Dialogues for Quest")]
