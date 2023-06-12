@@ -11,12 +11,21 @@ public class MenuController : MonoBehaviour
     private string levelToLoad;
     public static MenuController instance;
 
+    [SerializeField]
+    private GameObject loadButton;
+    private bool hasSaveGame = false;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+    }
+
+    void Start()
+    {
+        loadButton.SetActive(hasSaveGame);
     }
 
     public void NewGame()
