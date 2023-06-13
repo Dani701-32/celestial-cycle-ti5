@@ -6,7 +6,21 @@ using UnityEngine;
 
 public class SavingLoading : MonoBehaviour
 {
+    public static SavingLoading instance;
     private string SavePath => $"{Application.persistentDataPath}/saveGame.txt";
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     public bool StatusFile()
     {
@@ -79,11 +93,12 @@ public class SavingLoading : MonoBehaviour
         }
     }
 
-    //public void Start()
-    //{
-    //    if (StatusFile())
-    //    {
-    //        Load();
-    //    }
-    //}
+    public void Start()
+    {
+        if (StatusFile() == true)
+        {
+            Load();
+            Debug.Log("Inicializou do save");
+        }
+    }
 }

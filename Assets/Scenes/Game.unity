@@ -17225,6 +17225,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 116108090}
     - target: {fileID: 4050779448526773630, guid: 6d62540de26177943b84ba712bc2d763, type: 3}
+      propertyPath: savingLoading
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050779448526773630, guid: 6d62540de26177943b84ba712bc2d763, type: 3}
       propertyPath: textMoonPhase
       value: 
       objectReference: {fileID: 813249861}
@@ -17254,33 +17258,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxNewMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxFullMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: weaponSprite
       value: 
       objectReference: {fileID: 470036060}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxWaningMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxWaxingMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: newMoonSlider
       value: 
       objectReference: {fileID: 66419029}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: CurrentNewMoon
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: artifactSlider
       value: 
@@ -17290,25 +17274,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1514498600}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentNewMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: fullMoonSlider
       value: 
       objectReference: {fileID: 1119038301}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentFullMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentWaningMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentWaxingMoon
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5019829766420754210, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: m_RootOrder
       value: 2

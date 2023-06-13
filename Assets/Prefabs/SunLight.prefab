@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4050779448526773624}
   - component: {fileID: 4050779448526773631}
   - component: {fileID: 4050779448526773630}
+  - component: {fileID: 89351951147777807}
   m_Layer: 0
   m_Name: SunLight
   m_TagString: Untagged
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4050779448526773627}
-  m_LocalRotation: {x: 0.35594735, y: -0.17782275, z: -0.06918915, w: 0.91481876}
+  m_LocalRotation: {x: 0.35594493, y: -0.17782652, z: -0.06918517, w: 0.91481936}
   m_LocalPosition: {x: 0, y: 2.98, z: -5.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 38.803, y: -28.731, z: -18.958}
 --- !u!108 &4050779448526773624
 Light:
   m_ObjectHideFlags: 0
@@ -138,3 +139,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &89351951147777807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050779448526773627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0f389b40e1f5c41bb94fa9fc18d12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 9f335d3e-a044-4a3d-9c58-3153bda912ac

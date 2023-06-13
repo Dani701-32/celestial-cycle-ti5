@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private GameObject loadButton;
     private bool hasSaveGame = false;
+    private SavingLoading savingLoading;
 
     void Awake()
     {
@@ -21,10 +22,13 @@ public class MenuController : MonoBehaviour
         {
             instance = this;
         }
+
+        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
     }
 
     void Start()
     {
+        hasSaveGame = savingLoading.StatusFile();
         loadButton.SetActive(hasSaveGame);
     }
 
@@ -35,6 +39,7 @@ public class MenuController : MonoBehaviour
 
     public void LoadGame()
     {
+        SceneManager.LoadScene(newGameLevel);
         Debug.Log("Carregar jogo");
     }
 
