@@ -2962,6 +2962,7 @@ GameObject:
   - component: {fileID: 3090711682512035670}
   - component: {fileID: 5019829766420754211}
   - component: {fileID: 9011282033864383711}
+  - component: {fileID: 2621755346556862835}
   - component: {fileID: 5019829766420754208}
   - component: {fileID: 1656015336}
   - component: {fileID: 1656015337}
@@ -3003,10 +3004,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   animator: {fileID: 0}
+  maxFullMoon: 100
+  maxWaxingMoon: 100
+  maxWaningMoon: 100
+  maxNewMoon: 100
+  currentFullMoon: 100
+  currentWaxingMoon: 100
+  currentWaningMoon: 100
+  currentNewMoon: 100
   artifactSpot: {fileID: 6013848926405195012}
   weaponSpot: {fileID: 4802788853462534938}
+  currentArtifact: {fileID: 0}
   weaponSprite: {fileID: 0}
   artifactSprite: {fileID: 0}
+  artifactSlider: {fileID: 0}
+  fullMoonSlider: {fileID: 0}
+  waxingMoonSlider: {fileID: 0}
+  waningMoonSlider: {fileID: 0}
+  newMoonSlider: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &5019829766420754211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3038,9 +3054,9 @@ MonoBehaviour:
   isGrounded: 1
   combatMode: 0
   currentWeapon: {fileID: 0}
-  currentArtifact: {fileID: 0}
   timeToDraw: 0.6
   currentTime: 0
+  currentArtifact: {fileID: 0}
   isCombat: 0
   currentAttackTime: 0
   delayAttack: 1.2
@@ -3060,6 +3076,19 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 959
+--- !u!114 &2621755346556862835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019829766420754213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0f389b40e1f5c41bb94fa9fc18d12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 16a0d928-59ee-48f9-99c3-c0f8b6eb757d
 --- !u!143 &5019829766420754208
 CharacterController:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
 {
     public static TimeControllerManager InstanceTime;
     public TimeControllerData timeControllerData;
+    private SavingLoading savingLoading;
 
     private Material skyMaterial;
     private AnimationCurve lightAngleCurve;
@@ -45,7 +46,23 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         }
 
         sunLight = this.GetComponent<Light>();
+        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         mainCamera = Camera.main.transform;
+    }
+
+    public void SetVariablesInTimeController()
+    {
+        skyMaterial = timeControllerData.skyMaterial;
+        lightAngleCurve = timeControllerData.lightAngleCurve;
+        longitude = timeControllerData.longitude;
+        nightDuration = timeControllerData.nightDuration;
+        dayMinutesDuration = timeControllerData.dayMinutesDuration;
+        sunSize = timeControllerData.sunSize;
+        intensity = timeControllerData.intensity;
+        nightColor = timeControllerData.nightColor;
+        dayColor = timeControllerData.dayColor;
+        dawnColor = timeControllerData.dawnColor;
+        gradientColor = timeControllerData.gradientColor;
     }
 
     void Start()
@@ -55,7 +72,13 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
             light.intensity = 0;
         }
 
-        InitializeVariables();
+        SetVariablesInTimeController();
+
+        if(savingLoading.StatusFile() == false)
+        {
+            InitializeVariables();
+            Debug.Log("Inicializou mas mão tem save");
+        }
 
         SetMoonPhase();
 
@@ -239,22 +262,11 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
     }
 
     public void InitializeVariables()
-    {
-        skyMaterial = timeControllerData.skyMaterial;
-        lightAngleCurve = timeControllerData.lightAngleCurve;
+    {  
         hour = timeControllerData.hour;
-        longitude = timeControllerData.longitude;
-        nightDuration = timeControllerData.nightDuration;
-        dayMinutesDuration = timeControllerData.dayMinutesDuration;
-        sunSize = timeControllerData.sunSize;
         phaseController = timeControllerData.phaseController;
         currentPhase = timeControllerData.currentPhase;
-        day = timeControllerData.day;
-        intensity = timeControllerData.intensity;
-        nightColor = timeControllerData.nightColor;
-        dayColor = timeControllerData.dayColor;
-        dawnColor = timeControllerData.dawnColor;
-        gradientColor = timeControllerData.gradientColor;
+        day = timeControllerData.day;     
     }
 
     public object CaptureState()
