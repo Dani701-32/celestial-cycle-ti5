@@ -8,11 +8,13 @@ public class ItemObject : MonoBehaviour
     private PlayerMovement playerMovement;
     private QuestSystem questSystem;
     private InventorySystem inventory;
+    [SerializeField] private GameObject canvas; 
 
     private void Start()
     {
         inventory = GameController.gameController.inventorySystem;
         questSystem = GameController.gameController.questSystem;
+        canvas.SetActive(false);
     }
 
     public void OnHandlePickupItem()
@@ -38,6 +40,7 @@ public class ItemObject : MonoBehaviour
         if (other.TryGetComponent(out PlayerMovement playerMovement))
         {
             this.playerMovement = playerMovement;
+            canvas.SetActive(true);
         }
     }
 
@@ -46,6 +49,7 @@ public class ItemObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             this.playerMovement = null;
+            canvas.SetActive(false);
         }
     }
 }
