@@ -8,6 +8,10 @@ public class Enemy_Human : Enemy
     [SerializeField]
     private bool isFoward = true;
 
+    [SerializeField]
+    private GameObject spriteCrecked,
+        canvas;
+
     public Material defaultMaterial,
         stunedMaterial;
     public SkinnedMeshRenderer joints; //Temporario
@@ -22,8 +26,9 @@ public class Enemy_Human : Enemy
         agent = GetComponent<NavMeshAgent>();
         isFoward = true;
         currentWaypointIndex = 0;
-
+        spriteCrecked.SetActive(false);
         joints.material = defaultMaterial;
+        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,6 +36,14 @@ public class Enemy_Human : Enemy
     {
         Attack();
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
+        if (Vector3.Distance(player.transform.position, transform.position) <= spriteRange)
+        {
+            canvas.SetActive(true);
+        }
+        else
+        {
+            canvas.SetActive(false);
+        }
         if (
             newDestnationCD <= 0
             || Vector3.Distance(player.transform.position, transform.position) <= viewRange
@@ -99,6 +112,8 @@ public class Enemy_Human : Enemy
             animator.SetTrigger("damage");
             canReceiveDamage = true;
             joints.material = stunedMaterial;
+
+            spriteCrecked.SetActive(true);
         }
     }
 
@@ -123,6 +138,8 @@ public class Enemy_Human : Enemy
         if (joints != null)
         {
             joints.material = defaultMaterial;
+
+            spriteCrecked.SetActive(false);
         }
     }
 

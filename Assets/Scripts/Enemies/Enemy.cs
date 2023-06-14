@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
     protected float attackRange = 1f;
 
     [SerializeField]
-    protected float viewRange = 4f;
+    protected float viewRange = 4f, spriteRange = 5f;
     [SerializeField] protected bool canReceiveDamage = false;
 
     protected GameObject player;
@@ -74,6 +74,8 @@ public abstract class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, viewRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, spriteRange);
     }
 
     public EnemyType GetEnemyType()

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public QuestSystem questSystem;
     public NPCDialogue _NPCDialogue;
     public Player player;
+    public Transform cam;
     public CinemachineFreeLook freelookCamera;
     private bool isMenu = false;
     private string currentCameraX = "";

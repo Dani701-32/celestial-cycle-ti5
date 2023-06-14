@@ -6,6 +6,11 @@ public class WorldCanvas : MonoBehaviour
 {
     public Transform cam;
 
+    void Start()
+    {
+        cam = GameController.gameController.cam;
+    }
+
     void LateUpdate()
     {
         transform.LookAt(cam);
