@@ -24,7 +24,7 @@ public class SaveObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             isSave = true;
             ControlPlayerActionsOnSave(isSave);
