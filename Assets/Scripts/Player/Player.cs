@@ -128,6 +128,8 @@ public class Player : MonoBehaviour
         artifactSlider.SetActive(false);
     }
     public void UpdateHud(){
+        if(currentFullMoon > maxFullMoon) currentFullMoon = maxFullMoon;
+        if(currentNewMoon > maxNewMoon) currentNewMoon = maxNewMoon;
         fullMoonSlider.value = currentFullMoon;
         newMoonSlider.value = currentNewMoon;
     }

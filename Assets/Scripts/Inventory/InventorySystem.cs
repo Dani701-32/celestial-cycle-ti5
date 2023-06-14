@@ -46,7 +46,6 @@ public class InventorySystem : MonoBehaviour
         inventory = new List<InventoryItem>();
         slots = new List<GameObject>();
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-        
     }
 
     private void Start()
@@ -77,7 +76,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (currentItem.data.canStack)
         {
-            Remove();
+            currentItem.Use();
         }
         else
         {
@@ -111,6 +110,9 @@ public class InventorySystem : MonoBehaviour
                     break;
                 case ItemType.Weapon:
                     newItem = new WeaponItem(referenceData);
+                    break;
+                case ItemType.Consumable:
+                    newItem = new ConsumableItem(referenceData);
                     break;
                 default:
                 case ItemType.Collectable:
@@ -147,9 +149,13 @@ public class InventorySystem : MonoBehaviour
             {
                 inventory.Remove(value);
                 itemDictionary.Remove(referenceData);
+                descriptionScreen.SetActive(false);
             }
         }
+        ClearInventory();
+        UpdateScreen();
     }
+
     private void UpdateScreen()
     {
         foreach (InventoryItem item in inventory)
@@ -158,7 +164,6 @@ public class InventorySystem : MonoBehaviour
             instance.GetComponent<ItemSlot>().UpdateItem(item);
             instance.GetComponent<ItemSlot>().itemDescriptor = descriptionScreen;
             slots.Add(instance);
-
         }
     }
 
@@ -175,9 +180,15 @@ public class InventorySystem : MonoBehaviour
             removeButton.GetComponent<Button>().enabled = false;
             return;
         }
-        equipeButton.SetActive(true);
-        unequipeButton.SetActive(false);
         buttonText.text = (currentItem.data.canStack) ? "Consumir" : "Equipar";
+        if (currentItem.data.type != ItemType.Collectable)
+        {
+            equipeButton.SetActive(true);
+            unequipeButton.SetActive(false);
+        }else {
+            equipeButton.SetActive(false);
+            unequipeButton.SetActive(false);
+        }
         removeButton.GetComponent<Button>().enabled = true;
     }
 
@@ -190,8 +201,8 @@ public class InventorySystem : MonoBehaviour
         slots.Clear();
     }
 
-    public InventoryItem GetInventoryItem(InventoryItemData referenceData){
-
+    public InventoryItem GetInventoryItem(InventoryItemData referenceData)
+    {
         if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             Debug.Log("Teste");
@@ -202,7 +213,8 @@ public class InventorySystem : MonoBehaviour
 
     public void OpenScreen()
     {
-        if(slots.Count != 0){
+        if (slots.Count != 0)
+        {
             ClearInventory();
         }
         UpdateScreen();

@@ -21,6 +21,5 @@ public abstract class Artifact : MonoBehaviour
     {
         gameController = GameController.gameController;
         useArtifact = false;
-        // charge = maxCharge;
     }
 }

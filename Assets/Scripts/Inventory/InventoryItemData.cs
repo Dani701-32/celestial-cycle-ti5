@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-[CreateAssetMenu(menuName ="Inventory/Item Data")]
+
+[CreateAssetMenu(menuName = "Inventory/Item Data")]
 public class InventoryItemData : ScriptableObject
 {
+    [Header("Dados Genericos")]
+    public ItemType type;
     public string id;
     public string displayName;
     public string description;
     public Sprite icon;
     public GameObject prefab;
+    [Header("Consumiveis e Coletáveis")]
     public int maxStack;
     public bool canStack;
-    public ItemType type;
+
 }
 
-
-public enum ItemType {
+public enum ItemType
+{
     Collectable,
     Weapon,
     Artifact,
+    Consumable,
 }

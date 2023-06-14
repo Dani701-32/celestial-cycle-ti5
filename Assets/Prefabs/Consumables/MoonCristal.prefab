@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7095384159646364116}
-  - component: {fileID: 3664658346344557573}
   - component: {fileID: 3074678688792193152}
+  - component: {fileID: -3765619062984925774}
   m_Layer: 0
   m_Name: MoonCristal
   m_TagString: Untagged
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3664658346344557573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3302864717936446470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69c33d3f73e7313448ea7337d90b575b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  referenceItem: {fileID: 11400000, guid: acc6ef5526c86744e8c4e16cbc677bbd, type: 2}
 --- !u!135 &3074678688792193152
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -60,6 +47,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.16
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3765619062984925774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302864717936446470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5359ad5ca4ff742836d4477161fe4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moonPhase: 2
+  typeConsumable: 1
+  charge: 10
 --- !u!1 &4504414951633164562
 GameObject:
   m_ObjectHideFlags: 0
