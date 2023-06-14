@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     private GameObject menuScreen;
 
     [SerializeField]
-    private GameObject deathScreen;
+    private GameObject deathScreen, popoutGame;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
     {
         menuScreen.SetActive(false);
         deathScreen.SetActive(false);
+        popoutGame.SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour
             inventorySystem.CloseScreen();
             questSystem.CloseScreen();
             menuScreen.SetActive(false);
+            popoutGame.SetActive(false);
             ReleaseCamera();
             isMenu = false;
         }
@@ -89,8 +91,14 @@ public class GameController : MonoBehaviour
             GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
+
             StopCamera();
             isMenu = true;
         }
+    }
+
+    public void QuitGame(){
+        popoutGame.SetActive(false);
+        SceneManager.LoadScene("Menu");
     }
 }
