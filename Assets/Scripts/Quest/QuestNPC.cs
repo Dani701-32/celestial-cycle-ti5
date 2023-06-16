@@ -15,6 +15,8 @@ public class QuestNPC : MonoBehaviour
     private InputAction interact;
     private NPCDialogue dialogueSystem;
 
+    [SerializeField] private GameObject canvas; 
+
     [Header("NPC data")]
     public NPCData NPC;
 
@@ -106,6 +108,7 @@ public class QuestNPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             player = other.GetComponent<Player>();
+            canvas.SetActive(true);
         }
     }
 
@@ -114,6 +117,7 @@ public class QuestNPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             player = null;
+            canvas.SetActive(false);
         }
     }
 }
