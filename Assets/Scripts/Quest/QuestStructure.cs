@@ -10,6 +10,9 @@ public class QuestStructure : ScriptableObject
     {
         public string title;
         public string description;
+
+        [Header("Tutorial")]
+        public bool isTutorial;
     }
 
     public abstract class QuestReward : ScriptableObject
@@ -53,7 +56,7 @@ public class QuestStructure : ScriptableObject
 
     [Header("Quest Reward")]
     public List<QuestReward> rewards;
-    public bool isQuestCompleted = false;
+    public bool isQuestCompleted;
 
     public void Invoke()
     {

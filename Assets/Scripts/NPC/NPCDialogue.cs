@@ -51,7 +51,9 @@ public class NPCDialogue : MonoBehaviour
         buttonContinue.SetActive(currentNPC.activeQuest.currentIndex == 0);
         UpdateDialog();
     }
-    public void OpenScreen(){
+
+    public void OpenScreen()
+    {
         Cursor.lockState = CursorLockMode.None;
         dialogScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
@@ -133,6 +135,7 @@ public class NPCDialogue : MonoBehaviour
 
     public void CloseQuestDialog()
     {
+        currentNPC.interected = false;
         questScreen.SetActive(false);
     }
 
@@ -145,6 +148,7 @@ public class NPCDialogue : MonoBehaviour
         );
         questAcept = true;
         currentNPC.activeQuest.data.Invoke();
+
         StartCoroutine(ResponseDialog());
     }
 
@@ -167,5 +171,13 @@ public class NPCDialogue : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
         CloseScreen();
+        if (currentNPC.activeQuest.data.questData.isTutorial)
+        {
+            GameController.gameController.tutorialArtefact.SetActive(true);
+            Time.timeScale = 0f;
+            GameController.gameController.StopCamera();
+            GameController.gameController.player.playerMovement.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

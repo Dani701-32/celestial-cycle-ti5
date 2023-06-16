@@ -15,7 +15,8 @@ public class QuestNPC : MonoBehaviour
     private InputAction interact;
     private NPCDialogue dialogueSystem;
 
-    [SerializeField] private GameObject canvas; 
+    [SerializeField]
+    private GameObject canvas;
 
     [Header("NPC data")]
     public NPCData NPC;
@@ -28,7 +29,8 @@ public class QuestNPC : MonoBehaviour
     private List<QuestStructure> quests;
     public int currentStep;
     public Quest activeQuest;
-    private bool interected = false;
+    public bool interected = false,
+        isOpen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,7 @@ public class QuestNPC : MonoBehaviour
         gameController = GameController.gameController;
         dialogueSystem = gameController._NPCDialogue;
         interected = false;
+        isOpen = false;
         currentStep = 0;
     }
 
@@ -65,10 +68,10 @@ public class QuestNPC : MonoBehaviour
                     activeQuest.CompleteQuest(5);
                     UpdadeScreen();
                     Debug.Log("Completou a Quest");
-                    activeQuest.data.GetRewards();
-                    gameController.questSystem.CompleteQuest(activeQuest);
-                    quests.Remove(activeQuest.data);
-                    activeQuest = null;
+                    // activeQuest.data.GetRewards();
+                    // gameController.questSystem.CompleteQuest(activeQuest);
+                    // quests.Remove(activeQuest.data);
+                    // activeQuest = null;
                 }
                 else
                 {
@@ -79,6 +82,16 @@ public class QuestNPC : MonoBehaviour
         }
         else
         {
+            Debug.Log(activeQuest != null);
+            if (activeQuest != null && activeQuest.data.isQuestCompleted)
+            {
+                // activeQuest.CompleteQuest(5);
+                Debug.Log("Recebey Qyest a Quest");
+                activeQuest.data.GetRewards();
+                gameController.questSystem.CompleteQuest(activeQuest);
+                quests.Remove(activeQuest.data);
+                activeQuest = null;
+            }
             dialogueSystem.CloseScreen();
         }
     }

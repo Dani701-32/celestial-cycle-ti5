@@ -12,7 +12,7 @@ public class Quest
     public Quest(QuestStructure data, int currentIndex)
     {
         this.data = data;
-        this.data.Invoke();
+        // this.data.Invoke();
         this.currentIndex = currentIndex;
     }
 

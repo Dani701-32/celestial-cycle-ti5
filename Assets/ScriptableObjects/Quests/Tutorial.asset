@@ -17,19 +17,21 @@ MonoBehaviour:
     description: "Recupere uma Ess\xEAncia da Lua Cheia.  A ultima vez que uma foi
       vista foi do outro lado do rio, Eu n\xE3o recomendaria entrar em combate por
       enquanto Senhorita. "
+    isTutorial: 1
   goals:
   - {fileID: 11400000, guid: ec7f8ae041fb1a1498a33a72a265bfcc, type: 2}
   rewards:
   - {fileID: 11400000, guid: 69d76a5239b250c4496455c5f783ac4e, type: 2}
   - {fileID: 11400000, guid: f86cb0e014864424d8d61dcb11594202, type: 2}
-  isQuestCompleted: 0
+  isQuestCompleted: 1
   aceptedMessage: 2
   declineMessage: 3
   NPCsmessages:
-  - "Olha vejo que se recuperou do seu primeiro incidente Senhorita. Bem n temos
+  - "Olha vejo que se recuperou do seu primeiro incidente Senhorita. Bem n\xE3o temos
     muito tempo para conversar, ent\xE3o serei direta..."
   - "Eu se que voc\xEA uma guerreira ent\xE3o vai ser facil pra voc\xEA. Preciso
-    que voc\xEA v\xE1 e recupere uma"
+    que voc\xEA v\xE1 e recupere uma Ess\xEAncia da Lua para que eu posso fazerum
+    Artefato para voc\xEA"
   - "Muito bem Eu sabia que poderia contar com voc\xEA. Tente sobreviver at\xE9 encontra-la
     certo Senhorita?!"
   - "Bom se voc\xEA mudar de ideia e estiver viva. Me avise ok! At\xE9 l\xE1 bom...

@@ -7,6 +7,7 @@ using TMPro;
 public class QuestSystem : MonoBehaviour
 {
     private List<Quest> activeQuestList;
+    public int questCount = 0;
 
     [Header("UI Quest System")]
     [SerializeField]
@@ -23,7 +24,6 @@ public class QuestSystem : MonoBehaviour
 
     [SerializeField]
     private GameObject questDescriptor;
-
     [SerializeField]
     private TextMeshProUGUI questTitle,
         questDescriotion,
@@ -44,7 +44,9 @@ public class QuestSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update() { 
+        questCount = activeQuestList.Count;
+    }
 
     public void AddQuest(QuestStructure quest, int currentStep, NPCData npc)
     {
@@ -126,7 +128,10 @@ public class QuestSystem : MonoBehaviour
 
     public void CompleteQuest(Quest quest)
     {
-        activeQuestList.Remove(quest);
+        if(quest.data.questData.isTutorial){
+           StartCoroutine(ResponseDialog());
+        }
+        activeQuestList.Clear();
     }
 
     public void OpenScreen()
@@ -148,5 +153,19 @@ public class QuestSystem : MonoBehaviour
         }
         questScreen.SetActive(false);
         CloseDescription();
+    }
+     private IEnumerator ResponseDialog()
+    {
+        Debug.Log("Corrotina start");
+        
+
+        yield return new WaitForSeconds(1f);
+
+            GameController.gameController.tutorialCombat.SetActive(true);
+            Time.timeScale = 0f;
+            GameController.gameController.StopCamera();
+            GameController.gameController.player.playerMovement.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+        
     }
 }

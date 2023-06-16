@@ -23,7 +23,10 @@ public class GameController : MonoBehaviour
     private GameObject menuScreen;
 
     [SerializeField]
-    private GameObject deathScreen, popoutGame;
+    private GameObject deathScreen,
+        popoutGame;
+    public GameObject tutorialArtefact,
+        tutorialCombat;
 
     // Start is called before the first frame update
     void Awake()
@@ -73,6 +76,14 @@ public class GameController : MonoBehaviour
         currentCameraY = "";
     }
 
+    public void ContinueGame()
+    {
+        ReleaseCamera();
+        Time.timeScale = 1.0f;
+        GameController.gameController.player.playerMovement.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public void MenuScreen()
     {
         if (isMenu)
@@ -97,7 +108,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void QuitGame(){
+    public void QuitGame()
+    {
         popoutGame.SetActive(false);
         SceneManager.LoadScene("Menu");
     }
