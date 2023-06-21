@@ -23,6 +23,10 @@ public class GameController : MonoBehaviour
     private GameObject menuScreen;
 
     [SerializeField]
+    private GameObject tutorialScreen,
+        tutorialDescription;
+
+    [SerializeField]
     private GameObject deathScreen,
         popoutGame;
     public GameObject tutorialArtefact,
@@ -41,6 +45,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        tutorialScreen.SetActive(false);
+        tutorialDescription.SetActive(false);
         menuScreen.SetActive(false);
         deathScreen.SetActive(false);
         popoutGame.SetActive(false);
@@ -66,14 +72,14 @@ public class GameController : MonoBehaviour
 
     public void ReleaseCamera()
     {
-         Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f;
         currentCameraX = "Mouse X";
         currentCameraY = "Mouse Y";
     }
 
     public void StopCamera()
     {
-         Time.timeScale = 0f;
+        Time.timeScale = 0f;
         currentCameraX = "";
         currentCameraY = "";
     }
@@ -90,19 +96,20 @@ public class GameController : MonoBehaviour
     {
         if (isMenu)
         {
-           
             GameController.gameController.player.playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             inventorySystem.CloseScreen();
             questSystem.CloseScreen();
             menuScreen.SetActive(false);
             popoutGame.SetActive(false);
+
+            tutorialScreen.SetActive(false);
+            tutorialDescription.SetActive(false);
             ReleaseCamera();
             isMenu = false;
         }
         else
         {
-           
             GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
