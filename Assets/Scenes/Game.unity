@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.002125438, g: 0.0034751017, b: 0.011331088, a: 1}
+  m_IndirectSpecularColor: {r: 0.19399726, g: 0.2426113, b: 0.28858912, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7074,6 +7074,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terreno
       objectReference: {fileID: 0}
+    - target: {fileID: 5369917196390279591, guid: e56ba58def95b5d4fb7e99d35cae1129, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5369917197394671446, guid: e56ba58def95b5d4fb7e99d35cae1129, type: 3}
       propertyPath: m_Name
       value: Map
@@ -12820,7 +12824,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.07797789, y: -0.000000017681925, z: 0.0000000013830105, w: 0.9969551}
+  m_LocalRotation: {x: 0.07797789, y: 0.000000017681929, z: -0.0000000013830108, w: 0.9969551}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
