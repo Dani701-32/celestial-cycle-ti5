@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private GameController controller;
 
     [SerializeField]
-    float health = 100;
+    float health = 50, maxHealth = 100;
 
     [SerializeField]
     Animator animator;
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     public Slider waxingMoonSlider;
     public Slider waningMoonSlider;
     public Slider newMoonSlider;
+    public Slider lifeSlider;
 
     [SerializeField]
     private Slider slider;
@@ -62,6 +63,9 @@ public class Player : MonoBehaviour
         fullMoonSlider.value = currentFullMoon;
         newMoonSlider.maxValue = maxNewMoon;
         newMoonSlider.value = currentNewMoon;
+
+        lifeSlider.maxValue = maxHealth;
+        lifeSlider.value = health;
 
         fullMoonSlider.gameObject.SetActive(false);
         newMoonSlider.gameObject.SetActive(false);
@@ -87,7 +91,7 @@ public class Player : MonoBehaviour
     {
         health -= damage;
         animator.SetTrigger("damage");
-
+        lifeSlider.value = health;
         if (health <= 0)
         {
             Die();
