@@ -81,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
             currentWeapon.SetActive(combatMode);
         }
         currentTime = timeToDraw;
+        animator.SetFloat("speed", 0, speedDampTime, Time.deltaTime);
+        isRunning = false;
     }
 
     // Update is called once per frame
@@ -128,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
     void OnDisable()
     {
         animator.SetFloat("speed", 0);
+        isRunning = false;
     }
 
     private void Jump()
