@@ -166,11 +166,6 @@ public class PlayerMovement : MonoBehaviour
         movement =
             Quaternion.AngleAxis(cameraTransform.rotation.eulerAngles.y, Vector3.up) * movement;
         movement.Normalize();
-
-        // if (characterController.isGrounded)
-        // {
-        //     ySpeed = -0.5f;
-        // }
         Vector3 velocity = movement * magnitude;
         velocity.y = ySpeed;
         characterController.Move(velocity * Time.deltaTime);

@@ -96,6 +96,9 @@ public class Player : MonoBehaviour
 
     public void EquipeArtifact(GameObject prefab)
     {
+        if(hasArtifact){
+            RemoveArtifact();
+        }
         hasArtifact = true;
         GameObject artifact = Instantiate(prefab, artifactSpot);
         playerMovement.currentArtifact = artifact;

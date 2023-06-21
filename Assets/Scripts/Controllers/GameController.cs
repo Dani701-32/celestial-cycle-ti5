@@ -66,12 +66,14 @@ public class GameController : MonoBehaviour
 
     public void ReleaseCamera()
     {
+         Time.timeScale = 1.0f;
         currentCameraX = "Mouse X";
         currentCameraY = "Mouse Y";
     }
 
     public void StopCamera()
     {
+         Time.timeScale = 0f;
         currentCameraX = "";
         currentCameraY = "";
     }
@@ -88,6 +90,7 @@ public class GameController : MonoBehaviour
     {
         if (isMenu)
         {
+           
             GameController.gameController.player.playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             inventorySystem.CloseScreen();
@@ -99,6 +102,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+           
             GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
