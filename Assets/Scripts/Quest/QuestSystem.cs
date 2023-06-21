@@ -127,14 +127,15 @@ public class QuestSystem : MonoBehaviour
 
     public void CompleteQuest(Quest quest)
     {
-        if(quest.data.questData.isTutorial){
-           StartCoroutine(ResponseDialog());
-        }
         foreach (Quest item in activeQuestList)
         {
             if(item.data.questData.questID == quest.data.questData.questID){
                 activeQuestList.Remove(item);
+                break;
             }
+        }
+        if(quest.data.questData.isTutorial){
+           StartCoroutine(ResponseDialog());
         }
     }
 

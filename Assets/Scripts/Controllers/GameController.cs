@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1.0f;
         tutorialScreen.SetActive(false);
         tutorialDescription.SetActive(false);
         menuScreen.SetActive(false);
@@ -72,14 +73,12 @@ public class GameController : MonoBehaviour
 
     public void ReleaseCamera()
     {
-        Time.timeScale = 1.0f;
         currentCameraX = "Mouse X";
         currentCameraY = "Mouse Y";
     }
 
     public void StopCamera()
     {
-        Time.timeScale = 0f;
         currentCameraX = "";
         currentCameraY = "";
     }
@@ -106,6 +105,7 @@ public class GameController : MonoBehaviour
             tutorialScreen.SetActive(false);
             tutorialDescription.SetActive(false);
             ReleaseCamera();
+            Time.timeScale = 1.0f;
             isMenu = false;
         }
         else
@@ -113,7 +113,7 @@ public class GameController : MonoBehaviour
             GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
-
+            Time.timeScale = 0f;
             StopCamera();
             isMenu = true;
         }
@@ -122,6 +122,7 @@ public class GameController : MonoBehaviour
     public void QuitGame()
     {
         popoutGame.SetActive(false);
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Menu");
     }
 }

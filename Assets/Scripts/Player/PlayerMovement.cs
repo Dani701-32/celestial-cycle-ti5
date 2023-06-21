@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
     private void Walking(Vector2 inputVector)
     {
         float speedAnim = inputVector.magnitude;
-        if (isRunning)
+        if (isRunning && inputVector != Vector2.zero)
             speedAnim += .5f;
 
         currentSpeed = (isRunning) ? runSpeed : walkSpeed;
