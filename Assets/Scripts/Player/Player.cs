@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     public Image weaponSprite;
     public Image artifactSprite;
     public GameObject artifactSlider;
+
+    [Header("Sliders")]
     public Slider fullMoonSlider;
     public Slider waxingMoonSlider;
     public Slider waningMoonSlider;
@@ -60,6 +62,9 @@ public class Player : MonoBehaviour
         fullMoonSlider.value = currentFullMoon;
         newMoonSlider.maxValue = maxNewMoon;
         newMoonSlider.value = currentNewMoon;
+
+        fullMoonSlider.gameObject.SetActive(false);
+        newMoonSlider.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -97,6 +102,7 @@ public class Player : MonoBehaviour
         if (artifact.TryGetComponent(out Artifact component))
         {
             currentArtifact = component;
+            ArtifactEnergy(currentArtifact.artifactMoon, true);
             artifactSlider.SetActive(true);
             slider = artifactSlider.GetComponent<Slider>();
             slider.maxValue = currentArtifact.cooldown;
@@ -124,12 +130,18 @@ public class Player : MonoBehaviour
         Debug.Log("Remvoer artefato");
         Destroy(playerMovement.currentArtifact);
         playerMovement.currentArtifact = null;
+        ArtifactEnergy(currentArtifact.artifactMoon, false);
         currentArtifact = null;
         artifactSlider.SetActive(false);
+
     }
-    public void UpdateHud(){
-        if(currentFullMoon > maxFullMoon) currentFullMoon = maxFullMoon;
-        if(currentNewMoon > maxNewMoon) currentNewMoon = maxNewMoon;
+
+    public void UpdateHud()
+    {
+        if (currentFullMoon > maxFullMoon)
+            currentFullMoon = maxFullMoon;
+        if (currentNewMoon > maxNewMoon)
+            currentNewMoon = maxNewMoon;
         fullMoonSlider.value = currentFullMoon;
         newMoonSlider.value = currentNewMoon;
     }
@@ -139,6 +151,21 @@ public class Player : MonoBehaviour
         slider.value = currentArtifact.remaningCooldown;
         fullMoonSlider.value = currentFullMoon;
         newMoonSlider.value = currentNewMoon;
+    }
+
+    private void ArtifactEnergy(MoonPhases moonType, bool activated)
+    {
+        switch (moonType)
+        {
+            case MoonPhases.FirstQuarter:
+            case MoonPhases.FullMoon:
+                fullMoonSlider.gameObject.SetActive(activated);
+                break;
+            case MoonPhases.ThirdQuarter:
+            case MoonPhases.NewMoon:
+                newMoonSlider.gameObject.SetActive(activated);
+                break;
+        }
     }
 
     void Die()
