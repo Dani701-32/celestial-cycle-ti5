@@ -67,16 +67,10 @@ public class QuestNPC : MonoBehaviour
                 {
                     activeQuest.CompleteQuest(5);
                     UpdadeScreen();
-                    Debug.Log("Completou a Quest");
-                    // activeQuest.data.GetRewards();
-                    // gameController.questSystem.CompleteQuest(activeQuest);
-                    // quests.Remove(activeQuest.data);
-                    // activeQuest = null;
                 }
                 else
                 {
                     UpdadeScreen();
-                    Debug.Log("N�o Completou a Quest");
                 }
             }
         }
@@ -85,10 +79,10 @@ public class QuestNPC : MonoBehaviour
             Debug.Log(activeQuest != null);
             if (activeQuest != null && activeQuest.data.isQuestCompleted)
             {
-                // activeQuest.CompleteQuest(5);
                 Debug.Log("Recebey Qyest a Quest");
                 activeQuest.data.GetRewards();
                 gameController.questSystem.CompleteQuest(activeQuest);
+                activeQuest.data.Invoke();
                 quests.Remove(activeQuest.data);
                 activeQuest = null;
             }

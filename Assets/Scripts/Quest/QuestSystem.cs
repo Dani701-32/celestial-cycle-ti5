@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -131,7 +130,12 @@ public class QuestSystem : MonoBehaviour
         if(quest.data.questData.isTutorial){
            StartCoroutine(ResponseDialog());
         }
-        activeQuestList.Clear();
+        foreach (Quest item in activeQuestList)
+        {
+            if(item.data.questData.questID == quest.data.questData.questID){
+                activeQuestList.Remove(item);
+            }
+        }
     }
 
     public void OpenScreen()

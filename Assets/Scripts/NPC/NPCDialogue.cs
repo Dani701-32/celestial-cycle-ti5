@@ -141,13 +141,13 @@ public class NPCDialogue : MonoBehaviour
 
     public void AceptQuest()
     {
+        currentNPC.activeQuest.data.Invoke();
         GameController.gameController.questSystem.AddQuest(
             currentNPC.activeQuest.data,
             currentNPC.activeQuest.currentIndex,
             currentNPC.NPC
         );
         questAcept = true;
-        currentNPC.activeQuest.data.Invoke();
 
         StartCoroutine(ResponseDialog());
     }

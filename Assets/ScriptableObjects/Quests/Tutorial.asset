@@ -17,28 +17,29 @@ MonoBehaviour:
     description: "Recupere uma \"Ess\xEAncia da Lua Cheia\".  A ultima vez que uma
       foi vista foi do outro lado do rio, Eu n\xE3o recomendaria entrar em combate
       por enquanto "
+    questID: tutorial-1
     isTutorial: 1
   goals:
   - {fileID: 11400000, guid: ec7f8ae041fb1a1498a33a72a265bfcc, type: 2}
   rewards:
   - {fileID: 11400000, guid: 69d76a5239b250c4496455c5f783ac4e, type: 2}
   - {fileID: 11400000, guid: f86cb0e014864424d8d61dcb11594202, type: 2}
-  isQuestCompleted: 1
-  aceptedMessage: 2
-  declineMessage: 3
+  isQuestCompleted: 0
+  aceptedMessage: 3
+  declineMessage: 2
   NPCsmessages:
   - "Olha vejo que se recuperou do seu primeiro incidente Senhorita. Bem n\xE3o temos
     muito tempo para conversar, ent\xE3o serei direta..."
   - "Eu sei que voc\xEA uma guerreira ent\xE3o vai ser f\xE1cil pra voc\xEA. Preciso
     que voc\xEA v\xE1 e recupere uma \"Ess\xEAncia da Lua\" para que eu posso fazer
     um Artefato para voc\xEA."
-  - "Muito bem Eu sabia que poderia contar com voc\xEA. Tente sobreviver at\xE9 encontra-la
-    certo Senhorita?!"
   - "Bom se voc\xEA mudar de ideia e estiver viva. Me avise ok! At\xE9 l\xE1 bom...
     Eu n\xE3o me importo o bastante para me preocupar. "
-  - "Quando voc\xEA trouxer a \"Ess\xEAncia da Lua\" para mim. Poderei fazer algo
-    por voc\xEA se n\xE3o bom, vai ser complicado para voc\xEA matar alguma coisa...
-    triste.  "
+  - "Muito bem Eu sabia que poderia contar com voc\xEA. Tente sobreviver at\xE9 encontra-la
+    certo Senhorita?!"
+  - "Se voc\xEA trouxer uma <color=yellow>Ess\xEAncia da Lua</color> para mim, poderei
+    fazer um <color=yellow>Artefato</color> para voc\xEA, se n\xE3o bom... vai ser
+    complicado para voc\xEA matar alguma coisa nessa cidade."
   - "Olha voc\xEA achou mesmo! Achei que voc\xEA fosse s\xF3 morrer. N\xE3o me leve
     a mal, n\xE3o \xE9 exatamente comum forasteiros receberem uma Ess\xEAncia em
     sua chegada. De qualquer forma, Aqui senhorita, aproveitei o que sobrou da \"Ess\xEAncia
