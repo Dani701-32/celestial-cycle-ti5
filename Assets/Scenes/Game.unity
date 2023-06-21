@@ -7082,6 +7082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 5369917197394671446, guid: e56ba58def95b5d4fb7e99d35cae1129, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5369917197394671447, guid: e56ba58def95b5d4fb7e99d35cae1129, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -11717,8 +11721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 76.525}
-  m_SizeDelta: {x: 0, y: 153.05}
+  m_AnchoredPosition: {x: 0, y: 45.692993}
+  m_SizeDelta: {x: 0, y: 91.385}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153773533
 MonoBehaviour:
@@ -11835,7 +11839,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
+  m_fontSize: 37
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11871,7 +11875,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 25, z: 0, w: 25}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15054,8 +15058,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0010223, y: 51.524}
-  m_SizeDelta: {x: 1273.2, y: 493.207}
+  m_AnchoredPosition: {x: 0.0010223, y: 20.692}
+  m_SizeDelta: {x: 1273.2, y: 554.87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413676845
 MonoBehaviour:
@@ -15077,10 +15081,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Artefatos s\xE3o itens que a Sacerdotisa da Lua, Nishida Mizaki, consegue
-    criar utilizando Ess\xEAncias da Lua encontradas em durante suas Miss\xF5es de
-    busca. \n\nExistem 2 de 4 tipos de artefatos. \nUma representando cada fase da
-    lua.   "
+  m_text: "Artefatos s\xE3o itens criados pela Sacerdotisa da Lua, Nishida Mizaki,
+    utilizando as poderosas \"Ess\xEAncias da Lua\". Cada ess\xEAncia possui um aspecto
+    relacionado a uma das quatro fases da lua (Cheia, Minguante, Nova e Crescente),
+    determinando assim o tipo do artefato resultante.\r\n\r\nEsses artefatos t\xEAm
+    o prop\xF3sito quebrar a prote\xE7\xE3o dos inimigos, permitindo que sejam derrotados
+    pela arma do jogador. Ao utilizar um artefato, uma parte da energia acumulada
+    pelo jogador ser\xE1 gasta e uma \xE1rea de efeito ser\xE1 gerada. Os inimigos
+    que estiverem no raio de efeito e possu\xEDrem o mesmo tipo de prote\xE7\xE3o
+    que o aspecto do artefato ficar\xE3o vulner\xE1veis a danos, enquanto os demais
+    n\xE3o sofrer\xE3o altera\xE7\xF5es."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15107,15 +15117,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -15143,7 +15153,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 60, z: 0, w: 0}
+  m_margin: {x: 35, y: 60, z: 35, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
