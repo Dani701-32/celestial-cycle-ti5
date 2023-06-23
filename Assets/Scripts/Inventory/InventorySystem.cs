@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,8 +42,13 @@ public class InventorySystem : MonoBehaviour
     private Image spriteDescription;
     private InventoryItem currentItem;
 
+
     void Awake()
     {
+        inventory = new List<InventoryItem>();
+        
+        itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+
         inventory = new List<InventoryItem>();
         slots = new List<GameObject>();
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
@@ -51,7 +57,7 @@ public class InventorySystem : MonoBehaviour
     private void Start()
     {
         inventoryScreen.SetActive(false);
-        descriptionScreen.SetActive(false);
+        descriptionScreen.SetActive(false);     
     }
 
     public bool canAdd(InventoryItemData referenceData)

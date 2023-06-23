@@ -13,6 +13,6 @@ public class WorldCanvas : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.LookAt(cam);
+        transform.LookAt(transform.position + cam.forward);
     }
 }

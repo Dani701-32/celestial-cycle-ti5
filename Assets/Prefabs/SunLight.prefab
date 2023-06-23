@@ -130,7 +130,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeControllerData: {fileID: 11400000, guid: 234320b7ce2437b4f8eb40d4ba1fe361, type: 2}
+  savingLoading: {fileID: 0}
+  phaseController: 0
+  day: 0
+  hour: 0
+  longitude: 0
+  nightDuration: 0
   isNight: 0
+  isSaveNight: 0
+  switchDay: 0
   textHours: {fileID: 0}
   textDays: {fileID: 0}
   textMoonPhase: {fileID: 0}
@@ -139,6 +147,28 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  data:
+    s_hour: 0
+    s_phaseController: 0
+    s_day: 0
 --- !u!114 &89351951147777807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,4 +181,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0f389b40e1f5c41bb94fa9fc18d12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 9f335d3e-a044-4a3d-9c58-3153bda912ac
+  id: 29da1a77-95e4-4537-999b-c99adafaa0c3

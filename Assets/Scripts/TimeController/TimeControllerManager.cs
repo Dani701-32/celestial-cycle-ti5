@@ -9,21 +9,20 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
 {
     public static TimeControllerManager InstanceTime;
     public TimeControllerData timeControllerData;
-    private SavingLoading savingLoading;
+    public SavingLoading savingLoading;
 
     private Material skyMaterial;
     private AnimationCurve lightAngleCurve;
     private Light sunLight;
 
-    private int phaseController, day;
-    private float hour, longitude, nightDuration;
+    public int phaseController, day;
+    public float hour, longitude, nightDuration;
     private float intensity, sunSize, dayMinutesDuration, lastNightDuration = -1;
     private float dt = 0, hourEval, gray, lastLongitude = 1000, lastHour = -1;
 
     private MoonPhases currentPhase;
-    [HideInInspector]
     public bool isNight;
-    private bool isSaveNight = false, switchDay = false;
+    public bool isSaveNight = false, switchDay = false;
     
     private Color dayColor, dawnColor, nightColor, lightColor;
     private Gradient gradientColor;
@@ -50,7 +49,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         mainCamera = Camera.main.transform;
     }
 
-    public void SetVariablesInTimeController()
+    public void NotSavedInTimeController()
     {
         skyMaterial = timeControllerData.skyMaterial;
         lightAngleCurve = timeControllerData.lightAngleCurve;
@@ -67,29 +66,38 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
 
     void Start()
     {
+        
+
         foreach (Light light in cityLights)
         {
             light.intensity = 0;
         }
 
-        SetVariablesInTimeController();
 
-        if(savingLoading.StatusFile() == false)
+        if(!savingLoading.StatusFile())
         {
             InitializeVariables();
-            Debug.Log("Inicializou mas mão tem save");
+            
+            currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
+            textDays.text = "Day " + day.ToString();
+            SetMoonPhase();
+
+            lastNightDuration = -1;
+            Debug.Log("Inicializou o Sistema de Dia e Noite mas não tem save");
         }
 
-        SetMoonPhase();
-
-        textDays.text = "Day " + day.ToString();
-
+        currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
+        NotSavedInTimeController();
+        
+       
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
         RenderSettings.sun = sunLight;
         RenderSettings.skybox = skyMaterial;
         RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
-        currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
-        lastNightDuration = -1;
+
+        data.s_hour = hour;
+        data.s_day = day;
+        data.s_phaseController = phaseController;
     }
 
     private void ControlLightsCity(float min, float max)
@@ -200,13 +208,6 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         keys[1].time = nightDuration / 2;
         keys[3].time = 24 - nightDuration / 2;
         lightAngleCurve.keys = keys;
-
-        //for (int i = 0; i < lightAngleCurve.keys.Length; i++)
-        //{
-        //    AnimationUtility.SetKeyBroken(lightAngleCurve, i, true);
-        //    AnimationUtility.SetKeyLeftTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
-        //    AnimationUtility.SetKeyRightTangentMode(lightAngleCurve, i, AnimationUtility.TangentMode.Linear);
-        //}
     }
 
     public void UpdateTimeOfDay()
@@ -226,9 +227,12 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
                 SetMoonPhase();
             }
             if (textDays) textDays.text = "Day " + day.ToString();
+            Debug.Log("Chamou o UpdateTimeOfDay");
         }
 
         if (!isNight && isSaveNight) isSaveNight = false;
+
+        
     }
 
     private void SetMoonPhase()
@@ -254,6 +258,8 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         }
 
         textMoonPhase.text = currentPhase.ToString();
+
+        Debug.Log("Chamou o SetMoonPhase");
     }
 
     public MoonPhases GetCurrentPhase()
@@ -265,7 +271,6 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
     {  
         hour = timeControllerData.hour;
         phaseController = timeControllerData.phaseController;
-        currentPhase = timeControllerData.currentPhase;
         day = timeControllerData.day;     
     }
 
@@ -274,7 +279,6 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         return new SaveData
         {
             s_hour = hour,
-            s_currentPhase = currentPhase,
             s_phaseController = phaseController,
             s_day = day
         };
@@ -285,19 +289,20 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         var saveData = (SaveData)state;
 
         hour = saveData.s_hour;
-        currentPhase = saveData.s_currentPhase;
-        phaseController = saveData.s_phaseController;
+        phaseController = saveData.s_phaseController;      
         day = saveData.s_day;
     }
 
     [Serializable]
-    private struct SaveData
+    public struct SaveData
     {
         public float s_hour;
-        public MoonPhases s_currentPhase;
         public int s_phaseController;
         public int s_day;
     }
+
+    public SaveData data;
+    
 }
 
 public enum MoonPhases

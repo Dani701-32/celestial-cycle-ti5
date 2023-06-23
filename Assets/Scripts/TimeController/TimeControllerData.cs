@@ -26,8 +26,7 @@ public class TimeControllerData : ScriptableObject
     public float sunSize = 0.06f;
 
     [Header("Moon Controlls:")]
-    public MoonPhases currentPhase;
-    public int phaseController = 0;
+    [Range(0, 3)] public int phaseController = 0;
     public int day = 1;
     public float intensity;
 

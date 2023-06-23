@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable
 {
     private GameController controller;
+    private SavingLoading savingLoading;
 
     [SerializeField]
     float health = 50, maxHealth = 100;
@@ -47,8 +49,16 @@ public class Player : MonoBehaviour
     public bool hasArtifact { get; private set; }
     public bool hasWeapon { get; private set; }
 
+    private Vector3 playerPos;
+
+
+    public void InitializeVariables()
+    {
+        playerPos = this.transform.position;
+    }
     void Start()
     {
+        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         controller = GameController.gameController;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
@@ -69,10 +79,18 @@ public class Player : MonoBehaviour
 
         fullMoonSlider.gameObject.SetActive(false);
         newMoonSlider.gameObject.SetActive(false);
+
+        if (!savingLoading.StatusFile())
+        {
+            InitializeVariables();
+            Debug.Log("Inicializou o Sistema de Dia e Noite mas não tem save");
+        }
     }
 
     private void Update()
     {
+        playerPos = this.transform.position;
+
         if (inventoryAction.triggered)
         {
             controller.MenuScreen();
@@ -187,5 +205,33 @@ public class Player : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+
+
+    public object CaptureState()
+    {
+        return new SaveData
+        {
+            s_xPos = playerPos.x,
+            s_yPos = playerPos.y,
+            s_zPos = playerPos.z
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (SaveData)state;
+
+        playerPos.x = saveData.s_xPos;
+        playerPos.y = saveData.s_yPos;
+        playerPos.z = saveData.s_zPos;
+    }
+
+    [Serializable]
+    private struct SaveData
+    {
+        public float s_xPos;
+        public float s_yPos;
+        public float s_zPos;
     }
 }
