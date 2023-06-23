@@ -2554,7 +2554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b44fee5172f89947a7adf0b78255b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStateMenu: 0
 --- !u!4 &718245051
 Transform:
   m_ObjectHideFlags: 0
@@ -4703,7 +4702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1522623485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5601,7 +5600,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Geral\n\nWASD - Movimenta\xE7\xE3o\nQ - Sacar espada\nEspa\xE7o - Pular\nE-
-    Interagir\nEsc - Abrir Menu/invent\xE1rio"
+    Interagir"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5696,7 +5695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1827608445
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5712,10 +5711,10 @@ RectTransform:
   m_Father: {fileID: 1733071627}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 275, y: -143.79001}
+  m_SizeDelta: {x: 550, y: 55.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827608446
 MonoBehaviour:
