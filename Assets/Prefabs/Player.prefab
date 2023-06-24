@@ -3002,7 +3002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392de74ac06530647874182667535a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
+  maxHealth: 50
   animator: {fileID: 0}
   maxFullMoon: 100
   maxWaxingMoon: 100
@@ -3022,6 +3023,7 @@ MonoBehaviour:
   waxingMoonSlider: {fileID: 0}
   waningMoonSlider: {fileID: 0}
   newMoonSlider: {fileID: 0}
+  lifeSlider: {fileID: 0}
   slider: {fileID: 0}
 --- !u!114 &5019829766420754211
 MonoBehaviour:
@@ -3100,13 +3102,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.9
+  m_Height: 1.8
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.08, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &1656015336
 Animator:
   serializedVersion: 5
