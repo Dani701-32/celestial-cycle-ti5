@@ -52,6 +52,7 @@ public class QuestSystem : MonoBehaviour
         Quest _quest = new Quest(quest, currentStep);
         _quest.SetNPC(npc);
         activeQuestList.Add(_quest);
+        CheckQuests();
     }
 
     public void UpdateScreen()

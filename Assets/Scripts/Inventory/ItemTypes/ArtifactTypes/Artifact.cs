@@ -5,9 +5,8 @@ using UnityEngine;
 public abstract class Artifact : MonoBehaviour
 {
     [Header("Main Controllers")]
-    public MoonPhases artifactMoon;
     public float cost;
-    
+    public MoonPhases artifactMoon;
     public float cooldown = 5f;
     public float remaningCooldown = 0;
 

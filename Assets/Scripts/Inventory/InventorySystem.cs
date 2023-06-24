@@ -30,6 +30,7 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI itemName,
+        itemAspect,
         itemDescription,
         buttonText;
 
@@ -42,11 +43,10 @@ public class InventorySystem : MonoBehaviour
     private Image spriteDescription;
     private InventoryItem currentItem;
 
-
     void Awake()
     {
         inventory = new List<InventoryItem>();
-        
+
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
 
         inventory = new List<InventoryItem>();
@@ -57,7 +57,7 @@ public class InventorySystem : MonoBehaviour
     private void Start()
     {
         inventoryScreen.SetActive(false);
-        descriptionScreen.SetActive(false);     
+        descriptionScreen.SetActive(false);
     }
 
     public bool canAdd(InventoryItemData referenceData)
@@ -179,6 +179,8 @@ public class InventorySystem : MonoBehaviour
         itemName.text = currentItem.data.displayName;
         itemDescription.text = currentItem.data.description;
         spriteDescription.sprite = currentItem.data.icon;
+        itemAspect.text =
+            (currentItem.data.type == ItemType.Weapon) ? "" : GetMoonPhase(currentItem.data.aspect);
         if (currentItem.equiped)
         {
             equipeButton.SetActive(false);
@@ -191,11 +193,30 @@ public class InventorySystem : MonoBehaviour
         {
             equipeButton.SetActive(true);
             unequipeButton.SetActive(false);
-        }else {
+        }
+        else
+        {
             equipeButton.SetActive(false);
             unequipeButton.SetActive(false);
         }
         removeButton.GetComponent<Button>().enabled = true;
+    }
+
+    private string GetMoonPhase(MoonPhases moonPhase)
+    {
+        switch (moonPhase)
+        {
+            case MoonPhases.NewMoon:
+                return "Aspecto da Lua Nova";
+            case MoonPhases.FirstQuarter:
+                return "Aspecto da Lua Crescente";
+            case MoonPhases.FullMoon:
+                return "Aspecto da Lua Cheia";
+            case MoonPhases.ThirdQuarter:
+            default:
+
+                return "Aspecto da Lua Minguante";
+        }
     }
 
     private void ClearInventory()

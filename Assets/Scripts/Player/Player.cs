@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, ISaveable
     }
     void Start()
     {
-        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         controller = GameController.gameController;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
@@ -80,11 +80,11 @@ public class Player : MonoBehaviour, ISaveable
         fullMoonSlider.gameObject.SetActive(false);
         newMoonSlider.gameObject.SetActive(false);
 
-        if (!savingLoading.StatusFile())
-        {
-            InitializeVariables();
-            Debug.Log("Inicializou o Sistema de Dia e Noite mas não tem save");
-        }
+        // if (!savingLoading.StatusFile())
+        // {
+        //     InitializeVariables();
+        //     Debug.Log("Inicializou o Sistema de Dia e Noite mas nï¿½o tem save");
+        // }
     }
 
     private void Update()

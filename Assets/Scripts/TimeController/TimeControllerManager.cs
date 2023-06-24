@@ -45,7 +45,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         }
 
         sunLight = this.GetComponent<Light>();
-        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         mainCamera = Camera.main.transform;
     }
 
@@ -74,8 +74,8 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         }
 
 
-        if(!savingLoading.StatusFile())
-        {
+        // if(!savingLoading.StatusFile())
+        // {
             InitializeVariables();
             
             currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
@@ -84,7 +84,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
 
             lastNightDuration = -1;
             Debug.Log("Inicializou o Sistema de Dia e Noite mas não tem save");
-        }
+        // }
 
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
         NotSavedInTimeController();
@@ -237,6 +237,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
 
     private void SetMoonPhase()
     {
+        string currentMoonPhase = ""; 
         if (phaseController > 3)
         {
             phaseController = 0;
@@ -245,19 +246,23 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         {
             case 0:
                 currentPhase = MoonPhases.NewMoon;
+                currentMoonPhase = "Lua Nova";
                 break;
             case 1:
                 currentPhase = MoonPhases.FirstQuarter;
+                currentMoonPhase = "Lua Crescente";
                 break;
             case 2:
                 currentPhase = MoonPhases.FullMoon;
+                currentMoonPhase = "Lua Cheia"; 
                 break;
             case 3:
                 currentPhase = MoonPhases.ThirdQuarter;
+                currentMoonPhase = "Lua Minguante";
                 break;
         }
 
-        textMoonPhase.text = currentPhase.ToString();
+        textMoonPhase.text = currentMoonPhase;
 
         Debug.Log("Chamou o SetMoonPhase");
     }

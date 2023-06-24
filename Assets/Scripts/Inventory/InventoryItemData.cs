@@ -10,6 +10,7 @@ public class InventoryItemData : ScriptableObject
     public string description;
     public Sprite icon;
     public GameObject prefab;
+    public MoonPhases aspect;
     [Header("Consumiveis e Coletáveis")]
     public int maxStack;
     public bool canStack;

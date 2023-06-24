@@ -21,14 +21,14 @@ public class MenuController : MonoBehaviour
         {
             instance = this;
         }
-
-        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        //Sistema de save incompleto. 
+        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
     }
 
     void Start()
     {
-        hasSaveGame = savingLoading.StatusFile();
-        loadButton.SetActive(hasSaveGame);
+        // hasSaveGame = savingLoading.StatusFile();
+        // loadButton.SetActive(hasSaveGame);
     }
 
     public void NewGame()
