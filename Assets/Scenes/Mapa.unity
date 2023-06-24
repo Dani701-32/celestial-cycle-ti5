@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.007902451, g: 0.012448891, b: 0.034662724, a: 1}
+  m_IndirectSpecularColor: {r: 0.19399726, g: 0.2426113, b: 0.28858912, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3961,6 +3961,7 @@ MonoBehaviour:
   maxInventoryIndex: 12
   descriptionScreen: {fileID: 1348710735}
   itemName: {fileID: 2081313186}
+  itemAspect: {fileID: 0}
   itemDescription: {fileID: 471254384}
   buttonText: {fileID: 597317545}
   removeButton: {fileID: 1454975675}
@@ -5804,7 +5805,7 @@ Transform:
   - {fileID: 772619324}
   - {fileID: 1228118436}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &295889996
 MonoBehaviour:
@@ -16478,7 +16479,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 19.69, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -21300,7 +21301,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.07797789, y: 0.000000017681929, z: -0.0000000013830108, w: 0.9969551}
+  m_LocalRotation: {x: 0.07797789, y: -0.000000017681925, z: 0.0000000013830105, w: 0.9969551}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34631,7 +34632,7 @@ Transform:
   - {fileID: 1995607228}
   - {fileID: 506817352}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1925579495
 BoxCollider:
@@ -38154,7 +38155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102032573
 GameObject:
@@ -42381,53 +42382,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxHealth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: lifeSlider
       value: 
       objectReference: {fileID: 1710543735}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxNewMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxFullMoon
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: weaponSprite
       value: 
       objectReference: {fileID: 470036060}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxWaningMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxWaxingMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: newMoonObject
-      value: 
-      objectReference: {fileID: 66419027}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: newMoonSlider
       value: 
       objectReference: {fileID: 66419029}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: CurrentNewMoon
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: artifactSlider
       value: 
@@ -42437,29 +42402,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1514498600}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentNewMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: fullMoonObject
-      value: 
-      objectReference: {fileID: 1119038299}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: fullMoonSlider
       value: 
       objectReference: {fileID: 1119038301}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentFullMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentWaningMoon
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: currentWaxingMoon
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5019829766420754210, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: m_RootOrder
       value: 3
