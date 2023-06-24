@@ -12,15 +12,24 @@ public class QuestSlot : MonoBehaviour
     private TextMeshProUGUI textQuest;
     public GameObject questDescription;
     public GameObject spriteCompleted;
+    public Image traked;
+
     public void UpdateQuest(Quest quest)
     {
-        this.currentQuest = quest;
-        textQuest.text = quest.data.questData.title;
-        if(this.currentQuest.data.isQuestCompleted){
-            spriteCompleted.SetActive(true);
-        } else {
-            spriteCompleted.SetActive(false);
+        QuestSystem questSystem = GameController.gameController.questSystem;
+        bool questTraked = false;
+        if (questSystem.trakedQuest != null)
+        {
+            questTraked = (
+                questSystem.trakedQuest.data.questData.questID == quest.data.questData.questID
+            );
         }
+
+        this.currentQuest = quest;
+
+        textQuest.text = quest.data.questData.title;
+        spriteCompleted.SetActive(this.currentQuest.data.isQuestCompleted);
+        traked.gameObject.SetActive(questTraked);
     }
 
     public void ShowDescription()
@@ -28,7 +37,7 @@ public class QuestSlot : MonoBehaviour
         if (questDescription != null)
         {
             questDescription.SetActive(true);
-            GameController.gameController.questSystem.OpenDescription(currentQuest);
+            GameController.gameController.questSystem.OpenDescription(currentQuest, this);
         }
     }
 }

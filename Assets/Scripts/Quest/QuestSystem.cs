@@ -16,22 +16,30 @@ public class QuestSystem : MonoBehaviour
     private GameObject questMenuList;
 
     [SerializeField]
-    private GameObject questSlot;
+    private GameObject questSlot,
+        trackConfirmation,
+        trakedQuestScreen;
 
     [SerializeField]
     private List<GameObject> slotsList;
 
     [SerializeField]
     private GameObject questDescriptor;
+
     [SerializeField]
     private TextMeshProUGUI questTitle,
         questDescriotion,
         questGoals,
         questRewards,
-        questCompleted;
+        questCompleted,
+        questTrakerTitle,
+        questTrakerGoals;
 
     [SerializeField]
-    private Quest currentQuest;
+    private Quest currentQuest,
+        tempQuest;
+    public Quest trakedQuest { get; private set; }
+    private QuestSlot currentSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +48,12 @@ public class QuestSystem : MonoBehaviour
         questDescriptor.SetActive(false);
         activeQuestList = new List<Quest>();
         slotsList = new List<GameObject>();
+        trakedQuestScreen.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update() { 
+    void Update()
+    {
         questCount = activeQuestList.Count;
     }
 
@@ -66,13 +76,25 @@ public class QuestSystem : MonoBehaviour
         }
     }
 
-    public void OpenDescription(Quest quest)
+    public void OpenDescription(Quest quest, QuestSlot currentSlot)
     {
+        this.currentSlot = currentSlot;
         currentQuest = quest;
+        tempQuest = currentQuest;
         questTitle.text = quest.data.questData.title;
         questDescriotion.text = quest.data.questData.description;
         questGoals.text = quest.data.GetQuestGoals();
         questRewards.text = quest.data.GetQuestRewardsDescription();
+
+        if (
+            trakedQuest != null
+            && trakedQuest.data.questData.questID == quest.data.questData.questID
+        )
+        {
+            trackConfirmation.gameObject.SetActive(true);
+            return;
+        }
+        trackConfirmation.gameObject.SetActive(false);
     }
 
     public void CloseDescription()
@@ -107,6 +129,7 @@ public class QuestSystem : MonoBehaviour
                 questCompleted.text = "";
             }
         }
+        TrackQuest();
     }
 
     public Quest CheckQuests(QuestStructure quest)
@@ -130,13 +153,18 @@ public class QuestSystem : MonoBehaviour
     {
         foreach (Quest item in activeQuestList)
         {
-            if(item.data.questData.questID == quest.data.questData.questID){
+            if (item.data.questData.questID == quest.data.questData.questID)
+            {
                 activeQuestList.Remove(item);
+                tempQuest = null;
+                trakedQuest = null;
+                trakedQuestScreen.gameObject.SetActive(false);
                 break;
             }
         }
-        if(quest.data.questData.isTutorial){
-           StartCoroutine(ResponseDialog());
+        if (quest.data.questData.isTutorial)
+        {
+            StartCoroutine(ResponseDialog());
         }
     }
 
@@ -160,18 +188,39 @@ public class QuestSystem : MonoBehaviour
         questScreen.SetActive(false);
         CloseDescription();
     }
-     private IEnumerator ResponseDialog()
+
+    public void TrackQuest()
+    {
+        if (tempQuest == null)
+            return;
+        trakedQuest = tempQuest;
+        questTrakerTitle.text = trakedQuest.data.questData.title;
+        trackConfirmation.gameObject.SetActive(true);
+        trakedQuestScreen.gameObject.SetActive(true);
+        if (trakedQuest.questCompleted)
+        {
+            questTrakerGoals.text = $"Concluído \nRetorne para {trakedQuest.currentNPC.dataNPC.Name}";
+        }
+        else
+        {
+            questTrakerGoals.text = trakedQuest.data.GetQuestGoals();
+        }
+        if (currentSlot != null)
+        {
+            currentSlot.UpdateQuest(trakedQuest);
+        }
+    }
+
+    private IEnumerator ResponseDialog()
     {
         Debug.Log("Corrotina start");
-        
 
         yield return new WaitForSeconds(1f);
 
-            GameController.gameController.tutorialCombat.SetActive(true);
-            Time.timeScale = 0f;
-            GameController.gameController.StopCamera();
-            GameController.gameController.player.playerMovement.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-        
+        GameController.gameController.tutorialCombat.SetActive(true);
+        Time.timeScale = 0f;
+        GameController.gameController.StopCamera();
+        GameController.gameController.player.playerMovement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

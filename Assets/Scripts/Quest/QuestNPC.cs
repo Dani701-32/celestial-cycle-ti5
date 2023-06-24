@@ -41,6 +41,10 @@ public class QuestNPC : MonoBehaviour
         interected = false;
         isOpen = false;
         currentStep = 0;
+        foreach (QuestStructure quest in quests)
+        {
+            quest.Invoke();
+        }
     }
 
     // Update is called once per frame
