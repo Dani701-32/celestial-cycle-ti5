@@ -15,12 +15,16 @@ public class NPCDialogue : MonoBehaviour
     public GameObject buttonContinue;
 
     [Header("UI QuestNPC - Geral")]
-    public GameObject questScreen;
+    public GameObject questScreen,
+        questDescriptor;
 
     [Header("UI QuestNPC - Resultados")]
-    public GameObject questDescriptor;
-    public GameObject questReward,
-        questRewardList;
+    public GameObject questReward;
+    public GameObject questRewardList,
+        rewardSlot;
+
+    [SerializeField]
+    private List<GameObject> rewardList;
     public TextMeshProUGUI textQuestTitle,
         textQuestDescription,
         textQuestGoals,
@@ -33,9 +37,6 @@ public class NPCDialogue : MonoBehaviour
         answered = false,
         completed = false;
 
-    [Header("UI Reward")]
-    public GameObject rewardButton;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +44,20 @@ public class NPCDialogue : MonoBehaviour
         questScreen.SetActive(false);
         questDescriptor.SetActive(false);
         questReward.SetActive(false);
-        questRewardList.SetActive(false);
         questAcept = false;
         answered = false;
         completed = false;
+    }
+
+    private void OpenRewardQuest()
+    {
+        textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
+        foreach (QuestStructure.QuestReward reward in currentNPC.activeQuest.data.rewards)
+        {
+            GameObject instance = Instantiate(rewardSlot, questRewardList.transform);
+            instance.GetComponent<RwardIcon>().UpdateRwardIcon(reward);
+            rewardList.Add(instance);
+        }
     }
 
     public void OpenScreen(QuestNPC currentNPC)
@@ -88,11 +99,21 @@ public class NPCDialogue : MonoBehaviour
         currentNPC.currentStep =
             (currentNPC.activeQuest != null) ? currentNPC.activeQuest.currentIndex : 0;
         Cursor.lockState = CursorLockMode.Locked;
+
         dialogScreen.SetActive(false);
+        questDescriptor.SetActive(false);
+        questReward.SetActive(false);
         questScreen.SetActive(false);
+
         GameController.gameController.ReleaseCamera();
         GameController.gameController.player.playerMovement.enabled = true;
         GameController.gameController.player.QuestIsOpen = false;
+
+        if (rewardList.Count > 0)
+        {
+            ClearSlots();
+            rewardList.Clear();
+        }
         currentNPC = null;
     }
 
@@ -100,13 +121,16 @@ public class NPCDialogue : MonoBehaviour
     {
         if (currentNPC.activeQuest != null)
         {
+            if (currentNPC.activeQuest.currentIndex == 5)
+            {
+                OpenQuestCompleteDialog();
+            }
             textNPCDialogue.text = currentNPC.activeQuest.CurrentDialogue();
         }
         else
         {
             if (!currentNPC.isOpen)
             {
-                Debug.Log("dsafkjasd");
                 textNPCDialogue.text =
                     "Espero poder contar com você novamente no futuro minha jovem";
                 currentNPC.isOpen = true;
@@ -136,8 +160,7 @@ public class NPCDialogue : MonoBehaviour
         else if (currentNPC.activeQuest.currentIndex == 5)
         {
             UpdateDialog();
-            Debug.Log("Teste 2");
-            OpenQuestCompleteDialog();
+            // OpenQuestCompleteDialog();
         }
         else
         {
@@ -154,18 +177,10 @@ public class NPCDialogue : MonoBehaviour
 
     private void OpenQuestCompleteDialog()
     {
-        // questScreen.SetActive(true);
-
-        textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
-        textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
-        textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";
-        textQuestRewards.text =
-            $"Recompensas:\n{currentNPC.activeQuest.data.GetQuestRewardsDescription()}";
-
-        acceptButton.SetActive(false);
-        refuseButton.SetActive(false);
-        rewardButton.SetActive(true);
-
+        questScreen.SetActive(true);
+        questDescriptor.SetActive(false);
+        OpenRewardQuest();
+        questReward.SetActive(true);
         completed = true;
     }
 
@@ -180,10 +195,7 @@ public class NPCDialogue : MonoBehaviour
             $"Recompensas:\n{currentNPC.activeQuest.data.GetQuestRewardsDescription()}";
         acceptButton.SetActive(true);
         refuseButton.SetActive(true);
-        rewardButton.SetActive(false);
     }
-
-    public void EmptyQuest() { }
 
     public void CloseQuestDialog()
     {
@@ -214,14 +226,16 @@ public class NPCDialogue : MonoBehaviour
         textNPCDialogue.text = currentNPC.activeQuest.StatusQuest(questAcept);
     }
 
-    public void CompleteQuest()
+    private void ClearSlots()
     {
-        Debug.Log("Complete dialogo");
+        foreach (GameObject slot in rewardList)
+        {
+            Destroy(slot);
+        }
     }
 
     private IEnumerator ResponseDialog()
     {
-        Debug.Log("Corrotina start");
         textNPCDialogue.text = currentNPC.activeQuest.StatusQuest(questAcept);
         CloseQuestDialog();
 

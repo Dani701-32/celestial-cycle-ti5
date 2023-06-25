@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6285233919577448236}
   - component: {fileID: 1658975990479509296}
+  - component: {fileID: 623177061817318134}
   m_Layer: 5
   m_Name: Reward
   m_TagString: Untagged
@@ -47,6 +48,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59299496599314384}
   m_CullTransparentMesh: 1
+--- !u!114 &623177061817318134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59299496599314384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: addb620f06fcb76408bf7554297a2cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 6208116266423215679}
+  nameText: {fileID: 935004595543169916}
 --- !u!1 &210302298005835479
 GameObject:
   m_ObjectHideFlags: 0

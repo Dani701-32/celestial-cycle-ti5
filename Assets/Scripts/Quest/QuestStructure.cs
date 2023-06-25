@@ -22,6 +22,17 @@ public class QuestStructure : ScriptableObject
         [SerializeField]
         protected string rewardDescription;
 
+        [SerializeField]
+        protected InventoryItemData itemDataReference;
+        public string RewardName { get; private set; }
+        public Sprite Sprite { get; private set; }
+
+        public void Invoke()
+        {
+            RewardName = itemDataReference.displayName;
+            Sprite = itemDataReference.icon;
+        }
+
         public abstract string GetDescription();
         public abstract void GetReward();
     }
@@ -67,6 +78,10 @@ public class QuestStructure : ScriptableObject
         foreach (QuestGoal questGoal in goals)
         {
             questGoal.Invoke();
+        }
+        foreach (QuestReward reward in rewards)
+        {
+            reward.Invoke();
         }
     }
 
