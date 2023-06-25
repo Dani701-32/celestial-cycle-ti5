@@ -40,6 +40,7 @@ public class QuestSystem : MonoBehaviour
         tempQuest;
     public Quest trakedQuest { get; private set; }
     private QuestSlot currentSlot;
+    private bool isUi = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,7 @@ public class QuestSystem : MonoBehaviour
         activeQuestList = new List<Quest>();
         slotsList = new List<GameObject>();
         trakedQuestScreen.SetActive(false);
+        isUi = false;
     }
 
     // Update is called once per frame
@@ -129,7 +131,11 @@ public class QuestSystem : MonoBehaviour
                 questCompleted.text = "";
             }
         }
-        TrackQuest();
+        if (!isUi)
+        {
+            TrackQuest();
+        }
+        isUi = false;
     }
 
     public Quest CheckQuests(QuestStructure quest)
@@ -170,6 +176,7 @@ public class QuestSystem : MonoBehaviour
 
     public void OpenScreen()
     {
+        isUi = true;
         if (slotsList.Count > 0)
         {
             ClearList();
