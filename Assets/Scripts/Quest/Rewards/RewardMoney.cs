@@ -12,9 +12,6 @@ public class RewardMoney : QuestStructure.QuestReward
     [SerializeField]
     private MoonPhases moonType;
 
-    [SerializeField]
-    private InventoryItemData itemDataReference;
-
     public override string GetDescription()
     {
         return $"{rewardValue} {this.rewardDescription}";

@@ -232,7 +232,6 @@ public class InventorySystem : MonoBehaviour
     {
         if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
-            Debug.Log("Teste");
             return value;
         }
         return null;

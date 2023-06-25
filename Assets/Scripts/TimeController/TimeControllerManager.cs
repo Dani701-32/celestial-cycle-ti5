@@ -79,7 +79,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
             InitializeVariables();
             
             currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
-            textDays.text = "Day " + day.ToString();
+            textDays.text = "Dia " + day.ToString();
             SetMoonPhase();
 
             lastNightDuration = -1;
@@ -226,7 +226,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
                 phaseController++;
                 SetMoonPhase();
             }
-            if (textDays) textDays.text = "Day " + day.ToString();
+            if (textDays) textDays.text = "Dia " + day.ToString();
             Debug.Log("Chamou o UpdateTimeOfDay");
         }
 

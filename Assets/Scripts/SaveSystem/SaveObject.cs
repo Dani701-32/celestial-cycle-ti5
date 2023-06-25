@@ -13,7 +13,7 @@ public class SaveObject : MonoBehaviour
 
     void Awake()
     {
-        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         ControlStateMessage(messageObject, false);
     }
 

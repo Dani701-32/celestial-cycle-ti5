@@ -54,7 +54,6 @@ public class Spawner : MonoBehaviour
             go_Enemy = obj;
             enemy = go_Enemy.GetComponent<Enemy>();
             enemy.waypoints = waypoints;
-            Debug.Log("Spawn");
             spawned = true;
         }
     }
