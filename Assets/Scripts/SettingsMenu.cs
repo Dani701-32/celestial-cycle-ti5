@@ -13,6 +13,11 @@ public class SettingsMenu : MonoBehaviour
     private float currentRefreshRate;
     private int currentResolutionIndex = 0;
 
+    public void SetResolution(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+
+    }
     private void Start()
     {
         resolutions = Screen.resolutions;
