@@ -14,8 +14,13 @@ public class NPCDialogue : MonoBehaviour
         textNPCDialogue;
     public GameObject buttonContinue;
 
-    [Header("UI QuestNPC")]
+    [Header("UI QuestNPC - Geral")]
     public GameObject questScreen;
+
+    [Header("UI QuestNPC - Resultados")]
+    public GameObject questDescriptor;
+    public GameObject questReward,
+        questRewardList;
     public TextMeshProUGUI textQuestTitle,
         textQuestDescription,
         textQuestGoals,
@@ -36,6 +41,9 @@ public class NPCDialogue : MonoBehaviour
     {
         dialogScreen.SetActive(false);
         questScreen.SetActive(false);
+        questDescriptor.SetActive(false);
+        questReward.SetActive(false);
+        questRewardList.SetActive(false);
         questAcept = false;
         answered = false;
         completed = false;
@@ -49,7 +57,7 @@ public class NPCDialogue : MonoBehaviour
         dialogScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
         GameController.gameController.StopCamera();
-        completed =( currentNPC.activeQuest.currentIndex == 5);
+        completed = (currentNPC.activeQuest.currentIndex == 5);
         if (currentNPC.activeQuest.currentIndex == 1)
         {
             questScreen.SetActive(true);
@@ -62,7 +70,7 @@ public class NPCDialogue : MonoBehaviour
     public void OpenScreenDefault(QuestNPC currentNPC)
     {
         answered = false;
-        completed =false;
+        completed = false;
         this.currentNPC = currentNPC;
         Cursor.lockState = CursorLockMode.None;
         dialogScreen.SetActive(true);
@@ -70,7 +78,7 @@ public class NPCDialogue : MonoBehaviour
         GameController.gameController.player.QuestIsOpen = true;
         GameController.gameController.StopCamera();
         buttonContinue.SetActive(false);
-       
+
         UpdateDialog();
     }
 
@@ -101,7 +109,7 @@ public class NPCDialogue : MonoBehaviour
                 Debug.Log("dsafkjasd");
                 textNPCDialogue.text =
                     "Espero poder contar com você novamente no futuro minha jovem";
-                     currentNPC.isOpen = true;
+                currentNPC.isOpen = true;
             }
             else
             {
@@ -147,6 +155,7 @@ public class NPCDialogue : MonoBehaviour
     private void OpenQuestCompleteDialog()
     {
         // questScreen.SetActive(true);
+
         textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
         textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
         textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";
@@ -163,6 +172,7 @@ public class NPCDialogue : MonoBehaviour
     public void OpenQuestDialog()
     {
         questScreen.SetActive(true);
+        questDescriptor.SetActive(true);
         textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
         textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
         textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";

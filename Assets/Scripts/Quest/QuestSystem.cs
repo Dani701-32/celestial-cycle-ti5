@@ -199,7 +199,8 @@ public class QuestSystem : MonoBehaviour
         trakedQuestScreen.gameObject.SetActive(true);
         if (trakedQuest.questCompleted)
         {
-            questTrakerGoals.text = $"Concluído \nRetorne para {trakedQuest.currentNPC.dataNPC.Name}";
+            questTrakerTitle.text = $"{trakedQuest.data.questData.title}- Concluído";
+            questTrakerGoals.text = $"Retorne para {trakedQuest.currentNPC.dataNPC.Name}";
         }
         else
         {
