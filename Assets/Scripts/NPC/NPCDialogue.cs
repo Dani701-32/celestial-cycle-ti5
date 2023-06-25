@@ -12,7 +12,7 @@ public class NPCDialogue : MonoBehaviour
     public Image NPCsprite;
     public TextMeshProUGUI textNPCName,
         textNPCDialogue;
-    public GameObject buttonContinue;
+    // public GameObject buttonContinue;
 
     [Header("UI QuestNPC - Geral")]
     public GameObject questScreen,
@@ -73,7 +73,7 @@ public class NPCDialogue : MonoBehaviour
         {
             questScreen.SetActive(true);
         }
-        buttonContinue.SetActive(currentNPC.activeQuest.currentIndex == 0);
+        // buttonContinue.SetActive(currentNPC.activeQuest.currentIndex == 0);
         currentNPC.isOpen = true;
         UpdateDialog();
     }
@@ -88,7 +88,7 @@ public class NPCDialogue : MonoBehaviour
         GameController.gameController.player.playerMovement.enabled = false;
         GameController.gameController.player.QuestIsOpen = true;
         GameController.gameController.StopCamera();
-        buttonContinue.SetActive(false);
+        // buttonContinue.SetActive(false);
 
         UpdateDialog();
     }
@@ -153,7 +153,7 @@ public class NPCDialogue : MonoBehaviour
         {
             Debug.Log("Teste 1");
             currentNPC.activeQuest.ProgressQuest();
-            buttonContinue.SetActive(false);
+            // buttonContinue.SetActive(false);
             UpdateDialog();
             OpenQuestDialog();
         }
