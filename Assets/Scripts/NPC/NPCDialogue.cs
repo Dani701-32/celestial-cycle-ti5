@@ -24,7 +24,9 @@ public class NPCDialogue : MonoBehaviour
     private QuestNPC currentNPC;
     public GameObject acceptButton,
         refuseButton;
-    private bool questAcept = false;
+    public bool questAcept = false,
+        answered = false,
+        completed = false;
 
     [Header("UI Reward")]
     public GameObject rewardButton;
@@ -35,41 +37,55 @@ public class NPCDialogue : MonoBehaviour
         dialogScreen.SetActive(false);
         questScreen.SetActive(false);
         questAcept = false;
+        answered = false;
+        completed = false;
     }
-
-    // Update is called once per frame
-    void Update() { }
 
     public void OpenScreen(QuestNPC currentNPC)
     {
+        answered = false;
         this.currentNPC = currentNPC;
         Cursor.lockState = CursorLockMode.None;
         dialogScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
         GameController.gameController.StopCamera();
-        Debug.Log(currentNPC.activeQuest.currentIndex);
+        completed =( currentNPC.activeQuest.currentIndex == 5);
+        if (currentNPC.activeQuest.currentIndex == 1)
+        {
+            questScreen.SetActive(true);
+        }
         buttonContinue.SetActive(currentNPC.activeQuest.currentIndex == 0);
+        currentNPC.isOpen = true;
         UpdateDialog();
     }
 
-    public void OpenScreen()
+    public void OpenScreenDefault(QuestNPC currentNPC)
     {
+        answered = false;
+        completed =false;
+        this.currentNPC = currentNPC;
         Cursor.lockState = CursorLockMode.None;
         dialogScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
+        GameController.gameController.player.QuestIsOpen = true;
         GameController.gameController.StopCamera();
         buttonContinue.SetActive(false);
+       
         UpdateDialog();
     }
 
     public void CloseScreen()
     {
+        currentNPC.isOpen = false;
         currentNPC.currentStep =
             (currentNPC.activeQuest != null) ? currentNPC.activeQuest.currentIndex : 0;
         Cursor.lockState = CursorLockMode.Locked;
         dialogScreen.SetActive(false);
+        questScreen.SetActive(false);
         GameController.gameController.ReleaseCamera();
         GameController.gameController.player.playerMovement.enabled = true;
+        GameController.gameController.player.QuestIsOpen = false;
+        currentNPC = null;
     }
 
     private void UpdateDialog()
@@ -80,14 +96,30 @@ public class NPCDialogue : MonoBehaviour
         }
         else
         {
-            textNPCDialogue.text = "Espero poder contar com você novamente no futuro minha jovem";
+            if (!currentNPC.isOpen)
+            {
+                Debug.Log("dsafkjasd");
+                textNPCDialogue.text =
+                    "Espero poder contar com você novamente no futuro minha jovem";
+                     currentNPC.isOpen = true;
+            }
+            else
+            {
+                CloseScreen();
+            }
         }
     }
 
     public void ProgressDialog()
     {
-        if (currentNPC.activeQuest != null && currentNPC.activeQuest.currentIndex == 0)
+        if (completed)
         {
+            currentNPC.Rewards();
+            return;
+        }
+        if (currentNPC.activeQuest != null && currentNPC.activeQuest.currentIndex == 0 && !answered)
+        {
+            Debug.Log("Teste 1");
             currentNPC.activeQuest.ProgressQuest();
             buttonContinue.SetActive(false);
             UpdateDialog();
@@ -96,17 +128,25 @@ public class NPCDialogue : MonoBehaviour
         else if (currentNPC.activeQuest.currentIndex == 5)
         {
             UpdateDialog();
+            Debug.Log("Teste 2");
             OpenQuestCompleteDialog();
         }
         else
         {
-            UpdateDialog();
+            if (answered || currentNPC.activeQuest.currentIndex == 4)
+            {
+                CloseScreen();
+            }
+            else
+            {
+                UpdateDialog();
+            }
         }
     }
 
     private void OpenQuestCompleteDialog()
     {
-        questScreen.SetActive(true);
+        // questScreen.SetActive(true);
         textQuestTitle.text = currentNPC.activeQuest.data.questData.title;
         textQuestDescription.text = currentNPC.activeQuest.data.questData.description;
         textQuestGoals.text = $"Objetivos:\n{currentNPC.activeQuest.data.GetQuestGoals()}";
@@ -116,6 +156,8 @@ public class NPCDialogue : MonoBehaviour
         acceptButton.SetActive(false);
         refuseButton.SetActive(false);
         rewardButton.SetActive(true);
+
+        completed = true;
     }
 
     public void OpenQuestDialog()
@@ -147,15 +189,19 @@ public class NPCDialogue : MonoBehaviour
             currentNPC.activeQuest.currentIndex,
             currentNPC.NPC
         );
-        questAcept = true;
 
-        StartCoroutine(ResponseDialog());
+        questScreen.SetActive(false);
+        questAcept = true;
+        answered = true;
+        textNPCDialogue.text = currentNPC.activeQuest.StatusQuest(questAcept);
     }
 
     public void DeclineQuest()
     {
         questAcept = false;
-        StartCoroutine(ResponseDialog());
+        answered = true;
+        questScreen.SetActive(false);
+        textNPCDialogue.text = currentNPC.activeQuest.StatusQuest(questAcept);
     }
 
     public void CompleteQuest()

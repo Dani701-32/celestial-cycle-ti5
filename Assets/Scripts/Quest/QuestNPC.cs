@@ -29,8 +29,8 @@ public class QuestNPC : MonoBehaviour
     private List<QuestStructure> quests;
     public int currentStep;
     public Quest activeQuest;
-    public bool interected = false,
-        isOpen = false;
+    public bool interected = false;
+    public bool isOpen;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class QuestNPC : MonoBehaviour
     {
         if (player != null && player.playerMovement.interactAction.triggered)
         {
-            interected = (interected) ? false : true;
+            interected = true;
             Interact();
         }
     }
@@ -62,6 +62,7 @@ public class QuestNPC : MonoBehaviour
         if (interected)
         {
             player.playerMovement.enabled = false;
+            player.QuestIsOpen = true;
 
             if (activeQuest == null)
                 UpdadeScreen();
@@ -78,39 +79,50 @@ public class QuestNPC : MonoBehaviour
                 }
             }
         }
-        else
+    }
+
+    public void Rewards()
+    {
+        if (activeQuest != null && activeQuest.data.isQuestCompleted)
         {
-            Debug.Log(activeQuest != null);
-            if (activeQuest != null && activeQuest.data.isQuestCompleted)
-            {
-                Debug.Log("Recebey Qyest a Quest");
-                activeQuest.data.GetRewards();
-                gameController.questSystem.CompleteQuest(activeQuest);
-                activeQuest.data.Invoke();
-                quests.Remove(activeQuest.data);
-                activeQuest = null;
-            }
-            dialogueSystem.CloseScreen();
+            Debug.Log("Recebey Qyest a Quest");
+            activeQuest.data.GetRewards();
+            gameController.questSystem.CompleteQuest(activeQuest);
+            activeQuest.data.Invoke();
+            quests.Remove(activeQuest.data);
+            activeQuest = null;
         }
+        dialogueSystem.CloseScreen();
     }
 
     private void UpdadeScreen()
     {
         if (quests.Count > 0)
         {
-            dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
-            dialogueSystem.textNPCName.text = NPC.Name;
-            if (activeQuest != null)
+            Debug.Log("Com quest");
+            if (!isOpen)
             {
-                currentStep = activeQuest.currentIndex;
+                dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
+                dialogueSystem.textNPCName.text = NPC.Name;
+                if (activeQuest != null)
+                {
+                    currentStep = activeQuest.currentIndex;
+                }
+                activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
+                activeQuest.SetNPC(NPC);
+                dialogueSystem.OpenScreen(this);
             }
-            activeQuest = new Quest(quests[currentQuestAvailable], currentStep);
-            activeQuest.SetNPC(NPC);
-            dialogueSystem.OpenScreen(this);
+            else
+            {
+                dialogueSystem.ProgressDialog();
+            }
         }
         else
         {
-            dialogueSystem.OpenScreen();
+            Debug.Log("sem quest");
+            dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;
+            dialogueSystem.textNPCName.text = NPC.Name;
+            dialogueSystem.OpenScreenDefault(this);
         }
     }
 

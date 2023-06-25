@@ -12,7 +12,8 @@ public class Player : MonoBehaviour, ISaveable
     private SavingLoading savingLoading;
 
     [SerializeField]
-    float health = 50, maxHealth = 100;
+    float health = 50,
+        maxHealth = 100;
 
     [SerializeField]
     Animator animator;
@@ -51,11 +52,14 @@ public class Player : MonoBehaviour, ISaveable
 
     private Vector3 playerPos;
 
+    //Controla se as quests estão abertas
+    public bool QuestIsOpen;
 
     public void InitializeVariables()
     {
         playerPos = this.transform.position;
     }
+
     void Start()
     {
         // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
@@ -80,6 +84,8 @@ public class Player : MonoBehaviour, ISaveable
         fullMoonSlider.gameObject.SetActive(false);
         newMoonSlider.gameObject.SetActive(false);
 
+        QuestIsOpen = false;
+
         // if (!savingLoading.StatusFile())
         // {
         //     InitializeVariables();
@@ -93,7 +99,13 @@ public class Player : MonoBehaviour, ISaveable
 
         if (inventoryAction.triggered)
         {
-            controller.MenuScreen();
+            if (QuestIsOpen) { 
+                controller._NPCDialogue.CloseScreen(); 
+            }
+            else
+            {
+                controller.MenuScreen();
+            }
         }
         if (currentArtifact != null)
         {
@@ -118,7 +130,8 @@ public class Player : MonoBehaviour, ISaveable
 
     public void EquipeArtifact(GameObject prefab)
     {
-        if(hasArtifact){
+        if (hasArtifact)
+        {
             RemoveArtifact();
         }
         hasArtifact = true;
@@ -158,7 +171,6 @@ public class Player : MonoBehaviour, ISaveable
         ArtifactEnergy(currentArtifact.artifactMoon, false);
         currentArtifact = null;
         artifactSlider.SetActive(false);
-
     }
 
     public void UpdateHud()
@@ -206,7 +218,6 @@ public class Player : MonoBehaviour, ISaveable
     {
         return isDead;
     }
-
 
     public object CaptureState()
     {
