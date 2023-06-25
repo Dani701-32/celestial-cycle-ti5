@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     [Header("Levels to Load")]
-    public string newGameLevel;
+    public string newGameLevel, newGameLevelCheat;
     private string levelToLoad;
     public static MenuController instance;
 
@@ -34,6 +34,11 @@ public class MenuController : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene(newGameLevel);
+    }
+
+    public void NewGameCheat()
+    {
+        SceneManager.LoadScene(newGameLevelCheat);
     }
 
     public void LoadGame()

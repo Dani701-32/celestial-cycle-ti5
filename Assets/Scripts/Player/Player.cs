@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, ISaveable
 {
     private GameController controller;
     private SavingLoading savingLoading;
+    public bool isDamage;
 
     [SerializeField]
     float health = 50,
@@ -119,13 +120,17 @@ public class Player : MonoBehaviour, ISaveable
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        animator.SetTrigger("damage");
-        lifeSlider.value = health;
-        if (health <= 0)
+        if(isDamage)
         {
-            Die();
+            health -= damage;
+            animator.SetTrigger("damage");
+            lifeSlider.value = health;
+            if (health <= 0)
+            {
+                Die();
+            }
         }
+        
     }
 
     public void EquipeArtifact(GameObject prefab)
