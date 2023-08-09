@@ -135,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        
         if (characterController.isGrounded)
         {
             ySpeed = -.5f;
@@ -142,9 +143,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (jumpAction.triggered)
             {
+                animator.SetFloat("speed", 0);
                 animator.SetTrigger("jump");
-                Debug.Log("Jumping");
-                ySpeed = jumpSpeed;
+                
             }
 
             return;
@@ -253,5 +254,16 @@ public class PlayerMovement : MonoBehaviour
     void OnApplicationFocus(bool hasFocus)
     {
         Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
+    }
+    public void JumpUp(){
+        ySpeed = jumpSpeed;
+    }
+
+    public void Landing(){
+          animator.SetTrigger("landing");
+           animator.ResetTrigger("jump");
+    }
+    public void MoveLanded(){
+        animator.SetTrigger("move");
     }
 }

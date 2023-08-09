@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f1456f8289b469d48bba517608aa03f5
+guid: 842ff931ef93ef04d9816b6051ed6967
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -17,7 +17,14 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
+      : position error = 35.220932 mm\n\t'mixamorig:LeftLeg' : position error = 16.967974
+      mm\n\t'mixamorig:LeftFoot' : position error = 73.251282 mm\n\t'mixamorig:LeftToeBase'
+      : position error = 50.316624 mm\n\t'mixamorig:RightUpLeg' : position error
+      = 39.703255 mm\n\t'mixamorig:RightLeg' : position error = 16.020973 mm\n\t'mixamorig:RightFoot'
+      : position error = 73.160370 mm\n\t'mixamorig:RightToeBase' : position error
+      = 52.217564 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -33,21 +40,21 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: falling
+      name: falling_idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 32
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
@@ -56,14 +63,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.74621636
-        functionName: MoveLanded
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
