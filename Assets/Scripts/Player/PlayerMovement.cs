@@ -101,18 +101,16 @@ public class PlayerMovement : MonoBehaviour
             delayAttack = 1.2f;
             currentAttackTime = 0f;
             attack = true;
-            if(currentWeapon.GetComponent<SlashAttack>() != null)
+            if (currentWeapon.GetComponent<SlashAttack>() != null)
             {
                 currentWeapon.GetComponent<SlashAttack>().Slash();
             }
-            
         }
 
         Walking(inputVector);
 
         isGrounded = characterController.isGrounded;
         ySpeed += Physics.gravity.y * Time.deltaTime;
-
         Jump();
         DrawWeapon();
 
@@ -135,21 +133,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        
         if (characterController.isGrounded)
         {
             ySpeed = -.5f;
             characterController.stepOffset = stepOffset;
+            animator.ResetTrigger("jumpSprint");
 
             if (jumpAction.triggered)
             {
-                animator.SetFloat("speed", 0);
-                animator.SetTrigger("jump");
-                
+                if (isRunning)
+                {
+                    animator.SetTrigger("jumpSprint");
+                     
+                }
+                else
+                {
+                    animator.SetFloat("speed", 0);
+                    animator.SetTrigger("jump");
+                }
             }
-
             return;
         }
+        
         characterController.stepOffset = 0;
     }
 
@@ -255,15 +260,20 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
     }
-    public void JumpUp(){
+
+    public void JumpUp()
+    {
         ySpeed = jumpSpeed;
     }
 
-    public void Landing(){
-          animator.SetTrigger("landing");
-           animator.ResetTrigger("jump");
+    public void Landing()
+    {
+        animator.SetTrigger("landing");
+        animator.ResetTrigger("jump");
     }
-    public void MoveLanded(){
+
+    public void MoveLanded()
+    {
         animator.SetTrigger("move");
     }
 }
