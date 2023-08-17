@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.007902451, g: 0.012448891, b: 0.034662724, a: 1}
+  m_IndirectSpecularColor: {r: 0.19323808, g: 0.23946676, b: 0.28213942, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18234,7 +18234,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.05600007, y: -0.0000000021474222, z: 1.204448e-10, w: 0.9984308}
+  m_LocalRotation: {x: 0.05600007, y: 0.0000000021474227, z: -1.2044483e-10, w: 0.9984308}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33713,6 +33713,14 @@ PrefabInstance:
     - target: {fileID: 5019829766420754210, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
+      propertyPath: jumpSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
+      propertyPath: speedDampTime
+      value: 0.434
       objectReference: {fileID: 0}
     - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: cameraTransform
