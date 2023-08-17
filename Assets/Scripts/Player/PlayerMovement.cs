@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float speedDampTime;
 
     private bool isRunning = false;
-    private float ySpeed;
+    [SerializeField]private float ySpeed;
     private float stepOffset;
     private float currentSpeed;
 
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Transform cameraTransform;
     public bool isGrounded = false;
+    public bool isJumping = false;
     public bool combatMode = false;
 
     [Header("Combat Controllers")]
@@ -90,10 +91,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         if (runningAction.triggered)
-            isRunning = (isRunning) ? false : true;
+            isRunning = !isRunning;
         if (drawWeaponAction.triggered && currentWeapon != null)
         {
-            drawWeapon = (drawWeapon) ? false : true;
+            drawWeapon = !drawWeapon;
             counter = true;
         }
         if (attackAction.triggered && !counter && isCombat && !isRunning)
@@ -135,15 +136,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (characterController.isGrounded)
         {
-            ySpeed = -.5f;
             characterController.stepOffset = stepOffset;
             animator.ResetTrigger("jumpSprint");
 
+            animator.SetBool("isGrounded", true);
+            isGrounded = true;
+
+            animator.ResetTrigger("jump");
+            isJumping = false;
+
+            animator.SetBool("isFalling", false);
+
+            ySpeed = -.5f;
             if (jumpAction.triggered)
             {
-                if (isRunning)
+                if (animator.GetFloat("speed") >= .5f)
                 {
                     animator.SetTrigger("jumpSprint");
+                    JumpUp();
                      
                 }
                 else
@@ -151,11 +161,19 @@ public class PlayerMovement : MonoBehaviour
                     animator.SetFloat("speed", 0);
                     animator.SetTrigger("jump");
                 }
+                isJumping = true;
             }
             return;
         }
         
         characterController.stepOffset = 0;
+        animator.SetBool("isGrounded", false);
+        isGrounded = false;
+
+
+        if((isJumping && ySpeed < 0) || ySpeed < -1){
+            animator.SetBool("isFalling",true);
+        }
     }
 
     private void Walking(Vector2 inputVector)
@@ -164,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
         if (isRunning && inputVector != Vector2.zero)
             speedAnim += .5f;
 
-        currentSpeed = (isRunning) ? runSpeed : walkSpeed;
+        currentSpeed = isRunning ? runSpeed : walkSpeed;
         animator.SetFloat("speed", speedAnim, speedDampTime, Time.deltaTime);
         Vector3 movement = new Vector3(inputVector.x, 0, inputVector.y);
 
@@ -268,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Landing()
     {
-        animator.SetTrigger("landing");
+        // animator.SetTrigger("landing");
         animator.ResetTrigger("jump");
     }
 
