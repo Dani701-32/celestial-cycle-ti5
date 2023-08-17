@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Player player;
     [Header("Movement")]
     public float walkSpeed;
     public float runSpeed;
@@ -16,7 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public float speedDampTime;
 
     private bool isRunning = false;
-    [SerializeField]private float ySpeed;
+
+    [SerializeField]
+    private float ySpeed;
+
+    [SerializeField]
+    private float fallDamage;
     private float stepOffset;
     private float currentSpeed;
 
@@ -36,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraTransform;
     public bool isGrounded = false;
     public bool isJumping = false;
+    public bool isFalling = false;
     public bool combatMode = false;
 
     [Header("Combat Controllers")]
@@ -62,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        player = GetComponent<Player>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
@@ -84,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         currentTime = timeToDraw;
         animator.SetFloat("speed", 0, speedDampTime, Time.deltaTime);
         isRunning = false;
+        fallDamage = 0;
     }
 
     // Update is called once per frame
@@ -107,7 +116,10 @@ public class PlayerMovement : MonoBehaviour
                 currentWeapon.GetComponent<SlashAttack>().Slash();
             }
         }
-
+        
+        if(isFalling && fallDamage >= ySpeed){
+            fallDamage = ySpeed;
+        }
         Walking(inputVector);
 
         isGrounded = characterController.isGrounded;
@@ -146,6 +158,14 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
 
             animator.SetBool("isFalling", false);
+            isFalling = false;
+            
+
+            if(fallDamage <= -15f){
+                player.TakeDamage(player.maxHealth);
+            }else {
+                fallDamage =0;
+            }
 
             ySpeed = -.5f;
             if (jumpAction.triggered)
@@ -154,7 +174,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     animator.SetTrigger("jumpSprint");
                     JumpUp();
-                     
                 }
                 else
                 {
@@ -165,15 +184,19 @@ public class PlayerMovement : MonoBehaviour
             }
             return;
         }
-        
+
         characterController.stepOffset = 0;
         animator.SetBool("isGrounded", false);
         isGrounded = false;
 
-
-        if((isJumping && ySpeed < 0) || ySpeed < -1){
-            animator.SetBool("isFalling",true);
+        if ((isJumping && ySpeed < 0) || ySpeed < -2)
+        {
+            animator.SetBool("isFalling", true);
+            isFalling = true;
+            
         }
+
+        
     }
 
     private void Walking(Vector2 inputVector)

@@ -13,8 +13,8 @@ public class Player : MonoBehaviour, ISaveable
     public bool isDamage;
 
     [SerializeField]
-    float health = 50,
-        maxHealth = 100;
+    float health = 50;
+    public float maxHealth { get; private set; }
 
     [SerializeField]
     Animator animator;
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour, ISaveable
         newMoonSlider.gameObject.SetActive(false);
 
         QuestIsOpen = false;
-
+        maxHealth = 100f;
         // if (!savingLoading.StatusFile())
         // {
         //     InitializeVariables();
@@ -100,8 +100,9 @@ public class Player : MonoBehaviour, ISaveable
 
         if (inventoryAction.triggered)
         {
-            if (QuestIsOpen) { 
-                controller._NPCDialogue.CloseScreen(); 
+            if (QuestIsOpen)
+            {
+                controller._NPCDialogue.CloseScreen();
             }
             else
             {
@@ -120,17 +121,17 @@ public class Player : MonoBehaviour, ISaveable
 
     public void TakeDamage(float damage)
     {
-        if(isDamage)
+        if (isDamage)
         {
             health -= damage;
             animator.SetTrigger("damage");
             lifeSlider.value = health;
             if (health <= 0)
             {
+                health = 0;
                 Die();
             }
         }
-        
     }
 
     public void EquipeArtifact(GameObject prefab)

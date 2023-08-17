@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19323808, g: 0.23946676, b: 0.28213942, a: 1}
+  m_IndirectSpecularColor: {r: 0.19399726, g: 0.2426113, b: 0.28858912, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14873,7 +14873,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 198773379}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: ResetScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
