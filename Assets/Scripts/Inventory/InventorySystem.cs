@@ -22,7 +22,7 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField]
     private GameObject slotPrefab;
-    public int maxInventoryIndex = 2;
+    public int maxInventoryIndex = 12;
 
     [Header("UI Descrição")]
     [SerializeField]
