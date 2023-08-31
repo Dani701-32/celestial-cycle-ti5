@@ -8,7 +8,9 @@ public class ItemObject : MonoBehaviour
     private PlayerMovement playerMovement;
     private QuestSystem questSystem;
     private InventorySystem inventory;
-    [SerializeField] private GameObject canvas; 
+
+    [SerializeField]
+    private GameObject canvas;
 
     private void Start()
     {
@@ -19,10 +21,17 @@ public class ItemObject : MonoBehaviour
 
     public void OnHandlePickupItem()
     {
-        if (!inventory.canAdd(referenceItem))
+        if (!inventory.CanAdd(referenceItem))
             return;
-            
-        inventory.Add(referenceItem);
+
+        if (referenceItem.type == ItemType.Artifact)
+        {
+            inventory.AddArtifact(referenceItem);
+        }
+        else
+        {
+            inventory.Add(referenceItem);
+        }
         questSystem.CheckQuests();
         Destroy(this.gameObject);
     }

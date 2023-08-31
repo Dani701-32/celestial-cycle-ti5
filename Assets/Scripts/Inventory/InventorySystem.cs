@@ -7,26 +7,33 @@ using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
-    private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
-    public List<InventoryItem> inventory { get; private set; }
+    private Dictionary<InventoryItemData, InventoryItem> itemDictionary,
+        artifactDictionary;
+    public List<InventoryItem> InventoryItems { get; private set; }
+    public List<InventoryItem> InventoryArtifact { get; private set; }
 
     [SerializeField]
-    private List<GameObject> slots;
+    private List<GameObject> SlotsItems;
+    [SerializeField]
+    private List<GameObject> SlotsArtifacts;
 
     [Header("UI Invetário")]
     [SerializeField]
     private GameObject inventoryScreen;
 
     [SerializeField]
-    private GameObject slotsContainer;
+    private GameObject artifactScreen;
+
+    [SerializeField]
+    private GameObject slotsItemsContainer,slotsArtifactContainer;
 
     [SerializeField]
     private GameObject slotPrefab;
     public int maxInventoryIndex = 12;
 
-    [Header("UI Descrição")]
+    [Header("UI Descrição Inventário")]
     [SerializeField]
-    private GameObject descriptionScreen;
+    private GameObject descriptionScreenItem;
 
     [SerializeField]
     private TextMeshProUGUI itemName,
@@ -42,26 +49,49 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     private Image spriteDescription;
     private InventoryItem currentItem;
+    [Header("Ui Descrição Artefatos")]
+    private GameObject descriptionScreenArtifact;
+    [SerializeField]
+    private TextMeshProUGUI artifactName,
+        artifactAspect,
+        artifactDescription,
+        buttonAText;
+
+    [SerializeField]
+    GameObject removeArtifactButton,
+        equipeArtifactButton,
+        unequipeArtifactButton;
+
+    [SerializeField]
+    private Image spriteArtifactDescription;
+    private InventoryItem currentArtifact;
 
     void Awake()
     {
-        inventory = new List<InventoryItem>();
-
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        artifactDictionary = new Dictionary<InventoryItemData, InventoryItem>();
 
-        inventory = new List<InventoryItem>();
-        slots = new List<GameObject>();
-        itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        InventoryItems = new List<InventoryItem>();
+        InventoryArtifact = new List<InventoryItem>();
+
+        SlotsItems = new List<GameObject>();
+        SlotsArtifacts = new List<GameObject>();
     }
 
     private void Start()
     {
         inventoryScreen.SetActive(false);
-        descriptionScreen.SetActive(false);
+        artifactScreen.SetActive(false);
+        descriptionScreenItem.SetActive(false);
+        descriptionScreenArtifact.SetActive(false);
     }
 
-    public bool canAdd(InventoryItemData referenceData)
+    public bool CanAdd(InventoryItemData referenceData)
     {
+        if (referenceData.type == ItemType.Artifact)
+        {
+            return CanAddArtifact(referenceData);
+        }
         if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             if (value.stackSize >= referenceData.maxStack && referenceData.canStack)
@@ -70,9 +100,27 @@ public class InventorySystem : MonoBehaviour
                 return false;
             }
         }
-        else if (inventory.Count >= maxInventoryIndex)
+        else if (InventoryItems.Count >= maxInventoryIndex)
         {
-            Debug.Log($"Inventário lotado");
+            Debug.Log("Inventário lotado");
+            return false;
+        }
+        return true;
+    }
+
+    private bool CanAddArtifact(InventoryItemData referenceData)
+    {
+        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        {
+            if (value.stackSize >= referenceData.maxStack && referenceData.canStack)
+            {
+                Debug.Log($"Você n pode carregar mais de {referenceData.maxStack} desse item");
+                return false;
+            }
+        }
+        else if (InventoryArtifact.Count >= maxInventoryIndex)
+        {
+            Debug.Log("artefatos lotado");
             return false;
         }
         return true;
@@ -95,9 +143,21 @@ public class InventorySystem : MonoBehaviour
                 currentItem.Use();
             }
             OpenDescription(currentItem);
-            ClearInventory();
-            UpdateScreen();
+            ClearInventoryItens();
+            UpdateScreenInventory();
         }
+    }
+
+    public void AddArtifact(InventoryItemData referenceData)
+    {
+        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        {
+            value.AddToStack();
+            return;
+        }
+        InventoryItem newArtifact = new ArtifactItem(referenceData);
+        InventoryArtifact.Add(newArtifact);
+        artifactDictionary.Add(referenceData, newArtifact);
     }
 
     public void Add(InventoryItemData referenceData)
@@ -111,9 +171,6 @@ public class InventorySystem : MonoBehaviour
             InventoryItem newItem;
             switch (referenceData.type)
             {
-                case ItemType.Artifact:
-                    newItem = new ArtifactItem(referenceData);
-                    break;
                 case ItemType.Weapon:
                     newItem = new WeaponItem(referenceData);
                     break;
@@ -125,7 +182,7 @@ public class InventorySystem : MonoBehaviour
                     newItem = new CollectableItem(referenceData);
                     break;
             }
-            inventory.Add(newItem);
+            InventoryItems.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
     }
@@ -137,12 +194,12 @@ public class InventorySystem : MonoBehaviour
             value.RemoveFromStack();
             if (value.stackSize == 0)
             {
-                inventory.Remove(value);
+                InventoryItems.Remove(value);
                 itemDictionary.Remove(currentItem.data);
-                descriptionScreen.SetActive(false);
+                descriptionScreenItem.SetActive(false);
             }
-            ClearInventory();
-            UpdateScreen();
+            ClearInventoryItens();
+            UpdateScreenInventory();
         }
     }
 
@@ -153,23 +210,34 @@ public class InventorySystem : MonoBehaviour
             value.RemoveFromStack();
             if (value.stackSize == 0)
             {
-                inventory.Remove(value);
+                InventoryItems.Remove(value);
                 itemDictionary.Remove(referenceData);
-                descriptionScreen.SetActive(false);
+                descriptionScreenItem.SetActive(false);
             }
         }
-        ClearInventory();
-        UpdateScreen();
+        ClearInventoryItens();
+        UpdateScreenInventory();
     }
 
-    private void UpdateScreen()
+    private void UpdateScreenInventory()
     {
-        foreach (InventoryItem item in inventory)
+        foreach (InventoryItem item in InventoryItems)
         {
-            GameObject instance = Instantiate(slotPrefab, slotsContainer.transform);
+            GameObject instance = Instantiate(slotPrefab, slotsItemsContainer.transform);
             instance.GetComponent<ItemSlot>().UpdateItem(item);
-            instance.GetComponent<ItemSlot>().itemDescriptor = descriptionScreen;
-            slots.Add(instance);
+            instance.GetComponent<ItemSlot>().itemDescriptor = descriptionScreenItem;
+            SlotsItems.Add(instance);
+        }
+    }
+
+    private void UpdateScreenArtifact()
+    {
+        foreach (InventoryItem artifact in InventoryArtifact)
+        {
+            GameObject instance = Instantiate(slotPrefab, slotsArtifactContainer.transform);
+            instance.GetComponent<ItemSlot>().UpdateItem(artifact);
+            instance.GetComponent<ItemSlot>().itemDescriptor = descriptionScreenArtifact;
+            SlotsArtifacts.Add(instance);
         }
     }
 
@@ -188,7 +256,7 @@ public class InventorySystem : MonoBehaviour
             removeButton.GetComponent<Button>().enabled = false;
             return;
         }
-        buttonText.text = (currentItem.data.canStack) ? "Consumir" : "Equipar";
+        buttonText.text = currentItem.data.canStack ? "Consumir" : "Equipar";
         if (currentItem.data.type != ItemType.Collectable)
         {
             equipeButton.SetActive(true);
@@ -219,13 +287,22 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    private void ClearInventory()
+    private void ClearInventoryItens()
     {
-        foreach (GameObject item in slots)
+        foreach (GameObject item in SlotsItems)
         {
             Destroy(item);
         }
-        slots.Clear();
+        SlotsItems.Clear();
+    }
+
+    private void ClearInventoryArtifacts()
+    {
+        foreach (GameObject item in SlotsItems)
+        {
+            Destroy(item);
+        }
+        SlotsItems.Clear();
     }
 
     public InventoryItem GetInventoryItem(InventoryItemData referenceData)
@@ -239,21 +316,31 @@ public class InventorySystem : MonoBehaviour
 
     public void OpenScreen()
     {
-        if (slots.Count != 0)
+        if (SlotsItems.Count != 0)
         {
-            ClearInventory();
+            ClearInventoryItens();
         }
-        UpdateScreen();
+        UpdateScreenInventory();
         inventoryScreen.SetActive(true);
+    }
+
+    public void OpenArtifactScreen()
+    {
+        if (SlotsArtifacts.Count != 0)
+        {
+            ClearInventoryArtifacts();
+        }
+        UpdateScreenArtifact();
+        artifactScreen.SetActive(true);
     }
 
     public void CloseScreen()
     {
-        if (slots.Count > 0)
+        if (SlotsItems.Count > 0)
         {
-            ClearInventory();
+            ClearInventoryItens();
         }
-        descriptionScreen.SetActive(false);
+        descriptionScreenItem.SetActive(false);
         inventoryScreen.SetActive(false);
     }
 }
