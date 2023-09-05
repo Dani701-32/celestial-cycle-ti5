@@ -50,6 +50,7 @@ public class InventorySystem : MonoBehaviour
     private Image spriteDescription;
     private InventoryItem currentItem;
     [Header("Ui Descrição Artefatos")]
+    [SerializeField]
     private GameObject descriptionScreenArtifact;
     [SerializeField]
     private TextMeshProUGUI artifactName,
@@ -269,7 +270,33 @@ public class InventorySystem : MonoBehaviour
         }
         removeButton.GetComponent<Button>().enabled = true;
     }
-
+    public void OpenDescriptionArtifact(InventoryItem currentItem)
+    {
+        this.currentItem = currentItem;
+        artifactName.text = currentItem.data.displayName;
+        artifactDescription.text = currentItem.data.description;
+        spriteArtifactDescription.sprite = currentItem.data.icon;
+        artifactAspect.text = GetMoonPhase(currentItem.data.aspect);
+        if (currentItem.equiped)
+        {
+            equipeButton.SetActive(false);
+            unequipeButton.SetActive(true);
+            removeButton.GetComponent<Button>().enabled = false;
+            return;
+        }
+        buttonText.text = currentItem.data.canStack ? "Consumir" : "Equipar";
+        if (currentItem.data.type != ItemType.Collectable)
+        {
+            equipeButton.SetActive(true);
+            unequipeButton.SetActive(false);
+        }
+        else
+        {
+            equipeButton.SetActive(false);
+            unequipeButton.SetActive(false);
+        }
+        removeButton.GetComponent<Button>().enabled = true;
+    }
     private string GetMoonPhase(MoonPhases moonPhase)
     {
         switch (moonPhase)
@@ -298,11 +325,11 @@ public class InventorySystem : MonoBehaviour
 
     private void ClearInventoryArtifacts()
     {
-        foreach (GameObject item in SlotsItems)
+        foreach (GameObject item in SlotsArtifacts)
         {
             Destroy(item);
         }
-        SlotsItems.Clear();
+        SlotsArtifacts.Clear();
     }
 
     public InventoryItem GetInventoryItem(InventoryItemData referenceData)
@@ -342,5 +369,14 @@ public class InventorySystem : MonoBehaviour
         }
         descriptionScreenItem.SetActive(false);
         inventoryScreen.SetActive(false);
+    }
+    public void CloseArtifactScreen()
+    {
+        if (SlotsArtifacts.Count > 0)
+        {
+            ClearInventoryArtifacts();
+        }
+        descriptionScreenArtifact.SetActive(false);
+        artifactScreen.SetActive(false);
     }
 }

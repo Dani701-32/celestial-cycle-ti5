@@ -20,13 +20,13 @@ public class ItemSlot : MonoBehaviour
     // Start is called before the first frame update
     public void UpdateItem(InventoryItem referenceItem)
     {
-        this.currentItem = referenceItem;
+        currentItem = referenceItem;
         icon.sprite = currentItem.data.icon;
         stack.text = (referenceItem.stackSize > 1) ? $"{referenceItem.stackSize}" : "";
         if(currentItem.equiped){
-            backgroundImage.color = UnityEngine.Color.yellow;
+            backgroundImage.color = Color.yellow;
         }else {
-            backgroundImage.color = UnityEngine.Color.white;
+            backgroundImage.color = Color.white;
         }
     }
 
@@ -35,6 +35,10 @@ public class ItemSlot : MonoBehaviour
         if (itemDescriptor != null)
         {
             itemDescriptor.SetActive(true);
+            if(currentItem.data.type == ItemType.Artifact){
+                GameController.gameController.inventorySystem.OpenDescriptionArtifact(currentItem);
+                return;
+            }
             GameController.gameController.inventorySystem.OpenDescription(currentItem);
         }
     }
