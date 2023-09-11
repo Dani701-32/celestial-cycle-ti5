@@ -12,17 +12,24 @@ public class ArtifactItem : InventoryItem
         controller = GameController.gameController;
     }
 
-    public override void Use()
+    public override void Use() { }
+
+    public override void Use(int index)
     {
-        if (controller.player.hasArtifact)
+        if (controller.player.artifactsRoster[index])
         {
-            Debug.Log("Slot Ocupado");
-            return;
+            Debug.Log("Slot ocupado");
         }
-        equiped = true;
-        controller.player.EquipeArtifact(this.data.prefab);
-        controller.player.artifactSprite.sprite = data.icon;
-        controller.player.artifactSprite.enabled = true;
+        Debug.Log("Slot Livre");
+        // if (controller.player.hasArtifact)
+        // {
+        //     Debug.Log("Slot Ocupado");
+        //     return;
+        // }
+        // equiped = true;
+        // controller.player.EquipeArtifact(this.data.prefab);
+        // controller.player.artifactSprite.sprite = data.icon;
+        // controller.player.artifactSprite.enabled = true;
     }
 
     public override void Remove()

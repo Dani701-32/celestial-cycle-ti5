@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour, ISaveable
 {
@@ -29,10 +29,16 @@ public class Player : MonoBehaviour, ISaveable
     public Transform artifactSpot;
     public Transform weaponSpot;
     public PlayerMovement playerMovement { get; private set; }
+    public Artifact[] artifactsRoster = new Artifact[4];
     public Artifact currentArtifact;
     private bool isDead;
     InputAction inventoryAction;
     InputAction artifactsAction;
+    InputAction changeArtifact;
+    InputBinding firstBinding,
+        secondBinding,
+        thirdBinding,
+        fourthBinding;
 
     [Header("HUD")]
     public Image weaponSprite;
@@ -69,6 +75,13 @@ public class Player : MonoBehaviour, ISaveable
         playerMovement.enabled = true;
         inventoryAction = playerMovement.playerInput.actions["Inventory"];
         artifactsAction = playerMovement.playerInput.actions["Artifact"];
+
+        changeArtifact = playerMovement.playerInput.actions["changeArtifact"];
+        firstBinding = changeArtifact.bindings[0];
+        secondBinding = changeArtifact.bindings[1];
+        thirdBinding = changeArtifact.bindings[2];
+        fourthBinding = changeArtifact.bindings[3];
+
         animator = GetComponent<Animator>();
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -76,6 +89,10 @@ public class Player : MonoBehaviour, ISaveable
 
         fullMoonSlider.maxValue = maxFullMoon;
         fullMoonSlider.value = currentFullMoon;
+        waxingMoonSlider.maxValue = maxFullMoon;
+        waxingMoonSlider.value = currentFullMoon;
+        waningMoonSlider.maxValue = maxFullMoon;
+        waningMoonSlider.value = currentFullMoon;
         newMoonSlider.maxValue = maxNewMoon;
         newMoonSlider.value = currentNewMoon;
 
@@ -83,6 +100,8 @@ public class Player : MonoBehaviour, ISaveable
         lifeSlider.value = health;
 
         fullMoonSlider.gameObject.SetActive(false);
+        waxingMoonSlider.gameObject.SetActive(false);
+        waningMoonSlider.gameObject.SetActive(false);
         newMoonSlider.gameObject.SetActive(false);
 
         QuestIsOpen = false;
@@ -116,6 +135,10 @@ public class Player : MonoBehaviour, ISaveable
                 currentArtifact.Use();
             }
             UpdateArtifact();
+        }
+        if (changeArtifact.triggered)
+        {
+            ChangeArtifact();
         }
     }
 
@@ -218,6 +241,11 @@ public class Player : MonoBehaviour, ISaveable
         isDead = true;
         Cursor.lockState = CursorLockMode.None;
         GameController.gameController.DeathScreen();
+    }
+
+    public void ChangeArtifact()
+    {
+        Debug.Log(changeArtifact.name  );
     }
 
     public bool IsDead()

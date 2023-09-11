@@ -24,5 +24,6 @@ public abstract class InventoryItem
     }
 
     public abstract void Use();
+    public  abstract void Use(int index);
     public abstract void Remove();
 }

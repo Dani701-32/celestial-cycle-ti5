@@ -98,6 +98,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeArtifact"",
+                    ""type"": ""Button"",
+                    ""id"": ""838a16fa-af6a-4e46-9f7f-7a617bdd92d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5eff053-1d53-416a-8e47-b076f2bc2f34"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeArtifact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e7313c2-9c9e-4b4b-962c-fa4670f62207"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeArtifact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d306d846-f462-43a1-ad65-d5a9e30f0a81"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeArtifact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc119ca9-3119-4506-bdb2-96675fad1e40"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeArtifact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +301,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Artifact = m_Player.FindAction("Artifact", throwIfNotFound: true);
+        m_Player_ChangeArtifact = m_Player.FindAction("ChangeArtifact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +371,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Artifact;
+    private readonly InputAction m_Player_ChangeArtifact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -329,6 +384,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Artifact => m_Wrapper.m_Player_Artifact;
+        public InputAction @ChangeArtifact => m_Wrapper.m_Player_ChangeArtifact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +418,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Artifact.started += instance.OnArtifact;
             @Artifact.performed += instance.OnArtifact;
             @Artifact.canceled += instance.OnArtifact;
+            @ChangeArtifact.started += instance.OnChangeArtifact;
+            @ChangeArtifact.performed += instance.OnChangeArtifact;
+            @ChangeArtifact.canceled += instance.OnChangeArtifact;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -390,6 +449,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Artifact.started -= instance.OnArtifact;
             @Artifact.performed -= instance.OnArtifact;
             @Artifact.canceled -= instance.OnArtifact;
+            @ChangeArtifact.started -= instance.OnChangeArtifact;
+            @ChangeArtifact.performed -= instance.OnChangeArtifact;
+            @ChangeArtifact.canceled -= instance.OnChangeArtifact;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -417,5 +479,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnArtifact(InputAction.CallbackContext context);
+        void OnChangeArtifact(InputAction.CallbackContext context);
     }
 }

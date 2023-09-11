@@ -14,6 +14,7 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> SlotsItems;
+
     [SerializeField]
     private List<GameObject> SlotsArtifacts;
 
@@ -25,7 +26,8 @@ public class InventorySystem : MonoBehaviour
     private GameObject artifactScreen;
 
     [SerializeField]
-    private GameObject slotsItemsContainer,slotsArtifactContainer;
+    private GameObject slotsItemsContainer,
+        slotsArtifactContainer;
 
     [SerializeField]
     private GameObject slotPrefab;
@@ -49,9 +51,11 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     private Image spriteDescription;
     private InventoryItem currentItem;
+
     [Header("Ui Descrição Artefatos")]
     [SerializeField]
     private GameObject descriptionScreenArtifact;
+
     [SerializeField]
     private TextMeshProUGUI artifactName,
         artifactAspect,
@@ -270,9 +274,10 @@ public class InventorySystem : MonoBehaviour
         }
         removeButton.GetComponent<Button>().enabled = true;
     }
+
     public void OpenDescriptionArtifact(InventoryItem currentItem)
     {
-        this.currentItem = currentItem;
+        this.currentArtifact = currentItem;
         artifactName.text = currentItem.data.displayName;
         artifactDescription.text = currentItem.data.description;
         spriteArtifactDescription.sprite = currentItem.data.icon;
@@ -297,6 +302,7 @@ public class InventorySystem : MonoBehaviour
         }
         removeButton.GetComponent<Button>().enabled = true;
     }
+
     private string GetMoonPhase(MoonPhases moonPhase)
     {
         switch (moonPhase)
@@ -370,6 +376,7 @@ public class InventorySystem : MonoBehaviour
         descriptionScreenItem.SetActive(false);
         inventoryScreen.SetActive(false);
     }
+
     public void CloseArtifactScreen()
     {
         if (SlotsArtifacts.Count > 0)
@@ -379,4 +386,10 @@ public class InventorySystem : MonoBehaviour
         descriptionScreenArtifact.SetActive(false);
         artifactScreen.SetActive(false);
     }
+
+    public void EquipeArtifact(int index) {
+        Debug.Log("Teste "+ index);
+        if(currentArtifact == null) return;
+        currentArtifact.Use(index);
+     }
 }
