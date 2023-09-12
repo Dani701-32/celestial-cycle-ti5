@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19399726, g: 0.2426113, b: 0.28858912, a: 1}
+  m_IndirectSpecularColor: {r: 0.06119004, g: 0.06451633, b: 0.07707584, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -620,11 +620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &78932652 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7836642744485537504, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
-  m_PrefabInstance: {fileID: 7836642744541350988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &80794195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,11 +1061,6 @@ Transform:
   m_Father: {fileID: 2140903604}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &153302764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7836642744425822880, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
-  m_PrefabInstance: {fileID: 7836642744541350988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &155017191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1201,12 +1191,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc1bc125544a9543a3fa65a7cefca29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
+  SlotsItems: []
+  SlotsArtifacts: []
   inventoryScreen: {fileID: 1253208143}
-  slotsContainer: {fileID: 153302764}
+  artifactScreen: {fileID: 0}
+  slotsItemsContainer: {fileID: 0}
+  slotsArtifactContainer: {fileID: 0}
   slotPrefab: {fileID: 3759701992530642630, guid: ca64024e324c044499ae1b4a718e91f9, type: 3}
   maxInventoryIndex: 12
-  descriptionScreen: {fileID: 78932652}
+  descriptionScreenItem: {fileID: 0}
   itemName: {fileID: 2094240227}
   itemAspect: {fileID: 283624083}
   itemDescription: {fileID: 921323469}
@@ -1215,6 +1208,15 @@ MonoBehaviour:
   equipeButton: {fileID: 457655148}
   unequipeButton: {fileID: 406323808}
   spriteDescription: {fileID: 1212549950}
+  descriptionScreenArtifact: {fileID: 0}
+  artifactName: {fileID: 0}
+  artifactAspect: {fileID: 0}
+  artifactDescription: {fileID: 0}
+  buttonAText: {fileID: 0}
+  removeArtifactButton: {fileID: 0}
+  equipeArtifactButton: {fileID: 0}
+  unequipeArtifactButton: {fileID: 0}
+  spriteArtifactDescription: {fileID: 0}
 --- !u!114 &198773381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7038,7 +7040,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.05600007, y: 0.0000000021474227, z: -1.2044483e-10, w: 0.9984308}
+  m_LocalRotation: {x: 0.05600007, y: -0.0000000021474222, z: 1.204448e-10, w: 0.9984308}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17103,6 +17105,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1853324047516505320, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853324047516505320, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853324047516505320, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853324047516505320, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853324047516505320, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7836642743676855977, guid: e6621a511cb02f44e8d688dca1c2fe78, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

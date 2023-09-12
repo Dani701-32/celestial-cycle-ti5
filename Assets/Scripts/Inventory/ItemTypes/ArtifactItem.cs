@@ -16,11 +16,14 @@ public class ArtifactItem : InventoryItem
 
     public override void Use(int index)
     {
-        if (controller.player.artifactsRoster[index])
+        if (controller.player.artifactsRoster[index] != null)
         {
             Debug.Log("Slot ocupado");
+            return;
         }
         Debug.Log("Slot Livre");
+        controller.player.artifactsRoster[index] = data.prefab;
+
         // if (controller.player.hasArtifact)
         // {
         //     Debug.Log("Slot Ocupado");

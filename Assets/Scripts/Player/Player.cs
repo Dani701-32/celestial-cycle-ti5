@@ -29,16 +29,17 @@ public class Player : MonoBehaviour, ISaveable
     public Transform artifactSpot;
     public Transform weaponSpot;
     public PlayerMovement playerMovement { get; private set; }
-    public Artifact[] artifactsRoster = new Artifact[4];
+    public GameObject[] artifactsRoster = new GameObject[4];
     public Artifact currentArtifact;
     private bool isDead;
     InputAction inventoryAction;
     InputAction artifactsAction;
-    InputAction changeArtifact;
-    InputBinding firstBinding,
-        secondBinding,
-        thirdBinding,
-        fourthBinding;
+    InputAction firstArtifactAction,
+        secondArtifactAction,
+        thirdArtifactAction,
+        fourthArtifactAction;
+
+    InputAction[] artifactActions;
 
     [Header("HUD")]
     public Image weaponSprite;
@@ -73,14 +74,16 @@ public class Player : MonoBehaviour, ISaveable
         controller = GameController.gameController;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
+
         inventoryAction = playerMovement.playerInput.actions["Inventory"];
         artifactsAction = playerMovement.playerInput.actions["Artifact"];
 
-        changeArtifact = playerMovement.playerInput.actions["changeArtifact"];
-        firstBinding = changeArtifact.bindings[0];
-        secondBinding = changeArtifact.bindings[1];
-        thirdBinding = changeArtifact.bindings[2];
-        fourthBinding = changeArtifact.bindings[3];
+        artifactActions = new InputAction[]{
+           playerMovement.playerInput.actions["FirstArtifact"],
+             playerMovement.playerInput.actions["SecondArtifact"],
+            playerMovement.playerInput.actions["ThirdArtifact"],
+            playerMovement.playerInput.actions["FourthArtifact"],
+        };
 
         animator = GetComponent<Animator>();
         isDead = false;
@@ -136,10 +139,7 @@ public class Player : MonoBehaviour, ISaveable
             }
             UpdateArtifact();
         }
-        if (changeArtifact.triggered)
-        {
-            ChangeArtifact();
-        }
+        ChangeArtifact();
     }
 
     public void TakeDamage(float damage)
@@ -245,7 +245,18 @@ public class Player : MonoBehaviour, ISaveable
 
     public void ChangeArtifact()
     {
-        Debug.Log(changeArtifact.name  );
+        for (int i = 0; i < artifactActions.Length; i++)
+        {
+            if (artifactActions[i].triggered)
+            {
+                Debug.Log("Teste " + (i + 1));
+                if (artifactsRoster[i] != null)
+                {
+                    EquipeArtifact(artifactsRoster[i]);
+                }
+                break; // Saia do loop após encontrar a primeira ação acionada.
+            }
+        }
     }
 
     public bool IsDead()

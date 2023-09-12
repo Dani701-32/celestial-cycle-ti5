@@ -78,9 +78,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeArtifact",
+                    "name": "FirstArtifact",
                     "type": "Button",
-                    "id": "838a16fa-af6a-4e46-9f7f-7a617bdd92d0",
+                    "id": "09a9bb87-d673-4e86-a8ee-ccb2df31299f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondArtifact",
+                    "type": "Button",
+                    "id": "9d0fd47a-c4dc-42f8-a0fb-c919d9fda7df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThirdArtifact",
+                    "type": "Button",
+                    "id": "0ffa167d-29e5-425d-8886-4b002a2a3ff3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FourthArtifact",
+                    "type": "Button",
+                    "id": "ed91f42e-0ff6-4782-9146-4711fe109eae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -222,45 +249,45 @@
                 },
                 {
                     "name": "",
-                    "id": "e5eff053-1d53-416a-8e47-b076f2bc2f34",
+                    "id": "ec4253b5-3f12-42a3-88ad-67f34ed314b5",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeArtifact",
+                    "action": "FirstArtifact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7e7313c2-9c9e-4b4b-962c-fa4670f62207",
+                    "id": "c435c676-d0a4-45b9-96f8-b85f0ac86b0e",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeArtifact",
+                    "action": "SecondArtifact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d306d846-f462-43a1-ad65-d5a9e30f0a81",
+                    "id": "ab255e3e-1f14-4309-88ec-be9c9ce77fcd",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeArtifact",
+                    "action": "ThirdArtifact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bc119ca9-3119-4506-bdb2-96675fad1e40",
+                    "id": "3e70fd8e-c366-4c34-ae23-a97628e977ad",
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeArtifact",
+                    "action": "FourthArtifact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
