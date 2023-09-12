@@ -11,12 +11,7 @@ public class InventorySystem : MonoBehaviour
         artifactDictionary;
     public List<InventoryItem> InventoryItems { get; private set; }
     public List<InventoryItem> InventoryArtifact { get; private set; }
-
-    [SerializeField]
-    private List<GameObject> SlotsItems;
-
-    [SerializeField]
-    private List<GameObject> SlotsArtifacts;
+    private List<GameObject> SlotsItems, SlotsArtifacts;
 
     [Header("UI Invetário")]
     [SerializeField]
@@ -55,6 +50,8 @@ public class InventorySystem : MonoBehaviour
     [Header("Ui Descrição Artefatos")]
     [SerializeField]
     private GameObject descriptionScreenArtifact;
+    [SerializeField]
+    private Image[] imgArtifacts = new Image[4]; 
 
     [SerializeField]
     private TextMeshProUGUI artifactName,
@@ -70,7 +67,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     private Image spriteArtifactDescription;
     private InventoryItem currentArtifact;
-
+    private GameController controller;
     void Awake()
     {
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
@@ -81,6 +78,8 @@ public class InventorySystem : MonoBehaviour
 
         SlotsItems = new List<GameObject>();
         SlotsArtifacts = new List<GameObject>();
+
+         controller = GameController.gameController;
     }
 
     private void Start()
@@ -89,6 +88,11 @@ public class InventorySystem : MonoBehaviour
         artifactScreen.SetActive(false);
         descriptionScreenItem.SetActive(false);
         descriptionScreenArtifact.SetActive(false);
+
+        foreach (Image imgArtifact in imgArtifacts)
+        {
+            imgArtifact.enabled = false;
+        }
     }
 
     public bool CanAdd(InventoryItemData referenceData)
@@ -315,7 +319,6 @@ public class InventorySystem : MonoBehaviour
                 return "Aspecto da Lua Cheia";
             case MoonPhases.ThirdQuarter:
             default:
-
                 return "Aspecto da Lua Minguante";
         }
     }
@@ -388,8 +391,18 @@ public class InventorySystem : MonoBehaviour
     }
 
     public void EquipeArtifact(int index) {
-        Debug.Log("Teste "+ index);
         if(currentArtifact == null) return;
+        if(controller.player.HasArtifactRoster(currentArtifact.data.prefab)){
+            return;
+        } 
+
         currentArtifact.Use(index);
+        imgArtifacts[index].enabled = true;
+        imgArtifacts[index].sprite = currentArtifact.data.icon;
+
+     }
+
+     public void RemoveArtfact(int index) {
+        Debug.Log("Remove " + index);
      }
 }

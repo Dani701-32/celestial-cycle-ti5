@@ -47,10 +47,11 @@ public class Player : MonoBehaviour, ISaveable
     public GameObject artifactSlider;
 
     [Header("Sliders")]
-    public Slider fullMoonSlider;
-    public Slider waxingMoonSlider;
-    public Slider waningMoonSlider;
-    public Slider newMoonSlider;
+    public Slider fullMoonSlider, 
+    waxingMoonSlider, 
+    waningMoonSlider, 
+    newMoonSlider;
+
     public Slider lifeSlider;
 
     [SerializeField]
@@ -169,7 +170,7 @@ public class Player : MonoBehaviour, ISaveable
         if (artifact.TryGetComponent(out Artifact component))
         {
             currentArtifact = component;
-            ArtifactEnergy(currentArtifact.artifactMoon, true);
+
             artifactSlider.SetActive(true);
             slider = artifactSlider.GetComponent<Slider>();
             slider.maxValue = currentArtifact.cooldown;
@@ -197,7 +198,7 @@ public class Player : MonoBehaviour, ISaveable
         Debug.Log("Remvoer artefato");
         Destroy(playerMovement.currentArtifact);
         playerMovement.currentArtifact = null;
-        ArtifactEnergy(currentArtifact.artifactMoon, false);
+        // ArtifactEnergy(currentArtifact.artifactMoon, false);
         currentArtifact = null;
         artifactSlider.SetActive(false);
     }
@@ -257,6 +258,24 @@ public class Player : MonoBehaviour, ISaveable
                 break; // Saia do loop após encontrar a primeira ação acionada.
             }
         }
+    }
+    public void AddArtifactRoster(GameObject prefab, int index)
+    {
+
+        artifactsRoster[index] = prefab;
+        Artifact component = prefab.GetComponent<Artifact>();
+        ArtifactEnergy(component.artifactMoon, true);
+    }
+    public bool HasArtifactRoster(GameObject prefab)
+    {
+        foreach (GameObject item in artifactsRoster)
+        {
+            if (item == prefab)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool IsDead()

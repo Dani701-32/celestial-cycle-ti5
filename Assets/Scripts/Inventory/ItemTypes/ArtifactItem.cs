@@ -22,7 +22,7 @@ public class ArtifactItem : InventoryItem
             return;
         }
         Debug.Log("Slot Livre");
-        controller.player.artifactsRoster[index] = data.prefab;
+        controller.player.AddArtifactRoster(data.prefab, index);
 
         // if (controller.player.hasArtifact)
         // {

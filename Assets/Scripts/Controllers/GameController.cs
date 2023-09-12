@@ -98,6 +98,7 @@ public class GameController : MonoBehaviour
             GameController.gameController.player.playerMovement.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             inventorySystem.CloseScreen();
+            inventorySystem.CloseArtifactScreen();
             questSystem.CloseScreen();
             menuScreen.SetActive(false);
             popoutGame.SetActive(false);
