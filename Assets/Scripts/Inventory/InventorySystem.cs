@@ -7,10 +7,10 @@ using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
-    private Dictionary<InventoryItemData, InventoryItem> itemDictionary,
-        artifactDictionary;
+    private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
+    private Dictionary<InventoryItemData, ArtifactItem> artifactDictionary;
     public List<InventoryItem> InventoryItems { get; private set; }
-    public List<InventoryItem> InventoryArtifact { get; private set; }
+    public List<ArtifactItem> InventoryArtifact { get; private set; }
     private List<GameObject> SlotsItems, SlotsArtifacts;
 
     [Header("UI Invetário")]
@@ -51,7 +51,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     private GameObject descriptionScreenArtifact;
     [SerializeField]
-    private Image[] imgArtifacts = new Image[4]; 
+    private Image[] imgArtifacts = new Image[4];
 
     [SerializeField]
     private TextMeshProUGUI artifactName,
@@ -66,20 +66,20 @@ public class InventorySystem : MonoBehaviour
 
     [SerializeField]
     private Image spriteArtifactDescription;
-    private InventoryItem currentArtifact;
+    private ArtifactItem currentArtifact;
     private GameController controller;
     void Awake()
     {
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-        artifactDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        artifactDictionary = new Dictionary<InventoryItemData, ArtifactItem>();
 
         InventoryItems = new List<InventoryItem>();
-        InventoryArtifact = new List<InventoryItem>();
+        InventoryArtifact = new List<ArtifactItem>();
 
         SlotsItems = new List<GameObject>();
         SlotsArtifacts = new List<GameObject>();
 
-         controller = GameController.gameController;
+        controller = GameController.gameController;
     }
 
     private void Start()
@@ -119,7 +119,7 @@ public class InventorySystem : MonoBehaviour
 
     private bool CanAddArtifact(InventoryItemData referenceData)
     {
-        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (artifactDictionary.TryGetValue(referenceData, out ArtifactItem value))
         {
             if (value.stackSize >= referenceData.maxStack && referenceData.canStack)
             {
@@ -159,12 +159,12 @@ public class InventorySystem : MonoBehaviour
 
     public void AddArtifact(InventoryItemData referenceData)
     {
-        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (artifactDictionary.TryGetValue(referenceData, out ArtifactItem value))
         {
             value.AddToStack();
             return;
         }
-        InventoryItem newArtifact = new ArtifactItem(referenceData);
+        ArtifactItem newArtifact = new ArtifactItem(referenceData);
         InventoryArtifact.Add(newArtifact);
         artifactDictionary.Add(referenceData, newArtifact);
     }
@@ -279,7 +279,7 @@ public class InventorySystem : MonoBehaviour
         removeButton.GetComponent<Button>().enabled = true;
     }
 
-    public void OpenDescriptionArtifact(InventoryItem currentItem)
+    public void OpenDescriptionArtifact(ArtifactItem currentItem)
     {
         this.currentArtifact = currentItem;
         artifactName.text = currentItem.data.displayName;
@@ -390,19 +390,34 @@ public class InventorySystem : MonoBehaviour
         artifactScreen.SetActive(false);
     }
 
-    public void EquipeArtifact(int index) {
-        if(currentArtifact == null) return;
-        if(controller.player.HasArtifactRoster(currentArtifact.data.prefab)){
+    public void EquipeArtifact(int index)
+    {
+        if (currentArtifact == null) return;
+        if (controller.player.HasArtifactRoster(currentArtifact.data.prefab))
+        {
             return;
-        } 
+        }
 
-        currentArtifact.Use(index);
-        imgArtifacts[index].enabled = true;
-        imgArtifacts[index].sprite = currentArtifact.data.icon;
 
-     }
+        if (currentArtifact.Use(index))
+        {
 
-     public void RemoveArtfact(int index) {
+            imgArtifacts[index].enabled = true;
+            imgArtifacts[index].sprite = currentArtifact.data.icon;
+        }
+
+    }
+
+    public void RemoveArtfact(int index)
+    {
         Debug.Log("Remove " + index);
-     }
+        controller.player.RemoveArtifact(index);
+        imgArtifacts[index].enabled = false;
+        // imgArtifacts[index].sprite = currentArtifact.data.icon;
+    }
+
+    public void RemoveCurrentArtifact()
+    {
+        currentArtifact = null;
+    }
 }

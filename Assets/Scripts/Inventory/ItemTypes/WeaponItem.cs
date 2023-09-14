@@ -21,7 +21,6 @@ public class WeaponItem : InventoryItem
         controller.player.weaponSprite.sprite = data.icon;
         controller.player.weaponSprite.enabled = true;
     }
-    public override void Use(int index){}
     
     public override void Remove()
     {

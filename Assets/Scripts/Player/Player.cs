@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, ISaveable
 {
     private GameController controller;
     private SavingLoading savingLoading;
+    private int numArtifacts = 4;
     public bool isDamage;
 
     [SerializeField]
@@ -18,10 +19,7 @@ public class Player : MonoBehaviour, ISaveable
 
     [SerializeField]
     Animator animator;
-    public float maxFullMoon,
-        maxWaxingMoon,
-        maxWaningMoon,
-        maxNewMoon;
+    public int maxEnergy;
     public float currentFullMoon,
         currentWaxingMoon,
         currentWaningMoon,
@@ -47,22 +45,21 @@ public class Player : MonoBehaviour, ISaveable
     public GameObject artifactSlider;
 
     [Header("Sliders")]
-    public Slider fullMoonSlider, 
-    waxingMoonSlider, 
-    waningMoonSlider, 
-    newMoonSlider;
+    public ArtifactUIController[] moonArtifacts = new ArtifactUIController[4];
 
     public Slider lifeSlider;
 
     [SerializeField]
     private Slider slider;
-    public bool hasArtifact { get; private set; }
+    public bool hasArtifact;
     public bool hasWeapon { get; private set; }
 
     private Vector3 playerPos;
 
     //Controla se as quests estão abertas
     public bool QuestIsOpen;
+
+    private int previusIndex = 99;
 
     public void InitializeVariables()
     {
@@ -91,25 +88,20 @@ public class Player : MonoBehaviour, ISaveable
         Cursor.lockState = CursorLockMode.Locked;
         artifactSlider.SetActive(false);
 
-        fullMoonSlider.maxValue = maxFullMoon;
-        fullMoonSlider.value = currentFullMoon;
-        waxingMoonSlider.maxValue = maxFullMoon;
-        waxingMoonSlider.value = currentFullMoon;
-        waningMoonSlider.maxValue = maxFullMoon;
-        waningMoonSlider.value = currentFullMoon;
-        newMoonSlider.maxValue = maxNewMoon;
-        newMoonSlider.value = currentNewMoon;
 
         lifeSlider.maxValue = maxHealth;
         lifeSlider.value = health;
 
-        fullMoonSlider.gameObject.SetActive(false);
-        waxingMoonSlider.gameObject.SetActive(false);
-        waningMoonSlider.gameObject.SetActive(false);
-        newMoonSlider.gameObject.SetActive(false);
-
         QuestIsOpen = false;
         maxHealth = 100f;
+        if (moonArtifacts.Length > 0)
+        {
+            foreach (ArtifactUIController slider in moonArtifacts)
+            {
+                slider.StartSlider(maxEnergy);
+            }
+        }
+
         // if (!savingLoading.StatusFile())
         // {
         //     InitializeVariables();
@@ -158,14 +150,14 @@ public class Player : MonoBehaviour, ISaveable
         }
     }
 
-    public void EquipeArtifact(GameObject prefab)
+    public void EquipeArtifact(int index)
     {
         if (hasArtifact)
         {
-            RemoveArtifact();
+            ChangeArtifactEquipped(index);
         }
         hasArtifact = true;
-        GameObject artifact = Instantiate(prefab, artifactSpot);
+        GameObject artifact = Instantiate(artifactsRoster[index], artifactSpot);
         playerMovement.currentArtifact = artifact;
         if (artifact.TryGetComponent(out Artifact component))
         {
@@ -175,6 +167,7 @@ public class Player : MonoBehaviour, ISaveable
             slider = artifactSlider.GetComponent<Slider>();
             slider.maxValue = currentArtifact.cooldown;
         }
+        previusIndex = index;
     }
 
     public void EquipWeapon(GameObject prefab)
@@ -192,48 +185,43 @@ public class Player : MonoBehaviour, ISaveable
         playerMovement.UniqueppedWeapon();
     }
 
-    public void RemoveArtifact()
+    public void RemoveArtifact(int index)
     {
-        hasArtifact = false;
-        Debug.Log("Remvoer artefato");
-        Destroy(playerMovement.currentArtifact);
-        playerMovement.currentArtifact = null;
-        // ArtifactEnergy(currentArtifact.artifactMoon, false);
-        currentArtifact = null;
-        artifactSlider.SetActive(false);
-    }
+        if (artifactsRoster[index] == null) return;
 
-    public void UpdateHud()
+        if (artifactsRoster[index].GetComponent<Artifact>() != null && playerMovement.currentArtifact != null)
+        {
+            if (artifactsRoster[index].GetComponent<Artifact>().id == playerMovement.currentArtifact.GetComponent<Artifact>().id)
+            {
+                hasArtifact = false;
+                Destroy(playerMovement.currentArtifact);
+                playerMovement.currentArtifact = null;
+                currentArtifact = null;
+                artifactSlider.SetActive(false);
+            }
+        }
+
+        artifactsRoster[index] = null;
+        moonArtifacts[index].CloseSlider();
+    }
+    public void ChangeArtifactEquipped(int index)
     {
-        if (currentFullMoon > maxFullMoon)
-            currentFullMoon = maxFullMoon;
-        if (currentNewMoon > maxNewMoon)
-            currentNewMoon = maxNewMoon;
-        fullMoonSlider.value = currentFullMoon;
-        newMoonSlider.value = currentNewMoon;
+        if(previusIndex > 4) return;
+        if (artifactsRoster[previusIndex].GetComponent<Artifact>().id == playerMovement.currentArtifact.GetComponent<Artifact>().id)
+        {
+            Debug.Log("Remover artefato");
+            Destroy(playerMovement.currentArtifact);
+            playerMovement.currentArtifact = null;
+            currentArtifact = null;
+            artifactSlider.SetActive(false);
+        }
     }
 
     private void UpdateArtifact()
     {
         slider.value = currentArtifact.remaningCooldown;
-        fullMoonSlider.value = currentFullMoon;
-        newMoonSlider.value = currentNewMoon;
     }
 
-    private void ArtifactEnergy(MoonPhases moonType, bool activated)
-    {
-        switch (moonType)
-        {
-            case MoonPhases.FirstQuarter:
-            case MoonPhases.FullMoon:
-                fullMoonSlider.gameObject.SetActive(activated);
-                break;
-            case MoonPhases.ThirdQuarter:
-            case MoonPhases.NewMoon:
-                newMoonSlider.gameObject.SetActive(activated);
-                break;
-        }
-    }
 
     void Die()
     {
@@ -253,18 +241,18 @@ public class Player : MonoBehaviour, ISaveable
                 Debug.Log("Teste " + (i + 1));
                 if (artifactsRoster[i] != null)
                 {
-                    EquipeArtifact(artifactsRoster[i]);
+                    EquipeArtifact(i);
                 }
                 break; // Saia do loop após encontrar a primeira ação acionada.
             }
         }
     }
-    public void AddArtifactRoster(GameObject prefab, int index)
+    public void AddArtifactRoster(ArtifactItem artefactItem, int index)
     {
-
+        GameObject prefab = artefactItem.data.prefab;
         artifactsRoster[index] = prefab;
         Artifact component = prefab.GetComponent<Artifact>();
-        ArtifactEnergy(component.artifactMoon, true);
+        moonArtifacts[index].OpenSlider(artefactItem.data.icon);
     }
     public bool HasArtifactRoster(GameObject prefab)
     {
@@ -276,6 +264,11 @@ public class Player : MonoBehaviour, ISaveable
             }
         }
         return false;
+    }
+
+    public bool HasArtifactRoster(int index)
+    {
+        return artifactsRoster[index] != null;
     }
 
     public bool IsDead()

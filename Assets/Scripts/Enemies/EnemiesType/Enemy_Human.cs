@@ -145,8 +145,6 @@ public class Enemy_Human : Enemy
 
     protected override void Die()
     {
-        gameController.player.currentFullMoon += 10;
-        gameController.player.UpdateHud();
         Destroy(this.gameObject);
     }
 }

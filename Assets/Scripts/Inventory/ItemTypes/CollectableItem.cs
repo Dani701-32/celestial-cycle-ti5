@@ -11,7 +11,6 @@ public class CollectableItem : InventoryItem
     {
         Debug.Log("Usou Coletavel");
     }
-    public override void Use(int index){}
     public override void Remove()
     {
         throw new System.NotImplementedException();
