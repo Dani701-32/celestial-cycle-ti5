@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_SkyCustom
+  m_Shader: {fileID: -6465566751694194690, guid: c800a8c28b9370a4cb226b5c48c1624f, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AuroraBlend: 4.6
+    - _AuroraIntensity: 1
+    - _AuroraNoiseScale: 530
+    - _AuroraPower: 4
+    - _AuroraTwistStrength: 0.4
+    - _DayNightSlider: 1
+    - _DistortionSpeed: 0.012
+    - _GradientOffset: -0.2
+    - _HorizontBlend: 30
+    - _NadirBlend: 0.03
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _StarsHeight: 180
+    - _StarsIntensity: 500
+    - _StarsPower: 35
+    - _SunSize: 0.06
+    - _ZenithBlend: 0.3
+    m_Colors:
+    - _AuroralScrollSpeed: {r: 0, g: 0.03, b: 0, a: 0}
+    - _AuroralTiling: {r: 1, g: 5, b: 0, a: 0}
+    - _AuroralTwistOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _DistortionMinMax: {r: 12, g: 15, b: 0, a: 0}
+    - _GroundColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+    - _HorizontColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+    - _MainLightDirection: {r: 0, g: 1.0000001, b: -0.00000006891787, a: 0}
+    - _NightSkyColor: {r: 0.0428088, g: 0.11343936, b: 0.24528295, a: 1}
+    - _SkyColor: {r: 0.5613208, g: 0.79293454, b: 1, a: 1}
+    - _SunColor: {r: 413.2558, g: 282.27374, b: 231.96907, a: 1}
+  m_BuildTextureStacks: []
+--- !u!114 &4467144627796471332
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5

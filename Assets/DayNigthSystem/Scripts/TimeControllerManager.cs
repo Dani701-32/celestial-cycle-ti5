@@ -5,11 +5,10 @@ using UnityEditor;
 using TMPro;
 
 [RequireComponent(typeof(Light))]
-public class TimeControllerManager : MonoBehaviour, ISaveable
+public class TimeControllerManager : MonoBehaviour
 {
     public static TimeControllerManager InstanceTime;
     public TimeControllerData timeControllerData;
-    public SavingLoading savingLoading;
 
     private Material skyMaterial;
     private AnimationCurve lightAngleCurve;
@@ -37,20 +36,13 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
     [SerializeField]
     private List<Light> cityLights;
 
-    private void Awake()
-    {
-        if (InstanceTime == null)
-        {
-            InstanceTime = this;
-        }
 
-        sunLight = this.GetComponent<Light>();
-        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
-        mainCamera = Camera.main.transform;
-    }
-
-    public void NotSavedInTimeController()
+    public void InitializeVariables()
     {
+        hour = timeControllerData.hour;
+        phaseController = timeControllerData.phaseController;
+        day = timeControllerData.day;
+
         skyMaterial = timeControllerData.skyMaterial;
         lightAngleCurve = timeControllerData.lightAngleCurve;
         longitude = timeControllerData.longitude;
@@ -64,6 +56,17 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
         gradientColor = timeControllerData.gradientColor;
     }
 
+    private void Awake()
+    {
+        if (InstanceTime == null)
+        {
+            InstanceTime = this;
+        }
+
+        sunLight = this.GetComponent<Light>();
+        mainCamera = Camera.main.transform;
+    }
+
     void Start()
     {
         
@@ -73,31 +76,20 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
             light.intensity = 0;
         }
 
-
-        // if(!savingLoading.StatusFile())
-        // {
-            InitializeVariables();
-            
-            currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
-            textDays.text = "Dia " + day.ToString();
-            SetMoonPhase();
-
-            lastNightDuration = -1;
-            Debug.Log("Inicializou o Sistema de Dia e Noite mas não tem save");
-        // }
+        SetMoonPhase();
+        InitializeVariables();
 
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
-        NotSavedInTimeController();
+        textDays.text = "Dia " + day.ToString();
+        
+
+        lastNightDuration = -1;
         
        
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
         RenderSettings.sun = sunLight;
         RenderSettings.skybox = skyMaterial;
         RenderSettings.defaultReflectionMode = UnityEngine.Rendering.DefaultReflectionMode.Skybox;
-
-        data.s_hour = hour;
-        data.s_day = day;
-        data.s_phaseController = phaseController;
     }
 
     private void ControlLightsCity(float min, float max)
@@ -230,9 +222,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
             Debug.Log("Chamou o UpdateTimeOfDay");
         }
 
-        if (!isNight && isSaveNight) isSaveNight = false;
-
-        
+        if (!isNight && isSaveNight) isSaveNight = false;        
     }
 
     private void SetMoonPhase()
@@ -270,43 +260,7 @@ public class TimeControllerManager : MonoBehaviour, ISaveable
     public MoonPhases GetCurrentPhase()
     {
         return this.currentPhase;
-    }
-
-    public void InitializeVariables()
-    {  
-        hour = timeControllerData.hour;
-        phaseController = timeControllerData.phaseController;
-        day = timeControllerData.day;     
-    }
-
-    public object CaptureState()
-    {
-        return new SaveData
-        {
-            s_hour = hour,
-            s_phaseController = phaseController,
-            s_day = day
-        };
-    }
-
-    public void RestoreState(object state)
-    {
-        var saveData = (SaveData)state;
-
-        hour = saveData.s_hour;
-        phaseController = saveData.s_phaseController;      
-        day = saveData.s_day;
-    }
-
-    [Serializable]
-    public struct SaveData
-    {
-        public float s_hour;
-        public int s_phaseController;
-        public int s_day;
-    }
-
-    public SaveData data;
+    } 
     
 }
 
