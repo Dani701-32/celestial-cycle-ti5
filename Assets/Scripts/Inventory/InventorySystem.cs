@@ -7,16 +7,11 @@ using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
-    private Dictionary<InventoryItemData, InventoryItem> itemDictionary,
-        artifactDictionary;
+    private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
+    private Dictionary<InventoryItemData, ArtifactItem> artifactDictionary;
     public List<InventoryItem> InventoryItems { get; private set; }
-    public List<InventoryItem> InventoryArtifact { get; private set; }
-
-    [SerializeField]
-    private List<GameObject> SlotsItems;
-
-    [SerializeField]
-    private List<GameObject> SlotsArtifacts;
+    public List<ArtifactItem> InventoryArtifact { get; private set; }
+    private List<GameObject> SlotsItems, SlotsArtifacts;
 
     [Header("UI Invetário")]
     [SerializeField]
@@ -55,32 +50,30 @@ public class InventorySystem : MonoBehaviour
     [Header("Ui Descrição Artefatos")]
     [SerializeField]
     private GameObject descriptionScreenArtifact;
+    [SerializeField]
+    private Image[] imgArtifacts = new Image[4];
 
     [SerializeField]
     private TextMeshProUGUI artifactName,
         artifactAspect,
-        artifactDescription,
-        buttonAText;
-
-    [SerializeField]
-    GameObject removeArtifactButton,
-        equipeArtifactButton,
-        unequipeArtifactButton;
+        artifactDescription;
 
     [SerializeField]
     private Image spriteArtifactDescription;
-    private InventoryItem currentArtifact;
-
+    private ArtifactItem currentArtifact;
+    private GameController controller;
     void Awake()
     {
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
-        artifactDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        artifactDictionary = new Dictionary<InventoryItemData, ArtifactItem>();
 
         InventoryItems = new List<InventoryItem>();
-        InventoryArtifact = new List<InventoryItem>();
+        InventoryArtifact = new List<ArtifactItem>();
 
         SlotsItems = new List<GameObject>();
         SlotsArtifacts = new List<GameObject>();
+
+        controller = GameController.gameController;
     }
 
     private void Start()
@@ -89,6 +82,11 @@ public class InventorySystem : MonoBehaviour
         artifactScreen.SetActive(false);
         descriptionScreenItem.SetActive(false);
         descriptionScreenArtifact.SetActive(false);
+
+        foreach (Image imgArtifact in imgArtifacts)
+        {
+            imgArtifact.enabled = false;
+        }
     }
 
     public bool CanAdd(InventoryItemData referenceData)
@@ -115,7 +113,7 @@ public class InventorySystem : MonoBehaviour
 
     private bool CanAddArtifact(InventoryItemData referenceData)
     {
-        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (artifactDictionary.TryGetValue(referenceData, out ArtifactItem value))
         {
             if (value.stackSize >= referenceData.maxStack && referenceData.canStack)
             {
@@ -155,12 +153,12 @@ public class InventorySystem : MonoBehaviour
 
     public void AddArtifact(InventoryItemData referenceData)
     {
-        if (artifactDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (artifactDictionary.TryGetValue(referenceData, out ArtifactItem value))
         {
             value.AddToStack();
             return;
         }
-        InventoryItem newArtifact = new ArtifactItem(referenceData);
+        ArtifactItem newArtifact = new ArtifactItem(referenceData);
         InventoryArtifact.Add(newArtifact);
         artifactDictionary.Add(referenceData, newArtifact);
     }
@@ -275,7 +273,7 @@ public class InventorySystem : MonoBehaviour
         removeButton.GetComponent<Button>().enabled = true;
     }
 
-    public void OpenDescriptionArtifact(InventoryItem currentItem)
+    public void OpenDescriptionArtifact(ArtifactItem currentItem)
     {
         this.currentArtifact = currentItem;
         artifactName.text = currentItem.data.displayName;
@@ -315,7 +313,6 @@ public class InventorySystem : MonoBehaviour
                 return "Aspecto da Lua Cheia";
             case MoonPhases.ThirdQuarter:
             default:
-
                 return "Aspecto da Lua Minguante";
         }
     }
@@ -387,9 +384,34 @@ public class InventorySystem : MonoBehaviour
         artifactScreen.SetActive(false);
     }
 
-    public void EquipeArtifact(int index) {
-        Debug.Log("Teste "+ index);
-        if(currentArtifact == null) return;
-        currentArtifact.Use(index);
-     }
+    public void EquipeArtifact(int index)
+    {
+        if (currentArtifact == null) return;
+        if (controller.player.HasArtifactRoster(currentArtifact.data.prefab))
+        {
+            return;
+        }
+
+
+        if (currentArtifact.Use(index))
+        {
+
+            imgArtifacts[index].enabled = true;
+            imgArtifacts[index].sprite = currentArtifact.data.icon;
+        }
+
+    }
+
+    public void RemoveArtfact(int index)
+    {
+        Debug.Log("Remove " + index);
+        controller.player.RemoveArtifact(index);
+        imgArtifacts[index].enabled = false;
+        // imgArtifacts[index].sprite = currentArtifact.data.icon;
+    }
+
+    public void RemoveCurrentArtifact()
+    {
+        currentArtifact = null;
+    }
 }

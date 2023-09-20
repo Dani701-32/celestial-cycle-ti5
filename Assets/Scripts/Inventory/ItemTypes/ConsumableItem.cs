@@ -17,7 +17,6 @@ public class ConsumableItem : InventoryItem
         consumable.Use();
         GameController.gameController.inventorySystem.Remove(data);
     }
-    public override void Use(int index){}
 
     public override void Remove()
     {

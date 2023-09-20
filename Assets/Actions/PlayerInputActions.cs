@@ -100,9 +100,36 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChangeArtifact"",
+                    ""name"": ""FirstArtifact"",
                     ""type"": ""Button"",
-                    ""id"": ""838a16fa-af6a-4e46-9f7f-7a617bdd92d0"",
+                    ""id"": ""09a9bb87-d673-4e86-a8ee-ccb2df31299f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondArtifact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d0fd47a-c4dc-42f8-a0fb-c919d9fda7df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdArtifact"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ffa167d-29e5-425d-8886-4b002a2a3ff3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FourthArtifact"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed91f42e-0ff6-4782-9146-4711fe109eae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -244,45 +271,45 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e5eff053-1d53-416a-8e47-b076f2bc2f34"",
+                    ""id"": ""ec4253b5-3f12-42a3-88ad-67f34ed314b5"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeArtifact"",
+                    ""action"": ""FirstArtifact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7e7313c2-9c9e-4b4b-962c-fa4670f62207"",
+                    ""id"": ""c435c676-d0a4-45b9-96f8-b85f0ac86b0e"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeArtifact"",
+                    ""action"": ""SecondArtifact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d306d846-f462-43a1-ad65-d5a9e30f0a81"",
+                    ""id"": ""ab255e3e-1f14-4309-88ec-be9c9ce77fcd"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeArtifact"",
+                    ""action"": ""ThirdArtifact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bc119ca9-3119-4506-bdb2-96675fad1e40"",
+                    ""id"": ""3e70fd8e-c366-4c34-ae23-a97628e977ad"",
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeArtifact"",
+                    ""action"": ""FourthArtifact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -301,7 +328,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Artifact = m_Player.FindAction("Artifact", throwIfNotFound: true);
-        m_Player_ChangeArtifact = m_Player.FindAction("ChangeArtifact", throwIfNotFound: true);
+        m_Player_FirstArtifact = m_Player.FindAction("FirstArtifact", throwIfNotFound: true);
+        m_Player_SecondArtifact = m_Player.FindAction("SecondArtifact", throwIfNotFound: true);
+        m_Player_ThirdArtifact = m_Player.FindAction("ThirdArtifact", throwIfNotFound: true);
+        m_Player_FourthArtifact = m_Player.FindAction("FourthArtifact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,7 +401,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Artifact;
-    private readonly InputAction m_Player_ChangeArtifact;
+    private readonly InputAction m_Player_FirstArtifact;
+    private readonly InputAction m_Player_SecondArtifact;
+    private readonly InputAction m_Player_ThirdArtifact;
+    private readonly InputAction m_Player_FourthArtifact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -384,7 +417,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Artifact => m_Wrapper.m_Player_Artifact;
-        public InputAction @ChangeArtifact => m_Wrapper.m_Player_ChangeArtifact;
+        public InputAction @FirstArtifact => m_Wrapper.m_Player_FirstArtifact;
+        public InputAction @SecondArtifact => m_Wrapper.m_Player_SecondArtifact;
+        public InputAction @ThirdArtifact => m_Wrapper.m_Player_ThirdArtifact;
+        public InputAction @FourthArtifact => m_Wrapper.m_Player_FourthArtifact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -418,9 +454,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Artifact.started += instance.OnArtifact;
             @Artifact.performed += instance.OnArtifact;
             @Artifact.canceled += instance.OnArtifact;
-            @ChangeArtifact.started += instance.OnChangeArtifact;
-            @ChangeArtifact.performed += instance.OnChangeArtifact;
-            @ChangeArtifact.canceled += instance.OnChangeArtifact;
+            @FirstArtifact.started += instance.OnFirstArtifact;
+            @FirstArtifact.performed += instance.OnFirstArtifact;
+            @FirstArtifact.canceled += instance.OnFirstArtifact;
+            @SecondArtifact.started += instance.OnSecondArtifact;
+            @SecondArtifact.performed += instance.OnSecondArtifact;
+            @SecondArtifact.canceled += instance.OnSecondArtifact;
+            @ThirdArtifact.started += instance.OnThirdArtifact;
+            @ThirdArtifact.performed += instance.OnThirdArtifact;
+            @ThirdArtifact.canceled += instance.OnThirdArtifact;
+            @FourthArtifact.started += instance.OnFourthArtifact;
+            @FourthArtifact.performed += instance.OnFourthArtifact;
+            @FourthArtifact.canceled += instance.OnFourthArtifact;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -449,9 +494,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Artifact.started -= instance.OnArtifact;
             @Artifact.performed -= instance.OnArtifact;
             @Artifact.canceled -= instance.OnArtifact;
-            @ChangeArtifact.started -= instance.OnChangeArtifact;
-            @ChangeArtifact.performed -= instance.OnChangeArtifact;
-            @ChangeArtifact.canceled -= instance.OnChangeArtifact;
+            @FirstArtifact.started -= instance.OnFirstArtifact;
+            @FirstArtifact.performed -= instance.OnFirstArtifact;
+            @FirstArtifact.canceled -= instance.OnFirstArtifact;
+            @SecondArtifact.started -= instance.OnSecondArtifact;
+            @SecondArtifact.performed -= instance.OnSecondArtifact;
+            @SecondArtifact.canceled -= instance.OnSecondArtifact;
+            @ThirdArtifact.started -= instance.OnThirdArtifact;
+            @ThirdArtifact.performed -= instance.OnThirdArtifact;
+            @ThirdArtifact.canceled -= instance.OnThirdArtifact;
+            @FourthArtifact.started -= instance.OnFourthArtifact;
+            @FourthArtifact.performed -= instance.OnFourthArtifact;
+            @FourthArtifact.canceled -= instance.OnFourthArtifact;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -479,6 +533,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnArtifact(InputAction.CallbackContext context);
-        void OnChangeArtifact(InputAction.CallbackContext context);
+        void OnFirstArtifact(InputAction.CallbackContext context);
+        void OnSecondArtifact(InputAction.CallbackContext context);
+        void OnThirdArtifact(InputAction.CallbackContext context);
+        void OnFourthArtifact(InputAction.CallbackContext context);
     }
 }

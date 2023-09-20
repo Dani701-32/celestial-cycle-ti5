@@ -14,13 +14,17 @@ public class ArtifactItem : InventoryItem
 
     public override void Use() { }
 
-    public override void Use(int index)
+    public bool Use(int index)
     {
-        if (controller.player.artifactsRoster[index])
+        if (controller.player.artifactsRoster[index] != null)
         {
             Debug.Log("Slot ocupado");
+            return false;
         }
         Debug.Log("Slot Livre");
+        controller.player.AddArtifactRoster(this, index);
+        return true;
+
         // if (controller.player.hasArtifact)
         // {
         //     Debug.Log("Slot Ocupado");
@@ -32,12 +36,13 @@ public class ArtifactItem : InventoryItem
         // controller.player.artifactSprite.enabled = true;
     }
 
-    public override void Remove()
+    public override void Remove() { }
+
+    public void Remove(int index)
     {
         Debug.Log("Desequipar");
         equiped = false;
-        controller.player.RemoveArtifact();
-        controller.player.artifactSprite.sprite = null;
-        controller.player.artifactSprite.enabled = false;
+        controller.player.RemoveArtifact(index);
+
     }
 }

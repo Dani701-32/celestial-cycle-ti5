@@ -78,8 +78,6 @@ public class Enemy_Kappa : Enemy
 
     protected override void Die()
     {
-        gameController.player.currentNewMoon += 10;
-        gameController.player.UpdateHud();
         Destroy(this.gameObject);
     }
 }
