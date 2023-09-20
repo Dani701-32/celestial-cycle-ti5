@@ -56,13 +56,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI artifactName,
         artifactAspect,
-        artifactDescription,
-        buttonAText;
-
-    [SerializeField]
-    GameObject removeArtifactButton,
-        equipeArtifactButton,
-        unequipeArtifactButton;
+        artifactDescription;
 
     [SerializeField]
     private Image spriteArtifactDescription;
