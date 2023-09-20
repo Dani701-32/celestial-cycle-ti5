@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isGrounded", false);
         isGrounded = false;
 
-        if ((isJumping && ySpeed < 0) || ySpeed < -0.5)
+        if ((isJumping && ySpeed < 0) || ySpeed < -6f)
         {
             animator.SetBool("isFalling", true);
             isFalling = true;
