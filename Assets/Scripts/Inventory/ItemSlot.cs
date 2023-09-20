@@ -36,7 +36,8 @@ public class ItemSlot : MonoBehaviour
         {
             itemDescriptor.SetActive(true);
             if(currentItem.data.type == ItemType.Artifact){
-                GameController.gameController.inventorySystem.OpenDescriptionArtifact(currentItem);
+                ArtifactItem item = new ArtifactItem(currentItem.data); 
+                GameController.gameController.inventorySystem.OpenDescriptionArtifact(item);
                 return;
             }
             GameController.gameController.inventorySystem.OpenDescription(currentItem);

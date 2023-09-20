@@ -212,13 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30452df8b64308a4da0020d360d102f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artifactMoon: 2
-  charge: 100
-  maxCharge: 100
+  id: Full Moon
   cost: 20
+  artifactMoon: 2
+  cooldown: 5
+  remaningCooldown: 0
   particle: {fileID: 9196952178584547319, guid: b641703b450fca546bb8c3f400a77d58, type: 3}
   hasAffacted: []
   enemyCooldown: 5
   range: 5
-  cooldown: 5
-  remaningCooldown: 0
