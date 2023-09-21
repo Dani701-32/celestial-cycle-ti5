@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, ISaveable
 
     [SerializeField]
     float health = 50;
-    public float maxHealth { get; private set; }
+    public float maxHealth;
 
     [SerializeField]
     Animator animator;
