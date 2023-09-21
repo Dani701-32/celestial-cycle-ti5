@@ -165,6 +165,10 @@ public class InventorySystem : MonoBehaviour
 
     public void Add(InventoryItemData referenceData)
     {
+        if(referenceData.type == ItemType.Artifact){
+            AddArtifact(referenceData);
+            return;
+        }
         if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.AddToStack();
