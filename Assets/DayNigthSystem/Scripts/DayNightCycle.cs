@@ -47,14 +47,17 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField]
     private List<Light> cityLights;
 
-    
-    void Start()
+    private void Awake()
     {
         if (InstanceTime == null)
         {
             InstanceTime = this;
         }
+        DontDestroyOnLoad(this);
+    }
 
+    void Start()
+    {
         textDays.text = "Dia " + day.ToString();
 
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
