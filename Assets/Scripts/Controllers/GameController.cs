@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField]
+    private GameObject HUD;
+    [SerializeField]
     private GameObject menuScreen;
 
     [SerializeField]
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour
             questSystem.CloseScreen();
             menuScreen.SetActive(false);
             popoutGame.SetActive(false);
+            // HUD.SetActive(true);
 
             tutorialScreen.SetActive(false);
             tutorialDescription.SetActive(false);
@@ -114,6 +117,7 @@ public class GameController : MonoBehaviour
             GameController.gameController.player.playerMovement.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             menuScreen.SetActive(true);
+            // HUD.SetActive(false);
             Time.timeScale = 0f;
             StopCamera();
             isMenu = true;
