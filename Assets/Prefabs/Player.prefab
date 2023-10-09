@@ -2966,6 +2966,7 @@ GameObject:
   - component: {fileID: 5019829766420754208}
   - component: {fileID: 1656015336}
   - component: {fileID: 1656015337}
+  - component: {fileID: 3247901470322254786}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3002,29 +3003,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392de74ac06530647874182667535a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 50
+  isDamage: 1
+  health: 100
+  maxHealth: 100
   animator: {fileID: 0}
-  maxFullMoon: 100
-  maxWaxingMoon: 100
-  maxWaningMoon: 100
-  maxNewMoon: 100
+  maxEnergy: 0
   currentFullMoon: 100
   currentWaxingMoon: 100
   currentWaningMoon: 100
   currentNewMoon: 100
   artifactSpot: {fileID: 6013848926405195012}
   weaponSpot: {fileID: 4802788853462534938}
+  artifactsRoster:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentArtifact: {fileID: 0}
   weaponSprite: {fileID: 0}
   artifactSprite: {fileID: 0}
   artifactSlider: {fileID: 0}
-  fullMoonSlider: {fileID: 0}
-  waxingMoonSlider: {fileID: 0}
-  waningMoonSlider: {fileID: 0}
-  newMoonSlider: {fileID: 0}
+  moonArtifacts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   lifeSlider: {fileID: 0}
   slider: {fileID: 0}
+  hasArtifact: 0
+  QuestIsOpen: 0
 --- !u!114 &5019829766420754211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3040,8 +3047,10 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 8
   rotationSpeed: 720
-  jumpSpeed: 5
-  speedDampTime: 0.189
+  jumpSpeed: 6
+  speedDampTime: 0.434
+  ySpeed: 0
+  fallDamage: 0
   interactAction:
     m_Name: Interact
     m_Type: 0
@@ -3054,6 +3063,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   cameraTransform: {fileID: 0}
   isGrounded: 1
+  isJumping: 0
+  isFalling: 0
   combatMode: 0
   currentWeapon: {fileID: 0}
   timeToDraw: 0.6
@@ -3160,6 +3171,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3247901470322254786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019829766420754213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0f389b40e1f5c41bb94fa9fc18d12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 765b7db1-d705-4c9e-9820-0486ddc92753
 --- !u!1 &5019829767787777964
 GameObject:
   m_ObjectHideFlags: 0

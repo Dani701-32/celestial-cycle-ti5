@@ -6,14 +6,13 @@ public class SaveObject : MonoBehaviour
 {
     private SavingLoading savingLoading;
 
-    [SerializeField]
-    private bool isSave;
+    public bool isSave = false;
 
     public GameObject messageObject;
 
     void Awake()
     {
-        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        savingLoading = GetComponent<SavingLoading>();
         ControlStateMessage(messageObject, false);
     }
 
@@ -58,6 +57,7 @@ public class SaveObject : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             GameController.gameController.player.playerMovement.enabled = false;
             GameController.gameController.StopCamera();
+            DayNightCycle.InstanceTime.continueDayNight = false;
         }
         else
         {
@@ -65,6 +65,7 @@ public class SaveObject : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             GameController.gameController.ReleaseCamera();
             GameController.gameController.player.playerMovement.enabled = true;
+            DayNightCycle.InstanceTime.continueDayNight = true;
         }
     }
 }

@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3242156676938409391}
   - component: {fileID: 8043770178030976697}
+  - component: {fileID: 1455033650358991950}
   m_Layer: 0
   m_Name: DayNightSystem
   m_TagString: Untagged
@@ -163,9 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMultiplier: 800
-  startHour: 12
-  phaseController: 0
-  day: 1
   sunLight: {fileID: 6314617700747837562}
   skyboxMat: {fileID: 2100000, guid: 27b578e8dcf173849af7d42e4cdbfa06, type: 2}
   lightChangeCurve:
@@ -206,7 +204,7 @@ MonoBehaviour:
   sunriseHour: 7
   sunsetHour: 20
   isNight: 0
-  dayColor: {r: 1, g: 0.9629664, b: 0.8443396, a: 1}
+  dayColor: {r: 0.990566, g: 0.9705911, b: 0.9017889, a: 1}
   nightColor: {r: 0.048593808, g: 0.13616388, b: 0.26415092, a: 1}
   nightPost: {fileID: 9095423514921411167}
   fogDensity: 0.0035
@@ -215,6 +213,10 @@ MonoBehaviour:
   timeText: {fileID: 7851336929399224883}
   textDays: {fileID: 7851336928540116144}
   textMoonPhase: {fileID: 7851336928958009057}
+  rotLight: {x: 0, y: 0, z: 0}
+  day: 1
+  phaseController: 0
+  startHour: 12
   cityLights:
   - {fileID: 0}
   - {fileID: 0}
@@ -238,6 +240,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &1455033650358991950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5888328953128379590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0f389b40e1f5c41bb94fa9fc18d12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 7069dbbf-1149-434f-a62a-6cbeb9290fa7
 --- !u!1 &6932770406474956042
 GameObject:
   m_ObjectHideFlags: 0

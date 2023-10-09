@@ -13,8 +13,9 @@ public class GameController : MonoBehaviour
     public NPCDialogue _NPCDialogue;
     public Player player;
     public Transform cam;
+    public SaveObject saveObject;
     public CinemachineFreeLook freelookCamera;
-    private bool isMenu = false;
+    [HideInInspector] public bool isMenu = false;
     private string currentCameraX = "";
     private string currentCameraY = "";
 
@@ -93,31 +94,35 @@ public class GameController : MonoBehaviour
 
     public void MenuScreen()
     {
-        if (isMenu)
+        if(!saveObject.isSave)
         {
-            GameController.gameController.player.playerMovement.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            inventorySystem.CloseScreen();
-            inventorySystem.CloseArtifactScreen();
-            questSystem.CloseScreen();
-            menuScreen.SetActive(false);
-            popoutGame.SetActive(false);
+            if (isMenu)
+            {
+                GameController.gameController.player.playerMovement.enabled = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                inventorySystem.CloseScreen();
+                inventorySystem.CloseArtifactScreen();
+                questSystem.CloseScreen();
+                menuScreen.SetActive(false);
+                popoutGame.SetActive(false);
 
-            tutorialScreen.SetActive(false);
-            tutorialDescription.SetActive(false);
-            ReleaseCamera();
-            Time.timeScale = 1.0f;
-            isMenu = false;
+                tutorialScreen.SetActive(false);
+                tutorialDescription.SetActive(false);
+                ReleaseCamera();
+                Time.timeScale = 1.0f;
+                isMenu = false;
+            }
+            else
+            {
+                GameController.gameController.player.playerMovement.enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                menuScreen.SetActive(true);
+                Time.timeScale = 0f;
+                StopCamera();
+                isMenu = true;
+            }
         }
-        else
-        {
-            GameController.gameController.player.playerMovement.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            menuScreen.SetActive(true);
-            Time.timeScale = 0f;
-            StopCamera();
-            isMenu = true;
-        }
+        
     }
 
     public void QuitGame()

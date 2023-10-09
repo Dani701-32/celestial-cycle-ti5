@@ -5,9 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class DayNightCycle : MonoBehaviour
+public class DayNightCycle : MonoBehaviour, ISaveable
 {
     public static DayNightCycle InstanceTime;
+    public bool continueDayNight;
     private DateTime currentTime;
     private MoonPhases currentPhase;
     private bool isSaveNight = false, switchDay = false;
@@ -15,11 +16,7 @@ public class DayNightCycle : MonoBehaviour
     private TimeSpan sunriseTime, sunsetTime;
 
 
-    public float timeMultiplier, startHour;
-
-    public int phaseController;
-
-    public int day;
+    public float timeMultiplier;
 
     public Light sunLight;
 
@@ -44,6 +41,10 @@ public class DayNightCycle : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI textDays, textMoonPhase;
 
+    [Header("Save Variables")]
+    public float startHour;
+    public int day, phaseController;
+
     [SerializeField]
     private List<Light> cityLights;
 
@@ -53,14 +54,16 @@ public class DayNightCycle : MonoBehaviour
         {
             InstanceTime = this;
         }
-        DontDestroyOnLoad(this);
     }
 
     void Start()
     {
+        SetMoonPhase();
+        continueDayNight = true;
         textDays.text = "Dia " + day.ToString();
-
+       
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+
         hour = startHour;
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
@@ -74,13 +77,17 @@ public class DayNightCycle : MonoBehaviour
     }
     void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
-        UpdateLightSettings();
+        if(continueDayNight)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+            UpdateLightSettings();
 
-        if (hour == 0) switchDay = true;
-        else switchDay = false;
-        hour = currentTime.Hour;
+            if (hour == 0) switchDay = true;
+            else switchDay = false;
+            hour = currentTime.Hour;
+        }
+        
     }
 
     private void ControlLightsCity(float min, float max)
@@ -214,6 +221,33 @@ public class DayNightCycle : MonoBehaviour
     {
         return this.currentPhase;
     }
+
+
+    public object CaptureState()
+    {
+        return new SaveData
+        {
+            s_day = day,
+            s_phaseController = phaseController,
+            s_startHour = hour
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (SaveData)state;
+
+        startHour = saveData.s_startHour;
+        day = saveData.s_day;
+        phaseController = saveData.s_phaseController;   
+    }
+
+    [Serializable]
+    public struct SaveData
+    {
+        public float s_startHour;
+        public int s_day, s_phaseController;   
+    }
 }
 
 public enum MoonPhases
@@ -223,3 +257,5 @@ public enum MoonPhases
     FullMoon,
     ThirdQuarter,
 }
+
+

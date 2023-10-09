@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ISaveable
 {
     private Player player;
     [Header("Movement")]
@@ -316,5 +317,37 @@ public class PlayerMovement : MonoBehaviour
     public void MoveLanded()
     {
         animator.SetTrigger("move");
+    }
+
+    public object CaptureState()
+    {
+        return new SaveData
+        {
+            s_posPlayerX = this.transform.position.x,
+            s_posPlayerY = this.transform.position.y,
+            s_posPlayerZ = this.transform.position.z,
+
+            s_rotPlayerX = this.transform.rotation.x,
+            s_rotPlayerY = this.transform.rotation.y,
+            s_rotPlayerZ = this.transform.rotation.z
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (SaveData)state;
+
+        Vector3 posPlayer = new Vector3(saveData.s_posPlayerX, saveData.s_posPlayerY, saveData.s_posPlayerZ);
+        Vector3 rotPlayer = new Vector3(saveData.s_rotPlayerX, saveData.s_rotPlayerY, saveData.s_rotPlayerZ);
+
+        this.transform.SetPositionAndRotation(posPlayer, Quaternion.Euler(rotPlayer));
+    }
+
+    [Serializable]
+    public struct SaveData
+    {
+        public float s_posPlayerX, s_posPlayerY, s_posPlayerZ;
+        public float s_rotPlayerX, s_rotPlayerY, s_rotPlayerZ;
+
     }
 }

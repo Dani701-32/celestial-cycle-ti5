@@ -19,7 +19,16 @@ public class SavingLoading : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        } 
+        }
+
+        if (StatusFile())
+        {
+            Load();
+        }
+        else
+        {
+            Debug.Log("Inicializou mas NÃO tem save");
+        }
     }
 
     public bool StatusFile()
@@ -48,7 +57,7 @@ public class SavingLoading : MonoBehaviour
     {
         var state = LoadFile();
         RestoreState(state);
-        Debug.Log("O Jogo foi Carregado do Save");
+        Debug.Log("O Jogo foi Carregado");
     }
 
     private Dictionary<string, object> LoadFile()
@@ -90,15 +99,6 @@ public class SavingLoading : MonoBehaviour
             {
                 saveable.RestoreState(value);
             }
-        }
-    }
-
-    public void Start()
-    {
-        if (StatusFile())
-        {
-            Load();
-            Debug.Log("Inicializou do save");
         }
     }
 }
