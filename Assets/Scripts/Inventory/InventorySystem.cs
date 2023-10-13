@@ -4,14 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
-public class InventorySystem : MonoBehaviour
+[System.Serializable]
+public class InventoryDatabaseSave
+{
+    public string itemID;
+    public int amount;
+    public InventoryItemData item;
+    public InventoryDatabaseSave(string _id, InventoryItemData _item, int _amount)
+    {
+        itemID = _id;
+        item = _item;
+        amount = _amount;
+    }
+    public void AddAmount(int value)
+    {
+        amount += value;
+    }
+}
+public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 {
     private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
     private Dictionary<InventoryItemData, ArtifactItem> artifactDictionary;
     public List<InventoryItem> InventoryItems { get; private set; }
     public List<ArtifactItem> InventoryArtifact { get; private set; }
     private List<GameObject> SlotsItems, SlotsArtifacts;
+
+    [Header("SaveSystem")]
+    public string savePath;
+    public InventoryDatabase database;
+    public List<InventoryDatabaseSave> artifactContainer = new List<InventoryDatabaseSave>();
+    public List<InventoryDatabaseSave> itemContainer = new List<InventoryDatabaseSave>();
 
     [Header("UI Invetário")]
     [SerializeField]
@@ -62,8 +88,44 @@ public class InventorySystem : MonoBehaviour
     private Image spriteArtifactDescription;
     private ArtifactItem currentArtifact;
     private GameController controller;
+
+
+    public void SaveInventory()
+    {
+        string saveData = JsonUtility.ToJson(this, true);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
+        bf.Serialize(file, saveData);
+        file.Close();
+    }
+
+    public void LoadInventory()
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
+            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+            file.Close();
+        }
+    }
+
+    public void OnAfterDeserialize()
+    {
+        for (int i = 0; i < itemContainer.Count; i++) itemContainer[i].item = database.GetItem[itemContainer[i].item.id];
+
+        for (int i = 0; i < artifactContainer.Count; i++) artifactContainer[i].item = database.GetItem[artifactContainer[i].item.id];
+    }
+
+    public void OnBeforeSerialize() { }
+
     void Awake()
     {
+        controller = GameController.gameController;
+    }
+
+    private void Start()
+    {    
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
         artifactDictionary = new Dictionary<InventoryItemData, ArtifactItem>();
 
@@ -73,11 +135,44 @@ public class InventorySystem : MonoBehaviour
         SlotsItems = new List<GameObject>();
         SlotsArtifacts = new List<GameObject>();
 
-        controller = GameController.gameController;
-    }
+        if (SavingLoading.instance.StatusFile())
+        {
+            
+            for (int i = 0; i < itemContainer.Count; i++)
+            {
+                InventoryItemData referenceData = itemContainer[i].item;
+                InventoryItem newItem;
 
-    private void Start()
-    {
+                switch (referenceData.type)
+                {
+                    case ItemType.Weapon:
+                        newItem = new WeaponItem(referenceData);
+                        break;
+                    case ItemType.Consumable:
+                        newItem = new ConsumableItem(referenceData);
+                        break;
+                    default:
+                    case ItemType.Collectable:
+                        newItem = new CollectableItem(referenceData);
+                        break;
+                }
+                InventoryItems.Add(newItem);
+                itemDictionary.Add(referenceData, newItem);
+                newItem.SetStack(itemContainer[i].amount);
+            }
+            for (int i = 0; i < artifactContainer.Count; i++)
+            {
+                InventoryItemData referenceData = artifactContainer[i].item;
+                ArtifactItem newArtifact = new ArtifactItem(referenceData);
+
+                InventoryArtifact.Add(newArtifact);
+                artifactDictionary.Add(referenceData, newArtifact);       
+            }
+
+            UpdateScreenArtifact();
+            UpdateScreenInventory();
+        }
+           
         inventoryScreen.SetActive(false);
         artifactScreen.SetActive(false);
         descriptionScreenItem.SetActive(false);
@@ -153,6 +248,14 @@ public class InventorySystem : MonoBehaviour
 
     public void AddArtifact(InventoryItemData referenceData)
     {
+        for (int i = 0; i < artifactContainer.Count; i++)
+        {
+            if (artifactContainer[i].itemID == referenceData.id)
+            {
+                artifactContainer[i].AddAmount(1);
+                return;
+            }
+        }
         if (artifactDictionary.TryGetValue(referenceData, out ArtifactItem value))
         {
             value.AddToStack();
@@ -161,11 +264,13 @@ public class InventorySystem : MonoBehaviour
         ArtifactItem newArtifact = new ArtifactItem(referenceData);
         InventoryArtifact.Add(newArtifact);
         artifactDictionary.Add(referenceData, newArtifact);
+    
+        artifactContainer.Add(new InventoryDatabaseSave(referenceData.id, referenceData, 1));
     }
 
     public void Add(InventoryItemData referenceData)
-    {
-        if(referenceData.type == ItemType.Artifact){
+    {      
+        if (referenceData.type == ItemType.Artifact){
             AddArtifact(referenceData);
             return;
         }
@@ -188,10 +293,20 @@ public class InventorySystem : MonoBehaviour
                 case ItemType.Collectable:
                     newItem = new CollectableItem(referenceData);
                     break;
-            }
+            }          
             InventoryItems.Add(newItem);
-            itemDictionary.Add(referenceData, newItem);
+            itemDictionary.Add(referenceData, newItem);           
         }
+
+        for (int i = 0; i < itemContainer.Count; i++)
+        {
+            if (itemContainer[i].itemID == referenceData.id)
+            {
+                itemContainer[i].AddAmount(1);
+                return;
+            }
+        }
+        itemContainer.Add(new InventoryDatabaseSave(referenceData.id, referenceData, 1));
     }
 
     public void Remove()

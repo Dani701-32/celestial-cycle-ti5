@@ -33,14 +33,8 @@ public class SavingLoading : MonoBehaviour
 
     public bool StatusFile()
     {
-        if (!File.Exists(SavePath))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        if (!File.Exists(SavePath)) return false;
+        else return true;
     }
 
     [ContextMenu("Save")]
@@ -49,6 +43,7 @@ public class SavingLoading : MonoBehaviour
         var state = LoadFile();
         CaptureState(state);
         SaveFile(state);
+        GameController.gameController.inventorySystem.SaveInventory();
         Debug.Log("O Jogo foi Salvo");
     }
 
@@ -57,6 +52,7 @@ public class SavingLoading : MonoBehaviour
     {
         var state = LoadFile();
         RestoreState(state);
+        GameController.gameController.inventorySystem.LoadInventory();
         Debug.Log("O Jogo foi Carregado");
     }
 

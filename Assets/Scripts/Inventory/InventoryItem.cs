@@ -23,6 +23,11 @@ public abstract class InventoryItem
         stackSize--;
     }
 
+    public void SetStack(int value)
+    {
+        stackSize = value;
+    }
+
     public abstract void Use();
     public abstract void Remove();
 }
