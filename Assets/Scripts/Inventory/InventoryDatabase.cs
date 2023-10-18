@@ -6,16 +6,16 @@ using UnityEngine;
 public class InventoryDatabase : ScriptableObject, ISerializationCallbackReceiver
 {
     public InventoryItemData[] Items;
-    public Dictionary<InventoryItemData, string> GetId = new Dictionary<InventoryItemData, string>();
-    public Dictionary<string, InventoryItemData> GetItem = new Dictionary<string, InventoryItemData>();
+    public Dictionary<InventoryItemData, int> GetId = new Dictionary<InventoryItemData, int>();
+    public Dictionary<int, InventoryItemData> GetItem = new Dictionary<int, InventoryItemData>();
     public void OnAfterDeserialize()
     {
-        GetId = new Dictionary<InventoryItemData, string>();
-        GetItem = new Dictionary<string, InventoryItemData>();
+        GetId = new Dictionary<InventoryItemData, int>();
+        GetItem = new Dictionary<int, InventoryItemData>();
         for (int i = 0; i < Items.Length; i++)
         {
-            GetId.Add(Items[i], i.ToString());
-            GetItem.Add(i.ToString(), Items[i]);
+            GetId.Add(Items[i], i);
+            GetItem.Add(i, Items[i]);
         }
     }
 

@@ -7,14 +7,17 @@ using TMPro;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditorInternal.Profiling.Memory.Experimental;
+using static UnityEditor.Progress;
+using UnityEditor;
+using System.Linq;
 
 [System.Serializable]
 public class InventoryDatabaseSave
 {
-    public string itemID;
+    public int itemID;
     public int amount;
     public InventoryItemData item;
-    public InventoryDatabaseSave(string _id, InventoryItemData _item, int _amount)
+    public InventoryDatabaseSave(int _id, InventoryItemData _item, int _amount)
     {
         itemID = _id;
         item = _item;
@@ -112,9 +115,9 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        for (int i = 0; i < itemContainer.Count; i++) itemContainer[i].item = database.GetItem[itemContainer[i].item.id];
+        for (int i = 0; i < itemContainer.Count; i++) itemContainer[i].item = database.GetItem[itemContainer[i].item.saveID];
 
-        for (int i = 0; i < artifactContainer.Count; i++) artifactContainer[i].item = database.GetItem[artifactContainer[i].item.id];
+        for (int i = 0; i < artifactContainer.Count; i++) artifactContainer[i].item = database.GetItem[artifactContainer[i].item.saveID];
     }
 
     public void OnBeforeSerialize() { }
@@ -122,6 +125,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
     void Awake()
     {
         controller = GameController.gameController;
+
+        for (int j = 0; j < database.Items.Length; j++) database.Items[j].saveID = j;
     }
 
     private void Start()
@@ -250,7 +255,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
     {
         for (int i = 0; i < artifactContainer.Count; i++)
         {
-            if (artifactContainer[i].itemID == referenceData.id)
+            if (artifactContainer[i].itemID == referenceData.saveID)
             {
                 artifactContainer[i].AddAmount(1);
                 return;
@@ -265,7 +270,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         InventoryArtifact.Add(newArtifact);
         artifactDictionary.Add(referenceData, newArtifact);
     
-        artifactContainer.Add(new InventoryDatabaseSave(referenceData.id, referenceData, 1));
+        artifactContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
     }
 
     public void Add(InventoryItemData referenceData)
@@ -300,13 +305,13 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 
         for (int i = 0; i < itemContainer.Count; i++)
         {
-            if (itemContainer[i].itemID == referenceData.id)
+            if (itemContainer[i].itemID == referenceData.saveID)
             {
                 itemContainer[i].AddAmount(1);
                 return;
             }
         }
-        itemContainer.Add(new InventoryDatabaseSave(referenceData.id, referenceData, 1));
+        itemContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
     }
 
     public void Remove()

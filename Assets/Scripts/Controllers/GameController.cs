@@ -12,8 +12,8 @@ public class GameController : MonoBehaviour
     public QuestSystem questSystem;
     public NPCDialogue _NPCDialogue;
     public Player player;
-    public Transform cam;
     public SaveObject saveObject;
+    public Transform cam; 
     public CinemachineFreeLook freelookCamera;
     [HideInInspector] public bool isMenu = false;
     private string currentCameraX = "";
@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
         tutorialCombat;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         gameController = (gameController == null) ? this : gameController;
         inventorySystem = GetComponent<InventorySystem>();

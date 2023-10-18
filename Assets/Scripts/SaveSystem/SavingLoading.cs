@@ -7,29 +7,42 @@ using UnityEngine;
 public class SavingLoading : MonoBehaviour
 {
     public static SavingLoading instance;
+    public bool loadByMenu;
     private string SavePath => $"{Application.persistentDataPath}/saveGame.txt";
 
     private void Awake()
     {
-        if(instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
+        DontDestroyOnLoad(this);
+    }
 
+    private void Start()
+    {
         if (StatusFile())
         {
             Load();
+            Debug.Log("Carregou o jogo a partir do Save");
         }
         else
         {
-            Debug.Log("Inicializou mas NÃO tem save");
+            Debug.Log("Iniciou um Novo Jogo");
         }
+
     }
+
+    //private void Update()
+    //{
+    //    if (StatusFile() && loadByMenu)
+    //    {
+    //        Load();
+    //        Debug.Log("Carregou o jogo a partir do Save");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Iniciou um Novo Jogo");
+    //    }
+    //}
 
     public bool StatusFile()
     {
@@ -37,7 +50,6 @@ public class SavingLoading : MonoBehaviour
         else return true;
     }
 
-    [ContextMenu("Save")]
     public void Save()
     {
         var state = LoadFile();
@@ -47,13 +59,13 @@ public class SavingLoading : MonoBehaviour
         Debug.Log("O Jogo foi Salvo");
     }
 
-    [ContextMenu("Load")]
     public void Load()
     {
+        loadByMenu = false;
         var state = LoadFile();
         RestoreState(state);
         GameController.gameController.inventorySystem.LoadInventory();
-        Debug.Log("O Jogo foi Carregado");
+        
     }
 
     private Dictionary<string, object> LoadFile()

@@ -12,7 +12,6 @@ public class MenuController : MonoBehaviour
 
     [SerializeField]
     private GameObject loadButton;
-    private bool hasSaveGame = false;
     private SavingLoading savingLoading;
 
     void Awake()
@@ -21,18 +20,18 @@ public class MenuController : MonoBehaviour
         {
             instance = this;
         }
-        //Sistema de save incompleto. 
-        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+ 
+        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
     }
 
     void Start()
     {
-        // hasSaveGame = savingLoading.StatusFile();
-        // loadButton.SetActive(hasSaveGame);
+        loadButton.SetActive(savingLoading.StatusFile());
     }
 
     public void NewGame()
     {
+        Debug.Log("Iniciou um Novo Jogo");
         SceneManager.LoadScene(newGameLevel);
     }
 
@@ -43,9 +42,16 @@ public class MenuController : MonoBehaviour
 
     public void LoadGame()
     {
+        Debug.Log("Carregou o jogo a partir do Save");
+        savingLoading.loadByMenu = true;
         SceneManager.LoadScene(newGameLevel);
-        Debug.Log("Carregar jogo");
+
     }
+
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.K)) SceneManager.LoadScene(newGameLevel);
+    //}
 
     public void Exit()
     {
