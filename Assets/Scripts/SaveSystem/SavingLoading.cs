@@ -15,10 +15,7 @@ public class SavingLoading : MonoBehaviour
         if (instance != null) Destroy(gameObject);
         else instance = this;
         DontDestroyOnLoad(this);
-    }
 
-    private void Start()
-    {
         if (StatusFile())
         {
             Load();
@@ -28,21 +25,7 @@ public class SavingLoading : MonoBehaviour
         {
             Debug.Log("Iniciou um Novo Jogo");
         }
-
     }
-
-    //private void Update()
-    //{
-    //    if (StatusFile() && loadByMenu)
-    //    {
-    //        Load();
-    //        Debug.Log("Carregou o jogo a partir do Save");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Iniciou um Novo Jogo");
-    //    }
-    //}
 
     public bool StatusFile()
     {
