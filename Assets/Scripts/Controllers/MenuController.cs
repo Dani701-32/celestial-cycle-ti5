@@ -19,7 +19,7 @@ public class MenuController : MonoBehaviour
     {
         if (instance != null) Destroy(gameObject);
         else instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
 
         //savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
     }

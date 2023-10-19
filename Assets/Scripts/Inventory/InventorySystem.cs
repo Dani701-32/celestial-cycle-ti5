@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditorInternal.Profiling.Memory.Experimental;
-using static UnityEditor.Progress;
 using UnityEditor;
 using System.Linq;
 

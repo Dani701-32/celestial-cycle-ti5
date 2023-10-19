@@ -20,7 +20,7 @@ public class SavingLoading : MonoBehaviour
 
         gm = FindAnyObjectByType<GameController>().GetComponent<GameController>();
 
-        if (StatusFile() && MenuController.instance.byLoad)
+        if (StatusFile() && SceneManager.GetActiveScene().name == "Game")
         {
             Load();
             Debug.Log("Carregou o jogo a partir do Save");
