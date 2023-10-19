@@ -11,11 +11,14 @@ public class ItemSlot : MonoBehaviour
     [SerializeField]
     private Image backgroundImage;
     [SerializeField]
+    private Image itemType;
+    [SerializeField]
     private InventoryItem currentItem;
 
     [SerializeField]
     private TextMeshProUGUI stack;
     public GameObject itemDescriptor;
+    public GameObject typeContainer;
 
     // Start is called before the first frame update
     public void UpdateItem(InventoryItem referenceItem)
@@ -27,6 +30,12 @@ public class ItemSlot : MonoBehaviour
             backgroundImage.color = Color.yellow;
         }else {
             backgroundImage.color = Color.white;
+        }
+        if(currentItem.data.iconType != null){
+            itemType.sprite = currentItem.data.iconType;
+            typeContainer.SetActive(true);
+        }else{
+             typeContainer.SetActive(false);
         }
     }
 

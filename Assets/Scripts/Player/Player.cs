@@ -43,6 +43,8 @@ public class Player : MonoBehaviour, ISaveable
     public Image weaponSprite;
     public Image artifactSprite;
     public GameObject artifactSlider;
+    public GameObject artifactButton;
+    public GameObject weaponButton;
 
     [Header("Sliders")]
     public ArtifactUIController[] moonArtifacts = new ArtifactUIController[4];
@@ -87,6 +89,8 @@ public class Player : MonoBehaviour, ISaveable
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
         artifactSlider.SetActive(false);
+        // artifactButton.SetActive(false);
+        // weaponButton.SetActive(false);
 
 
         lifeSlider.maxValue = maxHealth;
@@ -176,6 +180,7 @@ public class Player : MonoBehaviour, ISaveable
         GameObject weapon = Instantiate(prefab, weaponSpot);
         playerMovement.currentWeapon = weapon;
         weapon.SetActive(playerMovement.combatMode);
+        // weaponButton.SetActive(playerMovement.combatMode);
     }
 
     public void RemoveWeapon()
@@ -252,7 +257,7 @@ public class Player : MonoBehaviour, ISaveable
         GameObject prefab = artefactItem.data.prefab;
         artifactsRoster[index] = prefab;
         Artifact component = prefab.GetComponent<Artifact>();
-        moonArtifacts[index].OpenSlider(artefactItem.data.icon);
+        moonArtifacts[index].OpenSlider(artefactItem.data.icon, artefactItem.data.iconType);
     }
     public bool HasArtifactRoster(GameObject prefab)
     {

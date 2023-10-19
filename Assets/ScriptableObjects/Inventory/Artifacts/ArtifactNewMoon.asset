@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d44b2c32f0d5942a79038a1e1ade25, type: 3}
   m_Name: ArtifactNewMoon
   m_EditorClassIdentifier: 
+  type: 2
   id: A_NewMoon
   displayName: Espelho da Lua Nova
   description: Enfraquece criaturas da Lua nova
   icon: {fileID: 21300000, guid: d77316b0b5877fa4b8acb98744d245dc, type: 3}
+  iconType: {fileID: 21300000, guid: 5af4be3f057329f42a7a73bf37d9b282, type: 3}
   prefab: {fileID: 6825043720167827741, guid: ae0125c9f3eb59242b59705331c67102, type: 3}
+  aspect: 0
   maxStack: 1
   canStack: 0
-  type: 2

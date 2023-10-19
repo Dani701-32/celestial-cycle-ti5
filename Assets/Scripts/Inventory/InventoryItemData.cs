@@ -9,6 +9,7 @@ public class InventoryItemData : ScriptableObject
     public string displayName;
     public string description;
     public Sprite icon;
+    public Sprite iconType;
     public GameObject prefab;
     public MoonPhases aspect;
     [Header("Consumiveis e Coletáveis")]
