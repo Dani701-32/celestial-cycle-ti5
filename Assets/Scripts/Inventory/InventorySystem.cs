@@ -28,6 +28,15 @@ public class InventoryDatabaseSave
         amount += value;
     }
 }
+
+[System.Serializable]
+public class InventoryDatabaseLists
+{
+    public List<InventoryDatabaseSave> artifactContainer = new List<InventoryDatabaseSave>();
+    public List<InventoryDatabaseSave> itemContainer = new List<InventoryDatabaseSave>();
+}
+
+[System.Serializable]
 public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 {
     private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
@@ -39,8 +48,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
     [Header("SaveSystem")]
     public string savePath;
     public InventoryDatabase database;
-    public List<InventoryDatabaseSave> artifactContainer = new List<InventoryDatabaseSave>();
-    public List<InventoryDatabaseSave> itemContainer = new List<InventoryDatabaseSave>();
+    [SerializeField]
+    public InventoryDatabaseLists listsDatabase;
 
     [Header("UI Invetário")]
     [SerializeField]
@@ -95,7 +104,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 
     public void SaveInventory()
     {
-        string saveData = JsonUtility.ToJson(this, true);
+        // O Problema está aqui
+        string saveData = JsonUtility.ToJson(listsDatabase, true);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
         bf.Serialize(file, saveData);
@@ -108,16 +118,17 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
-            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+            string saveData = (string)bf.Deserialize(file);
+            JsonUtility.FromJsonOverwrite(saveData, listsDatabase);
             file.Close();
         }
     }
 
     public void OnAfterDeserialize()
     {
-        for (int i = 0; i < itemContainer.Count; i++) itemContainer[i].item = database.GetItem[itemContainer[i].item.saveID];
+        for (int i = 0; i < listsDatabase.itemContainer.Count; i++) listsDatabase.itemContainer[i].item = database.GetItem[listsDatabase.itemContainer[i].item.saveID];
 
-        for (int i = 0; i < artifactContainer.Count; i++) artifactContainer[i].item = database.GetItem[artifactContainer[i].item.saveID];
+        for (int i = 0; i < listsDatabase.artifactContainer.Count; i++) listsDatabase.artifactContainer[i].item = database.GetItem[listsDatabase.artifactContainer[i].item.saveID];
     }
 
     public void OnBeforeSerialize() { }
@@ -143,9 +154,9 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         if (SavingLoading.instance.StatusFile())
         {
             
-            for (int i = 0; i < itemContainer.Count; i++)
+            for (int i = 0; i < listsDatabase.itemContainer.Count; i++)
             {
-                InventoryItemData referenceData = itemContainer[i].item;
+                InventoryItemData referenceData = listsDatabase.itemContainer[i].item;
                 InventoryItem newItem;
 
                 switch (referenceData.type)
@@ -163,11 +174,11 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
                 }
                 InventoryItems.Add(newItem);
                 itemDictionary.Add(referenceData, newItem);
-                newItem.SetStack(itemContainer[i].amount);
+                newItem.SetStack(listsDatabase.itemContainer[i].amount);
             }
-            for (int i = 0; i < artifactContainer.Count; i++)
+            for (int i = 0; i < listsDatabase.artifactContainer.Count; i++)
             {
-                InventoryItemData referenceData = artifactContainer[i].item;
+                InventoryItemData referenceData = listsDatabase.artifactContainer[i].item;
                 ArtifactItem newArtifact = new ArtifactItem(referenceData);
 
                 InventoryArtifact.Add(newArtifact);
@@ -253,11 +264,11 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 
     public void AddArtifact(InventoryItemData referenceData)
     {
-        for (int i = 0; i < artifactContainer.Count; i++)
+        for (int i = 0; i < listsDatabase.artifactContainer.Count; i++)
         {
-            if (artifactContainer[i].itemID == referenceData.saveID)
+            if (listsDatabase.artifactContainer[i].itemID == referenceData.saveID)
             {
-                artifactContainer[i].AddAmount(1);
+                listsDatabase.artifactContainer[i].AddAmount(1);
                 return;
             }
         }
@@ -269,8 +280,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         ArtifactItem newArtifact = new ArtifactItem(referenceData);
         InventoryArtifact.Add(newArtifact);
         artifactDictionary.Add(referenceData, newArtifact);
-    
-        artifactContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
+
+        listsDatabase.artifactContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
     }
 
     public void Add(InventoryItemData referenceData)
@@ -303,15 +314,15 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
             itemDictionary.Add(referenceData, newItem);           
         }
 
-        for (int i = 0; i < itemContainer.Count; i++)
+        for (int i = 0; i < listsDatabase.itemContainer.Count; i++)
         {
-            if (itemContainer[i].itemID == referenceData.saveID)
+            if (listsDatabase.itemContainer[i].itemID == referenceData.saveID)
             {
-                itemContainer[i].AddAmount(1);
+                listsDatabase.itemContainer[i].AddAmount(1);
                 return;
             }
         }
-        itemContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
+        listsDatabase.itemContainer.Add(new InventoryDatabaseSave(referenceData.saveID, referenceData, 1));
     }
 
     public void Remove()

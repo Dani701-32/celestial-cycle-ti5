@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour
     public string newGameLevel, newGameLevelCheat;
     private string levelToLoad;
     public static MenuController instance;
+    public bool byLoad;
 
     [SerializeField]
     private GameObject loadButton;
@@ -16,22 +17,23 @@ public class MenuController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
- 
-        savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
+        DontDestroyOnLoad(this);
+
+        //savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
     }
 
     void Start()
     {
-        loadButton.SetActive(savingLoading.StatusFile());
+        //loadButton.SetActive(savingLoading.StatusFile());
+        loadButton.SetActive(true);
     }
 
     public void NewGame()
     {
         Debug.Log("Iniciou um Novo Jogo");
+        byLoad = false;
         SceneManager.LoadScene(newGameLevel);
     }
 
@@ -42,8 +44,9 @@ public class MenuController : MonoBehaviour
 
     public void LoadGame()
     {
-        Debug.Log("Carregou o jogo a partir do Save");
-        savingLoading.loadByMenu = true;
+        //Debug.Log("Carregou o jogo a partir do Save");
+        //savingLoading.loadByMenu = true;
+        byLoad = true;
         SceneManager.LoadScene(newGameLevel);
 
     }
