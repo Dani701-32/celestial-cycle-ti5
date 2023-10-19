@@ -58,6 +58,7 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
+        SetMoonPhase();
         textDays.text = "Dia " + day.ToString();
 
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
