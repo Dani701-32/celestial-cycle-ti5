@@ -1,15 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SavingLoading : MonoBehaviour
 {
     public static SavingLoading instance;
-    public bool loadByMenu;
-    public GameController gm;
     private string SavePath => $"{Application.persistentDataPath}/saveGame.txt";
 
     private void Awake()
@@ -18,9 +14,7 @@ public class SavingLoading : MonoBehaviour
         else instance = this;
         //DontDestroyOnLoad(this);
 
-        gm = FindAnyObjectByType<GameController>().GetComponent<GameController>();
-
-        if (StatusFile() && SceneManager.GetActiveScene().name == "Game")
+        if (StatusFile() && GameController.gameController.menuController.hasSaveGame)
         {
             Load();
             Debug.Log("Carregou o jogo a partir do Save");
@@ -29,11 +23,6 @@ public class SavingLoading : MonoBehaviour
         {
             Debug.Log("Iniciou um Novo Jogo");
         }
-    }
-
-    public void Start()
-    {
-        
     }
 
     public bool StatusFile()
@@ -47,19 +36,15 @@ public class SavingLoading : MonoBehaviour
         var state = LoadFile();
         CaptureState(state);
         SaveFile(state);
-        //GameController.gameController.inventorySystem.SaveInventory();
-        gm.inventorySystem.SaveInventory();
+        GameController.gameController.inventorySystem.SaveInventory();
         Debug.Log("O Jogo foi Salvo");
     }
 
     public void Load()
     {
-        loadByMenu = false;
         var state = LoadFile();
         RestoreState(state);
-        //GameController.gameController.inventorySystem.LoadInventory();
-        gm.inventorySystem.LoadInventory();
-
+        GameController.gameController.inventorySystem.LoadInventory();
     }
 
     private Dictionary<string, object> LoadFile()

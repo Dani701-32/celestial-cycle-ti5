@@ -66,7 +66,7 @@ public class Player : MonoBehaviour, ISaveable
         playerPos = this.transform.position;
     }
 
-    void Start()
+    void Awake()
     {
         // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
         controller = GameController.gameController;
@@ -101,12 +101,6 @@ public class Player : MonoBehaviour, ISaveable
                 slider.StartSlider(maxEnergy);
             }
         }
-
-        // if (!savingLoading.StatusFile())
-        // {
-        //     InitializeVariables();
-        //     Debug.Log("Inicializou o Sistema de Dia e Noite mas n�o tem save");
-        // }
     }
 
     private void Update()

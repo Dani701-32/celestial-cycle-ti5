@@ -1,60 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     [Header("Levels to Load")]
-    public string newGameLevel, newGameLevelCheat;
-    private string levelToLoad;
+    public string newGameLevelCheat;
+    public string levelToLoad;
     public static MenuController instance;
-    public bool byLoad;
+
+    public bool hasSaveGame;
 
     [SerializeField]
     private GameObject loadButton;
     private SavingLoading savingLoading;
 
-    void Awake()
-    {
-        if (instance != null) Destroy(gameObject);
-        else instance = this;
-        //DontDestroyOnLoad(this);
+    public GameObject canvasGame;
 
-        //savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+    public void CallMenu()
+    {
+        hasSaveGame = false;
+        GameController.gameController.isMenu = false;
+        loadButton.SetActive(GameController.gameController.savingLoadingController.StatusFile());
+        canvasGame.SetActive(false);
+        GameController.gameController.MenuScreen();
     }
+        
 
     void Start()
     {
-        //loadButton.SetActive(savingLoading.StatusFile());
-        loadButton.SetActive(true);
+        CallMenu();
     }
 
     public void NewGame()
     {
-        Debug.Log("Iniciou um Novo Jogo");
-        byLoad = false;
-        SceneManager.LoadScene(newGameLevel);
+        hasSaveGame = false;
+        GameController.gameController.isMenu = true;
+        GameController.gameController.MenuScreen();
+        GameController.gameController.SwitchToCameraFreeLook(GameController.gameController.freelookCamera);
+        canvasGame.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 
     public void NewGameCheat()
     {
+        hasSaveGame = false;
         SceneManager.LoadScene(newGameLevelCheat);
     }
 
     public void LoadGame()
     {
-        //Debug.Log("Carregou o jogo a partir do Save");
-        //savingLoading.loadByMenu = true;
-        byLoad = true;
-        SceneManager.LoadScene(newGameLevel);
-
+        hasSaveGame = true;
+        canvasGame.SetActive(true);
+        this.gameObject.SetActive(false);
     }
-
-    //private void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.K)) SceneManager.LoadScene(newGameLevel);
-    //}
 
     public void Exit()
     {

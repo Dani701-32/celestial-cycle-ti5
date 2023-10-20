@@ -13,8 +13,9 @@ public class GameController : MonoBehaviour
     public NPCDialogue _NPCDialogue;
     public Player player;
     public SaveObject saveObject;
-    public Transform cam; 
-    public CinemachineFreeLook freelookCamera;
+    public MenuController menuController;
+    public SavingLoading savingLoadingController;
+    
     [HideInInspector] public bool isMenu = false;
     private string currentCameraX = "";
     private string currentCameraY = "";
@@ -33,11 +34,21 @@ public class GameController : MonoBehaviour
     public GameObject tutorialArtefact,
         tutorialCombat;
 
+
+    [Header("Camera Controller")]
+    public string triggerTag;
+    public Transform cam;
+    public CinemachineFreeLook freelookCamera;
+    public CinemachineVirtualCamera menuCamera;
+    public CinemachineVirtualCamera[] virtualCameras;
+    public CinemachineFreeLook[] freeLookCameras;
+
     // Start is called before the first frame update
     private void Awake()
     {
         gameController = (gameController == null) ? this : gameController;
         inventorySystem = GetComponent<InventorySystem>();
+        savingLoadingController = GetComponent<SavingLoading>();
         questSystem = GetComponent<QuestSystem>();
         _NPCDialogue = GetComponent<NPCDialogue>();
         currentCameraX = "Mouse X";
@@ -131,4 +142,35 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Menu");
     }
+
+    public void ExitMenuPrincipal()
+    {
+        //SceneManager.LoadScene(menuController.levelToLoad);
+    }
+
+    public void SwitchToCameraVirtual(CinemachineVirtualCamera targetCamera)
+    {
+        foreach (CinemachineFreeLook camera in freeLookCameras)
+        {
+            camera.enabled = camera == targetCamera;
+        }
+    }
+
+    public void SwitchToCameraFreeLook(CinemachineFreeLook targetCamera)
+    {
+        foreach (CinemachineVirtualCamera camera in virtualCameras)
+        {
+            camera.enabled = camera == targetCamera;
+        }
+    }
+
+    //public void StartMenuScreen()
+    //{
+    //    GameController.gameController.player.playerMovement.enabled = false;
+    //    Cursor.lockState = CursorLockMode.None;
+    //    menuScreen.SetActive(true);
+    //    Time.timeScale = 0f;
+    //    StopCamera();
+    //    isMenu = true;
+    //}
 }
