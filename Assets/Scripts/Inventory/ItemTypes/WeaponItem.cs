@@ -17,7 +17,7 @@ public class WeaponItem : InventoryItem
             return;
         }
         equiped = true;
-        controller.player.EquipWeapon(this.data.prefab);
+        controller.player.EquipWeapon(data.prefab);
         controller.player.weaponSprite.sprite = data.icon;
         controller.player.weaponSprite.enabled = true;
     }

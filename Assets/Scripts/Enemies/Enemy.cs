@@ -48,24 +48,9 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void TakeDamage(float damage);
 
-    public bool CanSpawn(MoonPhases moonphase)
+    public bool CanSpawn(MoonPhases timeMoonphase)
     {
-        switch (enemyType)
-        {
-            case EnemyType.Kitsune:
-                return (
-                    moonphase == MoonPhases.FirstQuarter || moonphase == MoonPhases.ThirdQuarter
-                )
-                    ? true
-                    : false;
-            case EnemyType.Tengu:
-                return (moonphase == MoonPhases.FullMoon) ? true : false;
-            case EnemyType.Kappa:
-                return (moonphase == MoonPhases.NewMoon) ? true : false;
-
-            default:
-                return true;
-        }
+        return timeMoonphase == moonPhase;
     }
 
     void OnDrawGizmos()
