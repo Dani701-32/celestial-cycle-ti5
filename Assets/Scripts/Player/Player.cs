@@ -163,7 +163,6 @@ public class Player : MonoBehaviour, ISaveable
         hasArtifact = true;
         GameObject artifact = Instantiate(artifactsRoster[index], artifactSpot);
         playerMovement.currentArtifact = artifact;
-        playerMovement.currentArtifact.SetActive(false);
         if (artifact.TryGetComponent(out Artifact component))
         {
             currentArtifact = component;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -107,6 +108,7 @@ public class Enemy_Human : Enemy
 
     public override void ArtifactEffect(MoonPhases artifactMoon)
     {
+        Debug.Log(artifactMoon); 
         if (moonPhase == artifactMoon)
         {
             animator.SetTrigger("damage");
