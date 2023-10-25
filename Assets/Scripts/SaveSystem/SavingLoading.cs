@@ -8,12 +8,8 @@ public class SavingLoading : MonoBehaviour
     public static SavingLoading instance;
     private string SavePath => $"{Application.persistentDataPath}/saveGame.txt";
 
-    private void Awake()
+    public void CallSave()
     {
-        if (instance != null) Destroy(gameObject);
-        else instance = this;
-        //DontDestroyOnLoad(this);
-
         if (StatusFile() && GameController.gameController.menuController.hasSaveGame)
         {
             Load();
@@ -23,6 +19,12 @@ public class SavingLoading : MonoBehaviour
         {
             Debug.Log("Iniciou um Novo Jogo");
         }
+    }
+
+    private void Awake()
+    {
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
     }
 
     public bool StatusFile()

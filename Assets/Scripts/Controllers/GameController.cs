@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public SaveObject saveObject;
     public MenuController menuController;
     public SavingLoading savingLoadingController;
+    public DayNightCycle dayNightController;
     
     [HideInInspector] public bool isMenu = false;
     private string currentCameraX = "";
@@ -30,9 +31,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private GameObject deathScreen,
-        popoutGame;
+        popoutGame, menuPrincipalScreen;
     public GameObject tutorialArtefact,
-        tutorialCombat;
+        tutorialCombat, popBackMenu;
 
 
     [Header("Camera Controller")]
@@ -139,38 +140,44 @@ public class GameController : MonoBehaviour
     public void QuitGame()
     {
         popoutGame.SetActive(false);
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Menu");
-    }
+        popBackMenu.SetActive(false);
+        GameController.gameController.isMenu = false;
+        GameController.gameController.MenuScreen();
+        menuPrincipalScreen.SetActive(true);
+        menuScreen.SetActive(false);
+        menuController.canvasGame.SetActive(false);
+        menuController.uiDayNight.SetActive(false);
+        menuController.mainMenuBackground.SetActive(true);
+        menuController.CheckSave(GameController.gameController.savingLoadingController.StatusFile());
+        GameController.gameController.inventorySystem.ClearInventoryItens();
+        GameController.gameController.inventorySystem.ClearInventoryArtifacts();
+        GameController.gameController.inventorySystem.StartInventory();
+        GameController.gameController.dayNightController.StartDayNightSystem();
 
-    public void ExitMenuPrincipal()
-    {
-        //SceneManager.LoadScene(menuController.levelToLoad);
+        SwitchToCameraVirtual(menuCamera);
     }
 
     public void SwitchToCameraVirtual(CinemachineVirtualCamera targetCamera)
     {
+        freelookCamera.GetComponent<CinemachineFreeLook>().Priority = 9;
+        menuCamera.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+
         foreach (CinemachineFreeLook camera in freeLookCameras)
         {
-            camera.enabled = camera == targetCamera;
+            camera.enabled = false;
+            targetCamera.enabled = true;
         }
     }
 
     public void SwitchToCameraFreeLook(CinemachineFreeLook targetCamera)
     {
+        freelookCamera.GetComponent<CinemachineFreeLook>().Priority = 10;
+        menuCamera.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+
         foreach (CinemachineVirtualCamera camera in virtualCameras)
         {
-            camera.enabled = camera == targetCamera;
+            camera.enabled = false;
+            targetCamera.enabled = true;
         }
     }
-
-    //public void StartMenuScreen()
-    //{
-    //    GameController.gameController.player.playerMovement.enabled = false;
-    //    Cursor.lockState = CursorLockMode.None;
-    //    menuScreen.SetActive(true);
-    //    Time.timeScale = 0f;
-    //    StopCamera();
-    //    isMenu = true;
-    //}
 }

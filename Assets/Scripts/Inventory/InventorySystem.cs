@@ -138,8 +138,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         for (int j = 0; j < database.Items.Length; j++) database.Items[j].saveID = j;
     }
 
-    private void Start()
-    {    
+    public void StartInventory()
+    {
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
         artifactDictionary = new Dictionary<InventoryItemData, ArtifactItem>();
 
@@ -149,9 +149,8 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         SlotsItems = new List<GameObject>();
         SlotsArtifacts = new List<GameObject>();
 
-        if (SavingLoading.instance.StatusFile())
+        if (SavingLoading.instance.StatusFile() && GameController.gameController.menuController.hasSaveGame)
         {
-            
             for (int i = 0; i < listsDatabase.itemContainer.Count; i++)
             {
                 InventoryItemData referenceData = listsDatabase.itemContainer[i].item;
@@ -180,13 +179,13 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
                 ArtifactItem newArtifact = new ArtifactItem(referenceData);
 
                 InventoryArtifact.Add(newArtifact);
-                artifactDictionary.Add(referenceData, newArtifact);       
+                artifactDictionary.Add(referenceData, newArtifact);
             }
 
             UpdateScreenArtifact();
             UpdateScreenInventory();
         }
-           
+
         inventoryScreen.SetActive(false);
         artifactScreen.SetActive(false);
         descriptionScreenItem.SetActive(false);
@@ -196,6 +195,11 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         {
             imgArtifact.enabled = false;
         }
+    }
+
+    private void Start()
+    {
+        StartInventory();
     }
 
     public bool CanAdd(InventoryItemData referenceData)
@@ -450,7 +454,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    private void ClearInventoryItens()
+    public void ClearInventoryItens()
     {
         foreach (GameObject item in SlotsItems)
         {
@@ -459,7 +463,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         SlotsItems.Clear();
     }
 
-    private void ClearInventoryArtifacts()
+    public void ClearInventoryArtifacts()
     {
         foreach (GameObject item in SlotsArtifacts)
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, ISaveable
 {
@@ -54,21 +55,17 @@ public class Player : MonoBehaviour, ISaveable
     public bool hasArtifact;
     public bool hasWeapon { get; private set; }
 
-    private Vector3 playerPos;
+    private Vector3 playerPos, initialPos;
 
     //Controla se as quests estão abertas
     public bool QuestIsOpen;
 
     private int previusIndex = 99;
 
-    public void InitializeVariables()
-    {
-        playerPos = this.transform.position;
-    }
-
     void Awake()
     {
-        // savingLoading = FindObjectOfType<SavingLoading>().GetComponent<SavingLoading>();
+        initialPos = this.transform.position;
+
         controller = GameController.gameController;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.enabled = true;
@@ -101,6 +98,21 @@ public class Player : MonoBehaviour, ISaveable
                 slider.StartSlider(maxEnergy);
             }
         }
+    }
+
+    public void PlayerStartPosition()
+    {
+        if (GameController.gameController.savingLoadingController.StatusFile() && GameController.gameController.menuController.hasSaveGame) { }
+        else
+        {
+            playerPos = initialPos;
+            this.transform.position = playerPos;
+        }
+    }
+
+    public void Start()
+    {
+        PlayerStartPosition();
     }
 
     private void Update()

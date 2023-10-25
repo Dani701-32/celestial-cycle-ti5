@@ -6,26 +6,44 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Levels to Load")]
-    public string newGameLevelCheat;
+    [Header("Levels:")]
     public string levelToLoad;
+    public string newGameLevelCheat;  
     public static MenuController instance;
-
     public bool hasSaveGame;
 
-    [SerializeField]
-    private GameObject loadButton;
-    private SavingLoading savingLoading;
+    [Header("UI:")]
+    public GameObject loadButton;
 
-    public GameObject canvasGame;
+    public GameObject canvasGame, uiDayNight;
+    [SerializeField]
+    public GameObject popNewGame, popLoadGame, mainMenuBackground;
+
+    public void CheckSave(bool status)
+    {
+        loadButton.SetActive(status);
+    }
 
     public void CallMenu()
     {
         hasSaveGame = false;
         GameController.gameController.isMenu = false;
-        loadButton.SetActive(GameController.gameController.savingLoadingController.StatusFile());
+        CheckSave(GameController.gameController.savingLoadingController.StatusFile());
         canvasGame.SetActive(false);
+        uiDayNight.SetActive(false);
         GameController.gameController.MenuScreen();
+    }
+
+    public void BaseContextMenu()
+    {
+        GameController.gameController.isMenu = true;
+        GameController.gameController.MenuScreen();
+        GameController.gameController.inventorySystem.StartInventory();
+        GameController.gameController.SwitchToCameraFreeLook(GameController.gameController.freelookCamera);
+        canvasGame.SetActive(true);
+        uiDayNight.SetActive(true);
+        popNewGame.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
         
 
@@ -37,24 +55,17 @@ public class MenuController : MonoBehaviour
     public void NewGame()
     {
         hasSaveGame = false;
-        GameController.gameController.isMenu = true;
-        GameController.gameController.MenuScreen();
-        GameController.gameController.SwitchToCameraFreeLook(GameController.gameController.freelookCamera);
-        canvasGame.SetActive(true);
-        this.gameObject.SetActive(false);
-    }
-
-    public void NewGameCheat()
-    {
-        hasSaveGame = false;
-        SceneManager.LoadScene(newGameLevelCheat);
+        GameController.gameController.player.PlayerStartPosition();
+        GameController.gameController.dayNightController.StartDayNightSystem(); 
+        BaseContextMenu();   
     }
 
     public void LoadGame()
     {
-        hasSaveGame = true;
-        canvasGame.SetActive(true);
-        this.gameObject.SetActive(false);
+        hasSaveGame = true;       
+        GameController.gameController.savingLoadingController.CallSave();
+        GameController.gameController.dayNightController.StartDayNightSystem();
+        BaseContextMenu();        
     }
 
     public void Exit()

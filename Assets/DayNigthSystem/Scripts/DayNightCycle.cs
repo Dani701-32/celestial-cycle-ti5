@@ -48,23 +48,46 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     [SerializeField]
     private List<Light> cityLights;
 
+    private float initialHour;
+    private int initialDay, ininitialPhaseController;
+
     private void Awake()
     {
-        if (InstanceTime == null)
-        {
-            InstanceTime = this;
-        }
+        if (InstanceTime == null) InstanceTime = this;
+
+        initialHour = startHour;
+        initialDay = day;
+        ininitialPhaseController = phaseController;
     }
 
-    void Start()
+    public void StartDayNightSystem()
     {
-        SetMoonPhase();
-        continueDayNight = true;
-        textDays.text = "Dia " + day.ToString();
-       
-        currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+        if (GameController.gameController.savingLoadingController.StatusFile() && GameController.gameController.menuController.hasSaveGame)
+        {
+            SetMoonPhase();
+            continueDayNight = true;
+            textDays.text = "Dia " + day.ToString();
 
-        hour = startHour;
+            currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+
+            hour = startHour;
+        }
+        else
+        {
+            startHour = initialHour;
+            day = initialDay;
+            phaseController = ininitialPhaseController;
+
+            SetMoonPhase();
+            continueDayNight = true;
+            textDays.text = "Dia " + day.ToString();
+
+            currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+
+            hour = startHour;
+        }
+
+        
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
@@ -73,7 +96,12 @@ public class DayNightCycle : MonoBehaviour, ISaveable
         RenderSettings.skybox = skyboxMat;
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
         RenderSettings.fogMode = FogMode.ExponentialSquared;
-        RenderSettings.fogDensity = fogDensity;  
+        RenderSettings.fogDensity = fogDensity;
+    }
+    void Start()
+    {
+        StartDayNightSystem();
+         
     }
     void Update()
     {
