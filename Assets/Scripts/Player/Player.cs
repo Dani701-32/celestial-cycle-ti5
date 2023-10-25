@@ -166,8 +166,7 @@ public class Player : MonoBehaviour, ISaveable
         if (artifact.TryGetComponent(out Artifact component))
         {
             currentArtifact = component;
-            artifactSprite.enabled = true;
-            artifactSprite.sprite = moonArtifacts[index].image.sprite;
+
             artifactSlider.SetActive(true);
             slider = artifactSlider.GetComponent<Slider>();
             slider.maxValue = currentArtifact.cooldown;
@@ -180,7 +179,6 @@ public class Player : MonoBehaviour, ISaveable
         hasWeapon = true;
         GameObject weapon = Instantiate(prefab, weaponSpot);
         playerMovement.currentWeapon = weapon;
-        playerMovement.EquipeWeapon();
         weapon.SetActive(playerMovement.combatMode);
         // weaponButton.SetActive(playerMovement.combatMode);
     }
@@ -205,7 +203,6 @@ public class Player : MonoBehaviour, ISaveable
                 playerMovement.currentArtifact = null;
                 currentArtifact = null;
                 artifactSlider.SetActive(false);
-                artifactSprite.enabled = false;
             }
         }
 
@@ -218,11 +215,10 @@ public class Player : MonoBehaviour, ISaveable
         if (artifactsRoster[previusIndex].GetComponent<Artifact>().id == playerMovement.currentArtifact.GetComponent<Artifact>().id)
         {
             Debug.Log("Remover artefato");
-            Destroy(playerMovement.currentArtifact.gameObject);
+            Destroy(playerMovement.currentArtifact);
             playerMovement.currentArtifact = null;
             currentArtifact = null;
             artifactSlider.SetActive(false);
-            artifactSprite.enabled = false;
         }
     }
 
@@ -251,11 +247,10 @@ public class Player : MonoBehaviour, ISaveable
                 if (artifactsRoster[i] != null)
                 {
                     EquipeArtifact(i);
-                } 
+                }
                 break; // Saia do loop após encontrar a primeira ação acionada.
             }
         }
-        
     }
     public void AddArtifactRoster(ArtifactItem artefactItem, int index)
     {

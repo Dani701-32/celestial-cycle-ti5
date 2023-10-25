@@ -7,7 +7,7 @@ public class ArtifactUIController : MonoBehaviour
 {
     [SerializeField] private GameObject paintArea; // Parte que sera pintada no slider
     [SerializeField] private GameObject typeArtifactContainer; // Parte que sera pintada no slider
-    public Image image;
+    [SerializeField] private Image image;
     [SerializeField] private Image iconType;
     [SerializeField] private int currentCharge; 
     private Slider _slider;
