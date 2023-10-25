@@ -101,11 +101,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         if (runningAction.triggered)
             isRunning = !isRunning;
-        if (drawWeaponAction.triggered && currentWeapon != null)
-        {
-            drawWeapon = !drawWeapon;
-            counter = true;
-        }
+        // if (drawWeaponAction.triggered && currentWeapon != null)
+        // {
+        //     drawWeapon = !drawWeapon;
+        //     counter = true;
+        // }
         if (attackAction.triggered && !counter && isCombat && !isRunning)
         {
             delayAttack = 1.2f;
@@ -227,6 +227,10 @@ public class PlayerMovement : MonoBehaviour
                 rotationSpeed * Time.deltaTime
             );
         }
+    }
+    public void EquipeWeapon(){
+        drawWeapon = !drawWeapon;
+        counter = true;
     }
 
     void Attack()

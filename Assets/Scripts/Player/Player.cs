@@ -180,6 +180,7 @@ public class Player : MonoBehaviour, ISaveable
         hasWeapon = true;
         GameObject weapon = Instantiate(prefab, weaponSpot);
         playerMovement.currentWeapon = weapon;
+        playerMovement.EquipeWeapon();
         weapon.SetActive(playerMovement.combatMode);
         // weaponButton.SetActive(playerMovement.combatMode);
     }
