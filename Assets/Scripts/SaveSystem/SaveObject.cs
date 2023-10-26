@@ -10,9 +10,9 @@ public class SaveObject : MonoBehaviour
 
     public GameObject messageObject;
 
-    void Awake()
+    void Start()
     {
-        savingLoading = GetComponent<SavingLoading>();
+        savingLoading = SavingLoading.instance;
         ControlStateMessage(messageObject, false);
     }
 

@@ -5,9 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class DayNightCycle : MonoBehaviour
+public class DayNightCycle : MonoBehaviour, ISaveable
 {
     public static DayNightCycle InstanceTime;
+    public bool continueDayNight;
     private DateTime currentTime;
     private MoonPhases currentPhase;
     private bool isSaveNight = false, switchDay = false;
@@ -15,11 +16,7 @@ public class DayNightCycle : MonoBehaviour
     private TimeSpan sunriseTime, sunsetTime;
 
 
-    public float timeMultiplier, startHour;
-
-    public int phaseController;
-
-    public int day;
+    public float timeMultiplier;
 
     public Light sunLight;
 
@@ -44,25 +41,53 @@ public class DayNightCycle : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI textDays, textMoonPhase;
 
+    [Header("Save Variables")]
+    public float startHour;
+    public int day, phaseController;
+
     [SerializeField]
     private List<Light> cityLights;
 
+    private float initialHour;
+    private int initialDay, ininitialPhaseController;
+
     private void Awake()
     {
-        if (InstanceTime == null)
-        {
-            InstanceTime = this;
-        }
-        DontDestroyOnLoad(this);
+        if (InstanceTime == null) InstanceTime = this;
+
+        initialHour = startHour;
+        initialDay = day;
+        ininitialPhaseController = phaseController;
     }
 
-    void Start()
+    public void StartDayNightSystem()
     {
-        SetMoonPhase();
-        textDays.text = "Dia " + day.ToString();
+        if (GameController.gameController.savingLoadingController.StatusFile() && GameController.gameController.menuController.hasSaveGame)
+        {
+            SetMoonPhase();
+            continueDayNight = true;
+            textDays.text = "Dia " + day.ToString();
 
-        currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
-        hour = startHour;
+            currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+
+            hour = startHour;
+        }
+        else
+        {
+            startHour = initialHour;
+            day = initialDay;
+            phaseController = ininitialPhaseController;
+
+            SetMoonPhase();
+            continueDayNight = true;
+            textDays.text = "Dia " + day.ToString();
+
+            currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+
+            hour = startHour;
+        }
+
+        
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
@@ -71,17 +96,26 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.skybox = skyboxMat;
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
         RenderSettings.fogMode = FogMode.ExponentialSquared;
-        RenderSettings.fogDensity = fogDensity;  
+        RenderSettings.fogDensity = fogDensity;
+    }
+    void Start()
+    {
+        StartDayNightSystem();
+         
     }
     void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
-        UpdateLightSettings();
+        if(continueDayNight)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+            UpdateLightSettings();
 
-        if (hour == 0) switchDay = true;
-        else switchDay = false;
-        hour = currentTime.Hour;
+            if (hour == 0) switchDay = true;
+            else switchDay = false;
+            hour = currentTime.Hour;
+        }
+        
     }
 
     private void ControlLightsCity(float min, float max)
@@ -215,6 +249,33 @@ public class DayNightCycle : MonoBehaviour
     {
         return this.currentPhase;
     }
+
+
+    public object CaptureState()
+    {
+        return new SaveData
+        {
+            s_day = day,
+            s_phaseController = phaseController,
+            s_startHour = hour
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (SaveData)state;
+
+        startHour = saveData.s_startHour;
+        day = saveData.s_day;
+        phaseController = saveData.s_phaseController;   
+    }
+
+    [Serializable]
+    public struct SaveData
+    {
+        public float s_startHour;
+        public int s_day, s_phaseController;   
+    }
 }
 
 public enum MoonPhases
@@ -224,3 +285,5 @@ public enum MoonPhases
     FullMoon,
     ThirdQuarter,
 }
+
+

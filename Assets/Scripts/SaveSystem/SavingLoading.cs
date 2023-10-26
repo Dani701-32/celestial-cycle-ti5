@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,55 +8,45 @@ public class SavingLoading : MonoBehaviour
     public static SavingLoading instance;
     private string SavePath => $"{Application.persistentDataPath}/saveGame.txt";
 
-    private void Awake()
+    public void CallSave()
     {
-        if(instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        if (StatusFile())
+        if (StatusFile() && GameController.gameController.menuController.hasSaveGame)
         {
             Load();
+            Debug.Log("Carregou o jogo a partir do Save");
         }
         else
         {
-            Debug.Log("Inicializou mas NÃO tem save");
+            Debug.Log("Iniciou um Novo Jogo");
         }
+    }
+
+    private void Awake()
+    {
+        if (instance != null) Destroy(gameObject);
+        else instance = this;
     }
 
     public bool StatusFile()
     {
-        if (!File.Exists(SavePath))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        if (!File.Exists(SavePath)) return false;
+        else return true;
     }
 
-    [ContextMenu("Save")]
     public void Save()
     {
         var state = LoadFile();
         CaptureState(state);
         SaveFile(state);
+        GameController.gameController.inventorySystem.SaveInventory();
         Debug.Log("O Jogo foi Salvo");
     }
 
-    [ContextMenu("Load")]
     public void Load()
     {
         var state = LoadFile();
         RestoreState(state);
-        Debug.Log("O Jogo foi Carregado");
+        GameController.gameController.inventorySystem.LoadInventory();
     }
 
     private Dictionary<string, object> LoadFile()

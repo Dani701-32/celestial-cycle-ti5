@@ -12,15 +12,16 @@ public class GameController : MonoBehaviour
     public QuestSystem questSystem;
     public NPCDialogue _NPCDialogue;
     public Player player;
-    public Transform cam;
-    public CinemachineFreeLook freelookCamera;
-    private bool isMenu = false;
+    public SaveObject saveObject;
+    public MenuController menuController;
+    public SavingLoading savingLoadingController;
+    public DayNightCycle dayNightController;
+    
+    [HideInInspector] public bool isMenu = false;
     private string currentCameraX = "";
     private string currentCameraY = "";
 
     [Header("UI")]
-    [SerializeField]
-    private GameObject HUD;
     [SerializeField]
     private GameObject menuScreen;
 
@@ -30,15 +31,25 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private GameObject deathScreen,
-        popoutGame;
+        popoutGame, menuPrincipalScreen;
     public GameObject tutorialArtefact,
-        tutorialCombat;
+        tutorialCombat, popBackMenu;
+
+
+    [Header("Camera Controller")]
+    public string triggerTag;
+    public Transform cam;
+    public CinemachineFreeLook freelookCamera;
+    public CinemachineVirtualCamera menuCamera;
+    public CinemachineVirtualCamera[] virtualCameras;
+    public CinemachineFreeLook[] freeLookCameras;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         gameController = (gameController == null) ? this : gameController;
         inventorySystem = GetComponent<InventorySystem>();
+        savingLoadingController = GetComponent<SavingLoading>();
         questSystem = GetComponent<QuestSystem>();
         _NPCDialogue = GetComponent<NPCDialogue>();
         currentCameraX = "Mouse X";
@@ -95,39 +106,78 @@ public class GameController : MonoBehaviour
 
     public void MenuScreen()
     {
-        if (isMenu)
+        if(!saveObject.isSave)
         {
-            GameController.gameController.player.playerMovement.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            inventorySystem.CloseScreen();
-            inventorySystem.CloseArtifactScreen();
-            questSystem.CloseScreen();
-            menuScreen.SetActive(false);
-            popoutGame.SetActive(false);
-            // HUD.SetActive(true);
+            if (isMenu)
+            {
+                GameController.gameController.player.playerMovement.enabled = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                inventorySystem.CloseScreen();
+                inventorySystem.CloseArtifactScreen();
+                questSystem.CloseScreen();
+                menuScreen.SetActive(false);
+                popoutGame.SetActive(false);
 
-            tutorialScreen.SetActive(false);
-            tutorialDescription.SetActive(false);
-            ReleaseCamera();
-            Time.timeScale = 1.0f;
-            isMenu = false;
+                tutorialScreen.SetActive(false);
+                tutorialDescription.SetActive(false);
+                ReleaseCamera();
+                Time.timeScale = 1.0f;
+                isMenu = false;
+            }
+            else
+            {
+                GameController.gameController.player.playerMovement.enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                menuScreen.SetActive(true);
+                Time.timeScale = 0f;
+                StopCamera();
+                isMenu = true;
+            }
         }
-        else
-        {
-            GameController.gameController.player.playerMovement.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-            menuScreen.SetActive(true);
-            // HUD.SetActive(false);
-            Time.timeScale = 0f;
-            StopCamera();
-            isMenu = true;
-        }
+        
     }
 
     public void QuitGame()
     {
         popoutGame.SetActive(false);
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Menu");
+        popBackMenu.SetActive(false);
+        GameController.gameController.isMenu = false;
+        GameController.gameController.MenuScreen();
+        menuPrincipalScreen.SetActive(true);
+        menuScreen.SetActive(false);
+        menuController.canvasGame.SetActive(false);
+        menuController.uiDayNight.SetActive(false);
+        menuController.mainMenuBackground.SetActive(true);
+        menuController.CheckSave(GameController.gameController.savingLoadingController.StatusFile());
+        GameController.gameController.inventorySystem.ClearInventoryItens();
+        GameController.gameController.inventorySystem.ClearInventoryArtifacts();
+        GameController.gameController.inventorySystem.StartInventory();
+        GameController.gameController.dayNightController.StartDayNightSystem();
+
+        SwitchToCameraVirtual(menuCamera);
+    }
+
+    public void SwitchToCameraVirtual(CinemachineVirtualCamera targetCamera)
+    {
+        freelookCamera.GetComponent<CinemachineFreeLook>().Priority = 9;
+        menuCamera.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+
+        foreach (CinemachineFreeLook camera in freeLookCameras)
+        {
+            camera.enabled = false;
+            targetCamera.enabled = true;
+        }
+    }
+
+    public void SwitchToCameraFreeLook(CinemachineFreeLook targetCamera)
+    {
+        freelookCamera.GetComponent<CinemachineFreeLook>().Priority = 10;
+        menuCamera.GetComponent<CinemachineVirtualCamera>().Priority = 9;
+
+        foreach (CinemachineVirtualCamera camera in virtualCameras)
+        {
+            camera.enabled = false;
+            targetCamera.enabled = true;
+        }
     }
 }
