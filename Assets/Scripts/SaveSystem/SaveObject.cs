@@ -4,66 +4,51 @@ using UnityEngine;
 
 public class SaveObject : MonoBehaviour
 {
+    private PlayerMovement playerMovement;
     private SavingLoading savingLoading;
 
-    public bool isSave = false;
+    public bool isSave;
 
-    public GameObject messageObject;
+    [SerializeField]
+    private GameObject canvas;
 
     void Start()
     {
         savingLoading = SavingLoading.instance;
-        ControlStateMessage(messageObject, false);
+        canvas.SetActive(false);
     }
 
-    public void ControlStateMessage(GameObject obj, bool state)
+    void Update()
     {
-        obj.SetActive(state);
+        if (playerMovement != null && playerMovement.interactAction.triggered)
+        {
+            CallSaveUI();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent(out PlayerMovement playerMovement))
         {
             isSave = true;
-            ControlPlayerActionsOnSave(isSave);
+            canvas.SetActive(true);
+            this.playerMovement = playerMovement;          
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isSave = false;
-        ControlPlayerActionsOnSave(isSave);
+        if (other.CompareTag("Player"))
+        {
+            isSave = false;
+            canvas.SetActive(false);
+            this.playerMovement = null;  
+        }
     }
 
     public void CallSaveUI()
     {
         savingLoading.Save();
-        isSave = false;
-        ControlPlayerActionsOnSave(isSave);
     }
 
-    public void ExitSaveUI()
-    {
-        isSave = false;
-        ControlPlayerActionsOnSave(isSave);
-    }
-
-    public void ControlPlayerActionsOnSave(bool state)
-    {
-        if(state)
-        {
-            ControlStateMessage(messageObject, true);
-            Cursor.lockState = CursorLockMode.None;
-            GameController.gameController.player.playerMovement.enabled = false;
-            GameController.gameController.StopCamera();
-        }
-        else
-        {
-            ControlStateMessage(messageObject, false);
-            Cursor.lockState = CursorLockMode.Locked;
-            GameController.gameController.ReleaseCamera();
-            GameController.gameController.player.playerMovement.enabled = true;
-        }
-    }
 }
