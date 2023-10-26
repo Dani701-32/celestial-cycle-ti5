@@ -47107,22 +47107,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: health
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: isDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: lifeSlider
       value: 
       objectReference: {fileID: 1102938072}
@@ -47135,10 +47119,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1087826013}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: newMoonSlider
-      value: 
-      objectReference: {fileID: 550711200}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: artifactButton
       value: 
       objectReference: {fileID: 1134086731}
@@ -47150,10 +47130,6 @@ PrefabInstance:
       propertyPath: artifactSprite
       value: 
       objectReference: {fileID: 1178437691}
-    - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: fullMoonSlider
-      value: 
-      objectReference: {fileID: 1202854334}
     - target: {fileID: 3090711682512035670, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: moonArtifacts.Array.data[0]
       value: 
@@ -47213,14 +47189,6 @@ PrefabInstance:
     - target: {fileID: 5019829766420754210, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: jumpSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
-      propertyPath: speedDampTime
-      value: 0.434
       objectReference: {fileID: 0}
     - target: {fileID: 5019829766420754211, guid: f6f74e862ec61214191938c3605f49fc, type: 3}
       propertyPath: cameraTransform
