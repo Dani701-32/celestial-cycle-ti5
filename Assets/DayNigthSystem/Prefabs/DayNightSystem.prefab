@@ -79,12 +79,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824309d9977dc9a4f80508d9376d8a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeMultiplier: 800
+  continueDayNight: 0
+  timeMultiplier: 400
   sunLight: {fileID: 6314617700747837562}
   skyboxMat: {fileID: 2100000, guid: 27b578e8dcf173849af7d42e4cdbfa06, type: 2}
   lightChangeCurve:
@@ -213,30 +214,10 @@ MonoBehaviour:
   timeText: {fileID: 7851336929399224883}
   textDays: {fileID: 7851336928540116144}
   textMoonPhase: {fileID: 7851336928958009057}
-  rotLight: {x: 0, y: 0, z: 0}
+  startHour: 12
   day: 1
   phaseController: 0
-  startHour: 12
   cityLights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
