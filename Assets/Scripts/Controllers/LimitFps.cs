@@ -19,7 +19,10 @@ public class LimitFps : MonoBehaviour
     private void Awake()
     {
         if (limiterFps) Application.targetFrameRate = (int)limit;
-        else Application.targetFrameRate = Screen.currentResolution.refreshRate;        
+        else Application.targetFrameRate = Screen.currentResolution.refreshRate;
+
+        // Sync the frame rate to the screen's refresh rate
+        QualitySettings.vSyncCount = 1;
     }
 
     //void Start()
