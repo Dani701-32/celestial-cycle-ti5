@@ -103,7 +103,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
         StartDayNightSystem();
          
     }
-    void Update()
+    void FixedUpdate()
     {
         if(continueDayNight)
         {
@@ -114,8 +114,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
             if (hour == 0) switchDay = true;
             else switchDay = false;
             hour = currentTime.Hour;
-        }
-        
+        }     
     }
 
     private void ControlLightsCity(float min, float max)
