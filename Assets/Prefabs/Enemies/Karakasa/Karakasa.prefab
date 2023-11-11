@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088276608411043823}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_Tip_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6947279072990611528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Clavicle.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1578435464871345150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Proximal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3534401439919363553}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forarm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9884787667638800}
   - component: {fileID: 552156409989581274}
-  m_Layer: 0
+  - component: {fileID: 7663416056344091538}
+  - component: {fileID: 8147016549320951242}
+  - component: {fileID: -8215091619019997203}
+  m_Layer: 8
   m_Name: Karakasa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,6 +185,70 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7663416056344091538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822134006432415914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab1f10e5354d9a4ebad8f5546d863e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieInStun: 0
+  isAgressive: 0
+  health: 50
+  attackCoulDown: 2
+  attackRange: 1
+  viewRange: 4
+  spriteRange: 5
+  canReceiveDamage: 0
+  animator: {fileID: 0}
+  enemyType: 0
+  moonPhase: 2
+  timePassad: 0
+  newDestnationCD: 0.5
+  waypoints: []
+  currentWaypointIndex: 0
+  isFoward: 1
+--- !u!136 &8147016549320951242
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822134006432415914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.41
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!195 &-8215091619019997203
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822134006432415914}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.45
+  m_Speed: 3
+  m_Acceleration: 5
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 3
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &898162562821921954
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7072387703668499119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Base.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4790876110887948778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Distal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8132609680247149019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2304756298238124070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725836404712184387}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8604624747122309309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Middle.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6339235205230885336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lumbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254693120398033447}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Botton.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8518532560191330966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6562485943892090893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Botton.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,6 +575,52 @@ Transform:
   m_Father: {fileID: 8463647361192439155}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2196005822277795866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8004076024994440601}
+  - component: {fileID: 1267612247387990695}
+  m_Layer: 8
+  m_Name: Enemy_Damage_dealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8004076024994440601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196005822277795866}
+  m_LocalRotation: {x: 0.20488015, y: -0.023595903, z: -0.0015774003, w: 0.9785013}
+  m_LocalPosition: {x: -0.00005, y: 0.0033, z: 0.00104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7665559849991579979}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 23.633, y: -2.93, z: -0.798}
+--- !u!114 &1267612247387990695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196005822277795866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01727863f6afe264e8929b1bd1b8bb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLength: 0.33
+  weaponDamage: 5
 --- !u!1 &2384093520343019938
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4187981583598747892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1936527908332089491}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Armature_Karakasa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1097914253206223011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5075578683517045367}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Umbrella_Cable_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3112921252998366363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,7 +790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 402988264394827654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Distal.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 70183303223917451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Base.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +853,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3555573275181181994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Proximal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +885,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7961436035318913006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8711814256391934352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Distal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2884148841529208591}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Middle.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463647361192439155}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6653974178645943328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +1047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1740680254863444363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +1079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3341576902823668150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +1111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7474933248378097420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Botton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5830681577841623593}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Distal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7446562490512087357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Umbrella_Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,7 +1207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6018949030063506895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Distal.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1125,7 +1238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2904745392177632644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4897305455332062417}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Clavicle.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1188,7 +1301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7665559849991579979}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,6 +1321,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2638750739016447951}
+  - {fileID: 8004076024994440601}
   m_Father: {fileID: 8132609680247149019}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1220,7 +1334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6772116604212662933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Distal.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7828689474084224536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822211302781855164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Proximal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,7 +1429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1864812538056475747}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Middle.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700912380858249503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Distal.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2638750739016447951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8439064897818381204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Proximal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,7 +1556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2940716485386222385}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Distal.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1473,7 +1587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8095445500911839087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Forarm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1366071956586457981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1537,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8282085345292854426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Distal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4576827483190860766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mounth_Top_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1600,7 +1714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3778922676733786037}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Distal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1632,7 +1746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3066617846699490222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Middle.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1664,7 +1778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5966465870482026144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Proximal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1696,7 +1810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8197576070027915945}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Proximal.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1728,7 +1842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8169348004356683947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Index_Middle.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1760,7 +1874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1297114482068439671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mounth_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1792,7 +1906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257227006635951532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1823,7 +1937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 29144439257903688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1856,7 +1970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3137162440522915249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Distal_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1887,7 +2001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153962719055447777}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Base.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1919,7 +2033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6226905729956090588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1950,7 +2064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2274188524767744019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1984,7 +2098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5261483323636742622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Distal.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2015,7 +2129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6995211314529807348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Distal.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6488526188011371870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2079,7 +2193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5934960817938729538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2111,7 +2225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8016149300648605714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Middle.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2144,7 +2258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5425235041522307195}
   - component: {fileID: 498015434811740086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Umbrella.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2290,7 +2404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 45391346944332479}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Base.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2322,7 +2436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4247252924894853712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Base.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2354,7 +2468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9109777518141358694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2386,7 +2500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4333300425136930572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2418,7 +2532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5047995131046530689}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2450,7 +2564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3427603926754931615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mounth_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2482,7 +2596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9107498669308830990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Middle.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,7 +2628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2967048342714687402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: B_Thumb_Middle.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2546,7 +2660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6579260359555232489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Phalanx_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2578,7 +2692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6325126479222303190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: F_Thumb_Base.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,7 +2724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5275149137550872213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
