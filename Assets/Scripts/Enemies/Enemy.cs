@@ -50,7 +50,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool CanSpawn(MoonPhases timeMoonphase)
     {
-        return timeMoonphase == moonPhase;
+        return true;
     }
 
     void OnDrawGizmos()
