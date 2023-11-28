@@ -32,7 +32,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
 
     [Header("Post-Processing:")]
     public Volume nightPost;
-   
+
     [Header("Fog:")]
     public float fogDensity = 0.0035f;
     public Color dayfogColor, nightfogColor;
@@ -87,7 +87,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
             hour = startHour;
         }
 
-        
+
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
@@ -101,11 +101,11 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     void Start()
     {
         StartDayNightSystem();
-         
+
     }
     void FixedUpdate()
     {
-        if(continueDayNight)
+        if (continueDayNight)
         {
             UpdateTimeOfDay();
             RotateSun();
@@ -114,7 +114,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
             if (hour == 0) switchDay = true;
             else switchDay = false;
             hour = currentTime.Hour;
-        }     
+        }
     }
 
     private void ControlLightsCity(float min, float max)
@@ -126,7 +126,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     {
         currentTime = currentTime.AddSeconds(Time.deltaTime * timeMultiplier);
 
-        if(timeText != null)
+        if (timeText != null)
         {
             timeText.text = currentTime.ToString("HH:mm");
         }
@@ -154,7 +154,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     {
         float sunLightRotation;
 
-        if(currentTime.TimeOfDay > sunriseTime && currentTime.TimeOfDay < sunsetTime)
+        if (currentTime.TimeOfDay > sunriseTime && currentTime.TimeOfDay < sunsetTime)
         {
             TimeSpan sunriseToSunsetDuration = CalculateTimeDifference(sunriseTime, sunsetTime);
             TimeSpan timeSinceSunrise = CalculateTimeDifference(sunriseTime, currentTime.TimeOfDay);
@@ -183,7 +183,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     {
         float dotProduct = Vector3.Dot(sunLight.transform.forward, Vector3.down);
 
-        if(!isNight)
+        if (!isNight)
         {
             sunLight.color = dayColor;
             sunLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightChangeCurve.Evaluate(dotProduct));
@@ -205,7 +205,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
     {
         TimeSpan difference = toTime - fromTime;
 
-        if(difference.TotalSeconds < 0)
+        if (difference.TotalSeconds < 0)
         {
             difference += TimeSpan.FromHours(24);
         }
@@ -266,14 +266,21 @@ public class DayNightCycle : MonoBehaviour, ISaveable
 
         startHour = saveData.s_startHour;
         day = saveData.s_day;
-        phaseController = saveData.s_phaseController;   
+        phaseController = saveData.s_phaseController;
     }
 
     [Serializable]
     public struct SaveData
     {
         public float s_startHour;
-        public int s_day, s_phaseController;   
+        public int s_day, s_phaseController;
+    }
+
+    public void ActiveUI(bool disable)
+    {
+        timeText.enabled = disable;
+        textDays.enabled = disable;
+        textMoonPhase.enabled = disable;
     }
 }
 

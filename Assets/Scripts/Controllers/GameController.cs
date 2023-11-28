@@ -126,6 +126,7 @@ public class GameController : MonoBehaviour
                 }
                 Time.timeScale = 1.0f;
                 isMenu = false;
+                dayNightController.ActiveUI(true);
             }
             else
             {
@@ -135,6 +136,7 @@ public class GameController : MonoBehaviour
                 Time.timeScale = 0f;
                 StopCamera();
                 isMenu = true;
+                dayNightController.ActiveUI(false);
             }
         }
         
