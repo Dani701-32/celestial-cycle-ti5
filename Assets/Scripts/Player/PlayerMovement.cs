@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour, ISaveable
         }
     }
     public void EquipeWeapon(){
-        drawWeapon = !drawWeapon;
+        drawWeapon = true;
         counter = true;
     }
 
@@ -287,9 +287,7 @@ public class PlayerMovement : MonoBehaviour, ISaveable
         counter = true;
         currentTime = timeToDraw;
         drawWeapon = false;
-        Destroy(currentWeapon);
         DrawWeapon();
-        currentWeapon = null;
     }
 
     public void StartDealDamage()

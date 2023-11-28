@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, ISaveable
     [SerializeField]
     private Slider slider;
     public bool hasArtifact;
-    public bool hasWeapon { get; private set; }
+    public bool hasWeapon;
 
     private Vector3 playerPos, initialPos;
 
@@ -186,6 +186,7 @@ public class Player : MonoBehaviour, ISaveable
         hasWeapon = true;
         GameObject weapon = Instantiate(prefab, weaponSpot);
         playerMovement.currentWeapon = weapon;
+        
         playerMovement.EquipeWeapon();
         weapon.SetActive(playerMovement.combatMode);
         // weaponButton.SetActive(playerMovement.combatMode);
@@ -194,8 +195,10 @@ public class Player : MonoBehaviour, ISaveable
     public void RemoveWeapon()
     {
         hasWeapon = false;
+        Destroy(playerMovement.currentWeapon);
+        playerMovement.currentWeapon = null;
         Debug.Log("Remvoer arma");
-        playerMovement.UniqueppedWeapon();
+        // playerMovement.UniqueppedWeapon();
     }
 
     public void RemoveArtifact(int index)

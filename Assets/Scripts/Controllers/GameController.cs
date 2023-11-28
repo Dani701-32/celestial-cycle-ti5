@@ -121,6 +121,9 @@ public class GameController : MonoBehaviour
                 tutorialScreen.SetActive(false);
                 tutorialDescription.SetActive(false);
                 ReleaseCamera();
+                if(!player.hasWeapon && player.playerMovement.currentWeapon != null){
+                    player.playerMovement.UniqueppedWeapon(); 
+                }
                 Time.timeScale = 1.0f;
                 isMenu = false;
             }
