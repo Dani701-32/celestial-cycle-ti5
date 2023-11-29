@@ -49,10 +49,12 @@ public class EssenceObject : MonoBehaviour
     }
     private void CanPick()
     {
-        canPick = moonPhase == timeController.GetCurrentPhase();
+        canPick = moonPhase == timeController.GetCurrentPhase() && timeController.isNight;
         if (childObject != null)
+        {
             childObject.SetActive(canPick);
-
+            canvas.SetActive(canPick);
+        }
     }
 
     void OnTriggerEnter(Collider other)

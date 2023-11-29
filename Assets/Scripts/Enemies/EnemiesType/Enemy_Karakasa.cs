@@ -23,6 +23,9 @@ public class Enemy_Karakasa : Enemy
     // Update is called once per frame
     void Update()
     {
+        if(!gameController.dayNightController.isNight){
+            Die();
+        }
         Attack();
         animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
         if (
