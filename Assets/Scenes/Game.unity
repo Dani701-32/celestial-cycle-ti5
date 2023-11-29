@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06192692, g: 0.103451565, b: 0.16723117, a: 1}
+  m_IndirectSpecularColor: {r: 0.06319856, g: 0.10576307, b: 0.17073743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 5993820}
   - component: {fileID: 5993821}
   m_Layer: 0
-  m_Name: Spawn Human Crescente (2)
+  m_Name: Spawn Human Crescente Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 5681174603262550212, guid: e9621decf8c23ab44b63b197f758eac6, type: 3}
+  enemiePrefabs: {fileID: 729723483476594062, guid: 4a5eaa03270e26d48b7edd713a979242, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 19530292}
   - component: {fileID: 19530293}
   m_Layer: 0
-  m_Name: Spawn Human Minaguante (4)
+  m_Name: Spawn Human Minaguante Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 9006172085756594182, guid: 8e0f684eac70a9b4d850c2956261c504, type: 3}
+  enemiePrefabs: {fileID: 8720996371091688877, guid: 177e22be34c652d47a912dd4cfbec6e9, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -3262,7 +3262,7 @@ GameObject:
   - component: {fileID: 80723337}
   - component: {fileID: 80723338}
   m_Layer: 0
-  m_Name: Spawn Human Nova (5)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3285,7 +3285,7 @@ Transform:
   - {fileID: 1334310412}
   - {fileID: 1346523715}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 5
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &80723338
 MonoBehaviour:
@@ -3299,7 +3299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -5778,7 +5778,7 @@ GameObject:
   - component: {fileID: 179476043}
   - component: {fileID: 179476044}
   m_Layer: 0
-  m_Name: Spawn Human Nova (1)
+  m_Name: 'Spawn Human Nova '
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9186,7 +9186,7 @@ Transform:
   - {fileID: 1926137165}
   - {fileID: 721463619}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &321409835
 MonoBehaviour:
@@ -9269,7 +9269,7 @@ Transform:
   - {fileID: 1641301471}
   - {fileID: 1516503256}
   m_Father: {fileID: 1733259381}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &324560638
 MonoBehaviour:
@@ -11433,7 +11433,7 @@ Transform:
   - {fileID: 714815870}
   - {fileID: 346560031}
   m_Father: {fileID: 1733259381}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &418250540
 MonoBehaviour:
@@ -11936,7 +11936,7 @@ Transform:
   - {fileID: 1312746698}
   - {fileID: 1366118177}
   m_Father: {fileID: 1231793878}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &433426964
 MonoBehaviour:
@@ -14069,13 +14069,13 @@ Transform:
   - {fileID: 787930132}
   - {fileID: 1998921936}
   - {fileID: 1490524170}
-  - {fileID: 80723337}
   - {fileID: 1233965895}
   - {fileID: 1974307851}
   - {fileID: 864378268}
   - {fileID: 321409834}
   - {fileID: 811756134}
   - {fileID: 2070004120}
+  - {fileID: 80723337}
   m_Father: {fileID: 428070479}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18069,7 +18069,7 @@ GameObject:
   - component: {fileID: 637259528}
   - component: {fileID: 637259529}
   m_Layer: 0
-  m_Name: Spawn Human Minaguante (5)
+  m_Name: Spawn Human Minaguante Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -18106,7 +18106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 9006172085756594182, guid: 8e0f684eac70a9b4d850c2956261c504, type: 3}
+  enemiePrefabs: {fileID: 8720996371091688877, guid: 177e22be34c652d47a912dd4cfbec6e9, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -19872,7 +19872,7 @@ GameObject:
   - component: {fileID: 701448223}
   - component: {fileID: 701448224}
   m_Layer: 0
-  m_Name: Spawn Human FM  (2)
+  m_Name: Spawn Human FM Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -19895,7 +19895,7 @@ Transform:
   - {fileID: 376848195}
   - {fileID: 407978168}
   m_Father: {fileID: 2052726702}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &701448224
 MonoBehaviour:
@@ -19909,7 +19909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 1125934309644148082, guid: f3947a5644a97f04ab21c8db42c540bf, type: 3}
+  enemiePrefabs: {fileID: 5914262093290348102, guid: c3c79fcfcfb5b2a47b6f98640c3fadf4, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -21075,7 +21075,7 @@ GameObject:
   - component: {fileID: 748498789}
   - component: {fileID: 748498790}
   m_Layer: 0
-  m_Name: Spawn Human FM (1)
+  m_Name: 'Spawn Human FM '
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -22124,7 +22124,7 @@ GameObject:
   - component: {fileID: 792737996}
   - component: {fileID: 792737997}
   m_Layer: 0
-  m_Name: Spawn Human Minaguante
+  m_Name: Spawn Human Minaguante Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -22161,7 +22161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 9006172085756594182, guid: 8e0f684eac70a9b4d850c2956261c504, type: 3}
+  enemiePrefabs: {fileID: 8720996371091688877, guid: 177e22be34c652d47a912dd4cfbec6e9, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -22455,7 +22455,7 @@ GameObject:
   - component: {fileID: 811756134}
   - component: {fileID: 811756135}
   m_Layer: 0
-  m_Name: Spawn Human Nova (10)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -22478,7 +22478,7 @@ Transform:
   - {fileID: 2011010184}
   - {fileID: 1219179581}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &811756135
 MonoBehaviour:
@@ -22492,7 +22492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -23207,7 +23207,7 @@ GameObject:
   - component: {fileID: 854071233}
   - component: {fileID: 854071234}
   m_Layer: 0
-  m_Name: 'Spawn Human FM '
+  m_Name: Spawn Human FM Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -23230,7 +23230,7 @@ Transform:
   - {fileID: 83931735}
   - {fileID: 580038102}
   m_Father: {fileID: 2052726702}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &854071234
 MonoBehaviour:
@@ -23244,7 +23244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 1125934309644148082, guid: f3947a5644a97f04ab21c8db42c540bf, type: 3}
+  enemiePrefabs: {fileID: 5914262093290348102, guid: c3c79fcfcfb5b2a47b6f98640c3fadf4, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -23401,7 +23401,7 @@ Transform:
   - {fileID: 2109792053}
   - {fileID: 357191910}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &864378269
 MonoBehaviour:
@@ -25720,7 +25720,7 @@ Transform:
   - {fileID: 346229260}
   - {fileID: 445352609}
   m_Father: {fileID: 1231793878}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &956872445
 MonoBehaviour:
@@ -27954,7 +27954,7 @@ Transform:
   - {fileID: 1449534771}
   - {fileID: 73381136}
   m_Father: {fileID: 1733259381}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1028451835
 MonoBehaviour:
@@ -29393,7 +29393,7 @@ Transform:
   - {fileID: 731459922}
   - {fileID: 634625460}
   m_Father: {fileID: 2052726702}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1080237875
 MonoBehaviour:
@@ -30137,7 +30137,7 @@ GameObject:
   - component: {fileID: 1124803141}
   - component: {fileID: 1124803142}
   m_Layer: 0
-  m_Name: Spawn Human Crescente (1)
+  m_Name: Spawn Human Crescente Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -30174,7 +30174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 1125934309644148082, guid: f3947a5644a97f04ab21c8db42c540bf, type: 3}
+  enemiePrefabs: {fileID: 729723483476594062, guid: 4a5eaa03270e26d48b7edd713a979242, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -32973,7 +32973,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228118434}
-  m_LocalRotation: {x: 0.05600007, y: -0.0000000021474227, z: 1.2044483e-10, w: 0.9984308}
+  m_LocalRotation: {x: 0.05600007, y: 0.0000000021474222, z: -1.204448e-10, w: 0.9984308}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33042,10 +33042,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1951443688}
-  - {fileID: 956872444}
   - {fileID: 1591838690}
-  - {fileID: 433426963}
   - {fileID: 1816690022}
+  - {fileID: 956872444}
+  - {fileID: 433426963}
   - {fileID: 585572421}
   - {fileID: 302910798}
   - {fileID: 1604438617}
@@ -33114,7 +33114,7 @@ GameObject:
   - component: {fileID: 1233965895}
   - component: {fileID: 1233965896}
   m_Layer: 0
-  m_Name: Spawn Human Nova (6)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -33137,7 +33137,7 @@ Transform:
   - {fileID: 2100076411}
   - {fileID: 1529469941}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1233965896
 MonoBehaviour:
@@ -33151,7 +33151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -33776,7 +33776,7 @@ Transform:
   - {fileID: 783167954}
   - {fileID: 1356938237}
   m_Father: {fileID: 1733259381}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1264027166
 MonoBehaviour:
@@ -34205,7 +34205,7 @@ GameObject:
   - component: {fileID: 1271971914}
   - component: {fileID: 1271971915}
   m_Layer: 0
-  m_Name: Spawn Human Minaguante (1)
+  m_Name: Spawn Human Minaguante
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -34228,7 +34228,7 @@ Transform:
   - {fileID: 1619295738}
   - {fileID: 1946937867}
   m_Father: {fileID: 1712449017}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1271971915
 MonoBehaviour:
@@ -38906,7 +38906,7 @@ GameObject:
   - component: {fileID: 1446274033}
   - component: {fileID: 1446274034}
   m_Layer: 0
-  m_Name: Spawn Human FM (3)
+  m_Name: Spawn Human Armeed FM
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -38943,7 +38943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 1125934309644148082, guid: f3947a5644a97f04ab21c8db42c540bf, type: 3}
+  enemiePrefabs: {fileID: 5914262093290348102, guid: c3c79fcfcfb5b2a47b6f98640c3fadf4, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -39557,7 +39557,7 @@ Transform:
   - {fileID: 868345015}
   - {fileID: 150476672}
   m_Father: {fileID: 1712449017}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1476102038
 MonoBehaviour:
@@ -39710,7 +39710,7 @@ GameObject:
   - component: {fileID: 1490524170}
   - component: {fileID: 1490524171}
   m_Layer: 0
-  m_Name: Spawn Human Nova (4)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -39747,7 +39747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -41697,7 +41697,7 @@ Transform:
   - {fileID: 480972966}
   - {fileID: 540306758}
   m_Father: {fileID: 1231793878}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1591838691
 MonoBehaviour:
@@ -44038,8 +44038,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 629069876}
-  - {fileID: 1476102037}
   - {fileID: 1271971914}
+  - {fileID: 1476102037}
   - {fileID: 748498789}
   m_Father: {fileID: 428070479}
   m_RootOrder: 5
@@ -44525,10 +44525,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1941970905}
-  - {fileID: 418250539}
   - {fileID: 1264027165}
-  - {fileID: 324560637}
   - {fileID: 1028451834}
+  - {fileID: 418250539}
+  - {fileID: 324560637}
   - {fileID: 1798685358}
   - {fileID: 41355609}
   - {fileID: 353434781}
@@ -46310,7 +46310,7 @@ Transform:
   - {fileID: 40366076}
   - {fileID: 1774205208}
   m_Father: {fileID: 1231793878}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1816690023
 MonoBehaviour:
@@ -47516,7 +47516,7 @@ Transform:
   - {fileID: 1611442993}
   - {fileID: 846889418}
   m_Father: {fileID: 2052726702}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1853283802
 MonoBehaviour:
@@ -47919,7 +47919,7 @@ GameObject:
   - component: {fileID: 1871641192}
   - component: {fileID: 1871641193}
   m_Layer: 0
-  m_Name: Spawn Human Nova (2)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -47956,7 +47956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -47971,7 +47971,7 @@ GameObject:
   - component: {fileID: 1871841825}
   - component: {fileID: 1871841826}
   m_Layer: 0
-  m_Name: Spawn Human Nova (2)
+  m_Name: Spawn Human Nova
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -49748,7 +49748,7 @@ GameObject:
   - component: {fileID: 1940528561}
   - component: {fileID: 1940528562}
   m_Layer: 0
-  m_Name: Spawn Human Nova (1)
+  m_Name: Spawn Human Nova
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -50286,7 +50286,7 @@ GameObject:
   - component: {fileID: 1971882959}
   - component: {fileID: 1971882960}
   m_Layer: 0
-  m_Name: Spawn Human Nova (2)
+  m_Name: Spawn Human Nova
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -50392,7 +50392,7 @@ Transform:
   - {fileID: 389493689}
   - {fileID: 1221008801}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1974307852
 MonoBehaviour:
@@ -50822,7 +50822,7 @@ GameObject:
   - component: {fileID: 1998921936}
   - component: {fileID: 1998921937}
   m_Layer: 0
-  m_Name: Spawn Human Nova (3)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -50859,7 +50859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -51777,11 +51777,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1853283801}
   - {fileID: 854071233}
-  - {fileID: 1080237874}
   - {fileID: 2118277526}
   - {fileID: 701448223}
+  - {fileID: 1853283801}
+  - {fileID: 1080237874}
   - {fileID: 1365693330}
   m_Father: {fileID: 428070479}
   m_RootOrder: 13
@@ -52114,7 +52114,7 @@ GameObject:
   - component: {fileID: 2070004120}
   - component: {fileID: 2070004121}
   m_Layer: 0
-  m_Name: Spawn Human Nova (11)
+  m_Name: Spawn Human Nova Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -52137,7 +52137,7 @@ Transform:
   - {fileID: 778281797}
   - {fileID: 979094324}
   m_Father: {fileID: 523035404}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2070004121
 MonoBehaviour:
@@ -52151,7 +52151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 7937807095936380686, guid: c161390935bdb0d4cbab517f4da7847d, type: 3}
+  enemiePrefabs: {fileID: 7456029968150086718, guid: 5aa25d8b1739c4b40ba5b2c70ef6a7c2, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -52228,7 +52228,7 @@ GameObject:
   - component: {fileID: 2081539699}
   - component: {fileID: 2081539700}
   m_Layer: 0
-  m_Name: Spawn Human Minaguante (3)
+  m_Name: Spawn Human Minaguante Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -52265,7 +52265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 9006172085756594182, guid: 8e0f684eac70a9b4d850c2956261c504, type: 3}
+  enemiePrefabs: {fileID: 8720996371091688877, guid: 177e22be34c652d47a912dd4cfbec6e9, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
@@ -53046,7 +53046,7 @@ GameObject:
   - component: {fileID: 2118277526}
   - component: {fileID: 2118277527}
   m_Layer: 0
-  m_Name: Spawn Human FM  (1)
+  m_Name: Spawn Human FM  Armeed
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -53069,7 +53069,7 @@ Transform:
   - {fileID: 1879407088}
   - {fileID: 241497675}
   m_Father: {fileID: 2052726702}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2118277527
 MonoBehaviour:
@@ -53083,7 +53083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44fe075a1cd4f84bb9bb947a54bec3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiePrefabs: {fileID: 1125934309644148082, guid: f3947a5644a97f04ab21c8db42c540bf, type: 3}
+  enemiePrefabs: {fileID: 5914262093290348102, guid: c3c79fcfcfb5b2a47b6f98640c3fadf4, type: 3}
   size: {x: 2, y: 0.2, z: 2}
   enemy: {fileID: 0}
   waypoints: []
