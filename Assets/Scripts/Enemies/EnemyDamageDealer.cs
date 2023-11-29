@@ -41,7 +41,7 @@ public class EnemyDamageDealer : MonoBehaviour
         }
     }
 
-    public void StarDealDamage()
+    public void StartDealDamage()
     {
         canDealDamage = true;
         hasDealtDamage = false;

@@ -70,9 +70,9 @@ public abstract class Enemy : MonoBehaviour
         return enemyType;
     }
 
-    public void StarDealDamage()
+    public void StartDealDamage()
     {
-        GetComponentInChildren<EnemyDamageDealer>().StarDealDamage();
+        GetComponentInChildren<EnemyDamageDealer>().StartDealDamage();
     }
 
     public void EndDealDamage()

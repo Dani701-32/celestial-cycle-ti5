@@ -59,6 +59,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        deathScreen.SetActive(false); 
         tutorialScreen.SetActive(false);
         tutorialDescription.SetActive(false);
         menuScreen.SetActive(false);
@@ -146,6 +147,7 @@ public class GameController : MonoBehaviour
     {
         popoutGame.SetActive(false);
         popBackMenu.SetActive(false);
+        deathScreen.SetActive(false);
         GameController.gameController.isMenu = false;
         GameController.gameController.MenuScreen();
         menuPrincipalScreen.SetActive(true);

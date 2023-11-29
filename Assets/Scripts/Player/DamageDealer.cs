@@ -47,7 +47,7 @@ public class DamageDealer : MonoBehaviour
         hasDealtDamage.Clear();
     }
 
-    public void EndDamage()
+    public void EndDealDamage()
     {
         canDamage = false;
     }

@@ -83,6 +83,7 @@ public class Player : MonoBehaviour, ISaveable
         };
 
         animator = GetComponent<Animator>();
+        
         isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
         artifactSlider.SetActive(false);
@@ -248,6 +249,20 @@ public class Player : MonoBehaviour, ISaveable
         isDead = true;
         Cursor.lockState = CursorLockMode.None;
         GameController.gameController.DeathScreen();
+    }
+
+    public void RestoreLife(float value){
+        health += value;
+        if(health >= maxHealth){
+            health = maxHealth; 
+        }
+        lifeSlider.value = health;
+    }
+    public void RestoreLife(){
+        animator.Rebind();
+        health = maxHealth;
+        isDead = false;
+        lifeSlider.value = health;
     }
 
     public void ChangeArtifact()

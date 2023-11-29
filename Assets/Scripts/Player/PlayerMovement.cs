@@ -297,7 +297,7 @@ public class PlayerMovement : MonoBehaviour, ISaveable
 
     public void EndDamage()
     {
-        currentWeapon.GetComponentInChildren<DamageDealer>().EndDamage();
+        currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
 
     void OnApplicationFocus(bool hasFocus)
