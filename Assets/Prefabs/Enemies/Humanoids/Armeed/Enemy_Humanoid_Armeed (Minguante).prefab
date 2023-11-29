@@ -3036,7 +3036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieInStun: 0
   isAgressive: 0
-  health: 30
+  health: 80
   attackCoulDown: 3
   attackRange: 1.3
   viewRange: 8
@@ -3049,6 +3049,8 @@ MonoBehaviour:
   newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
+  canDrop: 0
+  dropIten: {fileID: 0}
   isFoward: 1
   spriteCrecked: {fileID: 7483571919459004771}
   canvas: {fileID: 2568100451404907783}
@@ -3101,7 +3103,7 @@ Animator:
   m_GameObject: {fileID: 8720996371091688877}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 427169ae55a83f44a98153e4f9045b4a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6ca949566c53b9248b5c4b4ea93ccca3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 92b0bdd3b096c0e43ae38f2a822c86eb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -47,6 +47,8 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Attack();
 
     public abstract void TakeDamage(float damage);
+    public bool canDrop = false;
+    public GameObject dropIten; 
 
     public bool CanSpawn(MoonPhases timeMoonphase)
     {

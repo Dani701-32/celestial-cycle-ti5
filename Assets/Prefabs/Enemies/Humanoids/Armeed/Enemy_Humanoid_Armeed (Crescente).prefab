@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieInStun: 0
   isAgressive: 0
-  health: 30
+  health: 80
   attackCoulDown: 3
   attackRange: 1.3
   viewRange: 8
@@ -192,6 +192,8 @@ MonoBehaviour:
   newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
+  canDrop: 0
+  dropIten: {fileID: 0}
   isFoward: 1
   spriteCrecked: {fileID: 1512560045357216064}
   canvas: {fileID: 5802032266750493988}

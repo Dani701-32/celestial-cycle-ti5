@@ -97,8 +97,6 @@ public class Enemy_Karakasa : Enemy
 
     public override void TakeDamage(float damage)
     {
-        // if (!canReceiveDamage)
-        //     return;
         health -= damage;
         animator.SetTrigger("damage");
 

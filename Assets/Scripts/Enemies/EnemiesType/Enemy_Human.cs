@@ -108,7 +108,7 @@ public class Enemy_Human : Enemy
 
     public override void ArtifactEffect(MoonPhases artifactMoon)
     {
-        Debug.Log(artifactMoon); 
+        Debug.Log(artifactMoon);
         if (moonPhase == artifactMoon)
         {
             animator.SetTrigger("damage");
@@ -147,6 +147,10 @@ public class Enemy_Human : Enemy
 
     protected override void Die()
     {
+        if (canDrop)
+        {
+            Instantiate(dropIten, transform.position, Quaternion.identity);
+        }
         Destroy(this.gameObject);
     }
 }
