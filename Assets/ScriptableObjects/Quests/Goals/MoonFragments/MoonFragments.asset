@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b1c5fd44ebed94ba151cd73a0a1031, type: 3}
+  m_Name: MoonFragments
+  m_EditorClassIdentifier: 
+  goalDescription: Recupere os fragmentos da lua
+  currentAmount: 0
+  minimumAmount: 5
+  isGoalCompleted: 0
+  referenceItemData: {fileID: 11400000, guid: 2ef2aa6f4f5cb644a9e26abd734fafc4, type: 2}

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c91a428ed15942bbd83f1564ce094, type: 3}
+  m_Name: QuestWanningMoon
+  m_EditorClassIdentifier: 
+  questData:
+    title: Terceira Jornada
+    description: "Recupere a Ess\xEAncia da Lua Minguante. Elas costumam surgir do
+      outro lado da cidade, perto da ponte"
+    questID: questMinguante
+    isTutorial: 0
+  goals:
+  - {fileID: 11400000, guid: 5624dbba1bd774e40a8f799d6a64444b, type: 2}
+  - {fileID: 11400000, guid: 7fabbe6fc41451a46bf2706e6e2ecb50, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 9acc58148a4b1194f8319c668b01b746, type: 2}
+  isQuestCompleted: 0
+  aceptedMessage: 3
+  declineMessage: 2
+  NPCsmessages:
+  - "Ol\xE1 guerreira. Tenho uma nova tarefa para a senhorita... "
+  - "Preciso que voc\xEA recupera uma nova ess\xEAncia para mim. Infelizmente ela
+    s\xF3 aparece durante a Lua Minguante e como ela \xE9 mais instavel que as anteriores,
+    a senhora ter\xE1 que pegar fragmentos da lua de alguns inimigos. "
+  - 'Ah seja como quiser. '
+  - 'Obrigado jovem guerreira. '
+  - "Se voc\xEA trouxer uma <color=yellow>Ess\xEAncia da Lua</color> para mim, poderei
+    fazer um <color=yellow>Artefato</color> para voc\xEA, se n\xE3o bom... vai ser
+    complicado para voc\xEA matar alguma coisa nessa cidade."
+  - "Muito bem senhorita. Com isso falta apenas uma ess\xEAncia para mim"

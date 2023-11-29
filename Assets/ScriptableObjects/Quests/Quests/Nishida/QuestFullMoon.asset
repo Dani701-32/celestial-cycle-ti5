@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c91a428ed15942bbd83f1564ce094, type: 3}
+  m_Name: QuestFullMoon
+  m_EditorClassIdentifier: 
+  questData:
+    title: Segunda Jornada
+    description: "Muito obrigada por antes Guerreira. Voc\xEA poderia recolher uma
+      \"Ess\xEAncia da Lua Cheia\" para mim? Ela se manifesta pr\xF3xima da fonte
+      no centro da cidade"
+    questID: questFullMoon
+    isTutorial: 0
+  goals:
+  - {fileID: 11400000, guid: ec7f8ae041fb1a1498a33a72a265bfcc, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 69d76a5239b250c4496455c5f783ac4e, type: 2}
+  isQuestCompleted: 0
+  aceptedMessage: 3
+  declineMessage: 2
+  NPCsmessages:
+  - "Ol\xE1 senhorita. Voc\xEA estaria disposta a continuar recolhendo coisas para
+    mim?"
+  - "Preciso de uma \"Ess\xEAncia da Lua Cheia\" para continuar o meu \"papel\" nessa
+    cidade. Em troca lhe darai um novo artefato para que possa continuar elimando
+    os inimigos dessa cidade."
+  - "Muito bem senhorita. Bom fa\xE7a o que desejar e termine como os outros... \xE9
+    s\xF3 natural. "
+  - 'Agradecida senhorita. Espero que nossa parceria continue enquanto estiver viva. '
+  - "As ess\xEAncias da Lua Cheia costumam se manifestar perto da fonte no centro
+    da cidade. \xC9 bem pr\xF3xima de onde estamos, mas como n\xE3o posso deixar
+    o templo espero que tenha sucesso em sua busca. "
+  - 'Muito obrigada senhorita. '

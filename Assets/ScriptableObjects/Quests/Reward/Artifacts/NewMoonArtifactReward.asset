@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dc1e6f0d3e859a4eb3ed068ecf95d94, type: 3}
-  m_Name: FullMoonArtifactReward
+  m_Name: NewMoonArtifactReward
   m_EditorClassIdentifier: 
-  rewardDescription: Artefato Solo da Lua Cheia
+  rewardDescription: Artefato da Lua Nova
+  itemDataReference: {fileID: 11400000, guid: 1b8a7963bab3a324480a81bce5a1684a, type: 2}
   rewardValue: 1
-  moonType: 2
-  itemDataReference: {fileID: 11400000, guid: a5b0fc2970671a44ebe5c5d6719287ca, type: 2}
+  moonType: 0

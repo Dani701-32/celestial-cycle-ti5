@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c91a428ed15942bbd83f1564ce094, type: 3}
+  m_Name: QuestNewMoon
+  m_EditorClassIdentifier: 
+  questData:
+    title: Quarta Jornada
+    description: "Ol\xE1 novamente guerreira. Eu preciso de mais uma ess\xEAncia
+      da Lua para criar um novo artefato. Por\xE9m diferente da anterior est\xE1
+      se manifestar\xE1 pr\xF3xima do mercado por\xE9m apenas durante a Lua Nova.
+      Ent\xE3o fique atenta. "
+    questID: NewMoonQuest
+    isTutorial: 0
+  goals:
+  - {fileID: 11400000, guid: b3f6e6bf7fcaf4d4393c3e7d5e726b21, type: 2}
+  rewards:
+  - {fileID: 11400000, guid: 8289609486d76684cb7d13f1016fd922, type: 2}
+  isQuestCompleted: 0
+  aceptedMessage: 3
+  declineMessage: 2
+  NPCsmessages:
+  - Bem vinda de volta. Eu acho pelo menos... Bom vamos aos negocios.
+  - "Voc\xEA vai precisar recuperar o ultimo tipo de Ess\xEAncia da Lua. A Ess\xEAncia
+    da  Lua Nova, por\xE9m ela s\xF3 se manifesta durante a Lua Nova, geralmente
+    perto do Mercado, ent\xE3o voc\xEA poderia encontra-la para mim? "
+  - "Bom a senhorita que sabe. N\xE3o sou eu que morrerei sem o Artefato"
+  - "Maravilha! Com este artefato voc\xEA ter\xE1 tudo o necess\xE1rio para enfrentar
+    os inimigos da cidade. E eu completarei o meu papel aqui. "
+  - "Se voc\xEA trouxer uma <color=yellow>Ess\xEAncia da Lua</color> para mim, poderei
+    fazer um <color=yellow>Artefato</color> para voc\xEA, se n\xE3o bom... vai ser
+    complicado para voc\xEA matar alguma coisa nessa cidade."
+  - "\xD3timo. Muito obrigada, agora possuo todas as ess\xEAncias da Lua. "

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 867c91a428ed15942bbd83f1564ce094, type: 3}
-  m_Name: FullMoonArtifact
+  m_Name: QuestWaxingMoon
   m_EditorClassIdentifier: 
   questData:
-    title: Primeira jornada
-    description: "Recupere uma \"Ess\xEAncia da Lua Cheia\".  A ultima vez que uma
-      foi vista foi em frente ao templo perto do rio, eu n\xE3o recomendaria entrar
-      em combate por enquanto."
-    questID: tutorial-1
+    title: Primeira Jornada
+    description: "Recupere uma \"Ess\xEAncia da Lua Crescente\".  A ultima vez que
+      uma foi vista foi em frente ao templo perto do rio, eu n\xE3o recomendaria
+      entrar em combate por enquanto."
+    questID: waxingMoonQuest
     isTutorial: 0
   goals:
-  - {fileID: 11400000, guid: ec7f8ae041fb1a1498a33a72a265bfcc, type: 2}
+  - {fileID: 11400000, guid: a1599dd727f708149a6510c694ccac8a, type: 2}
   rewards:
-  - {fileID: 11400000, guid: 69d76a5239b250c4496455c5f783ac4e, type: 2}
+  - {fileID: 11400000, guid: fcea0514c9b66d04196e2196f6d1f79e, type: 2}
   - {fileID: 11400000, guid: f86cb0e014864424d8d61dcb11594202, type: 2}
   isQuestCompleted: 0
   aceptedMessage: 3
