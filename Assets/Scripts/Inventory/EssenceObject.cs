@@ -36,7 +36,7 @@ public class EssenceObject : MonoBehaviour
             inventory.Add(referenceItem);
         }
         questSystem.CheckQuests();
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     void Update()

@@ -499,6 +499,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         }
         UpdateScreenArtifact();
         artifactScreen.SetActive(true);
+        GameController.gameController.HUD.SetActive(false);
     }
 
     public void CloseScreen()
@@ -519,6 +520,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         }
         descriptionScreenArtifact.SetActive(false);
         artifactScreen.SetActive(false);
+        GameController.gameController.HUD.SetActive(true);
     }
 
     public void EquipeArtifact(int index)

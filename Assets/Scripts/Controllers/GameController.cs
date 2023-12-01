@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject tutorialScreen,
         tutorialDescription;
+    public GameObject HUD;
 
     [SerializeField]
     private GameObject deathScreen,
@@ -160,6 +161,13 @@ public class GameController : MonoBehaviour
         GameController.gameController.inventorySystem.ClearInventoryArtifacts();
         GameController.gameController.inventorySystem.StartInventory();
         GameController.gameController.dayNightController.StartDayNightSystem();
+        gameController.player.weaponSprite.enabled = false;
+        gameController.player.RemoveWeapon(); 
+        for (int i = 0; i < 4; i++)
+        {
+            gameController.player.RemoveArtifact(i); 
+            
+        }
 
         SwitchToCameraVirtual(menuCamera);
     }
