@@ -300,10 +300,10 @@ public class PlayerMovement : MonoBehaviour, ISaveable
         currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
 
-    void OnApplicationFocus(bool hasFocus)
-    {
-        Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
-    }
+    // void OnApplicationFocus(bool hasFocus)
+    // {
+    //     Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
+    // }
 
     public void JumpUp()
     {
