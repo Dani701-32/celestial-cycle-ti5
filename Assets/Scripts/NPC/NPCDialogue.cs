@@ -68,7 +68,7 @@ public class NPCDialogue : MonoBehaviour
         dialogScreen.SetActive(true);
         GameController.gameController.player.playerMovement.enabled = false;
         GameController.gameController.StopCamera();
-        completed = (currentNPC.activeQuest.currentIndex == 5);
+        completed = currentNPC.activeQuest.currentIndex == 5;
         if (currentNPC.activeQuest.currentIndex == 1)
         {
             questScreen.SetActive(true);

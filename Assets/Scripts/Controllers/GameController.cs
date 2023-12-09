@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
         popoutGame, menuPrincipalScreen;
     public GameObject tutorialArtefact,
         tutorialCombat, popBackMenu;
+    [SerializeField] private Image tabImage; 
 
 
     [Header("Camera Controller")]
@@ -96,6 +98,10 @@ public class GameController : MonoBehaviour
     {
         currentCameraX = "";
         currentCameraY = "";
+        freelookCamera.m_XAxis.m_InputAxisValue = 0;
+        freelookCamera.m_YAxis.m_InputAxisValue = 0;
+        freelookCamera.m_XAxis.m_InputAxisName = currentCameraX;
+        freelookCamera.m_YAxis.m_InputAxisName = currentCameraY;
     }
 
     public void ContinueGame()
@@ -128,6 +134,7 @@ public class GameController : MonoBehaviour
                 }
                 Time.timeScale = 1.0f;
                 isMenu = false;
+                tabImage.enabled = true;
                 dayNightController.ActiveUI(true);
             }
             else
@@ -137,6 +144,7 @@ public class GameController : MonoBehaviour
                 menuScreen.SetActive(true);
                 Time.timeScale = 0f;
                 StopCamera();
+                tabImage.enabled = false;
                 isMenu = true;
                 dayNightController.ActiveUI(false);
             }
