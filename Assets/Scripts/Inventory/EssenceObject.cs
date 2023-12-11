@@ -36,6 +36,7 @@ public class EssenceObject : MonoBehaviour
             inventory.Add(referenceItem);
         }
         questSystem.CheckQuests();
+        NotificationSystem.Instance.CallNotification(referenceItem);
         gameObject.SetActive(false);
     }
 
