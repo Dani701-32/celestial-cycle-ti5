@@ -99,6 +99,10 @@ public class PlayerMovement : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update()
     {
+        // Interação com a grama
+        Shader.SetGlobalVector("_Player", transform.position + Vector3.up * characterController.radius);
+
+
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         if (runningAction.triggered)
             isRunning = !isRunning;
