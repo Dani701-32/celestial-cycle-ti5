@@ -95,7 +95,7 @@ public class DayNightCycle : MonoBehaviour, ISaveable
         RenderSettings.sun = sunLight;
         RenderSettings.skybox = skyboxMat;
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
-        RenderSettings.fogMode = FogMode.ExponentialSquared;
+        RenderSettings.fogMode = FogMode.Exponential;
         RenderSettings.fogDensity = fogDensity;
     }
     void Start()
