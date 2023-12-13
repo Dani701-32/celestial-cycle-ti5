@@ -38,6 +38,7 @@ public class ItemObject : MonoBehaviour
             inventory.Add(referenceItem);
         }
         questSystem.CheckQuests();
+        NotificationSystem.Instance.CallNotification(referenceItem);
         firstChild.gameObject.SetActive(false);
         isDratroy = true;
     }
