@@ -55,7 +55,6 @@ public class EssenceObject : MonoBehaviour
         if (childObject != null)
         {
             childObject.SetActive(canPick);
-            canvas.SetActive(canPick);
         }
     }
 

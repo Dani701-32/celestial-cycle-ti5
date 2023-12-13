@@ -151,6 +151,8 @@ public class PlayerMovement : MonoBehaviour, ISaveable
 
     private void Jump()
     {
+        isGrounded = false;
+        animator.SetBool("isGrounded", false);
         if (characterController.isGrounded)
         {
             characterController.stepOffset = stepOffset;
@@ -173,8 +175,9 @@ public class PlayerMovement : MonoBehaviour, ISaveable
             }
 
             ySpeed = -.5f;
-            if (jumpAction.triggered)
+            if (jumpAction.triggered )
             {
+                animator.SetBool("isGrounded", false);
                 if (animator.GetFloat("speed") >= .5f)
                 {
                     animator.SetTrigger("jumpSprint");
