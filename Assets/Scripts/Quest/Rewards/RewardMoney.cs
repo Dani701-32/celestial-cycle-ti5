@@ -23,6 +23,7 @@ public class RewardMoney : QuestStructure.QuestReward
         {
             Debug.Log("Add item");
             GameController.gameController.inventorySystem.Add(itemDataReference);
+            NotificationSystem.Instance.CallNotification(itemDataReference);
         }
     }
 }

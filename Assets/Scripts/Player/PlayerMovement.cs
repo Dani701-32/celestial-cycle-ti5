@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update()
     {
-        // Interação com a grama
+        // Interaï¿½ï¿½o com a grama
         Shader.SetGlobalVector("_Player", transform.position + Vector3.up * characterController.radius);
 
 
@@ -299,7 +299,7 @@ public class PlayerMovement : MonoBehaviour, ISaveable
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
 
-    public void EndDamage()
+    public void EndDealDamage()
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
