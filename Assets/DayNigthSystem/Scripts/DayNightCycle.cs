@@ -117,9 +117,17 @@ public class DayNightCycle : MonoBehaviour, ISaveable
         }
     }
 
-    private void ControlLightsCity(float min, float max)
+    private void ControlLightsCity()
     {
-        foreach (Light light in cityLights) light.intensity = Mathf.Lerp(min, max, 0.6f);
+        if(isNight)
+        {
+            foreach (Light light in cityLights) light.gameObject.SetActive(true);
+        }
+        else
+        {
+            foreach (Light light in cityLights) light.gameObject.SetActive(false);
+        }
+        
     }
 
     void UpdateTimeOfDay()
@@ -187,13 +195,13 @@ public class DayNightCycle : MonoBehaviour, ISaveable
         {
             sunLight.color = dayColor;
             sunLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightChangeCurve.Evaluate(dotProduct));
-            ControlLightsCity(2, 0);
+            ControlLightsCity();
         }
         else
         {
             sunLight.color = nightColor;
             sunLight.intensity = Mathf.Lerp(maxMoonLightIntensity, 0, lightChangeCurve.Evaluate(dotProduct));
-            ControlLightsCity(0, 2);
+            ControlLightsCity();
         }
 
         RenderSettings.fogColor = Color.Lerp(nightfogColor, dayfogColor, lightChangeCurve.Evaluate(dotProduct));
