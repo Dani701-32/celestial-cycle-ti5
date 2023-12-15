@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueDayNight: 0
-  timeMultiplier: 300
+  timeMultiplier: 250
   sunLight: {fileID: 6314617700747837562}
   skyboxMat: {fileID: 2100000, guid: 27b578e8dcf173849af7d42e4cdbfa06, type: 2}
   lightChangeCurve:
@@ -201,26 +201,23 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxSunLightIntensity: 1.8
-  maxMoonLightIntensity: 0.3
+  maxMoonLightIntensity: 1
   sunriseHour: 7
-  sunsetHour: 20
+  sunsetHour: 18
   isNight: 0
   dayColor: {r: 0.990566, g: 0.9705911, b: 0.9017889, a: 1}
   nightColor: {r: 0.048593808, g: 0.13616388, b: 0.26415092, a: 1}
   nightPost: {fileID: 9095423514921411167}
-  fogDensity: 0.0035
+  fogDensity: 0.004
   dayfogColor: {r: 0.4488252, g: 0.6334255, b: 0.7735849, a: 1}
   nightfogColor: {r: 0.028969381, g: 0.08751915, b: 0.1981132, a: 1}
   timeText: {fileID: 7851336929399224883}
   textDays: {fileID: 7851336928540116144}
   textMoonPhase: {fileID: 7851336928958009057}
-  startHour: 12
+  startHour: 20
   day: 1
-  phaseController: 0
-  cityLights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  phaseController: 1
+  cityLights: []
 --- !u!114 &1455033650358991950
 MonoBehaviour:
   m_ObjectHideFlags: 0
