@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 03d0266fd76d82040b0cbcc882074880
-  m_OcclusionCullingData: {fileID: 36300000, guid: 57b37105528d73242aa9e6d2f7d569a1, type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20511189, g: 0.3985089, b: 0.55483454, a: 1}
+  m_IndirectSpecularColor: {r: 0.20511197, g: 0.39850822, b: 0.5548348, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -66763,6 +66763,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 6447302664574927484, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 89bc6b70d45585545b502e8a2779902f, type: 2}
     - target: {fileID: 6448738159270361048, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 26
@@ -66958,6 +66962,10 @@ PrefabInstance:
     - target: {fileID: 6541753293745125522, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559098218211201255, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6578704902632136941, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
       propertyPath: m_StaticEditorFlags
