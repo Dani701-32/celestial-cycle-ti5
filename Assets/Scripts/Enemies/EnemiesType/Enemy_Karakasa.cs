@@ -20,6 +20,9 @@ public class Enemy_Karakasa : Enemy
         currentWaypointIndex = 0;
         damageDealer = GetComponentInChildren<EnemyDamageDealer>();
     }
+    public override bool CanSpawn(MoonPhases timeMoonphase){
+        return true; 
+    }
 
     // Update is called once per frame
     void Update()

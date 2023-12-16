@@ -52,10 +52,7 @@ public abstract class Enemy : MonoBehaviour
     public bool canDrop = false;
     public GameObject dropIten; 
 
-    public bool CanSpawn(MoonPhases timeMoonphase)
-    {
-        return true;
-    }
+    public abstract bool CanSpawn(MoonPhases timeMoonphase);
 
     void OnDrawGizmos()
     {
