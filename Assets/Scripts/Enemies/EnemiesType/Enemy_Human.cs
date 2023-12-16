@@ -30,6 +30,7 @@ public class Enemy_Human : Enemy
         spriteCrecked.SetActive(false);
         joints.material = defaultMaterial;
         canvas.SetActive(false);
+        damageDealer = GetComponentInChildren<EnemyDamageDealer>();
     }
 
     // Update is called once per frame

@@ -13,6 +13,7 @@ public class Enemy_Kappa : Enemy
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        damageDealer = GetComponentInChildren<EnemyDamageDealer>();
     }
 
     // Update is called once per frame

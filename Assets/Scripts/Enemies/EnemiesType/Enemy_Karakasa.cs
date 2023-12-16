@@ -18,6 +18,7 @@ public class Enemy_Karakasa : Enemy
         agent = GetComponent<NavMeshAgent>();
         isFoward = true;
         currentWaypointIndex = 0;
+        damageDealer = GetComponentInChildren<EnemyDamageDealer>();
     }
 
     // Update is called once per frame

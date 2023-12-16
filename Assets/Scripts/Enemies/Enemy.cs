@@ -28,6 +28,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     protected Animator animator;
     protected NavMeshAgent agent;
+    [SerializeField]
+    protected EnemyDamageDealer damageDealer;
 
     [SerializeField]
     protected EnemyType enemyType;
@@ -72,12 +74,12 @@ public abstract class Enemy : MonoBehaviour
 
     public void StartDealDamage()
     {
-        GetComponentInChildren<EnemyDamageDealer>().StartDealDamage();
+        damageDealer.StartDealDamage();
     }
 
     public void EndDealDamage()
     {
-        GetComponentInChildren<EnemyDamageDealer>().EndDealDamage();
+        damageDealer.EndDealDamage();
     }
 
     public abstract void ArtifactEffect(MoonPhases artifactMoon);
