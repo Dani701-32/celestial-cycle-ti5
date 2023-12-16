@@ -4909,6 +4909,7 @@ GameObject:
   - component: {fileID: 3445747590679748013}
   - component: {fileID: 6740484675071722332}
   - component: {fileID: 5648709290169496063}
+  - component: {fileID: 2150259556969708160}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -4982,6 +4983,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &2150259556969708160
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114459239106525083}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c4c325277e3348448997fd217f90865, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4915652828099770342
 GameObject:
   m_ObjectHideFlags: 0

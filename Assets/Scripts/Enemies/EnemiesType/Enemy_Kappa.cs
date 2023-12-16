@@ -15,6 +15,9 @@ public class Enemy_Kappa : Enemy
         agent = GetComponent<NavMeshAgent>();
         damageDealer = GetComponentInChildren<EnemyDamageDealer>();
     }
+    public override bool CanSpawn(MoonPhases timeMoonphase){
+        return timeMoonphase == moonPhase; 
+    }
 
     // Update is called once per frame
     void Update()
