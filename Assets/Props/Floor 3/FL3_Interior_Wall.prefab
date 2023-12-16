@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8286065709402079545}
   - component: {fileID: 4995018967370944156}
   - component: {fileID: 7112635170564029014}
+  - component: {fileID: 7221707244560699075}
   m_Layer: 0
   m_Name: FL3_Interior_Wall
   m_TagString: Untagged
@@ -83,3 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &7221707244560699075
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770149430646315907}
+  m_Open: 1
+  m_Center: {x: 0.08118892, y: 2.0087051, z: -0.014976144}
+  m_Size: {x: 5.238192, y: 3.9996834, z: 1.0820835}

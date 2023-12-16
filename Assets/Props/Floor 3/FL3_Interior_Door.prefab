@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3390894109508649459}
   - component: {fileID: 1774765352345226838}
   - component: {fileID: 4559275489086519964}
+  - component: {fileID: 7299575422126393924}
   m_Layer: 0
   m_Name: FL3_Interior_Door
   m_TagString: Untagged
@@ -83,3 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &7299575422126393924
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613548581953084233}
+  m_Open: 1
+  m_Center: {x: 0.061356783, y: 2.0087051, z: 0}
+  m_Size: {x: 5.198528, y: 3.9996836, z: 1}

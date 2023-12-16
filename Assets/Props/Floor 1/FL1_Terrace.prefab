@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4875051315104293808}
   - component: {fileID: 8361058889195105301}
   - component: {fileID: 6047355232345151711}
+  - component: {fileID: 6029818124063129028}
   m_Layer: 0
   m_Name: FL1_Terrace
   m_TagString: Untagged
@@ -83,3 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &6029818124063129028
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5254708984449333514}
+  m_Open: 1
+  m_Center: {x: 0.0019403696, y: -1.1542327, z: 4.4812355}
+  m_Size: {x: 3.4439456, y: 1.0946321, z: 0.7575283}

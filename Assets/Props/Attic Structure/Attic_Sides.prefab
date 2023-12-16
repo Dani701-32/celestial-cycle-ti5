@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 789813396922534841}
   - component: {fileID: 4420881773448561692}
   - component: {fileID: 1927214932717629654}
+  - component: {fileID: 5961593328361982303}
   m_Layer: 0
   m_Name: Attic_Sides
   m_TagString: Untagged
@@ -87,3 +88,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &5961593328361982303
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125585896150520067}
+  m_Open: 1
+  m_Center: {x: -0.02259779, y: 3.26094, z: 0.055433646}
+  m_Size: {x: 5.188203, y: 1.2018795, z: 0.829736}

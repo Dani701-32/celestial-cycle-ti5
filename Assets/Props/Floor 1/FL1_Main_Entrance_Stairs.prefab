@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2348568755235266394}
   - component: {fileID: 1673106244055732479}
   - component: {fileID: 3520941940906320949}
+  - component: {fileID: 1878754461638350518}
   m_Layer: 0
   m_Name: FL1_Main_Entrance_Stairs
   m_TagString: Untagged
@@ -84,3 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &1878754461638350518
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160430151554123232}
+  m_Open: 1
+  m_Center: {x: -0.25131607, y: -1.2808795, z: 4.5486217}
+  m_Size: {x: 14.588995, y: 1.6087799, z: 1.0572519}

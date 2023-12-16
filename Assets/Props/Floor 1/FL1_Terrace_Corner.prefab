@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4963267339224138788}
   - component: {fileID: 8308801341976726401}
   - component: {fileID: 6100756289281802059}
+  - component: {fileID: 6865848884785266961}
   m_Layer: 0
   m_Name: FL1_Terrace_Corner
   m_TagString: Untagged
@@ -84,3 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &6865848884785266961
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740613935958105758}
+  m_Open: 1
+  m_Center: {x: -2.2944875, y: -1.0757616, z: -1.432637}
+  m_Size: {x: 5.4310255, y: 1.0796251, z: 6.3372483}

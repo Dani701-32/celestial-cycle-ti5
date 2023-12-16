@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 600768763331327158}
   - component: {fileID: 4609864765941791507}
   - component: {fileID: 1737669127714918361}
+  - component: {fileID: 6904789326638936164}
   m_Layer: 0
   m_Name: FL4_External_Wall_Corner
   m_TagString: Untagged
@@ -89,3 +90,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &6904789326638936164
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224490232172768780}
+  m_Open: 1
+  m_Center: {x: -1.098123, y: 1.9837884, z: 1.0070168}
+  m_Size: {x: 3.0597622, y: 3.8751004, z: 3.2208283}

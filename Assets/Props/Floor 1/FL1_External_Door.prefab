@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1098542966406840615}
   - component: {fileID: 4076061766673501826}
   - component: {fileID: 2266968527375235656}
+  - component: {fileID: 899915411024970371}
   m_Layer: 0
   m_Name: FL1_External_Door
   m_TagString: Untagged
@@ -85,3 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &899915411024970371
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321197778088713117}
+  m_Open: 1
+  m_Center: {x: 0.0069572926, y: 1.9895039, z: -2.4420242}
+  m_Size: {x: 5.305713, y: 4.0501385, z: 5.121064}
