@@ -17,18 +17,18 @@ public class Enemy_Human : Enemy
         stunedMaterial;
     public SkinnedMeshRenderer joints; //Temporario
 
-    [Header("Disintegration Settings:")]
-    public float dissolveSpeed = 1;
-    private float timeDissolve = 0;
-    private Material dissolveMat;
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // private Material dissolveMat;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        timeDissolve = 0;
-        dissolveMat = stunedMaterial;
-        if(dissolveMat != null) dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+        // timeDissolve = 0;
+        // dissolveMat = stunedMaterial;
+        // if(dissolveMat != null) dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
 
         gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
@@ -158,18 +158,18 @@ public class Enemy_Human : Enemy
         }
     }
 
-    IEnumerator DissolveEffect()
-    {
-        while (timeDissolve <= 1)
-        {
-            yield return new WaitForSecondsRealtime(0.2f);
-            timeDissolve += (Time.deltaTime * dissolveSpeed);
-            dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
-        }
+    // IEnumerator DissolveEffect()
+    // {
+    //     while (timeDissolve <= 1)
+    //     {
+    //         yield return new WaitForSecondsRealtime(0.2f);
+    //         timeDissolve += (Time.deltaTime * dissolveSpeed);
+    //         dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
+    //     }
 
-        timeDissolve = 1;
-        Destroy(this.gameObject);
-    }
+    //     timeDissolve = 1;
+    //     Destroy(this.gameObject);
+    // }
 
     protected override void Die()
     {
@@ -178,6 +178,7 @@ public class Enemy_Human : Enemy
             Instantiate(dropIten, transform.position, Quaternion.identity);
         }
 
-        StartCoroutine(DissolveEffect());
+        // StartCoroutine(DissolveEffect());
+        Destroy(this.gameObject);
     }
 }

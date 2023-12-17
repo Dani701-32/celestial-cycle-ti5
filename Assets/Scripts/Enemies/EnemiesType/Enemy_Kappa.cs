@@ -8,16 +8,16 @@ public class Enemy_Kappa : Enemy
     // Start is called before the first frame update
     public bool stuned = false;
 
-    [Header("Disintegration Settings:")]
-    public float dissolveSpeed = 1;
-    private float timeDissolve = 0;
-    [SerializeField]
-    private Material dissolveMat;
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // [SerializeField]
+    // private Material dissolveMat;
 
     void Start()
     {
-        timeDissolve = 0;
-        dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+        // timeDissolve = 0;
+        // dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
 
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
@@ -89,20 +89,21 @@ public class Enemy_Kappa : Enemy
         canReceiveDamage = false;
     }
 
-    IEnumerator DissolveEffect()
-    {
-        while (timeDissolve <= 1)
-        {
-            yield return new WaitForSecondsRealtime(0.2f);
-            timeDissolve += (Time.deltaTime * dissolveSpeed);
-            dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
-        }
+    // IEnumerator DissolveEffect()
+    // {
+    //     while (timeDissolve <= 1)
+    //     {
+    //         yield return new WaitForSecondsRealtime(0.2f);
+    //         timeDissolve += (Time.deltaTime * dissolveSpeed);
+    //         dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
+    //     }
 
-        timeDissolve = 1;
-        Destroy(this.gameObject);
-    }
+    //     timeDissolve = 1;
+    //     Destroy(this.gameObject);
+    // }
     protected override void Die()
     {
-        StartCoroutine(DissolveEffect());
+        // StartCoroutine(DissolveEffect());
+        Destroy(this.gameObject);
     }
 }
