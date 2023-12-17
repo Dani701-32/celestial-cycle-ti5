@@ -135,7 +135,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
 
         foreach (InventoryItem item in InventoryItems)
         {
-            listsDatabase.itemContainer.Add(new InventoryDatabaseSave(item.data.saveID, item.data, 1));
+            listsDatabase.itemContainer.Add(new InventoryDatabaseSave(item.data.saveID, item.data, item.stackSize));
         }
         foreach (ArtifactItem artifactItem in InventoryArtifact)
         {
