@@ -17,12 +17,14 @@ public class QuestDatabaseSave
     public int currentStep;
     public int npcId;
     public QuestStructure item;
-    public QuestDatabaseSave(int _id, int _step, int _npcId, QuestStructure _item)
+    public NPCData npcData; 
+    public QuestDatabaseSave(int _id, int _step, int _npcId, QuestStructure _item, NPCData _npcData)
     {
         itemID = _id;
         item = _item;
         currentStep = _step;
         npcId = _npcId;
+        npcData = _npcData; 
     }
 }
 
@@ -96,10 +98,10 @@ public class QuestNPC : MonoBehaviour
     public void UpdateDataQuest()
     {
         questDatabase.questContainer.Clear();
-
+        if(quests.Count == 0) return;
         for (int i = 0; i < quests.Count; i++)
         {
-            questDatabase.questContainer.Add(new QuestDatabaseSave(quests[i].questData.questID, currentStep, NPC.id, quests[i]));
+            questDatabase.questContainer.Add(new QuestDatabaseSave(quests[i].questData.questID, currentStep, NPC.id, quests[i], NPC));
         }
     }
 
@@ -110,6 +112,7 @@ public class QuestNPC : MonoBehaviour
             player.playerMovement.enabled = false;
             player.QuestIsOpen = true;
 
+            
             if (activeQuest == null)
                 UpdadeScreen();
             else
@@ -118,12 +121,12 @@ public class QuestNPC : MonoBehaviour
                 {
                     activeQuest.CompleteQuest(5);
                     UpdadeScreen();
-                    UpdateDataQuest();
                 }
                 else
                 {
                     UpdadeScreen();
                 }
+                UpdateDataQuest();
             }
         }
     }

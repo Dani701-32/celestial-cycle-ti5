@@ -93,6 +93,11 @@ public class QuestSystem : MonoBehaviour, ISerializationCallbackReceiver
                 globalQuest.questContainer.Add(item);
             }
         }
+        foreach (Quest playerQuest in activeQuestList)
+        {
+            QuestStructure questData = playerQuest.data; 
+            globalQuest.questContainer.Add(new QuestDatabaseSave(questData.questData.questID, playerQuest.currentIndex, 0, questData, playerQuest.currentNPC.dataNPC));
+        }
     }
 
     public void StartQuest()
@@ -108,12 +113,20 @@ public class QuestSystem : MonoBehaviour, ISerializationCallbackReceiver
                 {
                     npcQuestList.Add(item.item);
                     curStep = item.currentStep;
-                    Debug.Log(item.item.name);
                 }
             }
 
             npc.LoadAllQuests(npcQuestList, curStep);
         }
+        activeQuestList.Clear();
+        foreach (QuestDatabaseSave item in globalQuest.questContainer)
+            {
+                if (item.npcId == 0)
+                {
+                    AddQuest(item.item, item.currentStep, item.npcData);
+                }
+            }
+
     }
     // Start is called before the first frame update
     void Start()
@@ -209,6 +222,9 @@ public class QuestSystem : MonoBehaviour, ISerializationCallbackReceiver
             TrackQuest();
         }
         isUi = false;
+        GetAllQuests();
+        
+        
     }
 
     public Quest CheckQuests(QuestStructure quest)
