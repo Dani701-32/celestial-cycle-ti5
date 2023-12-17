@@ -89,20 +89,21 @@ public class Enemy_Kappa : Enemy
         canReceiveDamage = false;
     }
 
-    IEnumerator DissolveEffect()
-    {
-        while (timeDissolve <= 1)
-        {
-            yield return new WaitForSecondsRealtime(0.2f);
-            timeDissolve += (Time.deltaTime * dissolveSpeed);
-            dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
-        }
+    // IEnumerator DissolveEffect()
+    // {
+    //     while (timeDissolve <= 1)
+    //     {
+    //         yield return new WaitForSecondsRealtime(0.2f);
+    //         timeDissolve += (Time.deltaTime * dissolveSpeed);
+    //         dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
+    //     }
 
-        timeDissolve = 1;
-        Destroy(this.gameObject);
-    }
+    //     timeDissolve = 1;
+    //     Destroy(this.gameObject);
+    // }
     protected override void Die()
     {
-        StartCoroutine(DissolveEffect());
+        // StartCoroutine(DissolveEffect());
+        Destroy(this.gameObject);
     }
 }
