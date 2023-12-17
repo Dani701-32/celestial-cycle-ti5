@@ -12,6 +12,7 @@ public class QuestStructure : ScriptableObject
         public string description;
 
         public int questID;
+        public NPCData npcQuest;
 
         [Header("Tutorial")]
         public bool isTutorial;

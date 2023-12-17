@@ -128,6 +128,25 @@ public class QuestSystem : MonoBehaviour, ISerializationCallbackReceiver
             }
 
     }
+    public void NewGameQuests(){
+        foreach (QuestNPC npc in npcs)
+        {
+            List<QuestStructure> npcQuestList = new List<QuestStructure>();
+            int curStep = 0;
+
+            foreach (QuestStructure questStructure in database.Items)
+            {
+                if (questStructure.questData.npcQuest.id == npc.NPC.id)
+                {
+                    npcQuestList.Add(questStructure);
+                }
+            }
+
+            npc.LoadAllQuests(npcQuestList, curStep);
+        }
+        activeQuestList.Clear();
+
+    }
     // Start is called before the first frame update
     void Start()
     {
