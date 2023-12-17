@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06632591, g: 0.14618649, b: 0.17073517, a: 1}
+  m_IndirectSpecularColor: {r: 0.20511189, g: 0.3985089, b: 0.55483454, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -35502,11 +35502,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108707243, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 835.11
+      value: 857.555
       objectReference: {fileID: 0}
     - target: {fileID: 1108707243, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1248.5449
+      value: 1237.3225
       objectReference: {fileID: 0}
     - target: {fileID: 1236123008, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -35518,11 +35518,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1236123008, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 830.99
+      value: 808.545
       objectReference: {fileID: 0}
     - target: {fileID: 1236123008, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 415.495
+      value: 404.2725
       objectReference: {fileID: 0}
     - target: {fileID: 5018870414457210790, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -35659,6 +35659,14 @@ PrefabInstance:
     - target: {fileID: 5018870415341214200, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -522.5062
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018870415370199241, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 894975226}
+    - target: {fileID: 5018870415370199241, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5018870415706245525, guid: 14ef74ec4042058419ebd680e933e51d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -49877,8 +49885,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Geral\n\nWASD - Movimenta\xE7\xE3o\nQ - Sacar espada\nEspa\xE7o - Pular\nE-
-    Interagir"
+  m_text: "Geral\n\nWASD - Movimenta\xE7\xE3o\nEspa\xE7o - Pular\nShift - Correr\nE-
+    Interagir\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -56780,10 +56788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Menu
-
-
-    Esc - Tela de Menu'
+  m_text: "Menu\n\nTab - Invent\xE1rio"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
