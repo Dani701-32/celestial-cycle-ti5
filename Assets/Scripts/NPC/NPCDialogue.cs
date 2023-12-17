@@ -151,7 +151,6 @@ public class NPCDialogue : MonoBehaviour
         }
         if (currentNPC.activeQuest != null && currentNPC.activeQuest.currentIndex == 0 && !answered)
         {
-            Debug.Log("Teste 1");
             currentNPC.activeQuest.ProgressQuest();
             // buttonContinue.SetActive(false);
             UpdateDialog();
