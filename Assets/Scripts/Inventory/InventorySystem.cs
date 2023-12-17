@@ -129,6 +129,22 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         for (int i = 0; i < listsDatabase.artifactContainer.Count; i++) listsDatabase.artifactContainer[i].item = database.GetItem[listsDatabase.artifactContainer[i].item.saveID];
     }
 
+    public void UpdateInventoryDataBase(){
+        listsDatabase.itemContainer.Clear();
+        listsDatabase.artifactContainer.Clear();
+
+        foreach (InventoryItem item in InventoryItems)
+        {
+            listsDatabase.itemContainer.Add(new InventoryDatabaseSave(item.data.saveID, item.data, 1));
+        }
+        foreach (ArtifactItem artifactItem in InventoryArtifact)
+        {
+             listsDatabase.artifactContainer.Add(new InventoryDatabaseSave(artifactItem.data.saveID, artifactItem.data, 1));
+        }
+
+
+    }
+
     public void OnBeforeSerialize() { }
 
     void Awake()
@@ -262,6 +278,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
             ClearInventoryItens();
             UpdateScreenInventory();
         }
+        UpdateInventoryDataBase();
     }
 
     public void AddArtifact(InventoryItemData referenceData)
@@ -340,6 +357,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
             }
             ClearInventoryItens();
             UpdateScreenInventory();
+            UpdateInventoryDataBase();
         }
     }
 
@@ -357,6 +375,7 @@ public class InventorySystem : MonoBehaviour, ISerializationCallbackReceiver
         }
         ClearInventoryItens();
         UpdateScreenInventory();
+        UpdateInventoryDataBase();
     }
 
     private void UpdateScreenInventory()
