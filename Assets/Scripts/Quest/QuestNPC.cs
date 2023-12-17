@@ -68,6 +68,8 @@ public class QuestNPC : MonoBehaviour
         quests.Clear();
         quests = _quests;
         currentStep = _currentStep;
+        activeQuest =new Quest(quests[0], currentStep);
+        
     }
     void Start()
     {
@@ -78,11 +80,12 @@ public class QuestNPC : MonoBehaviour
         dialogueSystem = gameController._NPCDialogue;
         interected = false;
         isOpen = false;
-        currentStep = 0;
-        foreach (QuestStructure quest in quests)
-        {
-            quest.Invoke();
-        }
+        
+        // currentStep = 0;
+        // foreach (QuestStructure quest in quests)
+        // {
+        //     quest.Invoke();
+        // }
     }
 
     // Update is called once per frame
@@ -109,13 +112,17 @@ public class QuestNPC : MonoBehaviour
     {
         if (interected)
         {
+            
+            GameController.gameController.questSystem.CheckQuests();
             player.playerMovement.enabled = false;
             player.QuestIsOpen = true;
 
             
-            if (activeQuest == null)
+            if (activeQuest == null){
+                Debug.Log("quest null");
                 UpdadeScreen();
-            else
+
+            }else
             {
                 if (activeQuest.data.isQuestCompleted)
                 {
@@ -149,7 +156,6 @@ public class QuestNPC : MonoBehaviour
     {
         if (quests.Count > 0)
         {
-            Debug.Log("Com quest");
             if (!isOpen)
             {
                 dialogueSystem.NPCsprite.sprite = NPC.NPCsprite;

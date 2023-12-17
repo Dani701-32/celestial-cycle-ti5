@@ -58,6 +58,7 @@ public class MenuController : MonoBehaviour
         GameController.gameController.player.PlayerStartPosition();
         GameController.gameController.dayNightController.StartDayNightSystem(); 
         GameController.gameController.player.RestoreLife();
+        GameController.gameController.questSystem.NewGameQuests(); 
         BaseContextMenu();   
     }
 
