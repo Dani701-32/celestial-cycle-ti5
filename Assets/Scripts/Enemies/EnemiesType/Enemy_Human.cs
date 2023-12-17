@@ -17,18 +17,18 @@ public class Enemy_Human : Enemy
         stunedMaterial;
     public SkinnedMeshRenderer joints; //Temporario
 
-    [Header("Disintegration Settings:")]
-    public float dissolveSpeed = 1;
-    private float timeDissolve = 0;
-    private Material dissolveMat;
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // private Material dissolveMat;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        timeDissolve = 0;
-        dissolveMat = stunedMaterial;
-        if(dissolveMat != null) dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+        // timeDissolve = 0;
+        // dissolveMat = stunedMaterial;
+        // if(dissolveMat != null) dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
 
         gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
