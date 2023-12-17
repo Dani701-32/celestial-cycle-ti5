@@ -11,7 +11,7 @@ public class QuestStructure : ScriptableObject
         public string title;
         public string description;
 
-        public string questID;
+        public int questID;
 
         [Header("Tutorial")]
         public bool isTutorial;

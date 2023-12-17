@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06772844, g: 0.14873141, b: 0.1746025, a: 1}
+  m_IndirectSpecularColor: {r: 0.20511197, g: 0.39850822, b: 0.5548348, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6767,6 +6767,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b50a14428b16ef4984f3e44c852bcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savePath: /quests.txt
+  database: {fileID: 11400000, guid: 2746fdf7181fc5547b262d8ef1f854b8, type: 2}
+  npcs:
+  - {fileID: 1745028205}
+  - {fileID: 1599395451}
+  globalQuest:
+    questContainer: []
   questCount: 0
   questScreen: {fileID: 813657501}
   questMenuList: {fileID: 1685352911}
@@ -44769,7 +44776,7 @@ GameObject:
   - component: {fileID: 1599395449}
   m_Layer: 0
   m_Name: Mercador
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44820,6 +44827,8 @@ MonoBehaviour:
   currentQuestAvailable: 0
   quests:
   - {fileID: 11400000, guid: a527cca2784cc23459cece8fb1576c66, type: 2}
+  questDatabase:
+    questContainer: []
   currentStep: 0
   interected: 0
   isOpen: 0
@@ -47694,7 +47703,7 @@ GameObject:
   - component: {fileID: 1745028202}
   m_Layer: 0
   m_Name: Sacerdotisa
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47748,6 +47757,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 374c187439465bd4f9db7c29532b2609, type: 2}
   - {fileID: 11400000, guid: 9e332958f837e3b48a3619044d19c4b1, type: 2}
   - {fileID: 11400000, guid: 5d8cc2f7a2feb844aab4521d025a2855, type: 2}
+  questDatabase:
+    questContainer: []
   currentStep: 0
   interected: 0
   isOpen: 0
@@ -49392,14 +49403,6 @@ PrefabInstance:
     - target: {fileID: 5888328953128379590, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
       propertyPath: m_Name
       value: DayNightSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
-      propertyPath: startHour
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
-      propertyPath: timeMultiplier
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
       propertyPath: cityLights.Array.data[0]
@@ -62669,6 +62672,10 @@ PrefabInstance:
     - target: {fileID: 2705999532757480148, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705999532757480148, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2705999532757480148, guid: d33ecc09d465bd747b7117f3e5433052, type: 3}
       propertyPath: m_StaticEditorFlags
