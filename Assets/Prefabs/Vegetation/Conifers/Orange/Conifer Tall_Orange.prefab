@@ -188,80 +188,6 @@ Tree:
   m_GameObject: {fileID: 1604510074247556}
   m_SpeedTreeWindAsset: {fileID: 0}
   m_TreeData: {fileID: 0}
---- !u!1 &1714472832062932
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4925666623870900}
-  - component: {fileID: 227004396696467460}
-  m_Layer: 0
-  m_Name: Conifer Tall BOTD Billboard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4925666623870900
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714472832062932}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4534264641828652}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!227 &227004396696467460
-BillboardRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714472832062932}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 4294967295
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Billboard: {fileID: 22600000, guid: cd6e2d55445fa449ea39d6fd5f5b2452, type: 2}
 --- !u!1 &1743353957770956
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +220,6 @@ Transform:
   m_Children:
   - {fileID: 4657980456482902}
   - {fileID: 4033964170994324}
-  - {fileID: 4925666623870900}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -307,23 +232,19 @@ LODGroup:
   m_GameObject: {fileID: 1743353957770956}
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0, y: 12.857846, z: 0}
-  m_Size: 27.696539
-  m_FadeMode: 2
+  m_Size: 100
+  m_FadeMode: 1
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.8602908
+  - screenRelativeHeight: 0.6021578
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23933673824694470}
-  - screenRelativeHeight: 0.29807228
+  - screenRelativeHeight: 0.103344545
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23309444090733188}
-  - screenRelativeHeight: 0.053668495
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 227004396696467460}
   m_Enabled: 1
 --- !u!136 &136397860403507302
 CapsuleCollider:
