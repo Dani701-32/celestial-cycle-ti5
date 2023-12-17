@@ -8,16 +8,16 @@ public class Enemy_Kappa : Enemy
     // Start is called before the first frame update
     public bool stuned = false;
 
-    [Header("Disintegration Settings:")]
-    public float dissolveSpeed = 1;
-    private float timeDissolve = 0;
-    [SerializeField]
-    private Material dissolveMat;
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // [SerializeField]
+    // private Material dissolveMat;
 
     void Start()
     {
-        timeDissolve = 0;
-        dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+        // timeDissolve = 0;
+        // dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
 
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();

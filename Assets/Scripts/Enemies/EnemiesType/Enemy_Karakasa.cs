@@ -8,16 +8,16 @@ public class Enemy_Karakasa : Enemy
     [SerializeField]
     private bool isFoward = true;
 
-    [Header("Disintegration Settings:")]
-    public float dissolveSpeed = 1;
-    private float timeDissolve = 0;
-    [SerializeField]
-    private Material dissolveMat;
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // [SerializeField]
+    // private Material dissolveMat;
  
     void Start()
     {
-        timeDissolve = 0;
-        dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+        // timeDissolve = 0;
+        // dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
 
         gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
