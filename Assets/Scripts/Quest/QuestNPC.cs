@@ -68,7 +68,9 @@ public class QuestNPC : MonoBehaviour
         quests.Clear();
         quests = _quests;
         currentStep = _currentStep;
-        activeQuest =new Quest(quests[0], currentStep);
+        if(quests.Count > 0){
+            activeQuest = new Quest(quests[0], currentStep);
+        }
         
     }
     void Start()
@@ -81,11 +83,11 @@ public class QuestNPC : MonoBehaviour
         interected = false;
         isOpen = false;
         
-        // currentStep = 0;
-        // foreach (QuestStructure quest in quests)
-        // {
-        //     quest.Invoke();
-        // }
+        currentStep = 0;
+        foreach (QuestStructure quest in quests)
+        {
+            quest.Invoke();
+        }
     }
 
     // Update is called once per frame
