@@ -5,29 +5,35 @@ using UnityEngine.AI;
 
 public class Enemy_Karakasa : Enemy
 {
-   [SerializeField]
+    [SerializeField]
     private bool isFoward = true;
 
-
-    // Start is called before the first frame update
+    [Header("Disintegration Settings:")]
+    public float dissolveSpeed = 1;
+    private float timeDissolve = 0;
+    [SerializeField]
+    private Material dissolveMat;
+ 
     void Start()
     {
+        timeDissolve = 0;
+        dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+
         gameController = GameController.gameController;
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         isFoward = true;
         currentWaypointIndex = 0;
-        damageDealer = GetComponentInChildren<EnemyDamageDealer>();
+        damageDealer = GetComponentInChildren<EnemyDamageDealer>();      
     }
     public override bool CanSpawn(MoonPhases timeMoonphase){
         return true; 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(!gameController.dayNightController.isNight){
+        if (!gameController.dayNightController.isNight){
             Die();
         }
         Attack();
@@ -120,8 +126,22 @@ public class Enemy_Karakasa : Enemy
         // canReceiveDamage = false;
     }
 
+    IEnumerator DissolveEffect()
+    {
+        while(timeDissolve <= 1)
+        {
+            yield return new WaitForSecondsRealtime(0.2f);
+            timeDissolve += (Time.deltaTime * dissolveSpeed);
+            dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
+        }
+
+        timeDissolve = 1;
+        Destroy(this.gameObject);
+    }
+
+
     protected override void Die()
     {
-        Destroy(this.gameObject);
+        StartCoroutine(DissolveEffect());
     }
 }

@@ -295,6 +295,7 @@ MonoBehaviour:
   spriteRange: 10
   canReceiveDamage: 0
   animator: {fileID: 0}
+  damageDealer: {fileID: 0}
   enemyType: 1
   moonPhase: 1
   timePassad: 0
@@ -309,6 +310,9 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 5d8e93dea33bb7e4487fd6cad7ff0dd1, type: 2}
   stunedMaterial: {fileID: 2100000, guid: c26fb273d2f8b7841944ad719f1acf97, type: 2}
   joints: {fileID: 0}
+  dissolveSpeed: 0.5
+  timeDissolve: 0
+  dissolveMat: {fileID: 0}
 --- !u!195 &2430902272834467744
 NavMeshAgent:
   m_ObjectHideFlags: 0

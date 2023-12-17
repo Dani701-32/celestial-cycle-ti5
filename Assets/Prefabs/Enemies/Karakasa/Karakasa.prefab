@@ -206,13 +206,19 @@ MonoBehaviour:
   spriteRange: 10
   canReceiveDamage: 0
   animator: {fileID: 0}
+  damageDealer: {fileID: 0}
   enemyType: 0
   moonPhase: 2
   timePassad: 0
   newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
+  canDrop: 0
+  dropIten: {fileID: 0}
   isFoward: 1
+  dissolveSpeed: 0.3
+  timeDissolve: 0
+  dissolveMat: {fileID: 2100000, guid: eb152e29733d93346b636cc9936ecd4f, type: 2}
 --- !u!136 &8147016549320951242
 CapsuleCollider:
   m_ObjectHideFlags: 0

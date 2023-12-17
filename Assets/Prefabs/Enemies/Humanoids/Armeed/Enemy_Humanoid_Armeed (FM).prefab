@@ -2137,6 +2137,9 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 7fb42f11e55393b4fabfbc1d96648314, type: 2}
   stunedMaterial: {fileID: 2100000, guid: c26fb273d2f8b7841944ad719f1acf97, type: 2}
   joints: {fileID: 0}
+  dissolveSpeed: 0.5
+  timeDissolve: 0
+  dissolveMat: {fileID: 0}
 --- !u!195 &4429418355257149730
 NavMeshAgent:
   m_ObjectHideFlags: 0
