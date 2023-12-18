@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 853330445}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10023494, g: 0.20782861, b: 0.26455656, a: 1}
+  m_IndirectSpecularColor: {r: 0.20511197, g: 0.39850822, b: 0.5548348, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -48519,6 +48519,10 @@ PrefabInstance:
       value: DayNightSystem
       objectReference: {fileID: 0}
     - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
       propertyPath: cityLights.Array.data[0]
       value: 
       objectReference: {fileID: 1846912063}
@@ -48582,6 +48586,30 @@ PrefabInstance:
       propertyPath: cityLights.Array.data[15]
       value: 
       objectReference: {fileID: 912414214}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[16]
+      value: 
+      objectReference: {fileID: 6418841551091407609}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[17]
+      value: 
+      objectReference: {fileID: 6418841551091407608}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[18]
+      value: 
+      objectReference: {fileID: 6418841551091407607}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[19]
+      value: 
+      objectReference: {fileID: 6418841551091407606}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[20]
+      value: 
+      objectReference: {fileID: 6418841551091407605}
+    - target: {fileID: 8043770178030976697, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
+      propertyPath: cityLights.Array.data[21]
+      value: 
+      objectReference: {fileID: 6418841551091407604}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3fa9828c24e8ab40b13416406405ae5, type: 3}
 --- !u!1 &1812481615 stripped
@@ -58139,6 +58167,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2553330960915459444, guid: 05033f624280dde4b936448419def894, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833995873775728295, guid: 05033f624280dde4b936448419def894, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7328470079198816002, guid: 05033f624280dde4b936448419def894, type: 3}
       propertyPath: m_Name
       value: Map
@@ -58189,6 +58225,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05033f624280dde4b936448419def894, type: 3}
+--- !u!108 &6418841551091407604 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6230627046813769007, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6418841551091407605 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6230627046405894269, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6418841551091407606 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6230627046180158472, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6418841551091407607 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6230627046478922571, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6418841551091407608 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 6230627047323868447, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &6418841551091407609 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 8097327161693893858, guid: 05033f624280dde4b936448419def894, type: 3}
+  m_PrefabInstance: {fileID: 6418841551091407603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6520911032528830042
 MonoBehaviour:
   m_ObjectHideFlags: 0
