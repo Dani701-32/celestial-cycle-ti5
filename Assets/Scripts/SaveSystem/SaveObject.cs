@@ -5,22 +5,24 @@ using UnityEngine;
 public class SaveObject : MonoBehaviour
 {
     private PlayerMovement playerMovement;
-    private SavingLoading savingLoading;
+    private GameController gameController;
 
-    public bool isSave;
+    public bool isSave, isActive;
 
     [SerializeField]
-    private GameObject canvas;
+    private GameObject canvas, popUp;
 
     void Start()
     {
-        savingLoading = SavingLoading.instance;
+        gameController = GameController.gameController; 
         canvas.SetActive(false);
+        isActive = false;
+        popUp.SetActive(false);
     }
 
     void Update()
     {
-        if (playerMovement != null && playerMovement.interactAction.triggered)
+        if (playerMovement != null && playerMovement.interactAction.triggered && !isActive)
         {
             CallSaveUI();
         }
@@ -42,13 +44,28 @@ public class SaveObject : MonoBehaviour
         {
             isSave = false;
             canvas.SetActive(false);
-            this.playerMovement = null;  
+            playerMovement = null; 
         }
     }
 
     public void CallSaveUI()
     {
-        savingLoading.Save();
+        // savingLoading.Save();
+        popUp.SetActive(true);
+        isActive = true;
+        playerMovement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+        gameController.StopCamera();
+    }
+
+    public void DisableScreen(){
+        popUp.SetActive(false);
+        isActive = false;
+        playerMovement.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        gameController.ReleaseCamera();
+        Time.timeScale = 1.0f;
     }
 
 }

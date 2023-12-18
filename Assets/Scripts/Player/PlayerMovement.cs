@@ -99,6 +99,10 @@ public class PlayerMovement : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update()
     {
+        // Intera��o com a grama
+        Shader.SetGlobalVector("_Player", transform.position + Vector3.up * characterController.radius);
+
+
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         if (runningAction.triggered)
             isRunning = !isRunning;
@@ -147,6 +151,8 @@ public class PlayerMovement : MonoBehaviour, ISaveable
 
     private void Jump()
     {
+        isGrounded = false;
+        animator.SetBool("isGrounded", false);
         if (characterController.isGrounded)
         {
             characterController.stepOffset = stepOffset;
@@ -169,8 +175,9 @@ public class PlayerMovement : MonoBehaviour, ISaveable
             }
 
             ySpeed = -.5f;
-            if (jumpAction.triggered)
+            if (jumpAction.triggered )
             {
+                animator.SetBool("isGrounded", false);
                 if (animator.GetFloat("speed") >= .5f)
                 {
                     animator.SetTrigger("jumpSprint");
@@ -295,15 +302,15 @@ public class PlayerMovement : MonoBehaviour, ISaveable
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
 
-    public void EndDamage()
+    public void EndDealDamage()
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
 
-    void OnApplicationFocus(bool hasFocus)
-    {
-        Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
-    }
+    // void OnApplicationFocus(bool hasFocus)
+    // {
+    //     Cursor.lockState = (hasFocus) ? CursorLockMode.Locked : CursorLockMode.None;
+    // }
 
     public void JumpUp()
     {

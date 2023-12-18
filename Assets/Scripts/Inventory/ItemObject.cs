@@ -8,6 +8,8 @@ public class ItemObject : MonoBehaviour
     private PlayerMovement playerMovement;
     private QuestSystem questSystem;
     private InventorySystem inventory;
+    private bool isDratroy = false; 
+    private Transform firstChild;
 
     [SerializeField]
     private GameObject canvas;
@@ -17,6 +19,9 @@ public class ItemObject : MonoBehaviour
         inventory = GameController.gameController.inventorySystem;
         questSystem = GameController.gameController.questSystem;
         canvas.SetActive(false);
+        firstChild = transform.GetChild(0);
+        firstChild.gameObject.SetActive(true);
+        isDratroy = false;
     }
 
     public void OnHandlePickupItem()
@@ -33,7 +38,10 @@ public class ItemObject : MonoBehaviour
             inventory.Add(referenceItem);
         }
         questSystem.CheckQuests();
-        Destroy(this.gameObject);
+        NotificationSystem.Instance.CallNotification(referenceItem);
+        firstChild.gameObject.SetActive(false);
+        canvas.SetActive(false);
+        isDratroy = true;
     }
 
     void Update()
@@ -46,7 +54,7 @@ public class ItemObject : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMovement playerMovement))
+        if (other.TryGetComponent(out PlayerMovement playerMovement )&& !isDratroy)
         {
             this.playerMovement = playerMovement;
             canvas.SetActive(true);

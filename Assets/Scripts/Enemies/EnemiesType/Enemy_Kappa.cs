@@ -8,11 +8,24 @@ public class Enemy_Kappa : Enemy
     // Start is called before the first frame update
     public bool stuned = false;
 
+    // [Header("Disintegration Settings:")]
+    // public float dissolveSpeed = 1;
+    // private float timeDissolve = 0;
+    // [SerializeField]
+    // private Material dissolveMat;
+
     void Start()
     {
+        // timeDissolve = 0;
+        // dissolveMat.SetFloat(name = "_DissolveAmount", 0.0f);
+
         player = GameObject.FindWithTag("Player");
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        damageDealer = GetComponentInChildren<EnemyDamageDealer>();
+    }
+    public override bool CanSpawn(MoonPhases timeMoonphase){
+        return timeMoonphase == moonPhase; 
     }
 
     // Update is called once per frame
@@ -76,8 +89,21 @@ public class Enemy_Kappa : Enemy
         canReceiveDamage = false;
     }
 
+    // IEnumerator DissolveEffect()
+    // {
+    //     while (timeDissolve <= 1)
+    //     {
+    //         yield return new WaitForSecondsRealtime(0.2f);
+    //         timeDissolve += (Time.deltaTime * dissolveSpeed);
+    //         dissolveMat.SetFloat(name = "_DissolveAmount", timeDissolve);
+    //     }
+
+    //     timeDissolve = 1;
+    //     Destroy(this.gameObject);
+    // }
     protected override void Die()
     {
+        // StartCoroutine(DissolveEffect());
         Destroy(this.gameObject);
     }
 }

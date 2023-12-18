@@ -8,6 +8,7 @@ public class NPCData : ScriptableObject
 {
     public string Name;
     public Sprite NPCsprite;
+    public int id;
 }
 
 public enum Speeker

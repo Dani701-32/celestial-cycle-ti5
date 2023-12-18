@@ -36,7 +36,9 @@ public class EssenceObject : MonoBehaviour
             inventory.Add(referenceItem);
         }
         questSystem.CheckQuests();
-        Destroy(this.gameObject);
+        NotificationSystem.Instance.CallNotification(referenceItem);
+        canvas.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     void Update()
@@ -53,7 +55,6 @@ public class EssenceObject : MonoBehaviour
         if (childObject != null)
         {
             childObject.SetActive(canPick);
-            canvas.SetActive(canPick);
         }
     }
 

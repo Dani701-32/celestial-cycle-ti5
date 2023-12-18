@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
-public class QuestSystem : MonoBehaviour
+public class QuestSystem : MonoBehaviour, ISerializationCallbackReceiver
 {
+    [Header("SaveSystem")]
+    public string savePath;
+    public QuestDatabase database;
     private List<Quest> activeQuestList;
+    public List<QuestNPC> npcs;
+    public QuestDatabaseLists globalQuest;
     public int questCount = 0;
 
     [Header("UI Quest System")]
@@ -42,6 +49,104 @@ public class QuestSystem : MonoBehaviour
     private QuestSlot currentSlot;
     private bool isUi = false;
 
+    public void OnAfterDeserialize()
+    {
+        for (int i = 0; i < globalQuest.questContainer.Count; i++) globalQuest.questContainer[i].item = database.GetItem[globalQuest.questContainer[i].itemID];
+    }
+
+    public void OnBeforeSerialize() { }
+
+    public void SaveQuests()
+    {
+        GetAllQuests();
+        string saveData = JsonUtility.ToJson(globalQuest, true);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
+        bf.Serialize(file, saveData);
+        file.Close();
+    }
+
+    public void LoadQuests()
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
+            string saveData = (string)bf.Deserialize(file);
+            JsonUtility.FromJsonOverwrite(saveData, globalQuest);
+            file.Close();
+
+            StartQuest();
+        }      
+    }
+
+    public void GetAllQuests()
+    {
+        globalQuest = new QuestDatabaseLists();
+
+        foreach (QuestNPC npc in npcs)
+        {
+            List<QuestDatabaseSave> npcQuestList = npc.questDatabase.questContainer;
+
+            foreach (QuestDatabaseSave item in npcQuestList)
+            {
+                globalQuest.questContainer.Add(item);
+            }
+        }
+        foreach (Quest playerQuest in activeQuestList)
+        {
+            QuestStructure questData = playerQuest.data; 
+            globalQuest.questContainer.Add(new QuestDatabaseSave(questData.questData.questID, playerQuest.currentIndex, 0, questData, playerQuest.currentNPC.dataNPC));
+        }
+    }
+
+    public void StartQuest()
+    {
+        foreach (QuestNPC npc in npcs)
+        {
+            List<QuestStructure> npcQuestList = new List<QuestStructure>();
+            int curStep = 0;
+
+            foreach (QuestDatabaseSave item in globalQuest.questContainer)
+            {
+                if (item.npcId == npc.NPC.id)
+                {
+                    npcQuestList.Add(item.item);
+                    curStep = item.currentStep;
+                }
+            }
+
+            npc.LoadAllQuests(npcQuestList, curStep);
+        }
+        activeQuestList.Clear();
+        foreach (QuestDatabaseSave item in globalQuest.questContainer)
+            {
+                if (item.npcId == 0)
+                {
+                    AddQuest(item.item, item.currentStep, item.npcData);
+                }
+            }
+
+    }
+    public void NewGameQuests(){
+        foreach (QuestNPC npc in npcs)
+        {
+            List<QuestStructure> npcQuestList = new List<QuestStructure>();
+            int curStep = 0;
+
+            foreach (QuestStructure questStructure in database.Items)
+            {
+                if (questStructure.questData.npcQuest.id == npc.NPC.id)
+                {
+                    npcQuestList.Add(questStructure);
+                }
+            }
+
+            npc.LoadAllQuests(npcQuestList, curStep);
+        }
+        activeQuestList.Clear();
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -136,6 +241,9 @@ public class QuestSystem : MonoBehaviour
             TrackQuest();
         }
         isUi = false;
+        GetAllQuests();
+        
+        
     }
 
     public Quest CheckQuests(QuestStructure quest)

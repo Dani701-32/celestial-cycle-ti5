@@ -39,6 +39,7 @@ public class SavingLoading : MonoBehaviour
         CaptureState(state);
         SaveFile(state);
         GameController.gameController.inventorySystem.SaveInventory();
+        GameController.gameController.questSystem.SaveQuests(); 
         Debug.Log("O Jogo foi Salvo");
     }
 
@@ -47,6 +48,8 @@ public class SavingLoading : MonoBehaviour
         var state = LoadFile();
         RestoreState(state);
         GameController.gameController.inventorySystem.LoadInventory();
+        GameController.gameController.questSystem.LoadQuests();
+        GameController.gameController.player.RestoreLifeSave();
     }
 
     private Dictionary<string, object> LoadFile()

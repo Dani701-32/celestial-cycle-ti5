@@ -640,14 +640,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2234255909709949422}
-  m_LocalRotation: {x: 0.5416752, y: 0.5416752, z: -0.45451948, w: 0.45451948}
-  m_LocalPosition: {x: -0.008, y: 0.071, z: 0}
+  m_LocalRotation: {x: 0.006023453, y: -0.0063142055, z: -0.7235422, w: -0.690225}
+  m_LocalPosition: {x: -0.993, y: 0.038, z: 0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6524265826755765400}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 100, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 181, y: 180, z: -87.3}
 --- !u!114 &3739529675273591451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,20 +2500,24 @@ MonoBehaviour:
   spriteRange: 10
   canReceiveDamage: 0
   animator: {fileID: 0}
+  damageDealer: {fileID: 0}
   enemyType: 1
   moonPhase: 0
   timePassad: 0
   newDestnationCD: 0.5
   waypoints: []
   currentWaypointIndex: 0
-  canDrop: 0
-  dropIten: {fileID: 0}
+  canDrop: 1
+  dropIten: {fileID: 7781058939633757478, guid: 0d8ac643935a83f47b97b1e7fa01de47, type: 3}
   isFoward: 1
   spriteCrecked: {fileID: 4264237391646993556}
   canvas: {fileID: 2069957603586591972}
   defaultMaterial: {fileID: 2100000, guid: b574cb4af8267b94090e38477fc3bebd, type: 2}
   stunedMaterial: {fileID: 2100000, guid: 0cc51a09a847bec4eac307d547278ebb, type: 2}
   joints: {fileID: 0}
+  dissolveSpeed: 0.5
+  timeDissolve: 0
+  dissolveMat: {fileID: 0}
 --- !u!195 &1590250610770010246
 NavMeshAgent:
   m_ObjectHideFlags: 0

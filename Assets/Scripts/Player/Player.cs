@@ -265,6 +265,13 @@ public class Player : MonoBehaviour, ISaveable
         lifeSlider.value = health;
     }
 
+    public void RestoreLifeSave()
+    {
+        animator.Rebind();
+        isDead = false;
+        lifeSlider.value = health;
+    }
+
     public void ChangeArtifact()
     {
         for (int i = 0; i < artifactActions.Length; i++)
@@ -316,7 +323,8 @@ public class Player : MonoBehaviour, ISaveable
         {
             s_xPos = playerPos.x,
             s_yPos = playerPos.y,
-            s_zPos = playerPos.z
+            s_zPos = playerPos.z,
+            s_health = health
         };
     }
 
@@ -327,6 +335,7 @@ public class Player : MonoBehaviour, ISaveable
         playerPos.x = saveData.s_xPos;
         playerPos.y = saveData.s_yPos;
         playerPos.z = saveData.s_zPos;
+        health = saveData.s_health;
     }
 
     [Serializable]
@@ -335,5 +344,6 @@ public class Player : MonoBehaviour, ISaveable
         public float s_xPos;
         public float s_yPos;
         public float s_zPos;
+        public float s_health;
     }
 }
