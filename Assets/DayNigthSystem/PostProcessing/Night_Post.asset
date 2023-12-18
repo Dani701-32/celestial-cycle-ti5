@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   threshold:
     m_OverrideState: 1
     m_Value: 0.35
@@ -114,7 +114,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 0.3
   contrast:
     m_OverrideState: 1
     m_Value: 1.5
@@ -176,7 +176,7 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: -50
+    m_Value: -60
   tint:
     m_OverrideState: 0
     m_Value: 0
